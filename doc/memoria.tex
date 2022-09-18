@@ -41,11 +41,11 @@
 % 2 --> Texto a pie de figura
 % 3 --> Tamaño en tanto por uno relativo al ancho de página
 \usepackage{graphicx}
-\newcommand{\imagen}[3]{
+\newcommand{\imagen}[3][0.9]{
 	\begin{figure}[!h]
 		\centering
-		\includegraphics[width=#3\textwidth]{#1}
-		\caption{#2}\label{fig:#1}
+		\includegraphics[width=#1\textwidth]{#2}
+		\caption{#3}\label{fig:#2}
 	\end{figure}
 	\FloatBarrier
 }
@@ -55,11 +55,11 @@
 % 1 --> Ruta absoluta/relativa de la figura
 % 2 --> Texto a pie de figura
 % 3 --> Tamaño en tanto por uno relativo al ancho de página
-\newcommand{\imagenflotante}[3]{
+\newcommand{\imagenflotante}[3][0.9]{
 	\begin{figure}
 		\centering
-		\includegraphics[width=#3\textwidth]{#1}
-		\caption{#2}\label{fig:#1}
+		\includegraphics[width=#1\textwidth]{#2}
+		\caption{#3}\label{fig:#2}
 	\end{figure}
 }
 
