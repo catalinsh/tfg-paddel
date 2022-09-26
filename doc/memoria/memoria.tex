@@ -1,0 +1,108 @@
+%! TEX root = ./memoria.tex
+\input{../common/preambulo.tex}
+
+% Capítulo
+\setcounter{chapter}{0}
+\let\oldchapter\chapter
+\renewcommand\chapter[1]{
+    \setcounter{chapter}{\thechapter + 1}
+    \setcounter{section}{0}
+    \oldchapter*{#1}
+    \addcontentsline{toc}{chapter}{#1}
+    \markboth{#1}{#1}
+}
+
+\begin{document}
+
+\input{../common/portada.tex}
+
+
+% Tutor
+\thispagestyle{empty}
+\cabecera
+
+\vfill
+
+\noindent D. nombre tutor, profesor del departamento de nombre departamento,
+área de nombre área.
+
+\noindent Expone:
+
+\noindent Que el alumno D. \theauthor, con DNI \thedni, ha realizado el Trabajo
+final de Grado en Ingeniería Informática titulado título de TFG.
+
+\noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección
+del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
+
+\begin{center}
+	En Burgos, a {\large \today}
+\end{center}
+
+\vfill\vfill\vfill
+
+% Author and supervisor
+\begin{minipage}{0.45\textwidth}
+	\begin{flushleft}
+		Vº. Bº. del Tutor:\\[2cm]
+		D. nombre tutor
+	\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+	\begin{flushleft}
+		Vº. Bº. del co-tutor:\\[2cm]
+		D. nombre co-tutor
+	\end{flushleft}
+\end{minipage}
+
+\hfill
+\vfill
+
+
+\clearpage
+\frontmatter
+
+
+% Resumen
+\renewcommand*\abstractname{Resumen}
+\begin{abstract}
+    En este primer apartado se hace una \textbf{breve} presentación del tema
+    que se aborda en el proyecto.
+\end{abstract}
+\renewcommand*\abstractname{Descriptores}
+\begin{abstract}
+	Palabras separadas por comas que identifiquen el contenido del proyecto Ej:
+	servidor web, buscador de vuelos, android \ldots
+\end{abstract}
+
+\clearpage
+
+% Resumen en inglés
+\renewcommand*\abstractname{Abstract}
+\begin{abstract}
+	A \textbf{brief} presentation of the topic addressed in the project.
+\end{abstract}
+\renewcommand*\abstractname{Keywords}
+\begin{abstract}
+	keywords separated by commas.
+\end{abstract}
+
+\input{../common/indices.tex}
+
+
+\mainmatter
+
+
+\input{tex/1_Introduccion.tex}
+\input{tex/2_Objetivos_del_proyecto}
+\input{tex/3_Conceptos_teoricos}
+\input{tex/4_Tecnicas_y_herramientas}
+\input{tex/5_Aspectos_relevantes_del_desarrollo_del_proyecto}
+\input{tex/6_trabajos_relacionados}
+\input{tex/7_Conclusiones_Lineas_de_trabajo_futuras}
+
+\let\chapter\oldchapter
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

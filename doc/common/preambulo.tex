@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt,twoside]{memoir}
+
+% Castellano
+\usepackage[spanish,es-tabla,es-ucroman]{babel}
+\selectlanguage{spanish}
+\usepackage[T1]{fontenc}
+
+% Fuente
+\usepackage{lmodern}
+
+% Imagenes
+\usepackage{graphicx}
+\graphicspath{{../common/img/}{./img}}
+
+% Utils
+\usepackage{calc}
+\usepackage{tcolorbox}
+\usepackage{titling}
+\usepackage{titlesec}
+
+% Enlaces
+\usepackage[colorlinks]{hyperref}
+\hypersetup{
+    allcolors = {red}
+}
+
+% Capítulo
+\chapterstyle{bianchi}
+
+% Párrafos
+\nonzeroparskip
+
+% Variables
+\title{Detección del Parkinson}
+\author{Catalin Andrei Cacuci}
+\date{\today}
+\newcommand{\thedni}{X7451927L}
+\newcommand{\thetutor}{Álvar Arnaiz González}
+
+%%%%%%%%%%%%
+% Comandos %
+%%%%%%%%%%%%
+
+% Imagen de cabecera
+\newcommand{\cabecera}{\noindent\includegraphics[width=\textwidth]{cabecera}}
+
+% Añadir imagen
+% [1] --> Tamaño en tanto por uno relativo al ancho de página
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+\newcommand{\imagen}[3][0.9]{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=#1\textwidth]{#2}
+        \caption{#3}\label{fig:#2}
+    \end{figure}
+    \FloatBarrier
+}
+
+% Añadir imagen flotante
+% [1] --> Tamaño en tanto por uno relativo al ancho de página
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+\newcommand{\imagenflotante}[3][0.9]{
+    \begin{figure}
+        \centering
+        \includegraphics[width=#1\textwidth]{#2}
+        \caption{#3}\label{fig:#2}
+    \end{figure}
+}

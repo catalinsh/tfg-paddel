@@ -1,0 +1,34 @@
+\renewcommand\maketitle{
+    \thispagestyle{empty}
+
+    \cabecera
+    \vfill
+
+    \newtcolorbox{titlebox}{colback=white,colframe=black}
+    \begin{titlebox}
+        \begin{minipage}{0.78\textwidth}
+            \begin{center}
+                \textbf{\large TFG del Grado en Ingeniería Informática}
+
+                \bigbreak
+
+                \textbf{\LARGE\thetitle}
+            \end{center}
+        \end{minipage}
+        \begin{minipage}{0.2\textwidth}
+            \includegraphics[width=\textwidth]{escudoInfor}
+        \end{minipage}
+    \end{titlebox}
+
+    \vfill
+
+    \begin{center}
+        \noindent\LARGE
+        Presentado por \theauthor\\
+        en Universidad de Burgos --- \thedate\\
+        Tutor: \thetutor\\
+    \end{center}
+
+    \clearpage
+}
+\maketitle

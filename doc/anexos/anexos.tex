@@ -1,0 +1,28 @@
+%! TEX root = ./anexos.tex
+\input{../common/preambulo.tex}
+
+\let\oldtitle\thetitle
+\renewcommand{\thetitle}{\oldtitle \bigbreak \Large Documentación Técnica}
+
+\renewcommand{\appendixname}{Apéndice }
+\renewcommand*\cftappendixname{\appendixname\ }
+
+\begin{document}
+
+\input{../common/portada.tex}
+
+\frontmatter
+
+\input{../common/indices.tex}
+
+\mainmatter
+
+\appendix
+
+\input{tex/A_Plan_proyecto}
+\input{tex/B_Requisitos}
+\input{tex/C_Diseno}
+\input{tex/D_Manual_programador}
+\input{tex/E_Manual_usuario}
+
+\end{document}
