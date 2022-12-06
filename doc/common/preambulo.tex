@@ -10,13 +10,13 @@
 
 % Imagenes
 \usepackage{graphicx}
-\graphicspath{{../common/img/}{./img}}
+\graphicspath{{./img}}
 
 % Utils
-\usepackage{calc}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage[table]{xcolor}
 \usepackage{tcolorbox}
-\usepackage{titling}
-\usepackage{titlesec}
 
 % Enlaces
 \usepackage[colorlinks]{hyperref}
@@ -27,8 +27,8 @@
 % Capítulo
 \chapterstyle{bianchi}
 
-% Párrafos
-\nonzeroparskip
+% Permitir mayúsculas con tilde en headers
+\setlength{\headheight}{15.4pt}
 
 % Variables
 \title{Detección del Parkinson}
@@ -37,34 +37,258 @@
 \newcommand{\thedni}{X7451927L}
 \newcommand{\thetutor}{Álvar Arnaiz González}
 
-%%%%%%%%%%%%
-% Comandos %
-%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   COMANDOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Imagen de cabecera
 \newcommand{\cabecera}{\noindent\includegraphics[width=\textwidth]{cabecera}}
 
-% Añadir imagen
-% [1] --> Tamaño en tanto por uno relativo al ancho de página
+% Página en blanco que no incrementa contador
+\newcommand{\blankpage}{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage
+}
+
+% Comando para insertar una imagen en un lugar concreto.
+% Los parámetros son:
 % 1 --> Ruta absoluta/relativa de la figura
 % 2 --> Texto a pie de figura
-\newcommand{\imagen}[3][0.9]{
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
+\newcommand{\imagen}[3]{
     \begin{figure}[!h]
         \centering
-        \includegraphics[width=#1\textwidth]{#2}
-        \caption{#3}\label{fig:#2}
+        \includegraphics[width=#3\textwidth]{#1}
+        \caption{#2}\label{fig:#1}
     \end{figure}
     \FloatBarrier
 }
 
-% Añadir imagen flotante
-% [1] --> Tamaño en tanto por uno relativo al ancho de página
+% Comando para insertar una imagen sin posición.
+% Los parámetros son:
 % 1 --> Ruta absoluta/relativa de la figura
 % 2 --> Texto a pie de figura
-\newcommand{\imagenflotante}[3][0.9]{
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
+\newcommand{\imagenflotante}[3]{
     \begin{figure}
         \centering
-        \includegraphics[width=#1\textwidth]{#2}
-        \caption{#3}\label{fig:#2}
+        \includegraphics[width=#3\textwidth]{#1}
+        \caption{#2}\label{fig:#1}
     \end{figure}
+}
+
+% El comando \figuraConPosicion nos permite insertar figuras comodamente, y
+% utilizando siempre el mismo formato. Los parametros son:
+% 1 --> Porcentaje del ancho de página que ocupará la figura (de 0 a 1)
+% 2 --> Fichero de la imagen
+% 3 --> Texto a pie de imagen
+% 4 --> Etiqueta (label) para referencias
+% 5 --> Opciones que queramos pasarle al \includegraphics
+% 6 --> Opciones de posicionamiento a pasarle a \begin{figure}
+\newcommand{\figuraConPosicion}[6]{
+    \setlength{\anchoFloat}{#1\textwidth}
+    \addtolength{\anchoFloat}{-4\fboxsep}
+    \setlength{\anchoFigura}{\anchoFloat}
+    \begin{figure}[#6]
+        \begin{center}
+            \Ovalbox{
+                \begin{minipage}{\anchoFloat}
+                    \begin{center}
+                        \includegraphics[width=\anchoFigura,#5]{#2}
+                        \caption{#3}
+                        \label{#4}
+                    \end{center}
+                \end{minipage}
+            }
+        \end{center}
+    \end{figure}
+}
+
+% Comando para incluir imágenes en formato apaisado (sin marco).
+\newcommand{\figuraApaisadaSinMarco}[5]{%
+    \begin{figure}%
+        \begin{center}%
+            \includegraphics[angle=90,height=#1\textheight,#5]{#2}%
+            \caption{#3}%
+            \label{#4}%
+        \end{center}%
+    \end{figure}%
+}
+
+% Para las tablas
+\newcommand{\otoprule}{\midrule [\heavyrulewidth]}
+
+% Nuevo comando para tablas pequeñas (menos de una página).
+\newcommand{\tablaSmall}[5]{%
+    \begin{table}
+        \begin{center}
+            \rowcolors {2}{gray!35}{}
+            \begin{tabular}{#2}
+                \toprule
+                #4
+                \otoprule
+                #5
+                \bottomrule
+            \end{tabular}
+            \caption{#1}
+            \label{tabla:#3}
+        \end{center}
+    \end{table}
+}
+
+% Nuevo comando para tablas pequeñas (menos de una página).
+\newcommand{\tablaSmallSinColores}[5]{%
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{#2}
+                \toprule
+                #4
+                \otoprule
+                #5
+                \bottomrule
+            \end{tabular}
+            \caption{#1}
+            \label{tabla:#3}
+        \end{center}
+    \end{table}
+}
+
+\newcommand{\tablaApaisadaSmall}[5]{%
+    \begin{landscape}
+        \begin{table}
+            \begin{center}
+                \rowcolors {2}{gray!35}{}
+                \begin{tabular}{#2}
+                    \toprule
+                    #4
+                    \otoprule
+                    #5
+                    \bottomrule
+                \end{tabular}
+                \caption{#1}
+                \label{tabla:#3}
+            \end{center}
+        \end{table}
+    \end{landscape}
+}
+
+% Nuevo comando para tablas grandes con cabecera y filas alternas coloreadas en
+% gris.
+\newcommand{\tabla}[6]{%
+    \begin{center}
+        \tablefirsthead{
+            \toprule
+            #5
+            \otoprule
+        }
+        \tablehead{
+            \multicolumn{#3}{l}{\small\sl continúa desde la página anterior}\\
+            \toprule
+            #5
+            \otoprule
+        }
+        \tabletail{
+            \hline
+            \multicolumn{#3}{r}{\small\sl continúa en la página siguiente}\\
+        }
+        \tablelasttail{
+            \hline
+        }
+        \bottomcaption{#1}
+        \rowcolors {2}{gray!35}{}
+        \begin{xtabular}{#2}
+            #6
+            \bottomrule
+        \end{xtabular}
+        \label{tabla:#4}
+    \end{center}
+}
+
+% Nuevo comando para tablas grandes con cabecera.
+\newcommand{\tablaSinColores}[6]{%
+    \begin{center}
+        \tablefirsthead{
+            \toprule
+            #5
+            \otoprule
+        }
+        \tablehead{
+            \multicolumn{#3}{l}{\small\sl continúa desde la página anterior}\\
+            \toprule
+            #5
+            \otoprule
+        }
+        \tabletail{
+            \hline
+            \multicolumn{#3}{r}{\small\sl continúa en la página siguiente}\\
+        }
+        \tablelasttail{
+            \hline
+        }
+        \bottomcaption{#1}
+        \begin{xtabular}{#2}
+            #6
+            \bottomrule
+        \end{xtabular}
+        \label{tabla:#4}
+    \end{center}
+}
+
+% Nuevo comando para tablas grandes sin cabecera.
+\newcommand{\tablaSinCabecera}[5]{%
+    \begin{center}
+        \tablefirsthead{
+            \toprule
+        }
+        \tablehead{
+            \multicolumn{#3}{l}{\small\sl continúa desde la página anterior}\\
+            \hline
+        }
+        \tabletail{
+            \hline
+            \multicolumn{#3}{r}{\small\sl continúa en la página siguiente}\\
+        }
+        \tablelasttail{
+            \hline
+        }
+        \bottomcaption{#1}
+        \begin{xtabular}{#2}
+            #5
+            \bottomrule
+        \end{xtabular}
+        \label{tabla:#4}
+    \end{center}
+}
+
+\definecolor{cgoLight}{HTML}{EEEEEE}
+\definecolor{cgoExtralight}{HTML}{FFFFFF}
+
+% Nuevo comando para tablas grandes sin cabecera.
+\newcommand{\tablaSinCabeceraConBandas}[5]{%
+    \begin{center}
+        \tablefirsthead{
+            \toprule
+        }
+        \tablehead{
+            \multicolumn{#3}{l}{\small\sl continúa desde la página anterior}\\
+            \hline
+        }
+        \tabletail{
+            \hline
+            \multicolumn{#3}{r}{\small\sl continúa en la página siguiente}\\
+        }
+        \tablelasttail{
+            \hline
+        }
+        \bottomcaption{#1}
+        \rowcolors[]{1}{cgoExtralight}{cgoLight}
+
+        \begin{xtabular}{#2}
+            #5
+            \bottomrule
+        \end{xtabular}
+        \label{tabla:#4}
+    \end{center}
 }

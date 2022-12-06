@@ -4,9 +4,13 @@
     \cabecera
     \vfill
 
-    \newtcolorbox{titlebox}{colback=white,colframe=black}
-    \begin{titlebox}
-        \begin{minipage}{0.78\textwidth}
+    \begin{minipage}{0.74\textwidth}
+        \begin{tcolorbox}[
+                colback=blue!10,
+                colframe=blue!20!black!40,
+                top=16pt,
+                bottom=16pt
+            ]
             \begin{center}
                 \textbf{\large TFG del Grado en Ingeniería Informática}
 
@@ -14,11 +18,13 @@
 
                 \textbf{\LARGE\thetitle}
             \end{center}
-        \end{minipage}
-        \begin{minipage}{0.2\textwidth}
-            \includegraphics[width=\textwidth]{escudoInfor}
-        \end{minipage}
-    \end{titlebox}
+        \end{tcolorbox}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.2\textwidth}
+        \includegraphics[width=\textwidth]{escudoInfor}
+    \end{minipage}
+
 
     \vfill
 

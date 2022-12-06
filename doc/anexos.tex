@@ -1,0 +1,31 @@
+\input{common/preambulo.tex}
+
+\let\oldtitle\thetitle
+\renewcommand{\thetitle}{\oldtitle \bigbreak \Large Documentación Técnica}
+
+\renewcommand{\appendixname}{Apéndice }
+\renewcommand*\cftappendixname{\appendixname\ }
+
+\begin{document}
+
+\input{common/portada.tex}
+
+\frontmatter
+
+\input{common/indices.tex}
+
+\mainmatter
+
+\appendix
+
+\include{anexos/A_Plan_proyecto}
+\include{anexos/B_Requisitos}
+\include{anexos/C_Diseno}
+\include{anexos/D_Manual_programador}
+\include{anexos/E_Manual_usuario}
+
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
