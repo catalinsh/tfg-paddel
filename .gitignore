@@ -3,3 +3,6 @@
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Data folder
+/data/
