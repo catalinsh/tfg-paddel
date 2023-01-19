@@ -6,3 +6,5 @@
 
 # Data folder
 /data/
+
+__pycache__/
