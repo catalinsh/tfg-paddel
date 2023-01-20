@@ -13,7 +13,7 @@ from mediapipe.python.solutions.hands import Hands, HandLandmark
 from filevideostream import FileVideoStream
 
 # Minimum detection time for a video to be considered useful and be processed.
-MIN_DETECTION_TIME = datetime.time(second=5)
+MIN_DETECTION_TIME = datetime.timedelta(seconds=5)
 
 # Landmarks that should be taken
 WANTED_LANDMARK_INDICES = [
@@ -223,7 +223,7 @@ if __name__ == "__main__":
         video_landmarks = get_longest_landmarks_sequence(video_landmarks)
 
         video_framerate = get_video_info(video_path)["framerate"]
-        min_frames_needed = floor(video_framerate * MIN_DETECTION_TIME.second)
+        min_frames_needed = floor(video_framerate * MIN_DETECTION_TIME.total_seconds())
 
         if len(video_landmarks) < min_frames_needed:
             print(
