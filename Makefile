@@ -1,22 +1,15 @@
 # PYTHON
+ENVIRONMENT_PREFIX = ./venv
+ENVIRONMENT_FILE = ./environment.yml
 
-PYTHON_INTERPRETER = python
+create_environment:
+	-conda env create --prefix $(ENVIRONMENT_PREFIX) --file $(ENVIRONMENT_FILE)
 
-test_environment:
-	$(info >>> Checking Python evironment...)
-	$(PYTHON_INTERPRETER) test_environment.py
-
-requirements: test_environment
-	$(info >>> Installing Python requirements...)
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
-
-extract_landmarks: requirements
-	$(info >>> Extracting landmarks from videos...)
-	$(PYTHON_INTERPRETER) src/data/landmarkextraction.py data/raw data/landmarks
+update_environment: create_environment
+	conda env update --prefix $(ENVIRONMENT_PREFIX) --file $(ENVIRONMENT_FILE) --prune
 
 
 # LATEX
-
 LATEX_COMPILE = latexmk -cd -pdf
 LATEX_CLEAN = $(LATEX_COMPILE) -bibtex-cond1 -c
 
