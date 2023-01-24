@@ -8,6 +8,8 @@ create_environment:
 update_environment: create_environment
 	conda env update --prefix $(ENVIRONMENT_PREFIX) --file $(ENVIRONMENT_FILE) --prune
 
+test:
+	tox -p
 
 # LATEX
 LATEX_COMPILE = latexmk -cd -pdf
