@@ -1,15 +1,16 @@
 # PYTHON
-ENVIRONMENT_PREFIX = ./venv
-ENVIRONMENT_FILE = ./environment.yml
 
-create_environment:
-	-conda env create --prefix $(ENVIRONMENT_PREFIX) --file $(ENVIRONMENT_FILE)
+create_conda_environment:
+	-conda env create --prefix ./venv --file ./environment.yml
 
-update_environment: create_environment
-	conda env update --prefix $(ENVIRONMENT_PREFIX) --file $(ENVIRONMENT_FILE) --prune
+install_dependencies:
+	pip install -r requirements.txt -r requirements-dev.txt
 
 test:
-	tox -p
+	pytest tests
+
+typecheck:
+	mypy --install-types --non-interactive --strict src
 
 # LATEX
 LATEX_COMPILE = latexmk -cd -pdf
