@@ -1,6 +1,6 @@
 # PYTHON
 
-create_conda_environment:
+create_environment:
 	-conda env create --prefix ./venv --file ./environment.yml
 
 install_dependencies:
