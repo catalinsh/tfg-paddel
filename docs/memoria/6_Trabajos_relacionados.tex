@@ -1,2 +1,143 @@
 \capitulo{Trabajos relacionados}
 \label{cha:Trabajos relacionados}
+
+Durante la última década se ha intentado utilizar la visión por computador para
+evaluar la Enfermedad de Parkinson en múltiples ocasiones con diferentes
+resultados.
+
+Este capítulo recopila de forma resumida algunos de los trabajos más relevantes.
+
+
+\section{A computer vision framework for finger-tapping evaluation}
+
+Este artículo \cite{khan2014computer} documenta el uso de visión por computador
+para determinar el nivel de severidad de la Enfermedad de Parkinson y distinguir
+entre individuos con esta enfermedad e individuos sin ella.
+
+El método empleado se caracteriza por utilizar vídeos con la cara de la persona
+y ambas manos a los lados de la cabeza, apuntando las puntas de los dedos hacia
+la misma. Esto se utiliza para poder normalizar las distancias en base a
+características faciales.
+
+El estudio se ha realizado sobre 13 pacientes de la Enfermedad de Parkinson,
+tomando 17 vídeos de cada paciente durante un día, además de un grupo de control
+de 6 individuos, tomando 2 vídeos al día durante una semana por cada uno. Aunque
+algunos de estos vídeos han sido descartados.
+
+En total se han utilizado 471 vídeos.
+
+
+\paragraph{Metodología}
+
+\begin{enumerate}
+    \item Se detecta la cara del individuo para la normalización. Esto se basa
+          en que la longitud de la mano de una persona adulta es aproximadamente
+          igual a la altura de su cara.
+    \item Se obtiene una serie temporal que representa la amplitud del
+          movimiento de los dedos índice y pulgar de la mano dominante del
+          individuo.
+    \item Se extraen un total de 15 características de esta serie temporal, por
+          ejemplo:
+          \begin{itemize}
+              \item Correlación cruzada media entre los máximos locales de dos
+                    intervalos distintos de tiempo de la serie temporal. Esto
+                    mismo se realiza también sobre los mínimos locales.
+              \item Número total de toques de dedos durante la grabación.
+              \item Velocidad media de la apertura de dedos.
+              \item Velocidad media del cierre de dedos.
+              \item \dots
+          \end{itemize}
+    \item Se realiza una selección de características eliminando aquellas
+          redundantes y usando el algoritmo chi-cuadrado.
+    \item Se entrena una máquina de vectores de soporte mediante las
+          características obtenidas para realizar la clasificación.
+\end{enumerate}
+
+
+\paragraph{Resultados}
+
+En cuanto a la distinción entre pacientes de la Enfermedad de Parkinson y el
+grupo de control se ha obtenido una exactitud del 95\%, que es una cifra que se
+debería tomar con precaución debido que, aunque se han utilizado 471 vídeos,
+estos provienen de únicamente 19 personas.
+
+
+\section{The discerning eye of computer vision}
+
+En este estudio \cite{williams2020discerning} realizado sobre 39 pacientes de la
+Enfermedad de Parkinson y sobre un grupo de control de 30 individuos se han
+tomado vídeos de ambas manos de cada individuo mientras realizan toques de los
+dedos índice y pulgar (de forma similar a cómo se han tomado las muestras para
+este trabajo). Dando un total de 133 vídeos (se ha descartado uno).
+
+De estos vídeos se han extraído diferentes características y comprobado la
+relación que existe entre éstas y diferentes escalas que clasifican el nivel de
+gravedad de la Enfermedad en un paciente.
+
+
+\paragraph{Metodología}
+
+\begin{enumerate}
+    \item Se utiliza una librería de visión por computador, en concreto
+          DeepCutLab, para obtener una serie temporal de la amplitud entre las
+          puntas de los dedos pulgar e índice.
+    \item Se normaliza esta serie temporal utilizando la amplitud máxima
+          detectada, que va a convertirse en el valor 1, siendo todos los demás
+          valores escalados proporcionalmente.
+    \item Se extraen las siguientes características:
+          \begin{itemize}
+              \item Velocidad, calculada como la tasa media de cambio.
+              \item Variabilidad de la amplitud, calculada como el coeficiente
+                    de variación de la diferencia media entre máximos y mínimos
+                    de diferentes intervalos de 1 segundo de la serie temporal.
+              \item Regularidad del ritmo, calculada utilizando la Transformada
+                    Rápida de Fourier y, a continuación, midiendo la potencia de
+                    la frecuencia dominante más la potencia de las frecuencias
+                    en un intervalo de 0.4 Hz alrededor de ésta (un ritmo más
+                    regular concentra una mayor potencia en una única
+                    frecuencia).
+          \end{itemize}
+\end{enumerate}
+
+
+\paragraph{Resultados}
+
+Se ha observado una correlación bastante alta entre las características
+utilizadas y la categoría del individuo dentro de las escalas de medición de la
+Enfermedad de Parkinson utilizadas medida por un experto en el campo.
+
+
+\section{Supervised classification of bradykinesia}
+
+Este estudio \cite{williams2020supervised} es muy similar al anteriormente
+visto, y está realizado por un equipo compuesto por casi los mismos
+participantes. En este caso se han utilizado 70 vídeos, de ambas manos de 20
+pacientes de la Enfermedad de Parkinson y de un grupo de control de 15
+individuos.
+
+
+\paragraph{Metodología}
+
+La metodología es prácticamente igual que antes, la diferencia principal está en
+las características que se extraen de la serie temporal correspondiente con la
+amplitud, se ha obtenido:
+
+\begin{itemize}
+    \item Frecuencia, medida como la frecuencia máxima de la Transformada Rápida
+          de Fourier de la serie temporal.
+    \item Amplitud, calculada como la densidad espectral, que se ha obtenido
+          mediante la integral cuadrada del espectro de la Transformada Rápida
+          de Fourier.
+    \item Variabilidad.
+\end{itemize}
+
+Con estas características se ha realizado clasificación binaria mediante
+clasificación bayesiana ingenua, regresión logística y máquina de vectores de
+soporte, tanto con función lineal como con función de base radial.
+
+
+\paragraph{Resultados}
+
+Los mejores resultados se han obtenido con máquina de vectores de soporte con
+función de base radial, que coincide en un 73\% de los casos con la
+clasificación de expertos en el campo.
