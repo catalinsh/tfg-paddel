@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-from footfg.preprocessing.filename_features import extract_filename_features
+from paddel.preprocessing.filename_features import extract_filename_features
 
 log = logging.getLogger(__name__)
 

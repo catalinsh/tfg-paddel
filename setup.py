@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="footfg",
+    name="paddel",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    package_data={"footfg": ["py.typed"]},
+    package_data={"paddel": ["py.typed"]},
     version="0.0.1",
 )
