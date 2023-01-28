@@ -1,9 +1,10 @@
-from typing import NamedTuple
+from typing import NamedTuple, Iterable
 
 import numpy as np
 import numpy.typing as npt
 
 Image = npt.NDArray[np.uint8]
+Video = Iterable[Image]
 
 
 class Point(NamedTuple):

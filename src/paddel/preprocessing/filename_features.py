@@ -7,7 +7,7 @@ from paddel.enums import IndividualType, Side, Gender
 log = logging.getLogger(__name__)
 
 
-def _extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
+def extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
     pattern = re.compile(
         r"(?P<individual_type>\w+)"
         r"_"
@@ -32,12 +32,12 @@ def _extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
     return match.groupdict()
 
 
-def _contains_letters_in_order(word: str, letters: str) -> bool:
+def contains_letters_in_order(word: str, letters: str) -> bool:
     regex = ".*".join(letters)
     return re.search(regex, word) is not None
 
 
-def _parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]]:
+def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]]:
     features: dict[str, Any] = {}
 
     individual_type = unparsed_features["individual_type"]
@@ -50,9 +50,9 @@ def _parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any
         return None
 
     hand = unparsed_features["hand"]
-    if _contains_letters_in_order("DERECHA", hand.upper()):
+    if contains_letters_in_order("DERECHA", hand.upper()):
         features["hand"] = Side.RIGHT
-    elif _contains_letters_in_order("IZQUIERDA", hand.upper()):
+    elif contains_letters_in_order("IZQUIERDA", hand.upper()):
         features["hand"] = Side.LEFT
     else:
         log.warning("Could not parse hand of video")
@@ -86,12 +86,12 @@ def _parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any
 
 
 def extract_filename_features(filename: str) -> Optional[dict[str, Any]]:
-    features = _extract_filename_fields(filename)
+    features = extract_filename_fields(filename)
     if not features:
         log.warning(f"Could not match filename of {filename}")
         return None
 
-    parsed_features = _parse_features(features)
+    parsed_features = parse_features(features)
     if not parsed_features:
         log.warning(f"Could not parse features from filename of {filename}")
         return None

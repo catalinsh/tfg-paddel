@@ -2,11 +2,15 @@ import math
 
 import cv2
 import numpy as np
+import pytest
 
 from paddel.preprocessing.image_landmark_extraction import (
     extract_image_landmarks,
 )
-from paddel.preprocessing.video_landmark_extraction import initialize_hands
+from paddel.preprocessing.video_landmark_extraction import (
+    initialize_hands,
+    extract_video_landmarks,
+)
 from paddel.types import HandLandmarks
 
 hand_open_image: np.ndarray = cv2.imread("tests/resources/hand_open.jpg")
@@ -46,3 +50,67 @@ def test_landmark_image():
         assert closed_hand_index_thumb_distance < open_hand_index_thumb_distance
 
         assert not extract_image_landmarks(blank_image, hands)
+
+
+@pytest.mark.parametrize(
+    "video,length",
+    [
+        (
+            [
+                hand_open_image,
+                hand_closed_image,
+                hand_open_image,
+                hand_closed_image,
+            ],
+            4,
+        ),
+        (
+            [
+                hand_open_image,
+                blank_image,
+                hand_open_image,
+                hand_closed_image,
+            ],
+            2,
+        ),
+        (
+            [
+                hand_open_image,
+                hand_closed_image,
+                blank_image,
+                hand_open_image,
+                hand_closed_image,
+            ],
+            2,
+        ),
+        (
+            [
+                blank_image,
+                hand_open_image,
+                hand_closed_image,
+            ],
+            2,
+        ),
+        (
+            [
+                hand_open_image,
+                hand_closed_image,
+                blank_image,
+            ],
+            2,
+        ),
+        (
+            [
+                blank_image,
+                blank_image,
+                blank_image,
+                blank_image,
+            ],
+            0,
+        ),
+    ],
+)
+def test_landmark_video(video, length):
+    landmarks = extract_video_landmarks(video)
+    assert len(landmarks) == length
+    assert all(type(lm) == HandLandmarks for lm in landmarks)
