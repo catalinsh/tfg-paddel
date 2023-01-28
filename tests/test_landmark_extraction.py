@@ -1,7 +1,6 @@
 import math
 
 import cv2
-import numpy as np
 import pytest
 
 from paddel.preprocessing.image_landmark_extraction import (
@@ -11,15 +10,15 @@ from paddel.preprocessing.video_landmark_extraction import (
     initialize_hands,
     extract_video_landmarks,
 )
-from paddel.types import HandLandmarks
+from paddel.types import HandLandmarks, Image
 
-hand_open_image: np.ndarray = cv2.imread("tests/resources/hand_open.jpg")
+hand_open_image: Image = cv2.imread("tests/resources/hand_open.jpg")
 hand_open_image = hand_open_image[..., [2, 1, 0]]
 
-hand_closed_image: np.ndarray = cv2.imread("tests/resources/hand_closed.jpg")
+hand_closed_image: Image = cv2.imread("tests/resources/hand_closed.jpg")
 hand_closed_image = hand_closed_image[..., [2, 1, 0]]
 
-blank_image: np.ndarray = cv2.imread("tests/resources/blank.jpg")
+blank_image: Image = cv2.imread("tests/resources/blank.jpg")
 blank_image = blank_image[..., [2, 1, 0]]
 
 
@@ -106,6 +105,10 @@ def test_landmark_image():
                 blank_image,
                 blank_image,
             ],
+            0,
+        ),
+        (
+            [],
             0,
         ),
     ],
