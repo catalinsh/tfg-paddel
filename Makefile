@@ -7,7 +7,7 @@ install_dependencies:
 	pip install -r requirements.txt -r requirements-dev.txt
 
 test:
-	pytest tests
+	pytest --cov tests
 
 typecheck:
 	mypy --install-types --non-interactive --strict src
