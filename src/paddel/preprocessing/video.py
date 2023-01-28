@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import cv2
+import cv2  # type: ignore
 
 from paddel.types import Video
 
