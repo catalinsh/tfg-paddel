@@ -1,3 +1,5 @@
+-e /paddel
+
 fastapi
 pydantic
 uvicorn

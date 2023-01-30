@@ -10,7 +10,9 @@ services:
       - web
   
   api:
-    build: ./api
+    build:
+      context: ./
+      dockerfile: ./api/Dockerfile
     container_name: api
 
   web:

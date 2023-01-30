@@ -1,6 +1,6 @@
 services:
   api:
-    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --root-path /api --reload 
+    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --root-path /api --reload --reload-dir . --reload-dir /paddel
     volumes:
       - ./api:/api
       - ./paddel:/paddel
