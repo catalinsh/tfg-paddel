@@ -1,0 +1,12 @@
+services:
+  api:
+    command: uvicorn src.main:app --host 0.0.0.0 --port 80 --root-path /api --reload 
+    volumes:
+      - ./api:/api
+      - ./paddel:/paddel
+
+  web:
+    command: npm run dev -- --host 0.0.0.0 --port 80
+    volumes:
+      - ./web:/web
+      - /web/node_modules

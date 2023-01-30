@@ -1,18 +1,29 @@
-# PYTHON
+# Docker
+docker-up:
+	docker-compose up -d -t 0
 
-create_environment:
+docker-up-dev:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d -t 0
+
+docker-restart:
+	docker-compose restart -t 0
+
+docker-down:
+	docker-compose down -t 0
+
+docker-clean:
+	docker-compose down --rmi all -v -t 0
+
+
+# Python
+create-environment:
 	-conda env create --prefix ./venv --file ./environment.yml
 
-install_dependencies:
-	pip install -r requirements.txt -r requirements-dev.txt
+update-environment:
+	conda env update --prefix ./venv --file ./environment.yml --prune
 
-test:
-	pytest --cov=src tests
 
-typecheck:
-	mypy --install-types --non-interactive --strict src
-
-# LATEX
+# Latex
 LATEX_COMPILE = latexmk -cd -pdf
 LATEX_CLEAN = $(LATEX_COMPILE) -bibtex-cond1 -c
 
@@ -24,6 +35,6 @@ anexos:
 
 docs: memoria anexos
 
-docs_clean:
+docs-clean:
 	$(LATEX_CLEAN) docs/memoria.tex
 	$(LATEX_CLEAN) docs/anexos.tex
