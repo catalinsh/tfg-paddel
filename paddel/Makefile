@@ -1,8 +1,14 @@
 install-dependencies:
-	pip install -r requirements.txt -r requirements-dev.txt
+	pip install -e .[dev]
 
 test:
-	pytest --cov=src tests
+	pytest --cov
 
-typecheck:
-	mypy --install-types --non-interactive --strict src
+lint:
+	mypy src
+	black src tests --check
+	isort src tests --check-only
+
+format:
+	black src tests
+	isort src tests

@@ -1,4 +1,4 @@
-from typing import NamedTuple, Iterable
+from typing import Iterable, NamedTuple
 
 import numpy as np
 import numpy.typing as npt

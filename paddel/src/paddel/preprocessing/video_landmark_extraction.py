@@ -1,10 +1,10 @@
-from typing import Sequence, Any
+from typing import Any, Sequence
 
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
 from paddel.config import settings
 from paddel.preprocessing.image_landmark_extraction import extract_image_landmarks
-from paddel.types import Video, HandLandmarks
+from paddel.types import HandLandmarks, Video
 
 
 def initialize_hands() -> Hands:

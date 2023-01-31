@@ -15,14 +15,6 @@ docker-clean:
 	docker-compose down --rmi all -v -t 0
 
 
-# Python
-create-environment:
-	-conda env create --prefix ./venv --file ./environment.yml
-
-update-environment:
-	conda env update --prefix ./venv --file ./environment.yml --prune
-
-
 # Latex
 LATEX_COMPILE = latexmk -cd -pdf
 LATEX_CLEAN = $(LATEX_COMPILE) -bibtex-cond1 -c

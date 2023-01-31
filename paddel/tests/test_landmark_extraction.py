@@ -3,12 +3,10 @@ import math
 import cv2
 import pytest
 
-from paddel.preprocessing.image_landmark_extraction import (
-    extract_image_landmarks,
-)
+from paddel.preprocessing.image_landmark_extraction import extract_image_landmarks
 from paddel.preprocessing.video_landmark_extraction import (
-    initialize_hands,
     extract_video_landmarks,
+    initialize_hands,
 )
 from paddel.types import HandLandmarks, Image
 

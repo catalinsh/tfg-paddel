@@ -1,8 +1,8 @@
 import logging
 import re
-from typing import Optional, Any
+from typing import Any, Optional
 
-from paddel.enums import IndividualType, Side, Gender
+from paddel.enums import Gender, IndividualType, Side
 
 log = logging.getLogger(__name__)
 

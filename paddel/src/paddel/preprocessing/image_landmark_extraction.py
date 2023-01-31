@@ -2,7 +2,7 @@ from typing import Optional
 
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
-from paddel.types import Image, HandLandmarks, Point
+from paddel.types import HandLandmarks, Image, Point
 
 
 def extract_image_landmarks(image: Image, hands: Hands) -> Optional[HandLandmarks]:

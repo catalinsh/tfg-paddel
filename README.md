@@ -8,10 +8,6 @@ This project has the following components:
 Located in the `paddel` directory, this is an installable Python package that
 contains the core of the application.
 
-### Jupyter
-The `notebooks` directory stores the Jupyter notebooks used during the
-development of this project.
-
 ### Docker containers
 The web application is built around Docker to facilitate development and
 deployment. It consists of the following containers:

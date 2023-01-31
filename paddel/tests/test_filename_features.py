@@ -1,4 +1,4 @@
-from paddel.enums import IndividualType, Side, Gender
+from paddel.enums import Gender, IndividualType, Side
 from paddel.preprocessing.filename_features import extract_filename_features
 
 
