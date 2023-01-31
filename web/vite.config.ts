@@ -6,7 +6,7 @@ const config: UserConfig = {
 	server: {
 		watch: {
 			usePolling: true
-		},
+		}
 	}
 };
 
