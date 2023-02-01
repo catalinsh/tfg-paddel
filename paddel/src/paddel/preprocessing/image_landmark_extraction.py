@@ -6,6 +6,12 @@ from paddel.types import HandLandmarks, Image, Point
 
 
 def extract_image_landmarks(image: Image, hands: Hands) -> Optional[HandLandmarks]:
+    """Extract hand landmarks from the given image.
+
+    :param image: Image to extract landmarks from.
+    :param hands: Mediapipe Hands object.
+    :return: Image landmarks or None.
+    """
     hands_result = hands.process(image)
 
     # If hand not detected, retry, this time without

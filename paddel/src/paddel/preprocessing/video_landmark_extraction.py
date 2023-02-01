@@ -8,6 +8,10 @@ from paddel.types import HandLandmarks, Video
 
 
 def initialize_hands() -> Hands:
+    """Initialize Mediapipe Hands object.
+
+    :return: Mediapipe Hands object.
+    """
     return Hands(
         static_image_mode=False,
         max_num_hands=1,
@@ -18,6 +22,11 @@ def initialize_hands() -> Hands:
 
 
 def get_longest_non_none_sequence(sequence: Sequence[Any]) -> Sequence[Any]:
+    """Get the longest not None valued sequence from the given sequence.
+
+    :param sequence: Sequence to operate on.
+    :return: Longest non-None sequence.
+    """
     current: list[Any] = []
     best: list[Any] = []
 
@@ -37,6 +46,11 @@ def get_longest_non_none_sequence(sequence: Sequence[Any]) -> Sequence[Any]:
 
 
 def extract_video_landmarks(video: Video) -> Sequence[HandLandmarks]:
+    """Extract hand landmarks from the given video.
+
+    :param video: Video to landmark.
+    :return: Video landmarks.
+    """
     with initialize_hands() as hands:
         landmarks = [extract_image_landmarks(image, hands) for image in video]
 

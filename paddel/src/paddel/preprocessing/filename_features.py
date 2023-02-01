@@ -8,6 +8,11 @@ log = logging.getLogger(__name__)
 
 
 def extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
+    """Match filename to the expected regex pattern and get the fields.
+
+    :param filename: String to match.
+    :return: Filename fields or None.
+    """
     pattern = re.compile(
         r"(?P<individual_type>\w+)"
         r"_"
@@ -33,11 +38,22 @@ def extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
 
 
 def contains_letters_in_order(word: str, letters: str) -> bool:
+    """Check if the given word contains the given letter in order.
+
+    :param word: Word to check.
+    :param letters: Letters to check.
+    :return: If the word contains the letters in order.
+    """
     regex = ".*".join(letters)
     return re.search(regex, word) is not None
 
 
 def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]]:
+    """Parse previously matched features to the adequate feature values.
+
+    :param unparsed_features: Features to parse.
+    :return: Parsed features or None.
+    """
     features: dict[str, Any] = {}
 
     individual_type = unparsed_features["individual_type"]
@@ -86,6 +102,11 @@ def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]
 
 
 def extract_filename_features(filename: str) -> Optional[dict[str, Any]]:
+    """Get features from the given filename.
+
+    :param filename: Filename to get features from.
+    :return: Filename features or None.
+    """
     features = extract_filename_fields(filename)
     if not features:
         log.warning(f"Could not match filename of {filename}")
