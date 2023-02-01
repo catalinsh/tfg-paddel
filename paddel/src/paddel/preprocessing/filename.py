@@ -1,17 +1,16 @@
-import logging
 import re
-from typing import Any, Optional
+from typing import Any
 
 from paddel.enums import Gender, IndividualType, Side
+from paddel.exceptions import InvalidFilenameError
 
-log = logging.getLogger(__name__)
 
-
-def extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
+def extract_filename_fields(filename: str) -> dict[str, str]:
     """Match filename to the expected regex pattern and get the fields.
 
     :param filename: String to match.
     :return: Filename fields or None.
+    :raises InvalidFilenameError: If filename does not match.
     """
     pattern = re.compile(
         r"(?P<individual_type>\w+)"
@@ -32,7 +31,7 @@ def extract_filename_fields(filename: str) -> Optional[dict[str, str]]:
     match = pattern.match(filename)
 
     if not match:
-        return None
+        raise InvalidFilenameError(f"Filename does not match expected format.")
 
     return match.groupdict()
 
@@ -48,11 +47,12 @@ def contains_letters_in_order(word: str, letters: str) -> bool:
     return re.search(regex, word) is not None
 
 
-def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]]:
+def parse_features(unparsed_features: dict[str, str]) -> dict[str, Any]:
     """Parse previously matched features to the adequate feature values.
 
     :param unparsed_features: Features to parse.
     :return: Parsed features or None.
+    :raises InvalidFilenameError: If there is a bad field.
     """
     features: dict[str, Any] = {}
 
@@ -62,8 +62,7 @@ def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]
     elif "ID" in individual_type.upper():
         features["individual_type"] = IndividualType.ID
     else:
-        log.warning("Could not parse individual type of video")
-        return None
+        raise InvalidFilenameError("Could not parse individual type of video")
 
     hand = unparsed_features["hand"]
     if contains_letters_in_order("DERECHA", hand.upper()):
@@ -71,8 +70,7 @@ def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]
     elif contains_letters_in_order("IZQUIERDA", hand.upper()):
         features["hand"] = Side.LEFT
     else:
-        log.warning("Could not parse hand of video")
-        return None
+        raise InvalidFilenameError("Could not parse hand of video")
 
     gender = unparsed_features["gender"]
     if gender.upper() == "M":
@@ -80,8 +78,7 @@ def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]
     elif gender.upper() == "H":
         features["gender"] = Gender.MALE
     else:
-        log.warning("Could not parse gender of video")
-        return None
+        raise InvalidFilenameError("Could not parse gender of video")
 
     age = unparsed_features["age"]
     if age.isnumeric():
@@ -95,26 +92,22 @@ def parse_features(unparsed_features: dict[str, str]) -> Optional[dict[str, Any]
     elif handedness.upper() == "Z":
         features["handedness"] = Side.LEFT
     else:
-        log.warning("Could not parse handedness of video")
-        return None
+        raise InvalidFilenameError("Could not parse handedness of video")
 
     return features
 
 
-def extract_filename_features(filename: str) -> Optional[dict[str, Any]]:
+def extract_filename_features(filename: str) -> dict[str, Any]:
     """Get features from the given filename.
 
     :param filename: Filename to get features from.
-    :return: Filename features or None.
+    :return: Filename features.
+    :raises InvalidFilenameError: If filename is invalid.
     """
-    features = extract_filename_fields(filename)
-    if not features:
-        log.warning(f"Could not match filename of {filename}")
-        return None
-
-    parsed_features = parse_features(features)
-    if not parsed_features:
-        log.warning(f"Could not parse features from filename of {filename}")
-        return None
+    try:
+        features = extract_filename_fields(filename)
+        parsed_features = parse_features(features)
+    except InvalidFilenameError as e:
+        raise InvalidFilenameError(f"{filename} could not be parsed.") from e
 
     return parsed_features

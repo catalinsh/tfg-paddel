@@ -1,19 +1,20 @@
 import logging
+from datetime import timedelta
 
-from pydantic import BaseSettings, Field
+from pydantic import BaseSettings, DirectoryPath
 
 log = logging.getLogger(__name__)
 
 
 class _Settings(BaseSettings):
-    video_dir: str = Field("data/raw", env="PADDEL_VIDEO_DIR")
-    interim_dir: str = Field("data/interim", env="PADDEL_INTERIM_DIR")
-    mediapipe_min_detection_confidence: float = Field(
-        "0.5", env="PADDEL_MEDIAPIPE_MIN_DETECTION_CONFIDENCE"
-    )
-    mediapipe_min_tracking_confidence: float = Field(
-        "0.5", env="PADDEL_MEDIAPIPE_MIN_TRACKING_CONFIDENCE"
-    )
+    dirs__samples: DirectoryPath
+    dirs__interim: DirectoryPath
+
+    preprocessing__skip_done_samples: bool = True
+    preprocessing__min_detection_time: timedelta = timedelta(seconds=10)
+
+    class Config:
+        env_prefix = "PADDEL_"
 
 
 settings = _Settings()

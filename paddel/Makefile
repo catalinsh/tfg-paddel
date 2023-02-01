@@ -1,14 +1,13 @@
 install-dependencies:
 	pip install -e .[dev]
 
-test:
-	pytest --cov
-
 lint:
+	autoflake src --check --quiet
+	isort src --check-only
+	black src --check
 	mypy src
-	black src tests --check
-	isort src tests --check-only
 
 format:
-	black src tests
-	isort src tests
+	autoflake src
+	isort src
+	black src
