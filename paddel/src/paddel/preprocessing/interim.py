@@ -2,12 +2,14 @@ import logging
 import os.path
 import pickle
 from pathlib import Path
+from typing import Any, Iterable, Sequence
 
 from paddel import settings
 from paddel.exceptions import InvalidFilenameError, NotAVideoError
 from paddel.preprocessing.filename import extract_filename_features
 from paddel.preprocessing.landmark import extract_video_landmarks
 from paddel.preprocessing.video import extract_video_features
+from paddel.types import HandLandmarks
 
 log = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ def is_sample_done(path: Path) -> bool:
     return interim_path.exists() and interim_path.is_file()
 
 
-def extract_interim_features(path: Path) -> dict:
+def extract_interim_data(path: Path) -> tuple[dict[str, Any], Sequence[HandLandmarks]]:
     """Extract filename features, video features, and landmarks.
 
     :param path: Sample path.
@@ -48,15 +50,12 @@ def extract_interim_features(path: Path) -> dict:
 
     features["landmark_count"] = len(landmarks)
 
-    sample = {
-        "features": features,
-        "landmarks": landmarks,
-    }
-
-    return sample
+    return features, landmarks
 
 
-def save_interim_features(path: Path, features: dict) -> None:
+def save_interim_data(
+    path: Path, features: tuple[dict[str, Any], Sequence[HandLandmarks]]
+) -> None:
     """Extract features from the sample and save them to their apropiate location.
 
     :param features:
@@ -83,10 +82,22 @@ def preprocess_interim() -> None:
             continue
 
         try:
-            features = extract_interim_features(sample_path)
+            interim_data = extract_interim_data(sample_path)
         except (InvalidFilenameError, NotAVideoError):
             log.exception(f"{sample_path} feature extraction failed. Skipping.")
             continue
 
-        save_interim_features(sample_path, features)
+        save_interim_data(sample_path, interim_data)
         log.info(f"{sample_path} feature extraction was successful.")
+
+
+def load_interim_items() -> Iterable[tuple[dict[str, Any], Sequence[HandLandmarks]]]:
+    """Generator the iterates over the interim data.
+
+    :return: Interim data generator.
+    """
+    item_paths = settings.dirs__interim.iterdir()
+
+    for item_path in item_paths:
+        with open(item_path, "rb") as file:
+            yield pickle.load(file)

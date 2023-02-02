@@ -1,5 +1,5 @@
 -e /paddel
 
-fastapi
-pydantic
-uvicorn
+fastapi~=0.89.1
+pydantic~=1.10.4
+uvicorn~=0.20.0

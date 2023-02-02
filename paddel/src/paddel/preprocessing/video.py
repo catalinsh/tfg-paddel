@@ -44,8 +44,8 @@ def extract_video_features(path: Path) -> dict[str, Number]:
     ret = {
         "width": int(video_capture.get(cv2.CAP_PROP_FRAME_WIDTH)),
         "height": int(video_capture.get(cv2.CAP_PROP_FRAME_HEIGHT)),
-        "frames": int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT)),
-        "fps": video_capture.get(cv2.CAP_PROP_FPS),
+        "frames_count": int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT)),
+        "framerate": video_capture.get(cv2.CAP_PROP_FPS),
         "fourcc": int(video_capture.get(cv2.CAP_PROP_FOURCC)),
     }
     video_capture.release()
