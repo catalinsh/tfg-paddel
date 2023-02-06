@@ -1,16 +1,15 @@
 import re
-from typing import Any
+
+import pandas as pd
 
 from paddel.enums import Gender, IndividualType, Side
-from paddel.exceptions import InvalidFilenameError
 
 
-def extract_filename_fields(filename: str) -> dict[str, str]:
-    """Match filename to the expected regex pattern and get the fields.
+def extract_filename_features(filename: str) -> pd.Series:
+    """Extract the different fields from the given filename.
 
-    :param filename: String to match.
-    :return: Filename fields or None.
-    :raises InvalidFilenameError: If filename does not match.
+    :param filename: Filename.
+    :return: Pandas Series of the features.
     """
     pattern = re.compile(
         r"(?P<individual_type>\w+)"
@@ -31,9 +30,26 @@ def extract_filename_fields(filename: str) -> dict[str, str]:
     match = pattern.match(filename)
 
     if not match:
-        raise InvalidFilenameError(f"Filename does not match expected format.")
+        return pd.Series(index=list(pattern.groupindex), dtype=str)
 
-    return match.groupdict()
+    fields_dict = match.groupdict()
+    fields_series = pd.Series(fields_dict, dtype=str)
+
+    return fields_series
+
+
+def substitute_individual_type(individual_type: str) -> int:
+    """Parse individual type to apropiate value.
+
+    :param individual_type: Individual type string.
+    :return: Individual type value.
+    """
+    if "CONTROL" in individual_type.upper():
+        return IndividualType.CONTROL
+    elif "ID" in individual_type.upper():
+        return IndividualType.ID
+    else:
+        return -1
 
 
 def contains_letters_in_order(word: str, letters: str) -> bool:
@@ -47,67 +63,55 @@ def contains_letters_in_order(word: str, letters: str) -> bool:
     return re.search(regex, word) is not None
 
 
-def parse_features(unparsed_features: dict[str, str]) -> dict[str, Any]:
-    """Parse previously matched features to the adequate feature values.
+def substitute_hand(hand: str) -> int:
+    """Parse hand to apropiate value.
 
-    :param unparsed_features: Features to parse.
-    :return: Parsed features or None.
-    :raises InvalidFilenameError: If there is a bad field.
+    :param hand: Hand string.
+    :return: Hand value.
     """
-    features: dict[str, Any] = {}
-
-    individual_type = unparsed_features["individual_type"]
-    if "CONTROL" in individual_type.upper():
-        features["individual_type"] = IndividualType.CONTROL
-    elif "ID" in individual_type.upper():
-        features["individual_type"] = IndividualType.ID
-    else:
-        raise InvalidFilenameError("Could not parse individual type of video")
-
-    hand = unparsed_features["hand"]
     if contains_letters_in_order("DERECHA", hand.upper()):
-        features["hand"] = Side.RIGHT
+        return Side.RIGHT
     elif contains_letters_in_order("IZQUIERDA", hand.upper()):
-        features["hand"] = Side.LEFT
+        return Side.LEFT
     else:
-        raise InvalidFilenameError("Could not parse hand of video")
-
-    gender = unparsed_features["gender"]
-    if gender.upper() == "M":
-        features["gender"] = Gender.FEMALE
-    elif gender.upper() == "H":
-        features["gender"] = Gender.MALE
-    else:
-        raise InvalidFilenameError("Could not parse gender of video")
-
-    age = unparsed_features["age"]
-    if age.isnumeric():
-        features["age"] = int(age)
-    else:
-        features["age"] = -1
-
-    handedness = unparsed_features["handedness"]
-    if handedness.upper() == "D":
-        features["handedness"] = Side.RIGHT
-    elif handedness.upper() == "Z":
-        features["handedness"] = Side.LEFT
-    else:
-        raise InvalidFilenameError("Could not parse handedness of video")
-
-    return features
+        return -1
 
 
-def extract_filename_features(filename: str) -> dict[str, Any]:
-    """Get features from the given filename.
+def substitute_gender(gender: str) -> int:
+    """Parse gender to apropiate value.
 
-    :param filename: Filename to get features from.
-    :return: Filename features.
-    :raises InvalidFilenameError: If filename is invalid.
+    :param gender: Hand string.
+    :return: Gender value.
     """
-    try:
-        features = extract_filename_fields(filename)
-        parsed_features = parse_features(features)
-    except InvalidFilenameError as e:
-        raise InvalidFilenameError(f"{filename} could not be parsed.") from e
+    if gender.upper() == "M":
+        return Gender.FEMALE
+    elif gender.upper() == "H":
+        return Gender.MALE
+    else:
+        return -1
 
-    return parsed_features
+
+def substitute_age(age: str) -> int:
+    """Parse age to apropiate value.
+
+    :param age: Hand string.
+    :return: Age value.
+    """
+    if age.isnumeric():
+        return int(age)
+    else:
+        return -1
+
+
+def substitute_handedness(handedness: str) -> int:
+    """Parse handedness to apropiate value.
+
+    :param handedness: Hand string.
+    :return: Handedness value.
+    """
+    if handedness.upper() == "D":
+        return Side.RIGHT
+    elif handedness.upper() == "Z":
+        return Side.LEFT
+    else:
+        return -1
