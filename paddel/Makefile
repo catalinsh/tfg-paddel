@@ -5,7 +5,7 @@ lint:
 	autoflake src --check --quiet
 	isort src --check-only
 	black src --check
-	mypy src --install-types
+	mypy src
 
 format:
 	autoflake src

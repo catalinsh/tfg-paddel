@@ -1,15 +1,18 @@
 import re
+from pathlib import Path
 
-import pandas as pd
+import numpy as np
 
 from paddel.enums import Gender, IndividualType, Side
 
+FilenameFeatures = np.dtype([("stem", "O"), ("name", "O")])
 
-def extract_filename_features(filename: str) -> pd.Series:
+
+def extract_filename_fields(filename: str) -> dict[str, str]:
     """Extract the different fields from the given filename.
 
     :param filename: Filename.
-    :return: Pandas Series of the features.
+    :return: Dictionary with fields.
     """
     pattern = re.compile(
         r"(?P<individual_type>\w+)"
@@ -30,15 +33,12 @@ def extract_filename_features(filename: str) -> pd.Series:
     match = pattern.match(filename)
 
     if not match:
-        return pd.Series(index=list(pattern.groupindex), dtype=str)
+        return {key: "null" for key in pattern.groupindex}
 
-    fields_dict = match.groupdict()
-    fields_series = pd.Series(fields_dict, dtype=str)
-
-    return fields_series
+    return match.groupdict()
 
 
-def substitute_individual_type(individual_type: str) -> int:
+def parse_individual_type(individual_type: str) -> int:
     """Parse individual type to apropiate value.
 
     :param individual_type: Individual type string.
@@ -63,7 +63,7 @@ def contains_letters_in_order(word: str, letters: str) -> bool:
     return re.search(regex, word) is not None
 
 
-def substitute_hand(hand: str) -> int:
+def parse_hand(hand: str) -> int:
     """Parse hand to apropiate value.
 
     :param hand: Hand string.
@@ -77,7 +77,7 @@ def substitute_hand(hand: str) -> int:
         return -1
 
 
-def substitute_gender(gender: str) -> int:
+def parse_gender(gender: str) -> int:
     """Parse gender to apropiate value.
 
     :param gender: Hand string.
@@ -91,7 +91,7 @@ def substitute_gender(gender: str) -> int:
         return -1
 
 
-def substitute_age(age: str) -> int:
+def parse_age(age: str) -> int:
     """Parse age to apropiate value.
 
     :param age: Hand string.
@@ -103,7 +103,7 @@ def substitute_age(age: str) -> int:
         return -1
 
 
-def substitute_handedness(handedness: str) -> int:
+def parse_handedness(handedness: str) -> int:
     """Parse handedness to apropiate value.
 
     :param handedness: Hand string.
@@ -115,3 +115,21 @@ def substitute_handedness(handedness: str) -> int:
         return Side.LEFT
     else:
         return -1
+
+
+def extract_filename_features(path: Path) -> tuple[int, int, int, int, int]:
+    """Obtains the filename features from the file in the given path.
+
+    :param path: Path to get features from.
+    :return: Tuple with the parsed features.
+    """
+    filename = path.stem
+    fields = extract_filename_fields(filename)
+
+    individual_type = parse_individual_type(fields["individual_type"])
+    hand = parse_hand(fields["hand"])
+    gender = parse_gender(fields["gender"])
+    age = parse_age(fields["age"])
+    handedness = parse_handedness(fields["handedness"])
+
+    return individual_type, hand, gender, age, handedness

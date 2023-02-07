@@ -10,13 +10,12 @@ from paddel.types import HandLandmarks
 
 
 def angle_between(
-    a_in: npt.ArrayLike,
-    b_in: npt.ArrayLike,
-    c_in: npt.ArrayLike,
+        a_in: npt.ArrayLike,
+        b_in: npt.ArrayLike,
+        c_in: npt.ArrayLike,
 ) -> float:
     """Get angle between 3 points in n-dimensional euclidean
     space.
-
     :param a_in: First point.
     :param b_in: Second point.
     :param c_in: Third point.
@@ -38,44 +37,53 @@ def angle_between(
     return angle
 
 
-def get_tap_rate(framerate: float, angles: pd.Series) -> float:
-    """Get the tap rate of the given angles at the given framerate.
-    A tap is considered as a local minimum in the angles time series,
-    in order to remove undesired minimums a rolling standard deviation
-    is used to determine the prominence necessary for a minimum to be
-    considered as such.
+def get_taps(angles: pd.Series, framerate: float) -> npt.NDArray[int]:
+    """Get the amount of taps from the given hand angle series.
 
-    :param framerate: Framerate of the video the angles come from.
-    :param angles: Pandas series to get tap_rate_from
-    :return: Tapping rate in taps per second.
+    :param angles: Series of angles.
+    :param framerate: Framerate of the original video.
+    :return: Array containing the positions of the taps.
     """
-
     window = ceil(framerate) * 3
     rsd = angles.rolling(window, center=True, min_periods=0).std().to_numpy() * 1.9
+    taps = find_peaks(-angles.to_numpy(), prominence=rsd)[0]
 
-    tap_number = len(find_peaks(-angles.to_numpy(), prominence=rsd)[0])
-    elapsed_time = len(angles) / framerate
-    tap_rate = tap_number / elapsed_time
+    return taps
 
-    return tap_rate
+
+def get_tap_rate_difference(taps: npt.NDArray[int], frame_count: int, framerate: float) -> float:
+    """Get the tap rate difference between the first and last halves
+    of the video.
+
+    :param taps: Array containing the positions of the taps.
+    :param frame_count: Number of frames of the original video.
+    :param framerate: Framerate of the original video.
+    :return: Difference in tapping rate.
+    """
+    middle = frame_count / 2
+    tap_rate_1 = (taps < middle).sum() / framerate
+    tap_rate_2 = (taps >= middle).sum() / framerate
+
+    return tap_rate_1 - tap_rate_2
 
 
 def extract_classic_features(
-    framerate: float, landmarks: Sequence[HandLandmarks]
-) -> pd.Series:
-    """Extract features used in previous works in the field.
+        landmarks: Sequence[HandLandmarks], framerate: float
+) -> tuple[float, float]:
+    """Extract different features from the landmarks sequence from previous works in the field.
 
-    :param framerate: Framerate of the video the landmarks come from.
-    :param landmarks: Landmarks to extract features from.
-    :return: Series of different features.
+    :param landmarks: Sequence of the video landmarks.
+    :param framerate: Framerate of the video.
+    :return: Tuple of features.
     """
     angles = pd.Series(
-        [
-            angle_between(lm.INDEX_FINGER_TIP, lm.WRIST, lm.THUMB_TIP)
-            for lm in landmarks
-        ],
+        [angle_between(lm.INDEX_FINGER_TIP, lm.WRIST, lm.THUMB_TIP) for lm in landmarks]
     )
+    frame_count = len(landmarks)
+    elapse_time = frame_count / framerate
 
-    features = {"tap_rate": get_tap_rate(framerate, angles)}
+    taps = get_taps(angles, framerate)
+    tap_rate = len(taps) / elapse_time
+    tap_rate_difference = get_tap_rate_difference(taps, frame_count, framerate)
 
-    return pd.Series(features, dtype=float)
+    return tap_rate, tap_rate_difference

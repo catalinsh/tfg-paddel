@@ -1,10 +1,11 @@
 import logging
-import pickle
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Sequence
 
+import cv2  # type: ignore
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
+from paddel.decorators import path_input_cache
 from paddel.preprocessing.video import read_video
 from paddel.types import HandLandmarks, Image, Point
 
@@ -25,7 +26,7 @@ def initialize_hands() -> Hands:
     )
 
 
-def extract_image_landmarks(image: Image, hands: Hands) -> Optional[HandLandmarks]:
+def extract_image_landmarks(image: Image, hands: Hands) -> HandLandmarks | None:
     """Extract hand landmarks from the given image.
 
     :param image: Image to extract landmarks from.
@@ -43,9 +44,7 @@ def extract_image_landmarks(image: Image, hands: Hands) -> Optional[HandLandmark
         return None
 
     hand_result = hands_result.multi_hand_landmarks[0]
-
     mediapipe_landmarks = hand_result.landmark[0:9]
-
     landmarks = HandLandmarks(*(Point(lm.x, lm.y, lm.z) for lm in mediapipe_landmarks))
 
     return landmarks
@@ -59,57 +58,42 @@ def get_longest_non_none_sequence(
     :param sequence: Sequence to operate on.
     :return: Longest non-None sequence.
     """
-    current: list = []
-    best: list = []
+
+    def length(interval):
+        return interval[1] - interval[0]
+
+    current = [0, 0]
+    best = [0, 0]
 
     for item in sequence:
-        if item:
-            current.append(item)
-        elif len(current) > len(best):
+        if item is not None:
+            current[1] += 1
+        elif length(current) > length(best):
             best = current
-            current = []
+            current = [best[1] + 1, best[1] + 1]
         else:
-            current = []
+            current = [current[1] + 1, current[1] + 1]
 
-    if len(current) > len(best):
+    if length(current) > length(best):
         best = current
 
-    return best
+    return sequence[best[0] : best[1]]
 
 
-def load_landmarks(landmarks_path: str) -> Sequence[HandLandmarks]:
-    """Load landmarks from given path.
-
-    :param landmarks_path: Path with the landmarks.
-    :return: Landmark sequence.
-    """
-    with open(landmarks_path, "rb") as file:
-        return pickle.load(file)
-
-
-def extract_landmarks(
-    video_path: str, landmarks_path: str | None = None
-) -> Sequence[HandLandmarks]:
+@path_input_cache
+def extract_landmarks(path: Path) -> Sequence[HandLandmarks]:
     """Extract hand landmarks from the given file path into the given landmark path.
 
-    :param video_path: Video path.
-    :param landmarks_path: Path to pickle file to save or load the landmarks.
+    :param path: Video path.
     :return: Video landmarks.
     """
-    if landmarks_path and Path(landmarks_path).exists():
-        return load_landmarks(landmarks_path)
+    log.info(f'Extracting landmarks from "{path}".')
 
-    video = read_video(video_path)
+    video = read_video(path)
 
     with initialize_hands() as hands:
         extracted_landmarks = [extract_image_landmarks(image, hands) for image in video]
 
     landmarks = get_longest_non_none_sequence(extracted_landmarks)
-
-    log.info(f"Extracted landmarks from {video_path} successfully.")
-
-    if landmarks_path:
-        with open(landmarks_path, "wb") as file:
-            pickle.dump(landmarks, file)
 
     return landmarks
