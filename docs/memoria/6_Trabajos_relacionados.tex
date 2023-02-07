@@ -19,12 +19,10 @@ y ambas manos a los lados de la cabeza, apuntando las puntas de los dedos hacia
 la misma. Esto se utiliza para poder normalizar las distancias en base a
 características faciales.
 
-El estudio se ha realizado sobre 13 pacientes de la Enfermedad de Parkinson,
-tomando 17 vídeos de cada paciente durante un día, además de un grupo de control
-de 6 individuos, tomando 2 vídeos al día durante una semana por cada uno. Aunque
-algunos de estos vídeos han sido descartados.
-
-En total se han utilizado 471 vídeos.
+El estudio se realizó sobre 13 pacientes con la Enfermedad de Parkinson, tomando
+17 vídeos de cada paciente durante un día, además de un grupo de control de 6
+individuos, tomando 2 vídeos al día durante una semana por cada uno. Aunque
+algunos de estos vídeos fueron descartados. En total se utilizaron 471 vídeos.
 
 
 \paragraph{Metodología}
@@ -49,7 +47,7 @@ En total se han utilizado 471 vídeos.
           \end{itemize}
     \item Se realiza una selección de características eliminando aquellas
           redundantes y usando el algoritmo chi-cuadrado.
-    \item Se entrena una máquina de vectores de soporte mediante las
+    \item Se entrena una máquina de vectores de soporte (SVM) mediante las
           características obtenidas para realizar la clasificación.
 \end{enumerate}
 
@@ -57,22 +55,25 @@ En total se han utilizado 471 vídeos.
 \paragraph{Resultados}
 
 En cuanto a la distinción entre pacientes de la Enfermedad de Parkinson y el
-grupo de control se ha obtenido una exactitud del 95\%, que es una cifra que se
+grupo de control se obtuvo una precisión del 95\%, que es una cifra que se
 debería tomar con precaución debido que, aunque se han utilizado 471 vídeos,
 estos provienen de únicamente 19 personas.
 
 
 \section{The discerning eye of computer vision}
 
-En este estudio \cite{williams2020discerning} realizado sobre 39 pacientes de la
-Enfermedad de Parkinson y sobre un grupo de control de 30 individuos se han
-tomado vídeos de ambas manos de cada individuo mientras realizan toques de los
+En este estudio \cite{williams2020discerning} realizado sobre 39 pacientes con
+la Enfermedad de Parkinson y sobre un grupo de control de 30 individuos se
+tomaron vídeos de ambas manos de cada individuo mientras realizan toques de los
 dedos índice y pulgar (de forma similar a cómo se han tomado las muestras para
-este trabajo). Dando un total de 133 vídeos (se ha descartado uno).
+este trabajo). Dando un total de 133 vídeos (se descartó uno).
 
 De estos vídeos se han extraído diferentes características y comprobado la
 relación que existe entre éstas y diferentes escalas que clasifican el nivel de
-gravedad de la Enfermedad en un paciente.
+gravedad de la Enfermedad en un paciente, como la \textit{Modified Bradykinesia
+Rating Scale} (MBRS) que categoriza el movimiento de los individuos en 5
+niveles, del 0 al 4, siendo 0 un movimiento normal y 4 el nivel de mayor
+gravedad.
 
 
 \paragraph{Metodología}
@@ -102,17 +103,17 @@ gravedad de la Enfermedad en un paciente.
 
 \paragraph{Resultados}
 
-Se ha observado una correlación bastante alta entre las características
-utilizadas y la categoría del individuo dentro de las escalas de medición de la
-Enfermedad de Parkinson utilizadas medida por un experto en el campo.
+Se observó una correlación bastante alta entre las características utilizadas y
+la categoría del individuo dentro de las escalas de medición de la Enfermedad de
+Parkinson utilizadas medida por un experto en el campo.
 
 
 \section{Supervised classification of bradykinesia}
 
 Este estudio \cite{williams2020supervised} es muy similar al anteriormente
-visto, y está realizado por un equipo compuesto por casi los mismos
-participantes. En este caso se han utilizado 70 vídeos, de ambas manos de 20
-pacientes de la Enfermedad de Parkinson y de un grupo de control de 15
+explicado, y está realizado por un equipo compuesto por casi los mismos
+participantes. En este caso se utilizaron 70 vídeos, de ambas manos de 20
+pacientes con la Enfermedad de Parkinson y de un grupo de control de 15
 individuos.
 
 
@@ -128,16 +129,15 @@ amplitud, se ha obtenido:
     \item Amplitud, calculada como la densidad espectral, que se ha obtenido
           mediante la integral cuadrada del espectro de la Transformada Rápida
           de Fourier.
-    \item Variabilidad.
 \end{itemize}
 
 Con estas características se ha realizado clasificación binaria mediante
-clasificación bayesiana ingenua, regresión logística y máquina de vectores de
-soporte, tanto con función lineal como con función de base radial.
+clasificación bayesiana ingenua (naive bayes), regresión logística y máquina de
+vectores de soporte, tanto con función lineal como con función de base radial.
 
 
 \paragraph{Resultados}
 
-Los mejores resultados se han obtenido con máquina de vectores de soporte con
+Los mejores resultados se obtuvieron con máquina de vectores de soporte con
 función de base radial, que coincide en un 73\% de los casos con la
 clasificación de expertos en el campo.
