@@ -6,13 +6,14 @@ import numpy.typing as npt
 import pandas as pd
 from scipy.signal import find_peaks
 
+from paddel import settings
 from paddel.types import HandLandmarks
 
 
 def angle_between(
-        a_in: npt.ArrayLike,
-        b_in: npt.ArrayLike,
-        c_in: npt.ArrayLike,
+    a_in: npt.ArrayLike,
+    b_in: npt.ArrayLike,
+    c_in: npt.ArrayLike,
 ) -> float:
     """Get angle between 3 points in n-dimensional euclidean
     space.
@@ -45,13 +46,19 @@ def get_taps(angles: pd.Series, framerate: float) -> npt.NDArray[int]:
     :return: Array containing the positions of the taps.
     """
     window = ceil(framerate) * 3
-    rsd = angles.rolling(window, center=True, min_periods=0).std().to_numpy() * 1.9
-    taps = find_peaks(-angles.to_numpy(), prominence=rsd)[0]
+    rolling_std = angles.rolling(window, center=True, min_periods=0).std().to_numpy()
+    taps, _ = find_peaks(
+        -angles.to_numpy(),
+        prominence=rolling_std,
+        height=(-settings.preprocessing.MAX_RADIANS_FOR_TAP, 0),
+    )
 
     return taps
 
 
-def get_tap_rate_difference(taps: npt.NDArray[int], frame_count: int, framerate: float) -> float:
+def get_tap_rate_difference(
+    taps: npt.NDArray[int], frame_count: int, framerate: float
+) -> float:
     """Get the tap rate difference between the first and last halves
     of the video.
 
@@ -64,11 +71,11 @@ def get_tap_rate_difference(taps: npt.NDArray[int], frame_count: int, framerate:
     tap_rate_1 = (taps < middle).sum() / framerate
     tap_rate_2 = (taps >= middle).sum() / framerate
 
-    return tap_rate_1 - tap_rate_2
+    return abs(tap_rate_1 - tap_rate_2)
 
 
 def extract_classic_features(
-        landmarks: Sequence[HandLandmarks], framerate: float
+    landmarks: Sequence[HandLandmarks], framerate: float
 ) -> tuple[float, float]:
     """Extract different features from the landmarks sequence from previous works in the field.
 

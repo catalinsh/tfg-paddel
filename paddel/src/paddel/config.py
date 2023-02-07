@@ -10,8 +10,13 @@ class Dirs(BaseModel):
     cache: DirectoryPath
 
 
+class Preprocessing(BaseModel):
+    MAX_RADIANS_FOR_TAP: float = 0.2
+
+
 class Settings(BaseSettings):
     dirs: Dirs
+    preprocessing: Preprocessing = Preprocessing()
 
     class Config:
         env_prefix = "PADDEL_"
