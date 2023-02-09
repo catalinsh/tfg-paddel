@@ -1,9 +1,0 @@
-name: paddel
-channels:
-  - defaults
-dependencies:
-  - python~=3.9
-  - pip~=22.3.1
-  - pip:
-    - -e ./paddel[dev]
-    - jupyter~=1.0.0

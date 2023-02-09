@@ -1,0 +1,25 @@
+name: paddel
+services:
+  proxy:
+    container_name: proxy
+    build:
+      context: ./proxy
+      target: production
+    ports:
+      - 80:80
+    depends_on:
+      - api
+      - web
+  
+  api:
+    container_name: api
+    build:
+      context: ../
+      dockerfile: ./app/api/Dockerfile
+      target: production
+
+  web:
+    container_name: web
+    build:
+      context: ./web
+      target: production
