@@ -1,6 +1,3 @@
-install-dependencies:
-	pip install -e .[dev]
-
 lint:
 	autoflake src --check --quiet
 	isort src --check-only
