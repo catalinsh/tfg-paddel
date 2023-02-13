@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 
-from paddel.enums import Gender, IndividualType, Side
+from paddel.enums import Group, Gender, Side
 
 FilenameFeatures = np.dtype([("stem", "O"), ("name", "O")])
 
@@ -15,7 +15,7 @@ def extract_filename_fields(filename: str) -> dict[str, str]:
     :return: Dictionary with fields.
     """
     pattern = re.compile(
-        r"(?P<individual_type>\w+)"
+        r"(?P<group>\w+)"
         r"_"
         r"(?P<date>\d{2}-\d{2}-\d{4})"
         r"_"
@@ -38,16 +38,16 @@ def extract_filename_fields(filename: str) -> dict[str, str]:
     return match.groupdict()
 
 
-def parse_individual_type(individual_type: str) -> int:
-    """Parse individual type to apropiate value.
+def parse_group(group: str) -> int:
+    """Parse group to appropriate value.
 
-    :param individual_type: Individual type string.
+    :param group: Individual type string.
     :return: Individual type value.
     """
-    if "CONTROL" in individual_type.upper():
-        return IndividualType.CONTROL
-    elif "ID" in individual_type.upper():
-        return IndividualType.ID
+    if "CONTROL" in group.upper():
+        return Group.CONTROL
+    elif "ID" in group.upper():
+        return Group.ID
     else:
         return -1
 
@@ -64,7 +64,7 @@ def contains_letters_in_order(word: str, letters: str) -> bool:
 
 
 def parse_hand(hand: str) -> int:
-    """Parse hand to apropiate value.
+    """Parse hand to appropriate value.
 
     :param hand: Hand string.
     :return: Hand value.
@@ -78,7 +78,7 @@ def parse_hand(hand: str) -> int:
 
 
 def parse_gender(gender: str) -> int:
-    """Parse gender to apropiate value.
+    """Parse gender to appropriate value.
 
     :param gender: Hand string.
     :return: Gender value.
@@ -92,7 +92,7 @@ def parse_gender(gender: str) -> int:
 
 
 def parse_age(age: str) -> int:
-    """Parse age to apropiate value.
+    """Parse age to appropriate value.
 
     :param age: Hand string.
     :return: Age value.
@@ -104,7 +104,7 @@ def parse_age(age: str) -> int:
 
 
 def parse_handedness(handedness: str) -> int:
-    """Parse handedness to apropiate value.
+    """Parse handedness to appropriate value.
 
     :param handedness: Hand string.
     :return: Handedness value.
@@ -117,19 +117,25 @@ def parse_handedness(handedness: str) -> int:
         return -1
 
 
-def extract_filename_features(path: Path) -> tuple[int, int, int, int, int]:
+def extract_filename_features(path: Path) -> dict[str, int]:
     """Obtains the filename features from the file in the given path.
 
     :param path: Path to get features from.
-    :return: Tuple with the parsed features.
+    :return: Dictionary with the parsed features.
     """
     filename = path.stem
     fields = extract_filename_fields(filename)
 
-    individual_type = parse_individual_type(fields["individual_type"])
+    group = parse_group(fields["group"])
     hand = parse_hand(fields["hand"])
     gender = parse_gender(fields["gender"])
     age = parse_age(fields["age"])
     handedness = parse_handedness(fields["handedness"])
 
-    return individual_type, hand, gender, age, handedness
+    return {
+        "group": group,
+        "hand": hand,
+        "gender": gender,
+        "age": age,
+        "handedness": handedness,
+    }

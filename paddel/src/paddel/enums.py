@@ -6,7 +6,7 @@ class Side(IntEnum):
     RIGHT = auto()
 
 
-class IndividualType(IntEnum):
+class Group(IntEnum):
     CONTROL = 0
     ID = auto()
 

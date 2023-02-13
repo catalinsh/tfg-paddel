@@ -5,7 +5,6 @@ from typing import Sequence
 import cv2  # type: ignore
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
-from paddel.decorators import path_input_cache
 from paddel.preprocessing.video import read_video
 from paddel.types import HandLandmarks, Image, Point
 
@@ -80,9 +79,9 @@ def get_longest_non_none_sequence(
     return sequence[best[0] : best[1]]
 
 
-@path_input_cache
 def extract_landmarks(path: Path) -> Sequence[HandLandmarks]:
     """Extract hand landmarks from the given file path into the given landmark path.
+    It's expected for the path to point to a valid video file.
 
     :param path: Video path.
     :return: Video landmarks.

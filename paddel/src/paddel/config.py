@@ -1,21 +1,16 @@
 import logging
 
-from pydantic import BaseModel, BaseSettings, DirectoryPath
+from pydantic import BaseModel, BaseSettings
 
 log = logging.getLogger(__name__)
 
 
-class Dirs(BaseModel):
-    raw: DirectoryPath
-    cache: DirectoryPath
-
-
 class Preprocessing(BaseModel):
-    MAX_RADIANS_FOR_TAP: float = 0.2
+    max_radians_for_tap: float = 0.2
+    min_detection_seconds: float = 15
 
 
 class Settings(BaseSettings):
-    dirs: Dirs
     preprocessing: Preprocessing = Preprocessing()
 
     class Config:

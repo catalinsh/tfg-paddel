@@ -1,10 +1,11 @@
-from math import ceil
+from math import ceil, floor
 from typing import Sequence
 
 import numpy as np
 import numpy.typing as npt
 import pandas as pd
 from scipy.signal import find_peaks
+from scipy.stats import variation
 
 from paddel import settings
 from paddel.types import HandLandmarks
@@ -39,7 +40,7 @@ def angle_between(
 
 
 def get_taps(angles: pd.Series, framerate: float) -> npt.NDArray[int]:
-    """Get the amount of taps from the given hand angle series.
+    """Get the position of the taps in the given hand angle series.
 
     :param angles: Series of angles.
     :param framerate: Framerate of the original video.
@@ -47,13 +48,47 @@ def get_taps(angles: pd.Series, framerate: float) -> npt.NDArray[int]:
     """
     window = ceil(framerate) * 3
     rolling_std = angles.rolling(window, center=True, min_periods=0).std().to_numpy()
+
     taps, _ = find_peaks(
         -angles.to_numpy(),
         prominence=rolling_std,
-        height=(-settings.preprocessing.MAX_RADIANS_FOR_TAP, 0),
+        height=(-settings.preprocessing.max_radians_for_tap, 0),
     )
-
     return taps
+
+
+def get_amplitudes(angles: pd.Series, framerate: float) -> npt.NDArray[int]:
+    """Get the positions where the hand is at maximum amplitude in
+    the given angle series.
+
+    :param angles: Series of angles.
+    :param framerate: Framerate of the original video.
+    :return: Array containing the positions of the amplitudes.
+    """
+    window = ceil(framerate) * 3
+    rolling_std = angles.rolling(window, center=True, min_periods=0).std().to_numpy()
+
+    taps, _ = find_peaks(
+        angles.to_numpy(),
+        prominence=rolling_std,
+        height=settings.preprocessing.max_radians_for_tap,
+    )
+    return taps
+
+
+def get_average_speed(angles: pd.Series, framerate: float) -> float:
+    """Get average speed, measured as the rate of change per second.
+
+    :param angles: Series of angles.
+    :param framerate: Framerate of the original video.
+    :return: Average speed measured in radians per second.
+    """
+    changes = np.abs(np.diff(angles))
+    average = np.mean(changes)
+
+    # Times framerate to account for framerate differences.
+    average_per_second = average * framerate
+    return average_per_second
 
 
 def get_tap_rate_difference(
@@ -67,16 +102,17 @@ def get_tap_rate_difference(
     :param framerate: Framerate of the original video.
     :return: Difference in tapping rate.
     """
-    middle = frame_count / 2
-    tap_rate_1 = (taps < middle).sum() / framerate
-    tap_rate_2 = (taps >= middle).sum() / framerate
+    first_third = frame_count / 3
+    second_third = (frame_count * 2) / 3
+    tap_rate_1 = (taps <= first_third).sum() / framerate
+    tap_rate_2 = (taps >= second_third).sum() / framerate
 
     return abs(tap_rate_1 - tap_rate_2)
 
 
 def extract_classic_features(
     landmarks: Sequence[HandLandmarks], framerate: float
-) -> tuple[float, float]:
+) -> dict[str, float]:
     """Extract different features from the landmarks sequence from previous works in the field.
 
     :param landmarks: Sequence of the video landmarks.
@@ -84,13 +120,51 @@ def extract_classic_features(
     :return: Tuple of features.
     """
     angles = pd.Series(
-        [angle_between(lm.INDEX_FINGER_TIP, lm.WRIST, lm.THUMB_TIP) for lm in landmarks]
+        [
+            angle_between(lm.INDEX_FINGER_TIP, lm.THUMB_MCP, lm.THUMB_TIP)
+            for lm in landmarks
+        ]
     )
     frame_count = len(landmarks)
     elapse_time = frame_count / framerate
 
+    # Taps
     taps = get_taps(angles, framerate)
-    tap_rate = len(taps) / elapse_time
-    tap_rate_difference = get_tap_rate_difference(taps, frame_count, framerate)
+    taps_slot1 = taps[taps < frame_count / 3]
+    taps_slot2 = taps[taps > frame_count * 2 / 3]
 
-    return tap_rate, tap_rate_difference
+    tap_rate = len(taps) / elapse_time
+    tap_rate_difference = (len(taps_slot1) - len(taps_slot2)) / (elapse_time / 3)
+
+    # Amplitudes
+    amplitudes = get_amplitudes(angles, framerate)
+    amplitudes_slot1 = amplitudes[amplitudes < frame_count / 3]
+    amplitudes_slot2 = amplitudes[amplitudes > frame_count * 2 / 3]
+
+    amplitude_average = np.mean(angles[amplitudes])
+    amplitude_variation = variation(angles[amplitudes], axis=None)
+    amplitude_difference = np.mean(angles[amplitudes_slot1]) - np.mean(
+        angles[amplitudes_slot2]
+    )
+    amplitude_difference = (
+        amplitude_difference if not np.isnan(amplitude_difference) else 0
+    )
+
+    # Speed
+    speed = get_average_speed(angles, framerate)
+    speed_slot1 = get_average_speed(angles[: floor(framerate / 3)], framerate)
+    speed_slot2 = get_average_speed(angles[-floor(framerate / 3) :], framerate)
+    speed_difference = speed_slot1 - speed_slot2
+
+    angle_average = np.mean(angles)
+
+    return {
+        "tap_rate": tap_rate,
+        "tap_rate_difference": tap_rate_difference,
+        "amplitude_variation": amplitude_variation,
+        "amplitude_average": amplitude_average,
+        "amplitude_difference": amplitude_difference,
+        "speed": speed,
+        "speed_difference": speed_difference,
+        "angle_average": angle_average,
+    }
