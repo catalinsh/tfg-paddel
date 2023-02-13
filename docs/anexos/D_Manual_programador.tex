@@ -3,10 +3,119 @@
 
 \section{Introducción}
 
+Esta sección contiene toda la información que una persona externa debería tener
+para poder trabajar con las diferentes partes de este projecto.
+
+
 \section{Estructura de directorios}
+
+Los directorios del proyecto siguen la siguiente estructura:
+
+\begin{itemize}
+      \item \textbf{app}: Contiene todo lo relacionado con los contenedores de
+            Docker que conforman la aplicación web.
+            \begin{itemize}
+                  \item \textbf{api}: Contiene el código fuente de la API que
+                        implementa el framework FastAPI de Python.
+                  \item \textbf{web}: Contiene el código fuente de la página web, se
+                        trata de una implementación SvelteKit, que es un framework
+                        de JavaScript.
+                  \item \textbf{proxy}: Contiene la configuración de Nginx para el
+                        proxy inverso que se utiliza para acceder a la API y a la
+                        web desde el exterior.
+            \end{itemize}
+            
+      \item \textbf{docs}: Contiene el código fuente en \LaTeX de esta
+            documentación.
+            
+      \item \textbf{paddel}: Contiene el código fuente de la librería PADDEL, que
+            tiene aquellas utilidades empleadas en la fase de investigación para
+            facilitar su uso dentro de la aplicación web. Se trata de un paquete
+            de Python que se puede instalar mediante el comando \texttt{pip}.
+\end{itemize}
+
 
 \section{Manual del programador}
 
+Este proyecto utiliza la utilidad GNU Make para guardar secuencias de comandos y
+gestionar las dependencias que existen entre estas. Para esto se utiliza un
+archivo denominado \textit{Makefile} en los directorios relevantes. En caso de
+que el sistema utilizado no disponga de la herramienta Make, se pueden
+simplemente consultar el archivo \textit{Makefile} para ver los comandos que
+deberían ser utilizados.
+
+
+\subsection{PADDEL}
+
+La librería PADDEL dispone de un archivo \textit{pyproject.toml} en el que se
+detalla la forma de instalación, dependencias y algunas configuraciones de
+herramientas de desarrollo.
+
+Se incluye, además, un archivo \textit{Makefile} que define los siguientes
+comandos:
+
+\begin{itemize}
+      \item \texttt{make install-dependencies}: Instala la librería con las
+            dependencias de desarrollo, utilizadas para acciones como formateado
+            (\textit{black}) o comprobación de tipos (\textit{mypy}).
+      \item \texttt{make lint}: Realiza varias comprobaciones sobre el código
+            fuente para detectar problemas de formateado o tipado e informa al
+            usuario en caso de que existan.
+      \item \texttt{make format}: Realiza un formateado sobre el código fuente,
+            eliminando sentencias \texttt{import} no utilizadas, reordenando estas
+            sentencias \texttt{import} y formateando el código para darle un
+            aspecto homogéneo.
+\end{itemize}
+
+Para el entorno de desarrollo es muy recomendable utilizar un entorno virtual
+para evitar realizar cambios sobre la instalación de Python a nivel de sistema.
+Existen varias herramientas que permiten realizar esto, como \textit{venv} o
+\textit{conda}. Con instalaciones que no se van a detallar en este documento al
+existir documentación extensa sobre el uso de ambas herramientas. Es importante
+destacar que la librería se ha creado en la versión 3.10 de Python, por lo que
+es recomendable utilizar esta versión para el entorno virtual.
+
+Una vez creado el entorno virtual de Python, este se deberá activar de forma
+acorde a la herramienta utilizada y, a continuación, se puede ejecutar el
+comando \texttt{make install-dependencies}, en ausencia de la utilidad Make se
+puede utilizar \texttt{pip install -e .[dev]}, que instala el paquete en modo
+editable junto con las dependencias de desarrollo.
+
+Con todo esto se puede utilizar el comando \texttt{jupyter notebook notebooks}
+para lanzar lanzar una instancia del kernel IPython en la carpeta
+\textit{notebooks} donde se encuentra el código utilizado durante la fase de
+investigación, preprocesado y entrenamiendo de modelos.
+
+Para ejecutar los notebooks de Jupyter se debe crear una carpeta
+\texttt{/data/raw} en la raíz del repositorio donde introducir los vídeos con el
+formato de nombre adecuado.
+
+
+\subsection{Aplicación}
+
+Los componentes de la aplicación web se encuentran en el directorio \texttt{app}
+se trata de tres contenedores de Docker, api, web y proxy. Para lanzar los
+contenedores en modo desarrollo, es decir, que se detecten los cambios en la
+mayoría de ficheros fuente y se actualizen los contenedores acordemente, se
+puede utilizar \texttt{make docker-up-dev}, siempre que el motor de Docker esté
+inicializado.
+
+Para parar los contenedores se utiliza \texttt{make docker-down}, si, además, se
+desea liberar memoria y eliminar las imágenes creadas se utiliza \texttt{make
+      docker-clean}.
+
+La edición de ficheros fuente se puede realizar diréctamente desde el sistema
+anfitrión, pero, si se desea de ayudas como autocompletado y recomendaciones
+será necesario utilizar un entorno de desarrollo que pueda interactuar con
+contenedores, como por ejemplo \textit{Visual Studio Code} con la extensión
+\textit{Dev Containers}.
+
+
 \section{Compilación, instalación y ejecución del proyecto}
+
+Para desplegar el proyecto simplemente se debe ejecutar \texttt{make docker-up}
+desde la carpeta \texttt{app} con el motor de Docker inicializado, lo que
+inicializará la aplicación web en el equipo anfitrión.
+
 
 \section{Pruebas del sistema}
