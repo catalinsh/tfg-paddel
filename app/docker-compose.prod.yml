@@ -1,0 +1,13 @@
+services:
+  proxy:
+    restart: always
+
+  api:
+    build:
+      target: production
+    restart: always
+
+  web:
+    build:
+      target: production
+    restart: always

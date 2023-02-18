@@ -1,14 +1,8 @@
-docker-up: docker-down
-	docker-compose up -d -t 0
+prod: down
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
-docker-up-dev: docker-down
-	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d -t 0
+dev: down
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-docker-restart:
-	docker-compose restart -t 0
-
-docker-down:
-	docker-compose down -v -t 0
-
-docker-clean:
-	docker-compose down --rmi all -v -t 0
+down:
+	docker compose down --remove-orphans --rmi all --volumes --timeout 0

@@ -1,22 +1,26 @@
 FROM node:lts-slim AS base
+WORKDIR /code
 
-WORKDIR /web
-
-COPY package.json package-lock.json ./
-
+COPY ./package.json ./package.json
+COPY ./package-lock.json ./package-lock.json
 RUN npm ci
 
 COPY . ./
+RUN npm run prepare
 
 
 FROM base AS production
-
-RUN npm run build
-
 ENV PORT=80
-CMD ["node", "build"]
+CMD [ \
+    "sh", "-c", \
+    "npm run build && node build" \
+    ]
 
 
 FROM base AS development
-
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "80"]
+CMD [ \
+    "sh", "-c", \
+    "npm run dev -- \
+    --host 0.0.0.0 \
+    --port 80" \
+    ]

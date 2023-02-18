@@ -1,18 +1,15 @@
 services:
-  proxy:
-    build:
-      target: development
-
   api:
     build:
       target: development
     volumes:
-      - ./api:/api
-      - ../paddel:/paddel
+      - ../paddel:/code/paddel
+      - ./api/app:/code/app
 
   web:
     build:
       target: development
     volumes:
-      - ./web:/web
-      - /web/node_modules
+      - ./web:/code
+      - /code/node_modules
+      - /code/.svelte-kit
