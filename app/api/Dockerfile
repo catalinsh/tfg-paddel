@@ -1,16 +1,20 @@
 FROM python:3.9-slim AS base
 WORKDIR /code
 
+# Install API dependencies
 COPY ./app/api/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
-COPY ./paddel ./paddel
-RUN pip install --no-cache-dir --upgrade -e ./paddel
+# Install PADDEL dependencies
+COPY ./paddel/pyproject.toml ./paddel/pyproject.toml
+RUN pip install --no-cache-dir --upgrade ./paddel
 
+COPY ./paddel ./paddel
 COPY ./app/api/app ./app
 
 
 FROM base AS production
+RUN pip install --no-deps ./paddel
 CMD [ \
     "sh", "-c", \
     "uvicorn app.main:app \
@@ -21,6 +25,7 @@ CMD [ \
 
 
 FROM base AS development
+RUN pip install --no-deps -e ./paddel
 CMD [ \
     "sh", "-c", \
     "uvicorn app.main:app \
