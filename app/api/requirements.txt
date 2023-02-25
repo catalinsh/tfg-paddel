@@ -1,2 +1,4 @@
+./paddel
+
 fastapi
 uvicorn

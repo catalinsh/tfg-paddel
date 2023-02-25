@@ -13,13 +13,4 @@ class Point(NamedTuple):
     z: float
 
 
-class HandLandmarks(NamedTuple):
-    WRIST: Point
-    THUMB_CMC: Point
-    THUMB_MCP: Point
-    THUMB_IP: Point
-    THUMB_TIP: Point
-    INDEX_FINGER_MCP: Point
-    INDEX_FINGER_PIP: Point
-    INDEX_FINGER_DIP: Point
-    INDEX_FINGER_TIP: Point
+Pose = dict[str, Point]

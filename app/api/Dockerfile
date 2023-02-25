@@ -1,13 +1,10 @@
 FROM python:3.9-slim AS base
 WORKDIR /code
 
-# Install API dependencies
+# Install dependencies
 COPY ./app/api/requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
-
-# Install PADDEL dependencies
 COPY ./paddel/pyproject.toml ./paddel/pyproject.toml
-RUN pip install --no-cache-dir --upgrade ./paddel
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
 COPY ./paddel ./paddel
 COPY ./app/api/app ./app

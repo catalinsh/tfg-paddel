@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 
-from paddel.enums import Group, Gender, Side
+from paddel.enums import Gender, Group, Side
 
 FilenameFeatures = np.dtype([("stem", "O"), ("name", "O")])
 
