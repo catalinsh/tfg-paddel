@@ -1,2 +1,77 @@
 \capitulo{Técnicas y herraminetas}
 \label{cha:Técnicas y herraminetas}
+
+\section{Herramientas de desarrollo}
+
+\subsection{Windows Subsystem for Linux}
+
+Windows Subsystem for Linux (WSL) es una utilidad creada principalmente por
+Microsoft y Canonical(Mantenedores de Ubuntu) que permite utilizar un sistema
+operativo Linux desde Windows sin grandes pérdidas de rendimiento. Existen
+varias opciones de distribución que se pueden utilizar (Kali Linux, OpenSUSE,
+etc.), pero la mas utilizada y mejor mantenida para WSL es Ubuntu, por lo que es
+la que se ha utilizado.
+
+La mayor parte del desarrollo ha sido realizada desde WSL, donde se ha instalado
+tanto \LaTeX como Python 3.9 y algunas dependencias, proceso mucho más simple de
+realizar en Linux que en Windows.
+
+\subsection{Visual Studio Code}
+
+Visual Studio Code (VS Code) es un popular editor de texto altamente extensible
+orientado al desarrollo creado por Microsoft. Gracias a su gran extensibilidad
+es posible utilizarlo cómodamente en casi cualquier escenario. Mediante una de
+estas extensiones (denominada literalmente WSL) se puede conectar con WSL y
+utilizar los programas que tiene instalados como si hubiese sido ejecutado
+diréctamente desde un sistema operativo Linux.
+
+En este caso se ha utilizado VS Code para:
+
+\begin{itemize}
+    \item Crear tanto esta memoria como los anexos mediante la extensión
+          \href{https://github.com/James-Yu/LaTeX-Workshop}{\LaTeX Workshop} que
+          integra distintos compiladores de \LaTeX (pdfTeX, XeTeX, LuaTeX, etc.)
+          dentro del programa y añade otras funcionalidades que hacen la edición
+          de código \LaTeX mucho más conveniente.
+    \item Crear la aplicación web, que utiliza el framework de JavaScript
+          SvelteKit, mediante multitud de extensiones para integrar la multitud
+          de librerías utilizadas (Svelte, TypeScript, Prettier, etc.).
+    \item Editar archivos de configuración utilizados para la creación de los
+          contenedores de Docker que componen la totalidad de la aplicación web
+          (web, API y proxy inverso).
+\end{itemize}
+
+\subsection{PyCharm}
+
+PyCharm es un Entorno de Desarrollo Integrado (IDE, por sus siglas en inglés)
+creado y mantenido por JetBrains, una compañía que se dedica a crear software y
+cuyos productos más representativos son multitud de IDEs para diferentes
+lenguajes de programación (IntelliJ(Java), CLion(C y C++), GoLand(Go), etc.).
+
+El objetivo de PyCharm es facilitar el desarrollo de aplicaciones que utilizad
+Python y da soporte amplio tanto para los habituales ficheros \texttt{.py} como
+para \texttt{.ipynb} (Notebooks de Jupyter), que han sido utilizados
+extensamente en el proyecto.
+
+Además, PyCharm por defecto permite la integración con entornos WSL de forma muy
+fácil, simplemente se le debe indicar la localización del ejecutable de Python
+en el sistema de archivos de la distribución de WSL.
+
+En este proyecto PyCharm se ha utilizado para:
+
+\begin{enumerate}
+    \item Desarrollar la librería PADDEL, que contiene el código de Python común
+    a los Notebooks de Jupyter utilizados durante la fase de investigación y a
+    la aplicación web.
+    \item Desarrollar la API que utiliza la aplicación web.
+\end{enumerate}
+
+\subsection{Git}
+
+Actualmente Git es el sistema de control de versiones más extendido, en este
+proyecto se ha usado para gestionar y guardar de forma segura los cambios que se
+han ido realizado con el tiempo en la plataforma GitHub.
+
+Aunque existen varias herramientas con interfaces gráficas que envuelven el
+funcionamiento de Git (GitKraken, GitHub Desktop, etc.) para este proyecto se ha
+utilizado diréctamente el comando \texttt{git} desde una terminal de WSL.
