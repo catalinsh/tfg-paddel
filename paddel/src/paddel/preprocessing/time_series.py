@@ -3,9 +3,9 @@ import numpy.typing as npt
 
 
 def angle_between(
-        a_in: npt.ArrayLike,
-        b_in: npt.ArrayLike,
-        c_in: npt.ArrayLike,
+    a_in: npt.ArrayLike,
+    b_in: npt.ArrayLike,
+    c_in: npt.ArrayLike,
 ) -> float:
     """Get angle between 3 points in n-dimensional euclidean
     space.

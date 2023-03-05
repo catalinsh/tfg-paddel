@@ -1,21 +1,24 @@
 import logging
+import os
+from pathlib import Path
+from typing import Optional
 
-from pydantic import BaseModel, BaseSettings
+from pydantic import BaseSettings, DirectoryPath
 
 log = logging.getLogger(__name__)
 
 
-class Preprocessing(BaseModel):
+class Settings(BaseSettings):
+    videos_dir: DirectoryPath
+    cache_dir: Optional[Path]
+
     max_radians_for_tap: float = 0.2
     min_detection_seconds: float = 15
 
-
-class Settings(BaseSettings):
-    preprocessing: Preprocessing = Preprocessing()
+    max_processes: int = os.cpu_count()
 
     class Config:
         env_prefix = "PADDEL_"
-        env_nested_delimiter = "__"
 
 
 settings = Settings()

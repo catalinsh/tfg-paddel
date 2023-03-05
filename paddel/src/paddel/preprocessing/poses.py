@@ -6,8 +6,9 @@ import cv2  # type: ignore
 import pandas as pd
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
-from paddel.preprocessing.video import read_video
-from paddel.types import Image, Pose, Point
+from paddel.types import Image, Point, Pose
+
+from .video import read_video
 
 log = logging.getLogger(__name__)
 
@@ -96,13 +97,12 @@ def extract_poses(path: Path) -> list[Pose]:
         return longest_non_none_sequence(poses)
 
 
-def extract_poses_df(entry: tuple[int, dict]) -> pd.DataFrame:
-    index, row = entry
+def extract_poses_ts(row: pd.Series) -> pd.DataFrame:
     poses = extract_poses(row["video_path"])
 
-    dicts = [
-        {"id": index, "time": frame / row["framerate"]} | pose
-        for frame, pose in enumerate(poses)
-    ]
+    index = [(frame / row["framerate"]) * 10e8 for frame in range(len(poses))]
+    index = pd.DatetimeIndex(index)
 
-    return pd.DataFrame(dicts)
+    df = pd.DataFrame(poses, index=index)
+
+    return df

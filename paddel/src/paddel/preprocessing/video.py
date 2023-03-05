@@ -11,12 +11,18 @@ def is_video(path: Path) -> bool:
     :param path: Path to file to check.
     :return: If file is video.
     """
-    video_capture = cv2.VideoCapture(str(path))
+    video_capture = cv2.VideoCapture()
+    video_capture.setExceptionMode(True)
 
-    ret = video_capture.isOpened()
-    video_capture.release()
+    try:
+        video_capture.open(str(path))
 
-    return ret
+        ret = video_capture.isOpened()
+        video_capture.release()
+
+        return ret
+    except cv2.error:
+        return False
 
 
 def read_video(path: Path) -> Video:
@@ -35,7 +41,7 @@ def read_video(path: Path) -> Video:
     video_capture.release()
 
 
-def extract_video_framerate(path: Path) -> float:
+def get_framerate(path: Path) -> float:
     """Extracts the video framerate from the video in
     the given path. It's expected for the path to point to
     a valid video file.
