@@ -1,0 +1,67 @@
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+
+model_parameter_rules = {
+    SVC: [
+        (
+            {},
+            {
+                "C": [0.5, 0.6, 0.7, 0.9, 1],
+                "kernel": ["linear"],
+                "tol": [1e-6],
+                "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
+            },
+        ),
+        ({"kernel": {"poly"}}, {"degree": [2, 4, 6]}),
+        ({"kernel": {"rbf", "poly", "sigmoid"}}, {"gamma": ["scale", "auto"]}),
+        ({"kernel": {"poly", "sigmoid"}}, {"coef0": [0, 1, -1]}),
+    ],
+    GaussianNB: [({}, {})],
+    KNeighborsClassifier: [
+        (
+            {},
+            {
+                "n_neighbors": [3, 5, 7, 9, 11],
+                "weights": ["uniform", "distance"],
+                "algorithm": ["auto", "brute"],
+                "metric": [
+                    "cityblock",
+                    "cosine",
+                    "l1",
+                    "l2",
+                    "nan_euclidean",
+                ],
+            },
+        ),
+        (
+            {"algorithm": ["ball_tree", "kd_tree"]},
+            {"leaf_size": [5, 10, 20, 30, 40, 50]},
+        ),
+        ({"metric": ["minkowski"]}, {"p": [1, 2, 3, 4]}),
+    ],
+    RandomForestClassifier: [
+        (
+            {},
+            {
+                "n_estimators": [10, 50, 100, 200],
+                "criterion": ["gini", "entropy", "log_loss"],
+                "max_features": ["sqrt", "log2", None],
+                "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
+            },
+        )
+    ],
+    DecisionTreeClassifier: [
+        (
+            {},
+            {
+                "criterion": ["gini", "entropy", "log_loss"],
+                "splitter": ["best", "random"],
+                "max_features": ["sqrt", "log2", None],
+                "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
+            },
+        )
+    ],
+}
