@@ -1,6 +1,8 @@
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
@@ -64,4 +66,25 @@ model_parameter_rules = {
             },
         )
     ],
+    MLPClassifier: [
+        (
+            {},
+            {
+                "hidden_layer_sizes": [(100,), (10,), (50,), (50, 50)],
+                "activation": ["identity", "logistic", "tanh", "relu"],
+                "solver": ["lbfgs", "sgd", "adam"],
+                "alpha": [0.0001, 0.01, 1],
+            },
+        )
+    ],
+    AdaBoostClassifier: [
+        (
+            {},
+            {
+                "n_estimators": [1, 25, 50, 100],
+                "learning_rate": [0.1, 1, 10],
+            },
+        )
+    ],
+    QuadraticDiscriminantAnalysis: [({}, {})],
 }
