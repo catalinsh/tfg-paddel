@@ -107,7 +107,11 @@ def clean_data(y, misc_features, classic_features, fresh_features):
     fresh_features.drop(indices_to_remove, inplace=True)
 
     # Drop columns
+    misc_features.drop(["framerate"], axis=1, inplace=True)
+    misc_features.drop(["detection_time"], axis=1, inplace=True)
     misc_features.drop(["video_path"], axis=1, inplace=True)
+    misc_features.drop(["hand"], axis=1, inplace=True)
+    misc_features.drop(["handedness"], axis=1, inplace=True)
 
     # Impute
     impute(fresh_features)
