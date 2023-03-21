@@ -15,7 +15,8 @@ dependencies = [
     "pydantic",
     "mediapipe",
     "opencv-python",
-    "tsfresh"
+    "tsfresh",
+    "xgboost"
 ]
 
 [project.optional-dependencies]

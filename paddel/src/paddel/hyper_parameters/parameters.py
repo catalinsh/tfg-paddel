@@ -5,6 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
+from xgboost import XGBClassifier
 
 model_parameter_rules = {
     SVC: [
@@ -48,7 +49,7 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_estimators": [10, 50, 100, 200],
+                "n_estimators": [50, 100, 200, 300],
                 "criterion": ["gini", "entropy", "log_loss"],
                 "max_features": ["sqrt", "log2", None],
                 "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
@@ -81,8 +82,18 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_estimators": [1, 25, 50, 100],
+                "n_estimators": [25, 50, 100, 200],
                 "learning_rate": [0.1, 1, 10],
+            },
+        )
+    ],
+    XGBClassifier: [
+        (
+            {},
+            {
+                "n_estimators": [25, 50, 100, 200],
+                "grow_policy": ["depthwise", "lossguide"],
+                "learning_rate": [0.01, 0.1, 1, 10],
             },
         )
     ],
