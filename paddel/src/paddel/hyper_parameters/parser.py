@@ -1,7 +1,7 @@
 from itertools import product
 
 
-class Conditions(dict):
+class HashableDict(dict):
     def __hash__(self):
         return hash(tuple(sorted(self.items())))
 
@@ -11,7 +11,7 @@ def expand_rules(parameter_rules):
 
     for conditions, parameters in parameter_rules:
         for values in product(*conditions.values()):
-            simple_conditions = Conditions(
+            simple_conditions = HashableDict(
                 zip(conditions.keys(), [tuple([v]) for v in values])
             )
 
@@ -61,23 +61,3 @@ def parse_hyper_parameters(parameter_rules, prefix=""):
             params[f"{prefix}{key}"] = params.pop(key)
 
     return param_grid
-
-    ## Create conditions
-    # for conditions, parameters in settings["conditions"].items():
-    #    params = settings["base"].copy()
-
-
-#
-#    for condition in conditions:
-#        params.update({condition[0]: list(condition[1])})
-#
-#    params.update(parameters)
-#
-#    param_grid.append(params)
-#
-## Rename to match model if using pipeline
-# for params in param_grid:
-#    for key in list(params):
-#        params[f"{prefix}{key}"] = params.pop(key)
-#
-# return param_grid

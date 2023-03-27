@@ -18,9 +18,9 @@ model_parameter_rules = {
                 "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
             },
         ),
-        ({"kernel": {"poly"}}, {"degree": [2, 4, 6]}),
+        ({"kernel": {"poly"}}, {"degree": [2, 4, 5, 6, 7]}),
         ({"kernel": {"rbf", "poly", "sigmoid"}}, {"gamma": ["scale", "auto"]}),
-        ({"kernel": {"poly", "sigmoid"}}, {"coef0": [0, 1, -1]}),
+        ({"kernel": {"poly", "sigmoid"}}, {"coef0": [0, 1, -1, 2]}),
     ],
     GaussianNB: [({}, {})],
     KNeighborsClassifier: [
@@ -49,7 +49,7 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_estimators": [50, 100, 200, 300],
+                "n_estimators": [50, 100, 150, 200, 250, 300],
                 "criterion": ["gini", "entropy", "log_loss"],
                 "max_features": ["sqrt", "log2", None],
                 "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
