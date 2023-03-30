@@ -1,4 +1,3 @@
-import logging
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -6,11 +5,36 @@ import cv2  # type: ignore
 import pandas as pd
 from mediapipe.python.solutions.hands import Hands  # type: ignore
 
-from paddel.types import Image, Point, Pose
+from paddel.types import Image, Point, Pose, Video
 
-from .video import read_video
 
-log = logging.getLogger(__name__)
+def read_video(path: Path) -> Video:
+    """Iterate over the video frames from the video in the given path.
+    It's expected for the path to point to a valid video file.
+
+    :param path: Video path.
+    :return: Video iterator.
+    """
+    video_capture = cv2.VideoCapture(str(path))
+
+    while video_capture.grab():
+        bgr = video_capture.retrieve()[1]
+        yield cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+
+    video_capture.release()
+
+
+def get_framerate(path: Path) -> float:
+    """Extracts the video features from the video in
+    the given path.
+
+    :param path: Path to video.
+    :return: Video framerate, -1 if file not readable.
+    """
+    vc = cv2.VideoCapture(str(path))
+    framerate = vc.get(cv2.CAP_PROP_FPS)
+    vc.release()
+    return framerate
 
 
 def initialize_hands() -> Hands:
@@ -87,8 +111,6 @@ def extract_poses(path: Path) -> list[Pose]:
     :param path: Video path.
     :return: Video landmarks.
     """
-    log.info(f'Extracting landmarks from "{path}".')
-
     video = read_video(path)
 
     with initialize_hands() as hands:
@@ -97,12 +119,11 @@ def extract_poses(path: Path) -> list[Pose]:
         return longest_non_none_sequence(poses)
 
 
-def extract_poses_ts(row: pd.Series) -> pd.DataFrame:
-    poses = extract_poses(row["video_path"])
+def extract_poses_ts(video_path: Path) -> pd.DataFrame:
+    framerate = get_framerate(video_path)
+    poses = extract_poses(video_path)
 
-    index = [(frame / row["framerate"]) * 10e8 for frame in range(len(poses))]
+    index = [(frame / framerate) * 10e8 for frame in range(len(poses))]
     index = pd.DatetimeIndex(index)
 
-    df = pd.DataFrame(poses, index=index)
-
-    return df
+    return pd.DataFrame(poses, index=index)

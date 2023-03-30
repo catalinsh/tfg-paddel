@@ -29,7 +29,6 @@ model_parameter_rules = {
             {
                 "n_neighbors": [3, 5, 7, 9, 11],
                 "weights": ["uniform", "distance"],
-                "algorithm": ["auto", "brute"],
                 "metric": [
                     "cityblock",
                     "cosine",
@@ -39,17 +38,13 @@ model_parameter_rules = {
                 ],
             },
         ),
-        (
-            {"algorithm": ["ball_tree", "kd_tree"]},
-            {"leaf_size": [5, 10, 20, 30, 40, 50]},
-        ),
         ({"metric": ["minkowski"]}, {"p": [1, 2, 3, 4]}),
     ],
     RandomForestClassifier: [
         (
             {},
             {
-                "n_estimators": [50, 100, 150, 200, 250, 300],
+                "n_estimators": [50, 100, 200, 400, 800, 1600],
                 "criterion": ["gini", "entropy", "log_loss"],
                 "max_features": ["sqrt", "log2", None],
                 "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
@@ -71,7 +66,8 @@ model_parameter_rules = {
         (
             {},
             {
-                "hidden_layer_sizes": [(100,), (10,), (50,), (50, 50)],
+                "max_iter": [2000],
+                "hidden_layer_sizes": [(10, 10), (50,), (100,), (100, 50)],
                 "activation": ["identity", "logistic", "tanh", "relu"],
                 "solver": ["lbfgs", "sgd", "adam"],
                 "alpha": [0.0001, 0.01, 1],
@@ -82,7 +78,7 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_estimators": [25, 50, 100, 200],
+                "n_estimators": [25, 50, 100, 200, 400, 800],
                 "learning_rate": [0.1, 1, 10],
             },
         )
@@ -91,11 +87,10 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_estimators": [25, 50, 100, 200],
+                "n_estimators": [25, 50, 100, 200, 400, 800],
                 "grow_policy": ["depthwise", "lossguide"],
-                "learning_rate": [0.01, 0.1, 1, 10],
+                "learning_rate": [0.01, 0.1, 1],
             },
         )
-    ],
-    QuadraticDiscriminantAnalysis: [({}, {})],
+    ]
 }

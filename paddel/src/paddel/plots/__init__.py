@@ -24,7 +24,12 @@ def plot_grid_search(
     for legend in legends:
         legend_data = data[data[param_legend] == legend]
 
-        ax.plot(legend_data[param_bottom], legend_data[param_left], "-o", label=f"{param_legend_name}: {legend}")
+        ax.plot(
+            legend_data[param_bottom],
+            legend_data[param_left],
+            "-o",
+            label=f"{param_legend_name}: {legend}",
+        )
 
     ax.set_title(title, fontsize=16, fontweight="bold")
     ax.set_xlabel(param_bottom_name, fontsize=12)

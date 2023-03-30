@@ -1,7 +1,9 @@
 import numpy as np
 import numpy.typing as npt
+import pandas as pd
 
 
+@np.vectorize
 def angle_between(
     a_in: npt.ArrayLike,
     b_in: npt.ArrayLike,
@@ -28,3 +30,14 @@ def angle_between(
     angle: float = np.arccos(cosine_angle)
 
     return angle
+
+
+def extract_time_series(poses: pd.DataFrame) -> pd.DataFrame:
+    ts_df = pd.DataFrame()
+
+    ts_df["angle"] = angle_between(
+        poses["THUMB_TIP"], poses["WRIST"], poses["INDEX_FINGER_TIP"]
+    )
+
+    ts_df.index = poses.index
+    return ts_df
