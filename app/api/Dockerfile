@@ -17,7 +17,7 @@ CMD [ \
     "uvicorn app.main:app \
     --host 0.0.0.0 \
     --port 80 \
-    --root-path ${PUBLIC_API_PATH}" \
+    --root-path $API_PATH" \
     ]
 
 
@@ -28,7 +28,7 @@ CMD [ \
     "uvicorn app.main:app \
     --host 0.0.0.0 \
     --port 80 \
-    --root-path ${PUBLIC_API_PATH} \
+    --root-path $API_PATH \
     --reload \
     --reload-dir ./app \
     --reload-dir ./paddel" \

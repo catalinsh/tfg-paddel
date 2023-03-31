@@ -1,12 +1,15 @@
-http://{$PUBLIC_BASE_URL} {
-	redir https://{host}:{$PUBLIC_HTTPS_PORT}{uri} permanent
+http:// {
+	redir https://{host}:{$HTTPS_PORT}{uri} permanent
 }
 
-https://{$PUBLIC_BASE_URL} {
-	reverse_proxy * 	http://web
-	
-	rewrite {$PUBLIC_API_PATH} {$PUBLIC_API_PATH}/
-	handle_path {$PUBLIC_API_PATH}/* {
-		reverse_proxy 	http://api
+{$WEB_URL}/* {
+	handle_path {$WEB_PATH}/* {
+		reverse_proxy *	http://web
+	}
+}
+
+{$API_URL}/* {
+	handle_path {$API_PATH}/* {
+		reverse_proxy *	http://api
 	}
 }
