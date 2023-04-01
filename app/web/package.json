@@ -1,32 +1,22 @@
 {
-  "name": "paddel",
-  "version": "1.0.0",
-  "description": "Paddel website.",
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": [],
-  "author": "Catalin Andrei Cacuci<contact@catalin.sh>",
-  "license": "MIT",
   "dependencies": {
-    "@chakra-ui/react": "^2.5.5",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "framer-motion": "^10.10.0",
-    "next": "^13.2.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
-    "eslint": "^8.37.0",
-    "eslint-config-next": "^13.2.4",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.7",
+    "@types/react-dom": "18.0.11",
+    "eslint": "8.37.0",
+    "eslint-config-next": "13.2.4",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "typescript": "5.0.3"
   }
 }
