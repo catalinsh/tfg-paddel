@@ -12,3 +12,4 @@ services:
     volumes:
       - ./web:/code
       - /code/node_modules
+      - /code/.next
