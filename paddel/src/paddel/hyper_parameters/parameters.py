@@ -1,4 +1,3 @@
-from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -12,13 +11,12 @@ model_parameter_rules = {
         (
             {},
             {
-                "C": [0.5, 0.6, 0.7, 0.9, 1],
+                "C": [0.5, 0.75, 1, 1.5],
                 "kernel": ["linear"],
-                "tol": [1e-6],
                 "class_weight": [{0: w, 1: 1} for w in [1, 1.5, 2]],
             },
         ),
-        ({"kernel": {"poly"}}, {"degree": [2, 4, 5, 6, 7]}),
+        ({"kernel": {"poly"}}, {"degree": [2, 3, 4, 5, 6, 7, 8]}),
         ({"kernel": {"rbf", "poly", "sigmoid"}}, {"gamma": ["scale", "auto"]}),
         ({"kernel": {"poly", "sigmoid"}}, {"coef0": [0, 1, -1, 2]}),
     ],
@@ -27,7 +25,7 @@ model_parameter_rules = {
         (
             {},
             {
-                "n_neighbors": [3, 5, 7, 9, 11],
+                "n_neighbors": [3, 5, 7, 9, 11, 15],
                 "weights": ["uniform", "distance"],
                 "metric": [
                     "cityblock",
@@ -67,9 +65,9 @@ model_parameter_rules = {
             {},
             {
                 "max_iter": [2000],
-                "hidden_layer_sizes": [(10, 10), (50,), (100,), (100, 50)],
+                "hidden_layer_sizes": [(10, 10), (50,), (100,), (100, 50), (25, 25, 25)],
                 "activation": ["identity", "logistic", "tanh", "relu"],
-                "solver": ["lbfgs", "sgd", "adam"],
+                "solver": ["lbfgs"],
                 "alpha": [0.0001, 0.01, 1],
             },
         )
