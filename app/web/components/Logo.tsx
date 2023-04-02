@@ -10,8 +10,8 @@ const Logo = () => (
       className="h-full fill-none stroke-stone-900 dark:stroke-white"
     >
       <path
-        stroke-linejoin="round"
-        stroke-width="80"
+        strokeLinejoin="round"
+        strokeWidth={80}
         d="M 355.16,389.61
            C 348.55,390.55 268.35,466.98 268.35,466.98
              268.35,466.98 345.72,627.38 345.72,627.38M 158.91,113.15
