@@ -11,12 +11,12 @@ COPY . ./
 FROM base AS production
 CMD [ \
     "sh", "-c", \
-    "npm run build && npm run start -- -p 80" \
+    "npm run build && npm run start -- --port 80" \
     ]
 
 
 FROM base AS development
 CMD [ \
     "sh", "-c", \
-    "npm run dev -- -p 80" \
+    "npm run dev -- --port 80" \
     ]

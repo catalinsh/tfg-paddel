@@ -1,15 +1,7 @@
-http:// {
-	redir https://{host}:{$HTTPS_PORT}{uri} permanent
+{$WEB_LOCATION} {
+	reverse_proxy http://web
 }
 
-{$WEB_URL}/* {
-	handle_path {$WEB_PATH}/* {
-		reverse_proxy *	http://web
-	}
-}
-
-{$API_URL}/* {
-	handle_path {$API_PATH}/* {
-		reverse_proxy *	http://api
-	}
+{$API_LOCATION} {
+	reverse_proxy http://api
 }

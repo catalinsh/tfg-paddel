@@ -16,8 +16,7 @@ CMD [ \
     "sh", "-c", \
     "uvicorn app.main:app \
     --host 0.0.0.0 \
-    --port 80 \
-    --root-path $API_PATH" \
+    --port 80 " \
     ]
 
 
@@ -28,7 +27,6 @@ CMD [ \
     "uvicorn app.main:app \
     --host 0.0.0.0 \
     --port 80 \
-    --root-path $API_PATH \
     --reload \
     --reload-dir ./app \
     --reload-dir ./paddel" \
