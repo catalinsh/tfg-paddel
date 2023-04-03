@@ -6,116 +6,312 @@
 Esta sección contiene toda la información que una persona externa debería tener
 para poder trabajar con las diferentes partes de este projecto.
 
+Existen varios archivos \texttt{Makefile} en diferentes lugares del proyecto que
+contienen diferentes comandos útiles que se repiten con frecuencia.
 
 \section{Estructura de directorios}
 
-Los directorios del proyecto siguen la siguiente estructura:
+En la raíz del proyecto se pueden encontrar los siguentes directorios:
 
-\begin{itemize}
-      \item \textbf{app}: Contiene todo lo relacionado con los contenedores de
-            Docker que conforman la aplicación web.
-            \begin{itemize}
-                  \item \textbf{api}: Contiene el código fuente de la API que
-                        implementa el framework FastAPI de Python.
-                  \item \textbf{web}: Contiene el código fuente de la página web, se
-                        trata de una implementación SvelteKit, que es un framework
-                        de JavaScript.
-                  \item \textbf{proxy}: Contiene la configuración de Nginx para el
-                        proxy inverso que se utiliza para acceder a la API y a la
-                        web desde el exterior.
-            \end{itemize}
-            
-      \item \textbf{docs}: Contiene el código fuente en \LaTeX de esta
-            documentación.
-            
-      \item \textbf{paddel}: Contiene el código fuente de la librería PADDEL, que
-            tiene aquellas utilidades empleadas en la fase de investigación para
-            facilitar su uso dentro de la aplicación web. Se trata de un paquete
-            de Python que se puede instalar mediante el comando \texttt{pip}.
-\end{itemize}
+\subsection{\texttt{/app/}}
 
+Proyecto en Docker que implementa los contenedores que conforman la aplicación
+web. Este directorio contiene varios subdirectorios con el código fuente y
+configuración de las diferentes partes de la aplicación.
+
+\subsubsection{\texttt{/app/api/}}
+
+Este directorio contiene la implementación de la API de la aplicación, se ha
+realizado en Python mediante la librería
+\href{https://fastapi.tiangolo.com/}{FastAPI}.
+
+\subsubsection{\texttt{/app/proxy/}}
+
+Configuración para el contenedor de Caddy que implementa un proxy inverso que
+redirige las peticiones que llegan desde el exterior al contenedor apropiado
+(API o web).
+
+\subsubsection{\texttt{/app/web/}}
+
+Proyecto de NextJS (framework de JavaScript) que implementa el \textit{frontend}
+de la aplicación.
+
+\subsection{\texttt{/docs/}}
+
+Proyecto en \LaTeX{} que contiene este documento junto con la memoria.
+
+\subsubsection{\texttt{/docs/anexos/}}
+
+Contiene diferentes ficheros \texttt{.tex} que conforman estos anexos.
+
+\subsubsection{\texttt{/docs/common/}}
+
+Archivos \texttt{.tex} comunes entre la memoria y estos anexos.
+
+\subsubsection{\texttt{/docs/img/}}
+
+Diferentes imágenes utilizadas en la documentación.
+
+\subsubsection{\texttt{/docs/memoria/}}
+
+Ficheros \texttt{.tex} que contienen los diferentes apartados de la memoria.
+
+\subsection{\texttt{/notebooks/}}
+
+Notebooks de Jupyter que se han utilizado para realizar pruebas, entrenar
+modelos, optimizar hiperparámetros y generar gráficas.
+
+\subsection{\texttt{/paddel/}}
+
+Librería PADDEL, es un proyecto de Python instalable mediante \texttt{pip} que
+contiene el código utilizado para realizar la fase de investigación
+(procesamiento de los vídeos, extracción de características, etc.) del que va a
+depender la aplicación web.
+
+\subsection{\texttt{/paddel/src/paddel/}}
+
+Contiene los diferentes archivos de Python que componen la librería PADDEL.
+
+\subsubsection{\texttt{/paddel/src/paddel/hyper\_parameters/}}
+
+Contiene los archivos de Python relacionados con la fase de optimización de
+hiperparámetros.
+
+\subsubsection{\texttt{/paddel/src/paddel/preprocessing/}}
+
+Contiene los archivos de Python relacionados con el preprocesado y
+transformación de los vídeos para reducirlos a un conjunto de características.
 
 \section{Manual del programador}
 
-Este proyecto utiliza la utilidad GNU Make para guardar secuencias de comandos y
-gestionar las dependencias que existen entre estas. Para esto se utiliza un
-archivo denominado \textit{Makefile} en los directorios relevantes. En caso de
-que el sistema utilizado no disponga de la herramienta Make, se pueden
-simplemente consultar el archivo \textit{Makefile} para ver los comandos que
-deberían ser utilizados.
+En esta sección se detalla todo lo que debería saber una persona que para
+realizar cambios sobre las diferentes partes que componen este proyecto.
 
+\subsection{Aplicación web}
 
-\subsection{PADDEL}
+Para poder utilizar esta aplicación Docker debe ser instalado con antelación. La
+\href{https://docs.docker.com/engine/install/}{documentación de Docker} detalla
+el proceso de instalación sobre diferentes plataformas. Una vez Docker está
+instalado el proceso siguiente debería ser agnóstico al sistema operativo
+utilizado.
 
-La librería PADDEL dispone de un archivo \textit{pyproject.toml} en el que se
-detalla la forma de instalación, dependencias y algunas configuraciones de
-herramientas de desarrollo.
-
-Se incluye, además, un archivo \textit{Makefile} que define los siguientes
-comandos:
+La aplicación se compone por un conjunto de contenedores de Docker que
+interactúan entre ellos. En la raíz de la aplicación (\texttt{/app/}) se
+encuentran varios archivos \textit{docker-compose} de tipo YAML:
 
 \begin{itemize}
-      \item \texttt{make install-dependencies}: Instala la librería con las
-            dependencias de desarrollo, utilizadas para acciones como formateado
-            (\textit{black}) o comprobación de tipos (\textit{mypy}).
-      \item \texttt{make lint}: Realiza varias comprobaciones sobre el código
-            fuente para detectar problemas de formateado o tipado e informa al
-            usuario en caso de que existan.
-      \item \texttt{make format}: Realiza un formateado sobre el código fuente,
-            eliminando sentencias \texttt{import} no utilizadas, reordenando estas
-            sentencias \texttt{import} y formateando el código para darle un
-            aspecto homogéneo.
+    \item \texttt{docker-compose.yml}: Contiene la configuración básica común
+          tanto para el entorno de desarrollo como para el de producción.
+          Contiene información como dependencias entre contenedores, variables
+          de entorno que se pasa a cada contenedor y puertos en los que se va a
+          servir la aplicación.
+    \item \texttt{docker-compose.dev.yml}: Fichero con la configuración de los
+          contenedores específica al entorno de desarrollo. Simplemente
+          establece un mapeo entre los directorios del equipo anfitrión y los de
+          los contenedores para que los cambios realizados desde el anfitrión se
+          vean reflejados dentro de los contenedores y éstos se actualicen de
+          forma acorde.
+    \item \texttt{docker-compose.prod.yml}: Fichero con la configuración de los
+          contenedores específica al entorno de producción. Simplemente
+          establece el reinicio automático de los contenedores, para que en caso
+          de fallo o reinicio del sistema, los contenedores se lancen junto al
+          servicio de Docker.
 \end{itemize}
 
-Para el entorno de desarrollo es muy recomendable utilizar un entorno virtual
-para evitar realizar cambios sobre la instalación de Python a nivel de sistema.
-Existen varias herramientas que permiten realizar esto, como \textit{venv} o
-\textit{conda}. Con instalaciones que no se van a detallar en este documento al
-existir documentación extensa sobre el uso de ambas herramientas. Es importante
-destacar que la librería se ha creado en la versión 3.10 de Python, por lo que
-es recomendable utilizar esta versión para el entorno virtual.
+Gracias al uso de Docker Compose se crea una red interna de Docker que conecta
+los diferentes contenedores entre sí y estableciendo \textit{hostnames} simples
+que pueden utilizar para conectarse unos con otros. Por ejemplo, el proxy
+inverso puede realizar una petición HTTP a la API en la ruta
+\texttt{http://api}.
 
-Una vez creado el entorno virtual de Python, este se deberá activar de forma
-acorde a la herramienta utilizada y, a continuación, se puede ejecutar el
-comando \texttt{make install-dependencies}, en ausencia de la utilidad Make se
-puede utilizar \texttt{pip install -e .[dev]}, que instala el paquete en modo
-editable junto con las dependencias de desarrollo.
+La configuración de los distintos contenedores se realiza mediante variables de
+entorno. Con el fin de establecer estas variables se ha creado el fichero
+\texttt{sample.env} que contiene unos valores básicos para estas variables que
+deberán ser cambiadas para adaptarse al entorno en el que se van a ejecutar los
+contenedores. Una vez realizados los cambios este fichero debe ser guardado con
+el nombre \texttt{.env} en el mismo directorio donde se encuentra
+\texttt{sample.env}. Este fichero \texttt{.env} es detectado de forma automática
+por Docker cuando se lanzan los contenedores.
 
-Con todo esto se puede utilizar el comando \texttt{jupyter notebook notebooks}
-para lanzar lanzar una instancia del kernel IPython en la carpeta
-\textit{notebooks} donde se encuentra el código utilizado durante la fase de
-investigación, preprocesado y entrenamiendo de modelos.
+Para las operaciones de arranque y parada de los contenedores se utiliza el
+comando \texttt{docker compose} junto con los parámetros adecuados para la
+operación que se desea realizar. Como estos comando no son triviales y se
+utilizan de forma frecuente se encuentran guardados en un fichero
+\texttt{Makefile}
+. Son posibles los siguientes comandos\footnote{Para utilizar un archivo
+    \texttt{Makefile} se necesita la utilidad \texttt{make}, en caso de que no
+    se disponga de la misma se pueden copiar los comandos del archivo
+    \texttt{Makefile} y utilizar manualmente.}:
 
-Para ejecutar los notebooks de Jupyter se debe crear una carpeta
-\texttt{/data/raw} en la raíz del repositorio donde introducir los vídeos con el
-formato de nombre adecuado.
+\begin{itemize}
+    \item \texttt{make down}: Equivalente al comando:
+          \begin{flushleft}
+              \texttt{docker compose down ----remove-orphans ----rmi all ----volumes ----timeout 0}
+          \end{flushleft}
+          Elimina los contenedores y todo lo relacionado con los mismos sin
+          esperar. No se elimina el caché que guarda Docker, por lo que si se
+          vuelve a lanzar los contenedores no es necesario volver a descargar e
+          instalar todo.
 
+    \item \texttt{make dev}: Equivalente al comando:
+          \begin{flushleft}
+              \texttt{make down \&\& \\
+                  docker compose -f docker-compose.yml \\
+                  -f docker-compose.dev.yml up -d}
+          \end{flushleft}
+          Para y elimina los contenedores si estos estaban funcionando y los
+          lanza en modo desarrollo.
 
-\subsection{Aplicación}
+    \item \texttt{make prod}: Equivalente al comando:
+          \begin{flushleft}
+              \texttt{make down \&\& \\
+                  docker compose -f docker-compose.yml \\
+                  -f docker-compose.prod.yml up -d}
+          \end{flushleft}
+          Para y elimina los contenedores si estos estaban funcionando y los
+          lanza en modo producción.
+\end{itemize}
 
-Los componentes de la aplicación web se encuentran en el directorio \texttt{app}
-se trata de tres contenedores de Docker, api, web y proxy. Para lanzar los
-contenedores en modo desarrollo, es decir, que se detecten los cambios en la
-mayoría de ficheros fuente y se actualizen los contenedores acordemente, se
-puede utilizar \texttt{make docker-up-dev}, siempre que el motor de Docker esté
-inicializado.
+Para el desarrollo de la aplicación, como es de esperar, se utiliza el comando
+\texttt{make dev} para arrancar los contenedores (habiendo antes instalado
+Docker y creado el archivo \texttt{.env}).
 
-Para parar los contenedores se utiliza \texttt{make docker-down}, si, además, se
-desea liberar memoria y eliminar las imágenes creadas se utiliza \texttt{make
-      docker-clean}.
+En modo desarrollo se pueden editar los ficheros directamente desde el sistema
+anfitrión y los cambios se van a ver reflejados sobre los contenedores, esto
+puede ser útil para realizar cambios pequeños en los que no se necesiten las
+ayudas que puede dar una IDE.
 
-La edición de ficheros fuente se puede realizar diréctamente desde el sistema
-anfitrión, pero, si se desea de ayudas como autocompletado y recomendaciones
-será necesario utilizar un entorno de desarrollo que pueda interactuar con
-contenedores, como por ejemplo \textit{Visual Studio Code} con la extensión
-\textit{Dev Containers}.
+Para utilizar un entorno integrado para realizar el desarrollo se deben utilizar
+herramientas que pueden conectarse a contenedores de Docker, como, por ejemplo,
+\href{https://code.visualstudio.com/}{Visual Studio Code} con la extensión
+\href{https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers}{Dev
+    Containers} o IDEs de JetBrains, como IntelliJ o Pycharm, con el plugin de
+Docker.
 
+En los siguientes apartados se detalla el proceso de desarrollo sobre los
+diferentes contenedores.
+
+\subsubsection{Proxy}
+
+El contenedor \textit{proxy} contiene una instancia de Caddy funcionando como
+proxy inverso. Caddy es un servidor web similar a Nginx, pero con algunas
+características adicionales, como la gestión automática de certificados SSL.
+
+Los archivos que utiliza este contenedor se encuentran en la carpeta
+\texttt{/app/proxy}:
+
+\begin{itemize}
+    \item \texttt{Dockerfile}: Contiene la imágen y el proceso a seguir que
+          Docker debe realizar para construir el contenedor.
+    \item \texttt{Caddyfile}: Contiene la configuración de redirecciones de
+          Caddy que determina el contenedor de destino para las peticiones que
+          recibe.
+\end{itemize}
+
+Este contenedor es el único que tiene acceso al exterior, por lo que todas las
+peticiones que se hagan a la aplicación van a pasar por él.
+
+\subsubsection{API}
+
+El contenedor \textit{api} se trata de una implementación basada en la librería
+FastAPI. Se puede obtener una visión general de las peticiones posibles en la
+ruta \texttt{/api} de la localización en la que se encuentra el servicio.
+
+El fichero \texttt{Dockerfile} define como se prepara el contenedor, los pasos
+generales que sigue son:
+
+\begin{enumerate}
+    \item Copiar (o montar) el código fuente de la API y la librería PADDEL
+          desde el anfitrión.
+    \item Instalar los requisitos (\texttt{requirements.txt}), que incluyen
+          PADDEL y las dependencias específicas de la API.
+    \item Se lanza el servicio de FastAPI con los parámetro adecuados
+          dependiendo de si se lanza en modo desarrollo o producción.
+\end{enumerate}
+
+\subsubsection{Web}
+
+El contenedor \textit{web} es un proyecto basado en NodeJS que utiliza el
+framework de JavaScript NextJS, este framework está basado en React, una
+librería de JavaScript que permite la creación de componentes interactivos y
+reutilizables dentro de una web. Debido a esto, la
+\href{https://nextjs.org/docs/getting-started}{documentación de NextJS} es un
+recurso de gran valor para el desarrollo de este proyecto.
+
+En la raíz del proyecto existen varios archivos de interés:
+
+\begin{itemize}
+    \item \texttt{Dockerfile}: Define cómo se crea el contendor.
+    \item \texttt{next.config.js}: Define algunas configuraciones para NextJS.
+    \item \texttt{package.json}: Especifica detalles sobre el proyecto de NodeJS
+          como nombre del proyecto, autor, dependencias y algunos comandos de
+          utilidad.
+    \item \texttt{package.lock.json}: Este archivo define las versiones
+          específicas que se han utilizado de cada dependencia junto con sumas
+          de comprobación para asegurar que se puede reproducir el entorno en el
+          que se va a ejecutar la aplicación de forma exacta.
+    \item \texttt{postcss.config.js}, \texttt{tailwind.config.js}: Archivos
+          utilizados para la configuración de Tailwind CSS.
+    \item \texttt{tsconfig.json}: Archivo que configura el compilador de
+          TypeScript.
+    \item \texttt{.eslint.json}: Archivo de configuración de ESLint.
+\end{itemize}
+
+Aunque los archivos anteriores son importantes, la mayoría de cambios y
+adiciones se realizan dentro de los directorios \texttt{/pages/}, que define la
+estructura de páginas de la web, y \texttt{/components/}, donde se encuentran
+los diferentes componentes reutilizables de la web.
+
+Los archivos estáticos que se utilizan, imágenes, vídeos, iconos, se almacenan
+en el directorio \texttt{/public/}.
+
+En el directorio \texttt{/styles/} se alojan los archivos que definen los
+estilos (CSS) de la web, el contenido de esta carpeta es bastante escaso debido
+al extenso uso de las clases que provee la librería Tailwind CSS.
+
+\subsection{Documentación}
+
+La documentación se trata de un proyecto de \LaTeX{} compuesto por varios
+archivos \texttt{.tex} que se compilan a archivos \texttt{.pdf}.
+
+Para poder compilar estos archivos se necesita tener instalada una distribución
+de \LaTeX{}, en general la más recomendada es
+\href{https://www.tug.org/texlive/}{TeX Live}, disponible en varias plataformas.
+
+Una vez instalado \LaTeX{} se debería tener acceso al comando \texttt{latexmk},
+que se utiliza dentro del archivo \texttt{Makefile} tanto para compilar los
+archivos como para limpiar los archivos sobrantes. Están definidos los
+siguientes comandos:
+
+\begin{itemize}
+    \item \texttt{make memoria}: Compila la memoria. Equivalente a ejecutar:
+          \begin{flushleft}
+              \texttt{latexmk -cd -pdf memoria.tex}
+          \end{flushleft}
+    \item \texttt{make anexos}: Compila los anexos. Equivalente a ejecutar:
+          \begin{flushleft}
+              \texttt{latexmk -cd -pdf anexos.tex}
+          \end{flushleft}
+    \item \texttt{make all}: Compila la memoria y los anexos. Equivalente a
+          ejecutar los comandos anteriores.
+    \item \texttt{make clean}: Elimina archivos auxiliares generados durante la
+          compilación. Equivalente a ejecutar:
+          \begin{flushleft}
+              \texttt{latexmk -cd -pdf -bibtex-cond1 -c memoria.tex} \\
+              \texttt{latexmk -cd -pdf -bibtex-cond1 -c anexos.tex}
+          \end{flushleft}
+\end{itemize}
+
+Para editar los archivos de este proyecto existen algunas alternativas, como el
+entorno integrado creado específicamente para \LaTeX{}
+\href{https://www.xm1math.net/texmaker/}{Texmaker} o Visual Studio Code con la
+extensión
+\href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{Latex
+    Workshop}.
+
+\subsection{Librería PADDEL}
 
 \section{Compilación, instalación y ejecución del proyecto}
-
-Para desplegar el proyecto simplemente se debe ejecutar \texttt{make docker-up}
-desde la carpeta \texttt{app} con el motor de Docker inicializado, lo que
-inicializará la aplicación web en el equipo anfitrión.
 
 
 \section{Pruebas del sistema}

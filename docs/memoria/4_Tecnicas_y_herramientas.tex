@@ -3,6 +3,8 @@
 
 \section{Herramientas de desarrollo}
 
+Este capítulo detalla las distintas herramientas, librerías y frameworks que se
+han utilizado durante el desarrollo del proyecto.
 
 \subsection{Windows Subsystem for Linux}
 
@@ -17,6 +19,9 @@ La mayor parte del desarrollo ha sido realizada desde WSL, donde se ha instalado
 tanto \LaTeX{} como Python 3.9 y algunas dependencias, proceso mucho más simple
 de realizar en Linux que en Windows.
 
+\subsection{Python}
+
+
 \subsection{Visual Studio Code}
 
 Visual Studio Code (VS Code) es un popular editor de texto altamente extensible
@@ -29,17 +34,17 @@ diréctamente desde un sistema operativo Linux.
 En este caso se ha utilizado VS Code para:
 
 \begin{itemize}
-    \item Crear tanto esta memoria como los anexos mediante la extensión
-          \href{https://github.com/James-Yu/LaTeX-Workshop}{\LaTeX{} Workshop}
-          que integra distintos compiladores de \LaTeX{} (pdfTeX, XeTeX, LuaTeX,
-          etc.) dentro del programa y añade otras funcionalidades que hacen la
-          edición de código \LaTeX{} mucho más conveniente.
-    \item Crear la aplicación web, que utiliza el framework de JavaScript
-          SvelteKit, mediante multitud de extensiones para integrar la multitud
-          de librerías utilizadas (Svelte, TypeScript, Prettier, etc.).
-    \item Editar archivos de configuración utilizados para la creación de los
-          contenedores de Docker que componen la totalidad de la aplicación web
-          (web, API y proxy inverso).
+      \item Crear tanto esta memoria como los anexos mediante la extensión
+            \href{https://github.com/James-Yu/LaTeX-Workshop}{\LaTeX{} Workshop}
+            que integra distintos compiladores de \LaTeX{} (pdfTeX, XeTeX, LuaTeX,
+            etc.) dentro del programa y añade otras funcionalidades que hacen la
+            edición de código \LaTeX{} mucho más conveniente.
+      \item Crear la aplicación web, que utiliza el framework de JavaScript
+            SvelteKit, mediante multitud de extensiones para integrar la multitud
+            de librerías utilizadas (Svelte, TypeScript, Prettier, etc.).
+      \item Editar archivos de configuración utilizados para la creación de los
+            contenedores de Docker que componen la totalidad de la aplicación web
+            (web, API y proxy inverso).
 \end{itemize}
 
 
@@ -62,10 +67,10 @@ en el sistema de archivos de la distribución de WSL.
 En este proyecto PyCharm se ha utilizado para:
 
 \begin{enumerate}
-    \item Desarrollar la librería PADDEL, que contiene el código de Python común
-          a los Notebooks de Jupyter utilizados durante la fase de investigación
-          y a la aplicación web.
-    \item Desarrollar la API que utiliza la aplicación web.
+      \item Desarrollar la librería PADDEL, que contiene el código de Python común
+            a los Notebooks de Jupyter utilizados durante la fase de investigación
+            y a la aplicación web.
+      \item Desarrollar la API que utiliza la aplicación web.
 \end{enumerate}
 
 
@@ -101,11 +106,11 @@ utilizó MediaPipe Hands, cuyo objetivo es extraer varios puntos que definen un
 esqueleto ligeramente simplificado de la mano humana.
 
 \begin{figure}[h]
-    \centering
-    \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/mano.jpg}}
-    \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/pose.jpg}}
-    \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/mano_pose.jpg}}
-    \caption{MediaPipe Hands}
+      \centering
+      \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/mano.jpg}}
+      \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/pose.jpg}}
+      \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/mano_pose.jpg}}
+      \caption{MediaPipe Hands}
 \end{figure}
 
 
@@ -128,21 +133,7 @@ estar creadas por personas ajenas al proyecto que necesiten una implementación
 diferente para su caso de uso específico.
 
 
-\subsection{SvelteKit}
-
-SvelteKit es el \textit{framework} de JavaScript utilizado para la creación de
-la página web del proyecto. Para crear una aplicación web con esta herramienta
-se utilizan archivos \texttt{.svelte} que se utilizan para definir las
-diferentes páginas y los componentes reutilizables de la web.
-
-SvelteKit se caracteriza por estar compilado, es decir, cuando se construye la
-aplicación los ficheros \texttt{.svelte} (no ejecutables por el navegador) son
-compilados a únicamente ficheros de HTML, CSS y JavaScript. En este paso de
-compilación se realizan varias optimizaciones sobre el tamaño y velocidad del
-código, resultando en una página muchos más ligera y rápida.
-
-En este proyecto se ha creado una aplicación es SvelteKit para servir como
-\textit{frontend} a la API creada con FastAPI.
+\subsection{NextJS}
 
 
 \subsection{Caddy}
@@ -172,14 +163,15 @@ funcionalidades incluyendo gestión de certificados SSL, entre muchas otras, com
 un panel de control desde el que visualizar estadísticas sobre el nivel de uso
 del servicio.
 
-La otra alternativa, Caddy, es mucho más simple pero realiza la gestión de
-certificados de forma automática por defecto, sin necesidad de configuración
-específica, e incluso permite el uso de certificados \textit{self-signed}
-(firmados por uno mismo, en lugar de por una entidad certificadora) que es de
-gran utilidad durante el desarrollo para asegurar que el funcionamiento de la
-aplicación va a seguir siendo el mismo en el entorno final de producción (hay
-ligeras diferencias dependiendo de si un navegador utiliza HTTP o HTTPS). Es por
-esto que al final se decidió usar Caddy.
+La otra alternativa, Caddy, es mucho más simple, pero realiza la gestión de
+certificados de forma automática por defecto, e incluso permite el uso de
+certificados \textit{self-signed} (firmados por uno mismo, en lugar de por una
+entidad certificadora). Esto es de gran utilidad durante el desarrollo para
+asegurar que el funcionamiento de la aplicación va a seguir siendo el mismo en
+el entorno final de producción (ya que hay ligeras diferencias dependiendo de si
+un navegador utiliza HTTP o HTTPS).
+
+Es por todo lo anterior que, al final, se decidió usar Caddy.
 
 
 \subsection{Docker}
@@ -209,20 +201,20 @@ Se han utilizado las siguientes herramientas para realizar el formateado del
 código escrito en Python de forma automática:
 
 \begin{itemize}
-    \item \textbf{Autoflake}: herramienta utilizada para la eliminación de
-          sentencias \texttt{import} y variables innecesarias.
-    \item \textbf{Isort}: herramienta para la reordenación de sentencias
-          \texttt{import}.
-    \item \textbf{Black}: formateador de código caracterizado por un enfoque en
-          convenciones, por esto permite una configuración muy limitada por
-          parte del usuario.
+      \item \textbf{Autoflake}: herramienta utilizada para la eliminación de
+            sentencias \texttt{import} y variables innecesarias.
+      \item \textbf{Isort}: herramienta para la reordenación de sentencias
+            \texttt{import}.
+      \item \textbf{Black}: formateador de código caracterizado por un enfoque en
+            convenciones, por esto permite una configuración muy limitada por
+            parte del usuario.
 \end{itemize}
 
 
 \subsection{Make}
 
 A través del proyecto hay comandos de cierta complejidad que se repiten con
-bastante frecuencia (p. ej. formatear el código, lanzar contenedores, limpiar
+bastante frecuencia (\textit{e.g.} formatear el código, lanzar contenedores, limpiar
 contenedores, etc.), para facilitar el uso de estos comandos se ha utilizado la
 utilidad GNU Make, que viene por defecto en la mayoría de sistemas operativos de
 tipo Linux y se puede instalar tanto en Windows como en MacOS.

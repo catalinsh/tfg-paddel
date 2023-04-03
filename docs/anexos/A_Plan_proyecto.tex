@@ -3,6 +3,9 @@
 
 \section{Introducción}
 
+Este anexo detalla el procedimiento que se ha seguido para gestionar el progreso
+del proyecto y la realización de tareas.
+
 \section{Planificación temporal}
 
 La planificación del proyecto se llevará a cabo mediante una metodología ágil,
@@ -27,7 +30,87 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           posterior en la aplicación web.
 \end{itemize}
 
-\subsection{Sprint 1}
+\subsection{Sprint 1 (6-2-2023  12-2-2023)}
+
+\begin{itemize}
+    \item Añadir extracción de frecuencia de toques a partir de la secuencia
+          de poses de la mano extraida por Mediapipe.
+    \item Añadir extracción de diferencia entre la frecuencia de toques del
+          intervalo de tiempo inicial y final de la secuencia de poses.
+    \item Establecer ángulo máximo para la detección de toques.
+    \item Cambiar la configuración de los contenedores de Docker para usar
+          multietapa, separando la configuración para los entornos de desarrollo y
+          producción.
+\end{itemize}
+
+
+\subsection{Sprint 2 (13-2-2023  19-2-2023)}
+
+\begin{itemize}
+    \item Añadir extracción de amplitud media.
+    \item Añadir extracción de diferencia de amplitud media entre intervalo
+          inicial y final del vídeo.
+    \item Añadir extracción de variación de amplitud.
+    \item Añadir extracción de velocidad del movimiento.
+    \item Comenzar manual del programador.
+    \item Reemplazar Nginx por Caddy como proxy inverso de la aplicación.
+    \item Actualizar fichero README.md.
+\end{itemize}
+
+\subsection{Sprint 3 (20-2-2023  26-2-2023)}
+
+\begin{itemize}
+    \item Añadir extracción de características mediante TSFresh.
+    \item Cambiar secuencia de instalación del contenedor de Docker para la
+          API mejorando el cacheado de los pasos.
+\end{itemize}
+
+\subsection{Sprint 4 (27-2-2023  5-3-2023)}
+
+\begin{itemize}
+    \item Añadir herramientas de desarrollo a la memoria.
+    \item Cambiar implementación de extracción de características de trabajos
+          previos para que sea compatible con la librería TSFresh.
+\end{itemize}
+
+\subsection{Sprint 5 (6-3-2023  12-3-2023)}
+
+\begin{itemize}
+    \item Actualizar sección de herramientas de desarrollo.
+\end{itemize}
+
+\subsection{Sprint 6 (13-3-2023  19-3-2023)}
+
+\begin{itemize}
+    \item Implementar obtimización de hiperparámetros para varios modelos
+          mediante \textit{grid search}.
+    \item Añadir información temporal a la extracción de poses de Mediapipe a
+          partir de la tasa de fotogramas.
+\end{itemize}
+
+\subsection{Sprint 7 (20-3-2023  26-3-2023)}
+
+\begin{itemize}
+    \item Añadir Perceptrón multicapa, Adaboost y XGBoost a los modelos de la
+          optimización de hiperparámetros.
+    \item Cambiar validación cruzada para utilizar 5 repeticiones de 2 \textit{folds}.
+    \item Sustituir características de mano grabada y mano dominante por una
+          única características, si está utilizando la mano dominante.
+\end{itemize}
+
+\subsection{Sprint 8 (27-3-2023  2-4-2023)}
+
+\begin{itemize}
+    \item Arreglar Makefile para la compilación de la documentación.
+    \item Añadir generación de gráficas con los resultados obtenidos de la
+          optimización de hiperparámetros mediante \textit{grid search}.
+    \item Añadir selección del número de características a utilizar a la
+          optimización de hiperparámetros.
+    \item Refactorizar librería.
+    \item Cambiar el framework de JavaScript de la web de SvelteKit a NextJS.
+    \item Implementar una barra de navegación básica.
+\end{itemize}
+
 
 \section{Estudio de viabilidad}
 
