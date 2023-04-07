@@ -1,10 +1,141 @@
+\newcounter{ncu}
+\setcounter{ncu}{0}
+\newcommand{\cu}[9]{
+    \addtocounter{ncu}{1}
+
+    \begin{table}[p]
+        \centering
+        \begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+            \toprule
+            \textbf{CU-\arabic{ncu}}      & \textbf{#1} \\
+            \toprule
+            \textbf{Versión}              & #2          \\
+            \textbf{Autor}                & \theauthor  \\
+            \textbf{Requisitos asociados} & #3          \\
+            \textbf{Descripción}          & #4          \\
+            \textbf{Precondición}         & #5          \\
+            \textbf{Acciones}             &
+            #6                                          \\
+            \textbf{Postcondición}        & #7          \\
+            \textbf{Excepciones}          & #8          \\
+            \textbf{Importancia}          & #9          \\
+            \bottomrule
+        \end{tabularx}
+        \caption{CU-\arabic{ncu} #1.}
+    \end{table}
+}
+
+
 \chapter{Especificación de Requisitos}
 \label{cha:Especificación de Requisitos}
 
 \section{Introducción}
 
+Antes de comenzar a crear un programa es importante detallar las características
+que deberá tener (quienes son los usuarios, qué acciones pueden realizar, de qué
+manera deberá responder el programa, etc.). En este caso se ha seguido UML
+(Unified Modelling Language) como estándar para definir estas características.
+
 \section{Objetivos generales}
 
 \section{Catálogo de requisitos}
 
+\subsection{Requisitos funcionales}
+
+\begin{enumerate}[start=1,label={\bfseries RF\arabic*:}]
+    \item El sistema debe permitir diferenciar entre dos roles: Usuario normal y
+          Administrador.
+    \item Cualquier usuario debe poder subir un archivo de vídeo junto con
+          información adicional para ser procesados por un modelo de
+          inteligencia artifical y obtener el resultado.
+    \item Los usuarios administradores deben poder iniciar sesión con su nombre
+          de usuario y contraseña respectivos.
+    \item Los usuarios administradores deben poder finalizar su sesión.
+    \item Un inicio de sesión debe ser mantenido entre cambios de página y
+          cierres del navegador durante 24 horas.
+    \item Un administrador debe poder gestionar una lista con los modelos
+          disponibles.
+    \item Un administrador debe poder añadir modelos a la lista de modelos
+          disponibles.
+    \item Un administrador debe poder eliminar modelos de la lista de modelos
+          disponibles.
+    \item Un administrador debe poder seleccionar de la lista de modelos
+          disponibles aquel que se va a utilizar para realizar predicciones.
+\end{enumerate}
+
+\subsection{Requisitos no funcionales}
+
+\begin{enumerate}[start=1,label={\bfseries RNF\arabic*:}]
+    \item El tiempo desde que un usuario sube un vídeo y sus datos hasta que
+          recibe el resultado debe ser inferior a un minuto.
+    \item El sistema debe ser fácil de usar, con una interfaz intuitiva que el
+          usuario entienda de forma inmediata.
+    \item La página web deberá utilizar etiquetas y atributos HTML de tal forma
+          que se facilite la navegación para personas con accesibilidad
+          limitada.
+    \item La información de los usuario se debe almacenar de forma segura,
+          cifrando campos pertinentes como la contraseña.
+\end{enumerate}
+
 \section{Especificación de requisitos}
+
+\subsection{Actores}
+
+Existen dos tipos de actores en esta aplicación:
+
+\begin{itemize}
+    \item \textbf{Usuario Normal}: El aquel usuario que no ha iniciado sesión y
+          tiene un acceso limitado a las capacidades del sistema.
+    \item \textbf{Administrador}: El aquel usuario que sí ha iniciado sesión en
+          la aplicación y tiene acceso a la totalidad de la misma.
+\end{itemize}
+
+\subsection{Casos de uso}
+
+\cu{Obtener predicción}
+{1.0}
+{RF2}
+{Cualquier usuario debe poder obtener un predicción utilizado un modelo.}
+{Estar en la página respectiva de la web.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario selecciona el archivo sobre el que desea recibir una predicción.
+        \item El usuario introduce la información adicional necesaria.
+        \item El usuario hace clic sobre el botón para subir la infomación.
+        \item Se muestra una pantalla que informa al usuario sobre el estado de
+              su petición.
+        \item Se muestra la predicción obtenida.
+    \end{enumerate}
+}
+{}
+{
+    \begin{itemize}
+        \item No se pueden extraer fotogramas con pose suficientes.
+        \item La información adicional introducida no es válida.
+    \end{itemize}
+}
+{Alta}
+
+\cu{Iniciar sesión}
+{1.0}
+{RF1, RF3}
+{Los usuarios administradores deben poder iniciar sesión con sus credenciales.}
+{Estar en la página de inicio de sesión.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario introduce su nombre de usuario.
+        \item El usuario introduce su contraseña.
+        \item El usuario hace clic en el botón de ``iniciar sesión''.
+    \end{enumerate}
+}
+{El usuario es redirigido a la página de administración pertinente.}
+{
+    \begin{itemize}
+        \item Las credenciales introducidas no son válidas.
+    \end{itemize}
+}
+{Alta}
