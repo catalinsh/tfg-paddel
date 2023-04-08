@@ -92,6 +92,8 @@ Existen dos tipos de actores en esta aplicación:
 
 \subsection{Casos de uso}
 
+\imagen{anexos/diagrama_casos_de_uso.pdf}{Diagrama de casos de uso}{0.5}
+
 \cu{Obtener predicción}
 {1.0}
 {RF2}
@@ -136,6 +138,119 @@ Existen dos tipos de actores en esta aplicación:
 {
     \begin{itemize}
         \item Las credenciales introducidas no son válidas.
+    \end{itemize}
+}
+{Alta}
+
+\cu{Finalizar sesión}
+{1.0}
+{RF1, RF4}
+{Los usuarios administradores deben finalizar su sesión.}
+{Tener una sesión activa.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón de la parte superior para cerrar su sesión.
+        \item La sesión se cierra y el usuario es redirigido a la página principal.
+    \end{enumerate}
+}
+{}
+{}
+{Media}
+
+\cu{Ver lista de modelos}
+{1.0}
+{RF1, RF6}
+{Los usuarios administradores deben poder ver la lista con los modelos disponibles.}
+{}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario accede a la página de gestión de modelos.
+        \item Se muetra una lista con los modelos existentes junto con algunas acciones.
+    \end{enumerate}
+}
+{}
+{
+    \begin{itemize}
+        \item Usuario no ha iniciado sesión.
+    \end{itemize}
+}
+{Alta}
+
+\cu{Añadir modelo}
+{1.0}
+{RF1, RF7}
+{Los usuarios administradores deben poder añadir modelos.}
+{El usuario debe estar en la lista de modelos.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para añadir un modelo.
+        \item Se abre un formulario donde se pide el archivo del modelo junto
+              con información adicional que describa al modelo.
+        \item El usuario rellena el formulario y sube el archivo.
+        \item Se muestra una página de carga mientras se procesa la información.
+        \item Se devuelve al usuario a la lista de modelos, dondel el nuevo
+              modelo debería estar presente.
+    \end{enumerate}
+}
+{}
+{
+    \begin{itemize}
+        \item Usuario no ha iniciado sesión.
+        \item Modelo subido no válido.
+    \end{itemize}
+}
+{Alta}
+
+\cu{Eliminar modelo}
+{1.0}
+{RF1, RF8}
+{Los usuarios administradores deben poder eliminar modelos.}
+{El usuario debe estar en la lista de modelos.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para eliminar un modelo en concreto.
+        \item Se abre una ventana modal que pregunta al usuario si está seguro.
+        \item Si está seguro, se refresca la página mostrando la información actualizada.
+    \end{enumerate}
+}
+{
+    El modelo ha sido eliminado del disco donde estaba almacenado y su entrada en
+    la base de datos ha sido eliminada.
+}
+{
+    \begin{itemize}
+        \item Usuario no ha iniciado sesión.
+    \end{itemize}
+}
+{Alta}
+
+\cu{Seleccionar modelo}
+{1.0}
+{RF1, RF9}
+{Los usuarios administradores deben poder seleccionar el modelo a usar para realizar predicciones.}
+{El usuario debe estar en la lista de modelos.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para seleccionar el modelo respectivo.
+        \item El modelo se marca como seleccionado.
+    \end{enumerate}
+}
+{
+    La base de datos cambia para establecer el modelo respectivo como seleccionado.
+}
+{
+    \begin{itemize}
+        \item Usuario no ha iniciado sesión.
     \end{itemize}
 }
 {Alta}
