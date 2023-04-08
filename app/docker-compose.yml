@@ -42,6 +42,9 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
+      - PGDATA=/data
+    volumes:
+      - ./data/db:/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
       interval: 10s
