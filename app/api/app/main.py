@@ -1,9 +1,13 @@
 from typing import Union
 from urllib.parse import urlparse
 
-import os
-
 from fastapi import FastAPI
+
+from . import crud, models, schemas
+from .database import SessionLocal, engine
+
+models.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
