@@ -1,4 +1,4 @@
-FROM node:lts-slim AS base
+FROM node:18-slim AS base
 WORKDIR /code
 
 COPY ./package.json ./package.json
