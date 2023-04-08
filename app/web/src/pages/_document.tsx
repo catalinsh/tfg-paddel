@@ -3,10 +3,8 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head>
-        <title>PaDDeL</title>
-      </Head>
-      <body className=" bg-white text-stone-900 dark:bg-stone-900 dark:text-white">
+      <Head />
+      <body className="bg-white text-stone-900 dark:bg-stone-900 dark:text-white">
         <Main />
         <NextScript />
       </body>
