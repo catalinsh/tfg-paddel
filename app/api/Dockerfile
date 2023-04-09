@@ -2,6 +2,7 @@ FROM python:3.9-slim AS base
 WORKDIR /code
 
 # Install dependencies
+RUN apt update && apt install -y ffmpeg
 COPY ./app/api/requirements.txt ./requirements.txt
 COPY ./paddel/pyproject.toml ./paddel/pyproject.toml
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
