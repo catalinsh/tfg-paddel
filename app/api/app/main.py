@@ -1,7 +1,7 @@
 from tempfile import NamedTemporaryFile
 
 from sqlalchemy.orm import Session
-from fastapi import FastAPI, Depends, HTTPException, UploadFile
+from fastapi import FastAPI, Depends, File, Form, HTTPException, UploadFile
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
@@ -49,12 +49,12 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.post("/predict/")
+@app.post("/predict")
 def obtain_prediction(
-    hand_in_video: Side,
-    dominant_hand: Side,
-    gender: Gender,
-    video: UploadFile,
+    video_hand: Side = Form(),
+    dominant_hand: Side = Form(),
+    sex: Gender = Form(),
+    video: UploadFile = File(),
 ):
     file = NamedTemporaryFile()
     file_path = file.name

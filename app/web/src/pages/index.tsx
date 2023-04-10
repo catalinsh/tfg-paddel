@@ -3,7 +3,6 @@ import {
   UserIcon,
   ArrowTopRightOnSquareIcon,
   VideoCameraIcon,
-  UserCircleIcon,
 } from "@heroicons/react/20/solid";
 
 import Logo from "@/components/Logo";
@@ -52,7 +51,11 @@ const Home = () => (
         </div>
       </nav>
 
-      <form>
+      <form
+        action={`${process.env.NEXT_PUBLIC_API_LOCATION}/predict`}
+        method="post"
+        encType="multipart/form-data"
+      >
         <div className="mt-12">
           <div className="border-b border-stone-900/10 pb-12 dark:border-white/10">
             <h2 className="text-xl font-semibold leading-7 text-stone-900 dark:text-white">
@@ -71,7 +74,7 @@ const Home = () => (
                   <div className="flex items-center gap-x-3">
                     <input
                       id="dominant-hand-left"
-                      name="dominant-hand"
+                      name="dominant_hand"
                       type="radio"
                       value={0}
                       required
@@ -87,7 +90,7 @@ const Home = () => (
                   <div className="flex items-center gap-x-3">
                     <input
                       id="dominant-hand-right"
-                      name="dominant-hand"
+                      name="dominant_hand"
                       type="radio"
                       value={1}
                       required
@@ -111,7 +114,7 @@ const Home = () => (
                   <div className="flex items-center gap-x-3">
                     <input
                       id="video-hand-left"
-                      name="video-hand"
+                      name="video_hand"
                       type="radio"
                       value={0}
                       required
@@ -127,7 +130,7 @@ const Home = () => (
                   <div className="flex items-center gap-x-3">
                     <input
                       id="video-hand-right"
-                      name="video-hand"
+                      name="video_hand"
                       type="radio"
                       value={1}
                       required
@@ -193,7 +196,7 @@ const Home = () => (
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-stone-900/25 px-6 py-10 dark:border-stone-100/25">
                   <div className="text-center">
                     <VideoCameraIcon
-                      className="mx-auto h-12 w-12 text-gray-300"
+                      className="dark:text-stone-7500 mx-auto h-12 w-12 text-stone-500"
                       aria-hidden="true"
                     />
                     <div className="mt-4 flex text-sm leading-6 text-stone-600 dark:text-stone-400">
@@ -204,7 +207,7 @@ const Home = () => (
                         <span>Suba un archivo</span>
                         <input
                           id="hand-video-upload"
-                          name="hand-video-upload"
+                          name="video"
                           type="file"
                           className="sr-only"
                           required
@@ -239,7 +242,7 @@ const Home = () => (
               key="GitHub"
               href="https://github.com/cataand/tfg"
               target="_blank"
-              className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+              className="text-stone-400 hover:text-stone-500 dark:hover:text-stone-300"
             >
               <span className="sr-only">GitHub</span>
               <FontAwesomeIcon
@@ -250,7 +253,7 @@ const Home = () => (
             </a>
           </div>
           <div className="mt-8 md:order-1 md:mt-0">
-            <p className="text-center text-xs leading-5 text-gray-500 dark:text-gray-400">
+            <p className="text-center text-xs leading-5 text-stone-500 dark:text-stone-400">
               &copy; 2023 Catalin Andrei, Cacuci
             </p>
           </div>
