@@ -67,9 +67,12 @@ const Home = () => (
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
-                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
+                <label
+                  htmlFor="dominant_hand"
+                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
+                >
                   Su mano dominante
-                </div>
+                </label>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
@@ -107,9 +110,12 @@ const Home = () => (
               </div>
 
               <div className="sm:col-span-3">
-                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
+                <label
+                  htmlFor="video_hand"
+                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
+                >
                   Mano que muestra en el vídeo
-                </div>
+                </label>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
@@ -153,7 +159,7 @@ const Home = () => (
                 >
                   Edad
                 </label>
-                <div className="relative mt-2 w-24 rounded-md shadow-sm">
+                <div className="mt-2 flex w-28">
                   <input
                     type="number"
                     name="age"
@@ -161,21 +167,22 @@ const Home = () => (
                     min={0}
                     max={255}
                     step={1}
-                    className="sm:leading-6dark:bg-zinc-700 block w-full rounded-md border-0 py-1.5 pr-12 text-right text-zinc-900 ring-1 ring-inset ring-zinc-300  placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-zinc-700 dark:text-white dark:placeholder-zinc-400 dark:ring-zinc-600 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
+                    className="block w-full min-w-0 flex-1 rounded-none rounded-l-md border-0 py-1.5 text-right text-zinc-900 ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-zinc-700 dark:text-white dark:ring-zinc-600 dark:focus:ring-indigo-400 sm:text-sm sm:leading-6"
                     required
                   />
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                    <span className="text-zinc-500 dark:text-zinc-400 sm:text-sm">
-                      años
-                    </span>
-                  </div>
+                  <span className="inline-flex select-none items-center rounded-r-md border border-l-0 border-zinc-300 px-3 text-zinc-500 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-400 sm:text-sm">
+                    años
+                  </span>
                 </div>
               </div>
 
               <div className="sm:col-span-3">
-                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
+                <label
+                  htmlFor="sex"
+                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
+                >
                   Sexo
-                </div>
+                </label>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
