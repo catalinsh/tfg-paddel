@@ -78,7 +78,7 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="dominant-hand-left"
@@ -94,7 +94,7 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="dominant-hand-right"
@@ -118,7 +118,7 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="video-hand-left"
@@ -134,7 +134,7 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="video-hand-right"
@@ -146,7 +146,33 @@ const Home = () => (
                 </div>
               </div>
 
-              <div className="sm:col-span-6">
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="age"
+                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
+                >
+                  Edad
+                </label>
+                <div className="relative mt-2 w-24 rounded-md shadow-sm">
+                  <input
+                    type="number"
+                    name="age"
+                    id="age"
+                    min={0}
+                    max={255}
+                    step={1}
+                    className="sm:leading-6dark:bg-zinc-700 block w-full rounded-md border-0 py-1.5 pr-12 text-right text-zinc-900 ring-1 ring-inset ring-zinc-300  placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-zinc-700 dark:text-white dark:placeholder-zinc-400 dark:ring-zinc-600 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
+                    required
+                  />
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <span className="text-zinc-500 dark:text-zinc-400 sm:text-sm">
+                      años
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
                 <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Sexo
                 </div>
@@ -158,7 +184,7 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="sex-male"
@@ -174,7 +200,7 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:focus:ring-indigo-400 dark:focus:ring-offset-zinc-900"
                     />
                     <label
                       htmlFor="sex-female"
