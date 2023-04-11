@@ -57,17 +57,17 @@ const Home = () => (
         encType="multipart/form-data"
       >
         <div className="mt-12">
-          <div className="border-b border-stone-900/10 pb-12 dark:border-white/10">
-            <h2 className="text-xl font-semibold leading-7 text-stone-900 dark:text-white">
+          <div className="border-b border-zinc-900/10 pb-12 dark:border-white/10">
+            <h2 className="text-xl font-semibold leading-7 text-zinc-900 dark:text-white">
               Predecir
             </h2>
-            <p className="mt-1 text-sm leading-6 text-stone-600 dark:text-stone-400">
+            <p className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
               Introduzca la siguiente información para obtener una predicción.
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
-                <div className="text-base font-semibold leading-6 text-stone-900 dark:text-white">
+                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Su mano dominante
                 </div>
                 <div className="mt-2 space-y-3">
@@ -78,11 +78,11 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="dominant-hand-left"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Izquierda
                     </label>
@@ -94,11 +94,11 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="dominant-hand-right"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Derecha
                     </label>
@@ -107,7 +107,7 @@ const Home = () => (
               </div>
 
               <div className="sm:col-span-3">
-                <div className="text-base font-semibold leading-6 text-stone-900 dark:text-white">
+                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Mano que muestra en el vídeo
                 </div>
                 <div className="mt-2 space-y-3">
@@ -118,11 +118,11 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="video-hand-left"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Izquierda
                     </label>
@@ -134,11 +134,11 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="video-hand-right"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Derecha
                     </label>
@@ -147,7 +147,7 @@ const Home = () => (
               </div>
 
               <div className="sm:col-span-6">
-                <div className="text-base font-semibold leading-6 text-stone-900 dark:text-white">
+                <div className="text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Sexo
                 </div>
                 <div className="mt-2 space-y-3">
@@ -158,11 +158,11 @@ const Home = () => (
                       type="radio"
                       value={0}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="sex-male"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Masculino
                     </label>
@@ -174,11 +174,11 @@ const Home = () => (
                       type="radio"
                       value={1}
                       required
-                      className="h-4 w-4 border-stone-300 text-indigo-600 focus:ring-indigo-600 dark:border-stone-600 dark:bg-stone-700 dark:text-indigo-400 dark:ring-offset-stone-900 dark:focus:ring-indigo-400"
+                      className="h-4 w-4 border-zinc-300 text-indigo-600 focus:ring-indigo-600 dark:border-zinc-600 dark:bg-zinc-700 dark:text-indigo-400 dark:ring-offset-zinc-900 dark:focus:ring-indigo-400"
                     />
                     <label
                       htmlFor="sex-female"
-                      className="block text-sm font-medium leading-6 text-stone-900 dark:text-white"
+                      className="block text-sm font-medium leading-6 text-zinc-900 dark:text-white"
                     >
                       Femenino
                     </label>
@@ -189,20 +189,20 @@ const Home = () => (
               <div className="col-span-full">
                 <label
                   htmlFor="cover-photo"
-                  className="block text-base font-semibold leading-6 text-stone-900 dark:text-white"
+                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
                 >
                   Vídeo
                 </label>
-                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-stone-900/25 px-6 py-10 dark:border-stone-100/25">
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-zinc-900/25 px-6 py-10 dark:border-zinc-100/25">
                   <div className="text-center">
                     <VideoCameraIcon
-                      className="dark:text-stone-7500 mx-auto h-12 w-12 text-stone-500"
+                      className="dark:text-zinc-7500 mx-auto h-12 w-12 text-zinc-500"
                       aria-hidden="true"
                     />
-                    <div className="mt-4 flex text-sm leading-6 text-stone-600 dark:text-stone-400">
+                    <div className="mt-4 flex text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                       <label
                         htmlFor="hand-video-upload"
-                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 dark:bg-stone-900 dark:text-indigo-400 dark:focus-within:ring-indigo-400"
+                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 dark:bg-zinc-900 dark:text-indigo-400 dark:focus-within:ring-indigo-400"
                       >
                         <span>Suba un archivo</span>
                         <input
@@ -215,7 +215,7 @@ const Home = () => (
                       </label>
                       <p className="pl-1">o arrastre y suelte</p>
                     </div>
-                    <p className="text-xs leading-5 text-stone-600 dark:text-stone-400">
+                    <p className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">
                       MP4, MOV, AVI hasta 100MB
                     </p>
                   </div>
@@ -242,7 +242,7 @@ const Home = () => (
               key="GitHub"
               href="https://github.com/cataand/tfg"
               target="_blank"
-              className="text-stone-400 hover:text-stone-500 dark:hover:text-stone-300"
+              className="text-zinc-400 hover:text-zinc-500 dark:hover:text-zinc-300"
             >
               <span className="sr-only">GitHub</span>
               <FontAwesomeIcon
@@ -253,7 +253,7 @@ const Home = () => (
             </a>
           </div>
           <div className="mt-8 md:order-1 md:mt-0">
-            <p className="text-center text-xs leading-5 text-stone-500 dark:text-stone-400">
+            <p className="text-center text-xs leading-5 text-zinc-500 dark:text-zinc-400">
               &copy; 2023 Catalin Andrei, Cacuci
             </p>
           </div>
