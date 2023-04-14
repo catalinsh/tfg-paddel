@@ -2,6 +2,7 @@ from tempfile import NamedTemporaryFile
 
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import crud, models, schemas
 from .database import SessionLocal, engine
@@ -16,6 +17,15 @@ app = FastAPI(
     title="Paddel",
     description="Documentation for the API for the PaDDeL website.",
     version="0.1",
+)
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
