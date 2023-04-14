@@ -67,12 +67,12 @@ const Home = () => (
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
-                <label
+                <span
                   htmlFor="dominant_hand"
                   className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
                 >
                   Su mano dominante
-                </label>
+                </span>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
@@ -110,12 +110,9 @@ const Home = () => (
               </div>
 
               <div className="sm:col-span-3">
-                <label
-                  htmlFor="video_hand"
-                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
-                >
+                <span className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Mano que muestra en el vídeo
-                </label>
+                </span>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
@@ -170,19 +167,19 @@ const Home = () => (
                     className="block w-full min-w-0 flex-1 rounded-none rounded-l-md border-0 py-1.5 text-right text-zinc-900 ring-1 ring-inset ring-zinc-300 placeholder:text-zinc-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-zinc-700 dark:text-white dark:ring-zinc-600 dark:focus:ring-indigo-400 sm:text-sm sm:leading-6"
                     required
                   />
-                  <span className="inline-flex select-none items-center rounded-r-md border border-l-0 border-zinc-300 px-3 text-zinc-500 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-400 sm:text-sm">
+                  <label
+                    htmlFor="age"
+                    className="inline-flex select-none items-center rounded-r-md border border-l-0 border-zinc-300 px-3 text-zinc-500 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-400 sm:text-sm"
+                  >
                     años
-                  </span>
+                  </label>
                 </div>
               </div>
 
               <div className="sm:col-span-3">
-                <label
-                  htmlFor="sex"
-                  className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white"
-                >
+                <span className="block text-base font-semibold leading-6 text-zinc-900 dark:text-white">
                   Sexo
-                </label>
+                </span>
                 <div className="mt-2 space-y-3">
                   <div className="flex items-center gap-x-3">
                     <input
