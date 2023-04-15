@@ -25,6 +25,8 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+    volumes:
+      - ./data/api:/data
     depends_on:
       db:
         condition: service_healthy

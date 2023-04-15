@@ -1,4 +1,10 @@
+from pathlib import Path
+import pickle
 from tempfile import NamedTemporaryFile
+import pandas as pd
+from sklearn.base import BaseEstimator
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
 
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, File, Form, HTTPException, UploadFile
@@ -41,8 +47,7 @@ def get_db():
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_username(db, username=user.username)
     if db_user:
-        raise HTTPException(
-            status_code=400, detail="Username already registered")
+        raise HTTPException(status_code=400, detail="Username already registered")
     return crud.create_user(db=db, user=user)
 
 
@@ -86,4 +91,16 @@ def obtain_prediction(
             status_code=422, detail="Not enough hand poses detected in provided video."
         )
 
-    return classic_features.to_dict()
+    misc_features = pd.Series(
+        [sex.value, age, int(dominant_hand == video_hand)],
+        index=["gender", "age", "dominant_hand"],
+    )
+
+    all_features = pd.concat([misc_features, classic_features, fresh_features])
+
+    all_features = all_features.to_frame().T
+
+    with open(Path("/data/model.pkl"), "rb") as f:
+        clf = pickle.load(f)
+
+    return clf.predict(all_features)[0]
