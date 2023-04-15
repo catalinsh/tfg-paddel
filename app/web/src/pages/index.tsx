@@ -25,7 +25,7 @@ const Home = () => {
     formData.append("dominant_hand", data.dominantHand);
     formData.append("age", data.age);
     formData.append("sex", data.sex);
-    formData.append("video", data.video[0]);
+    formData.append("video", data.video);
 
     http
       .post("/predict", formData, {
@@ -39,7 +39,7 @@ const Home = () => {
         },
       })
       .then((r) => r.data)
-      .then((data) => setResult(data))
+      .then((data) => setResult({ result: data }))
       .catch((e: AxiosError) =>
         setResult({ result: "error", message: e.message })
       );

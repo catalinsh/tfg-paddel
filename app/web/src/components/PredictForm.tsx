@@ -1,4 +1,6 @@
 import { VideoCameraIcon } from "@heroicons/react/20/solid";
+import { useCallback, useRef, useState } from "react";
+import Dropzone, { useDropzone } from "react-dropzone";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 export type PredictInputs = {
@@ -6,7 +8,7 @@ export type PredictInputs = {
   dominantHand: string;
   age: string;
   sex: string;
-  video: FileList;
+  video: File;
 };
 
 const PredictForm = ({
@@ -17,8 +19,16 @@ const PredictForm = ({
   const {
     register,
     handleSubmit,
+    setValue,
+    clearErrors,
     formState: { errors },
   } = useForm<PredictInputs>();
+
+  const onDrop = useCallback((acceptedFiles: any) => {
+    setValue("video", acceptedFiles);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -209,34 +219,49 @@ const PredictForm = ({
               >
                 Vídeo
               </label>
-              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-zinc-900/25 px-6 py-10 dark:border-zinc-100/25">
-                <div className="text-center">
-                  <VideoCameraIcon
-                    className="dark:text-zinc-7500 mx-auto h-12 w-12 text-zinc-500"
-                    aria-hidden="true"
-                  />
-                  <div className="mt-4 flex text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                    <label
-                      htmlFor="hand-video-upload"
-                      className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 dark:bg-zinc-900 dark:text-indigo-400 dark:focus-within:ring-indigo-400"
-                    >
-                      <span>Suba un archivo</span>
-                      <input
-                        id="hand-video-upload"
-                        className="sr-only"
-                        type="file"
-                        {...register("video", {
-                          required: true,
-                        })}
+
+              <Dropzone
+                onDrop={(acceptedFiles) => {
+                  setValue("video", acceptedFiles[0]);
+                  clearErrors("video");
+                }}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div
+                    {...getRootProps()}
+                    className="mt-2 flex justify-center rounded-lg border border-dashed border-zinc-900/25 px-6 py-10 dark:border-zinc-100/25"
+                  >
+                    <div className="text-center">
+                      <VideoCameraIcon
+                        className="dark:text-zinc-7500 mx-auto h-12 w-12 text-zinc-500"
+                        aria-hidden="true"
                       />
-                    </label>
-                    <p className="pl-1">o arrastre y suelte</p>
+                      <div className="mt-4 flex text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                        <label
+                          htmlFor="hand-video-upload"
+                          className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500 dark:bg-zinc-900 dark:text-indigo-400 dark:focus-within:ring-indigo-400"
+                        >
+                          <span>Suba un archivo</span>
+                          <input
+                            id="hand-video-upload"
+                            className="sr-only"
+                            type="file"
+                            {...register("video", {
+                              required: true,
+                            })}
+                            {...getInputProps({ multiple: false })}
+                          />
+                        </label>
+                        <p className="pl-1">o arrastre y suelte</p>
+                      </div>
+                      <p className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">
+                        MP4, MOV, AVI hasta 100MB
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">
-                    MP4, MOV, AVI hasta 100MB
-                  </p>
-                </div>
-              </div>
+                )}
+              </Dropzone>
+
               {errors.video && (
                 <p className="mt-2 text-sm text-red-600" id="email-error">
                   Debe subir un archivo.
