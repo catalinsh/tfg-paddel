@@ -13,74 +13,122 @@ contienen diferentes comandos útiles que se repiten con frecuencia.
 
 En la raíz del proyecto se pueden encontrar los siguentes directorios:
 
-\subsection{\texttt{/app/}}
+\newpage
 
-Proyecto en Docker que implementa los contenedores que conforman la aplicación
-web. Este directorio contiene varios subdirectorios con el código fuente y
-configuración de las diferentes partes de la aplicación.
+\dirtree{%
+    .1 /app/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Proyecto en Docker que implementa los contenedores que conforman la aplicación
+        web{.} Este directorio contiene varios subdirectorios con el código fuente y
+        configuración de las diferentes partes de la aplicación{.}
+    \end{minipage}.
+    .2 api/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Este directorio contiene la implementación de la API de la aplicación, se ha
+        realizado en Python mediante la librería
+        \href{https://fastapi.tiangolo.com/}{FastAPI}{.}
+    \end{minipage}.
+    .2 proxy/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Configuración para el contenedor de Caddy que implementa un proxy inverso que
+        redirige las peticiones que llegan desde el exterior al contenedor apropiado
+        (API o web){.}
+    \end{minipage}.
+    .2 web/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Proyecto de NextJS (framework de JavaScript) que implementa el \textit{frontend}
+        de la aplicación{.}
+    \end{minipage}.
+}
 
-\subsubsection{\texttt{/app/api/}}
+\vspace{1cm}
 
-Este directorio contiene la implementación de la API de la aplicación, se ha
-realizado en Python mediante la librería
-\href{https://fastapi.tiangolo.com/}{FastAPI}.
+\dirtree{%
+    .1 /docs/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Proyecto en \LaTeX{} que contiene este documento junto con la memoria{.}
+    \end{minipage}.
+    .2 anexos/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene diferentes ficheros \texttt{.tex} que conforman estos anexos{.}
+    \end{minipage}.
+    .2 common/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Archivos \texttt{.tex} comunes entre la memoria y estos anexos{.}
+    \end{minipage}.
+    .2 img/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes imágenes utilizadas en la documentación{.}
+    \end{minipage}.
+    .2 memoria/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Ficheros \texttt{.tex} que contienen los diferentes apartados de la memoria{.}
+    \end{minipage}.
+}
 
-\subsubsection{\texttt{/app/proxy/}}
+\newpage
 
-Configuración para el contenedor de Caddy que implementa un proxy inverso que
-redirige las peticiones que llegan desde el exterior al contenedor apropiado
-(API o web).
+\dirtree{%
+    .1 /notebooks/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Notebooks de Jupyter que se han utilizado para realizar pruebas, entrenar
+        modelos, optimizar hiperparámetros y generar gráficas{.}
+    \end{minipage}.
+}
 
-\subsubsection{\texttt{/app/web/}}
+\vspace{1cm}
 
-Proyecto de NextJS (framework de JavaScript) que implementa el \textit{frontend}
-de la aplicación.
-
-\subsection{\texttt{/docs/}}
-
-Proyecto en \LaTeX{} que contiene este documento junto con la memoria.
-
-\subsubsection{\texttt{/docs/anexos/}}
-
-Contiene diferentes ficheros \texttt{.tex} que conforman estos anexos.
-
-\subsubsection{\texttt{/docs/common/}}
-
-Archivos \texttt{.tex} comunes entre la memoria y estos anexos.
-
-\subsubsection{\texttt{/docs/img/}}
-
-Diferentes imágenes utilizadas en la documentación.
-
-\subsubsection{\texttt{/docs/memoria/}}
-
-Ficheros \texttt{.tex} que contienen los diferentes apartados de la memoria.
-
-\subsection{\texttt{/notebooks/}}
-
-Notebooks de Jupyter que se han utilizado para realizar pruebas, entrenar
-modelos, optimizar hiperparámetros y generar gráficas.
-
-\subsection{\texttt{/paddel/}}
-
-Librería PADDEL, es un proyecto de Python instalable mediante \texttt{pip} que
-contiene el código utilizado para realizar la fase de investigación
-(procesamiento de los vídeos, extracción de características, etc.) del que va a
-depender la aplicación web.
-
-\subsection{\texttt{/paddel/src/paddel/}}
-
-Contiene los diferentes archivos de Python que componen la librería PADDEL.
-
-\subsubsection{\texttt{/paddel/src/paddel/hyper\_parameters/}}
-
-Contiene los archivos de Python relacionados con la fase de optimización de
-hiperparámetros.
-
-\subsubsection{\texttt{/paddel/src/paddel/preprocessing/}}
-
-Contiene los archivos de Python relacionados con el preprocesado y
-transformación de los vídeos para reducirlos a un conjunto de características.
+\dirtree{%
+    .1 /paddel/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Librería PADDEL, es un proyecto de Python instalable mediante \texttt{pip} que
+        contiene el código utilizado para realizar la fase de investigación
+        (procesamiento de los vídeos, extracción de características, etc{.}) del que va a
+        depender la aplicación web{.}
+    \end{minipage}.
+    .2 src/paddel/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los diferentes archivos de Python que componen la librería PADDEL{.}
+    \end{minipage}.
+    .3 hyper\_parameters/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los archivos de Python relacionados con la fase de optimización de
+        hiperparámetros{.}
+    \end{minipage}.
+    .3 preprocessing/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los archivos de Python relacionados con el preprocesado y
+        transformación de los vídeos para reducirlos a un conjunto de características{.}
+    \end{minipage}.
+}
 
 \section{Manual del programador}
 

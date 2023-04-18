@@ -84,15 +84,15 @@ manera deberá responder el programa, etc.). En este caso se ha seguido UML
 Existen dos tipos de actores en esta aplicación:
 
 \begin{itemize}
-    \item \textbf{Usuario Normal}: El aquel usuario que no ha iniciado sesión y
+    \item \textbf{Usuario Normal}: Es aquel usuario que no ha iniciado sesión y
           tiene un acceso limitado a las capacidades del sistema.
-    \item \textbf{Administrador}: El aquel usuario que sí ha iniciado sesión en
-          la aplicación y tiene acceso a la totalidad de la misma.
+    \item \textbf{Administrador}: Es aquel usuario que sí ha iniciado sesión en
+          la aplicación y tiene acceso a todas las funcionalidades.
 \end{itemize}
 
 \subsection{Casos de uso}
 
-\imagen{anexos/diagrama_casos_de_uso.pdf}{Diagrama de casos de uso}{0.5}
+\imagen{anexos/diagrama_casos_de_uso.pdf}{Diagrama general de casos de uso}{0.5}
 
 \cu{Obtener predicción}
 {1.0}
@@ -103,7 +103,8 @@ Existen dos tipos de actores en esta aplicación:
     \begin{enumerate}
         \def\labelenumi{\arabic{enumi}.}
         \tightlist
-        \item El usuario selecciona el archivo sobre el que desea recibir una predicción.
+        \item El usuario selecciona el archivo de vídeo sobre el que desea
+              recibir una predicción.
         \item El usuario introduce la información adicional necesaria.
         \item El usuario hace clic sobre el botón para subir la infomación.
         \item Se muestra una pantalla que informa al usuario sobre el estado de
@@ -114,8 +115,8 @@ Existen dos tipos de actores en esta aplicación:
 {}
 {
     \begin{itemize}
-        \item No se pueden extraer fotogramas con pose suficientes.
-        \item La información adicional introducida no es válida.
+        \item [1] No se pueden extraer fotogramas con pose suficientes.
+        \item [2] La información adicional introducida no es válida.
     \end{itemize}
 }
 {Alta}
@@ -137,7 +138,7 @@ Existen dos tipos de actores en esta aplicación:
 {El usuario es redirigido a la página de administración pertinente.}
 {
     \begin{itemize}
-        \item Las credenciales introducidas no son válidas.
+        \item [3] Las credenciales introducidas no son válidas.
     \end{itemize}
 }
 {Alta}
@@ -145,7 +146,7 @@ Existen dos tipos de actores en esta aplicación:
 \cu{Finalizar sesión}
 {1.0}
 {RF1, RF4}
-{Los usuarios administradores deben finalizar su sesión.}
+{Los usuarios administradores deben poder finalizar su sesión.}
 {Tener una sesión activa.}
 {
     \begin{enumerate}
@@ -175,7 +176,7 @@ Existen dos tipos de actores en esta aplicación:
 {}
 {
     \begin{itemize}
-        \item Usuario no ha iniciado sesión.
+        \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
 {Alta}
@@ -201,8 +202,8 @@ Existen dos tipos de actores en esta aplicación:
 {}
 {
     \begin{itemize}
-        \item Usuario no ha iniciado sesión.
-        \item Modelo subido no válido.
+        \item [1] Usuario no ha iniciado sesión.
+        \item [5] Modelo subido no válido.
     \end{itemize}
 }
 {Alta}
@@ -227,7 +228,7 @@ Existen dos tipos de actores en esta aplicación:
 }
 {
     \begin{itemize}
-        \item Usuario no ha iniciado sesión.
+        \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
 {Alta}
@@ -241,8 +242,10 @@ Existen dos tipos de actores en esta aplicación:
     \begin{enumerate}
         \def\labelenumi{\arabic{enumi}.}
         \tightlist
-        \item El usuario hace clic en el botón para seleccionar el modelo respectivo.
-        \item El modelo se marca como seleccionado.
+        \item El usuario hace clic en el botón para seleccionar un modelo
+              concreto de la lista de modelos.
+        \item Se informa al usuario de que el modelo ha sido seleccionado y es
+              el que se va a utilizar para realizar predicciones.
     \end{enumerate}
 }
 {
@@ -250,7 +253,7 @@ Existen dos tipos de actores en esta aplicación:
 }
 {
     \begin{itemize}
-        \item Usuario no ha iniciado sesión.
+        \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
 {Alta}
