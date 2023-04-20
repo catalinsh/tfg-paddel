@@ -1,18 +1,8 @@
-import Image from "next/image";
-
-const Logo = () => (
-  <>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={32}
-      height={32}
-      viewBox="0 0 1000 1000"
-      className="h-full fill-none stroke-stone-900 dark:stroke-white"
-    >
-      <path
-        strokeLinejoin="round"
-        strokeWidth={80}
-        d="M 355.16,389.61
+<svg width={32} height={32} viewBox="0 0 1000 1000" class="h-full fill-none stroke-neutral-900">
+	<path
+		stroke-linejoin="round"
+		stroke-width="80"
+		d="M 355.16,389.61
            C 348.55,390.55 268.35,466.98 268.35,466.98
              268.35,466.98 345.72,627.38 345.72,627.38M 158.91,113.15
            C 158.91,113.15 100.41,212.22 100.41,212.22
@@ -25,9 +15,5 @@ const Logo = () => (
              740.11,886.85 899.56,581.14 899.56,581.14
              899.56,581.14 615.56,315.07 615.56,315.07
              615.56,315.07 158.91,113.15 158.91,113.15 Z"
-      />
-    </svg>
-  </>
-);
-
-export default Logo;
+	/>
+</svg>

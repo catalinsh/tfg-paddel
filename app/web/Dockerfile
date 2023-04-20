@@ -7,16 +7,19 @@ RUN npm ci
 
 COPY . ./
 
+RUN npm run prepare
+
 
 FROM base AS production
+RUN npm run build
 CMD [ \
     "sh", "-c", \
-    "npm run build && npm run start -- --port 80" \
+    "HOST=0.0.0.0 PORT=80 node build" \
     ]
 
 
 FROM base AS development
 CMD [ \
     "sh", "-c", \
-    "npm run dev -- --port 80" \
+    "npm run dev" \
     ]
