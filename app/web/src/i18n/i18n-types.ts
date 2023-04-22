@@ -15,10 +15,6 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
-	 * T​h​i​s​ ​w​e​b​s​i​t​e​ ​n​e​e​d​s​ ​J​a​v​a​S​c​r​i​p​t​ ​t​o​ ​w​o​r​k​ ​p​r​o​p​e​r​l​y​.
-	 */
-	NOSCRIPT: string
-	/**
 	 * O​p​e​n​ ​l​a​n​g​u​a​g​e​ ​s​e​l​e​c​t​i​o​n
 	 */
 	LANGUAGE_SELECTION: string
@@ -26,13 +22,73 @@ type RootTranslation = {
 	 * A​d​m​i​n​i​s​t​r​a​t​i​o​n
 	 */
 	ADMINISTRATION: string
+	/**
+	 * P​r​e​d​i​c​t
+	 */
+	PREDICT: string
+	/**
+	 * F​i​l​l​ ​a​n​d​ ​s​e​n​d​ ​t​h​i​s​ ​f​o​r​m​ ​t​o​ ​r​e​c​i​e​v​e​ ​a​ ​p​r​e​d​i​c​t​i​o​n​.
+	 */
+	PREDICT_HELP: string
+	/**
+	 * L​e​f​t
+	 */
+	LEFT: string
+	/**
+	 * R​i​g​h​t
+	 */
+	RIGHT: string
+	/**
+	 * Y​o​u​r​ ​d​o​m​i​n​a​n​t​ ​h​a​n​d
+	 */
+	YOUR_DOMINANT_HAND: string
+	/**
+	 * H​a​n​d​ ​s​h​o​w​n​ ​i​n​ ​v​i​d​e​o
+	 */
+	HAND_SHOWN_IN_VIDEO: string
+	/**
+	 * A​g​e
+	 */
+	AGE: string
+	/**
+	 * y​e​a​r​s
+	 */
+	YEARS: string
+	/**
+	 * S​e​x
+	 */
+	SEX: string
+	/**
+	 * M​a​l​e
+	 */
+	MALE: string
+	/**
+	 * F​e​m​a​l​e
+	 */
+	FEMALE: string
+	/**
+	 * V​i​d​e​o
+	 */
+	VIDEO: string
+	/**
+	 * U​p​l​o​a​d​ ​a​ ​f​i​l​e
+	 */
+	UPLOAD_A_FILE: string
+	/**
+	 * o​r​ ​d​r​a​g​ ​a​n​d​ ​d​r​o​p
+	 */
+	OR_DRAG_AND_DROP: string
+	/**
+	 * S​e​n​d
+	 */
+	SEND: string
+	/**
+	 * U​n​i​v​e​r​s​i​t​y​ ​o​f​ ​B​u​r​g​o​s
+	 */
+	UNIVERSITY_OF_BURGOS: string
 }
 
 export type TranslationFunctions = {
-	/**
-	 * This website needs JavaScript to work properly.
-	 */
-	NOSCRIPT: () => LocalizedString
 	/**
 	 * Open language selection
 	 */
@@ -41,6 +97,70 @@ export type TranslationFunctions = {
 	 * Administration
 	 */
 	ADMINISTRATION: () => LocalizedString
+	/**
+	 * Predict
+	 */
+	PREDICT: () => LocalizedString
+	/**
+	 * Fill and send this form to recieve a prediction.
+	 */
+	PREDICT_HELP: () => LocalizedString
+	/**
+	 * Left
+	 */
+	LEFT: () => LocalizedString
+	/**
+	 * Right
+	 */
+	RIGHT: () => LocalizedString
+	/**
+	 * Your dominant hand
+	 */
+	YOUR_DOMINANT_HAND: () => LocalizedString
+	/**
+	 * Hand shown in video
+	 */
+	HAND_SHOWN_IN_VIDEO: () => LocalizedString
+	/**
+	 * Age
+	 */
+	AGE: () => LocalizedString
+	/**
+	 * years
+	 */
+	YEARS: () => LocalizedString
+	/**
+	 * Sex
+	 */
+	SEX: () => LocalizedString
+	/**
+	 * Male
+	 */
+	MALE: () => LocalizedString
+	/**
+	 * Female
+	 */
+	FEMALE: () => LocalizedString
+	/**
+	 * Video
+	 */
+	VIDEO: () => LocalizedString
+	/**
+	 * Upload a file
+	 */
+	UPLOAD_A_FILE: () => LocalizedString
+	/**
+	 * or drag and drop
+	 */
+	OR_DRAG_AND_DROP: () => LocalizedString
+	/**
+	 * Send
+	 */
+	SEND: () => LocalizedString
+	/**
+	 * University of Burgos
+	 */
+	UNIVERSITY_OF_BURGOS: () => LocalizedString
 }
 
 export type Formatters = {}

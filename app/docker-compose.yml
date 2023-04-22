@@ -25,6 +25,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - SECRET_KEY=${SECRET_KEY}
     volumes:
       - ./data/api:/data
     depends_on:
@@ -33,9 +34,12 @@ services:
 
   web:
     container_name: web
-    build: ./web
+    build: 
+      context: ./web
+      args:
+        - PUBLIC_API_LOCATION=${API_LOCATION}
     environment:
-      - NEXT_PUBLIC_API_LOCATION=${API_LOCATION}
+      - PUBLIC_API_LOCATION=${API_LOCATION}
 
   db:
     container_name: db

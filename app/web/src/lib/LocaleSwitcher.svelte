@@ -6,8 +6,8 @@
 	import type { Locales } from '$i18n/i18n-types';
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
+	import LanguageIcon from '$lib/icons/LanguageIcon.svelte';
 	import { localeLanguage, localeLanguageCode, replaceLocaleInUrl } from './utils';
-	import { Icon, Language } from 'svelte-hero-icons';
 
 	const switchLocale = async (newLocale: Locales, updateHistoryState = true) => {
 		if (!newLocale || $locale === newLocale) return;
@@ -63,12 +63,12 @@
 			aria-haspopup="true"
 		>
 			<span class="sr-only">{$LL.LANGUAGE_SELECTION()}</span>
-			<Icon src={Language} class="h-6 w-6" />
+			<LanguageIcon class="h-6 w-6" />
 		</button>
 	</div>
 
 	<div
-		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 shadow-lg focus:outline-none dark:border-neutral-600"
+		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-lg focus:outline-none"
 		role="menu"
 		class:hidden={!isDropdownOpen}
 		aria-orientation="vertical"
@@ -80,7 +80,7 @@
 				{#each locales as l}
 					<a
 						href={`${replaceLocaleInUrl($page.url, l)}`}
-						class="flex flex-shrink-0 justify-between px-4 py-2 align-middle text-sm hover:bg-neutral-200 dark:hover:bg-neutral-700"
+						class="flex flex-shrink-0 justify-between px-4 py-2 align-middle text-sm hover:bg-neutral-200"
 						role="menuitem"
 						tabindex="-1"
 						aria-current={l === $locale ? 'location' : undefined}

@@ -28,7 +28,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return resolve(event, {
 		transformPageChunk: ({ html }) => {
 			html = html.replace('%lang%', localeLanguageCode(locale));
-			html = html.replace('%noscript%', LL.NOSCRIPT());
 			return html;
 		}
 	});

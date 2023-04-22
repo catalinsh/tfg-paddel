@@ -7,6 +7,8 @@ RUN npm ci
 
 COPY . ./
 
+ARG PUBLIC_API_LOCATION
+
 RUN npm run prepare
 
 
