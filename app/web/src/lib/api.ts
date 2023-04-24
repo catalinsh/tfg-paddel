@@ -22,32 +22,47 @@ export const predict = async (
 	formData.append('sex', data.sex.toString());
 	formData.append('video', data.file);
 
-	let result: object;
+	const response = await http.post('/predict', formData, {
+		headers: {
+			'Content-Type': 'multipart/form-data'
+		},
+		onUploadProgress: onUploadProgress
+	});
 
-	await http
-		.post('/predict', formData, {
-			headers: {
-				'Content-Type': 'multipart/form-data'
-			},
-			onUploadProgress: onUploadProgress
-		})
-		.then((r) => r.data)
-		.then((data) => (result = { result: data }))
-		.catch((e: AxiosError) => (result = { result: 'error', message: e.message }));
-
-	return result!;
+	return response.data;
 };
 
 export const read_users = async (token: string) => {
-	let result;
-
-	await http
-		.get('/users/', {
+	try {
+		const response = await http.get('/users/', {
 			headers: { accept: 'application/json', Authorization: `Bearer ${token}` }
-		})
-		.then((r) => r.data)
-		.then((data) => (result = data))
-		.catch((e: AxiosError) => (result = { result: 'error', message: e.message }));
+		});
+		return response.data;
+	} catch (error) {
+		return [];
+	}
+};
 
-	return result;
+export const get_current_user = async (token: string) => {
+	try {
+		const response = await http.get('/users/current', {
+			headers: { accept: 'application/json', Authorization: `Bearer ${token}` }
+		});
+		return response.data;
+	} catch (error) {
+		return null;
+	}
+};
+
+export const token_login = async (username: string, password: string) => {
+	const data = new FormData();
+	data.append('username', username);
+	data.append('password', password);
+
+	try {
+		const response = await http.post('/token', data);
+		return response.data;
+	} catch (error) {
+		return null;
+	}
 };

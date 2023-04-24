@@ -1,7 +1,18 @@
-<svg width={32} height={32} viewBox="0 0 1000 1000" class="h-full fill-none stroke-neutral-900">
+<script lang="ts">
+	let clazz = '';
+	export { clazz as class };
+</script>
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	fill="none"
+	viewBox="0 0 1000 1000"
+	stroke-width="80"
+	stroke="currentColor"
+	class={clazz}
+>
 	<path
 		stroke-linejoin="round"
-		stroke-width="80"
 		d="M 355.16,389.61
            C 348.55,390.55 268.35,466.98 268.35,466.98
              268.35,466.98 345.72,627.38 345.72,627.38M 158.91,113.15

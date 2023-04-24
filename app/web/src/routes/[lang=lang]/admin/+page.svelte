@@ -1,16 +1,25 @@
 <script lang="ts">
 	import { locale } from '$i18n/i18n-svelte';
 	import { goto } from '$app/navigation';
-	import SmallNav from '$lib/SmallNav.svelte';
-	import Footer from '$lib/Footer.svelte';
+	import { read_users } from '$lib/api';
 
-	goto(`/${$locale}/login`, { replaceState: true });
+	const token = localStorage.getItem('token');
+
+	if (!token) {
+		goto(`/${$locale}/login`, { replaceState: true });
+	} else if (JSON.parse(atob(token.split('.')[1])).exp > new Date().getTime()) {
+		localStorage.removeItem('token');
+		goto(`/${$locale}/login`, { replaceState: true });
+	}
+
+	const users = read_users(token!);
 </script>
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-	<div class="mx-auto max-w-2xl">
-		<SmallNav />
-
-		<Footer />
-	</div>
+<div>
+	Database users:
+	{#await users}
+		fetching users...
+	{:then r}
+		{JSON.stringify(r)}
+	{/await}
 </div>

@@ -1,15 +1,15 @@
 <script>
 	import LocaleSwitcher from './LocaleSwitcher.svelte';
-	import Logo from './Logo.svelte';
 	import { locale } from '$i18n/i18n-svelte';
 	import LL from '$i18n/i18n-svelte';
 	import ButtonPrimary from './ButtonPrimary.svelte';
+	import PaddelIcon from './icons/PaddelIcon.svelte';
 </script>
 
 <nav class="flex justify-between py-2">
 	<a href="/{$locale}" class="group inline-flex items-center gap-2 p-2">
-		<Logo />
-		<span class="hidden font-bold group-hover:underline sm:inline"> PaDDeL </span>
+		<PaddelIcon class="h-7 w-7" />
+		<span class="hidden font-bold group-hover:underline sm:inline">PaDDeL</span>
 	</a>
 	<div class="flex items-center gap-2">
 		<a href="/{$locale}/admin">
