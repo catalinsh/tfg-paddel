@@ -9,21 +9,15 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"prepare": "svelte-kit sync",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"typesafe-i18n": "typesafe-i18n"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-node": "^1.2.3",
+		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "^1.5.0",
 		"@tailwindcss/forms": "^0.5.3",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
-		"eslint": "^8.28.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-svelte3": "^4.0.0",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.7",
@@ -39,7 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"axios": "^1.3.6",
-		"resolve-accept-language": "^1.1.51",
+		"resolve-accept-language": "^1.1.52",
 		"typesafe-i18n": "^5.24.3"
 	}
 }

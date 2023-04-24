@@ -14,7 +14,7 @@ export default {
 	SEX: 'Sex',
 	MALE: 'Male',
 	FEMALE: 'Female',
-	VIDEO: 'Video',
+	VIDEO_FILE: 'Video file',
 	UPLOAD_A_FILE: 'Upload a file',
 	OR_DRAG_AND_DROP: 'or drag and drop',
 	SEND: 'Send',

@@ -67,9 +67,9 @@ type RootTranslation = {
 	 */
 	FEMALE: string
 	/**
-	 * V​i​d​e​o
+	 * V​i​d​e​o​ ​f​i​l​e
 	 */
-	VIDEO: string
+	VIDEO_FILE: string
 	/**
 	 * U​p​l​o​a​d​ ​a​ ​f​i​l​e
 	 */
@@ -142,9 +142,9 @@ export type TranslationFunctions = {
 	 */
 	FEMALE: () => LocalizedString
 	/**
-	 * Video
+	 * Video file
 	 */
-	VIDEO: () => LocalizedString
+	VIDEO_FILE: () => LocalizedString
 	/**
 	 * Upload a file
 	 */

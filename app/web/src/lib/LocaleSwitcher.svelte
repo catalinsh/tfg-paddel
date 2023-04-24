@@ -7,7 +7,31 @@
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
 	import LanguageIcon from '$lib/icons/LanguageIcon.svelte';
-	import { localeLanguage, localeLanguageCode, replaceLocaleInUrl } from './utils';
+
+	const replaceLocaleInUrl = (url: URL, locale: string, full = false): string => {
+		const [, , ...rest] = url.pathname.split('/');
+		const new_pathname = `/${[locale, ...rest].join('/')}`;
+		if (!full) {
+			return `${new_pathname}${url.search}`;
+		}
+		const newUrl = new URL(url.toString());
+		newUrl.pathname = new_pathname;
+		return newUrl.toString();
+	};
+
+	const localeLanguageCode = (l: Locales) => {
+		const locale = new Intl.Locale(l);
+		return locale.language;
+	};
+
+	const localeLanguage = (l: Locales) => {
+		const locale = new Intl.Locale(l);
+
+		const languageNames = new Intl.DisplayNames([locale], { type: 'language' });
+		const language = languageNames.of(locale.language)!;
+
+		return language.charAt(0).toUpperCase() + language.slice(1);
+	};
 
 	const switchLocale = async (newLocale: Locales, updateHistoryState = true) => {
 		if (!newLocale || $locale === newLocale) return;
@@ -68,7 +92,7 @@
 	</div>
 
 	<div
-		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-lg focus:outline-none"
+		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-sm border border-neutral-300 bg-white shadow-lg focus:outline-none"
 		role="menu"
 		class:hidden={!isDropdownOpen}
 		aria-orientation="vertical"

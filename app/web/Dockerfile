@@ -9,14 +9,14 @@ COPY . ./
 
 ARG PUBLIC_API_LOCATION
 
-RUN npm run prepare
+RUN npm run check
 
 
 FROM base AS production
 RUN npm run build
 CMD [ \
     "sh", "-c", \
-    "HOST=0.0.0.0 PORT=80 node build" \
+    "npm run preview" \
     ]
 
 

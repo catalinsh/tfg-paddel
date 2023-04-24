@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosProgressEvent } from 'axios';
+import axios, { type AxiosProgressEvent } from 'axios';
 import { PUBLIC_API_LOCATION } from '$env/static/public';
 
 const http = axios.create({
@@ -22,14 +22,18 @@ export const predict = async (
 	formData.append('sex', data.sex.toString());
 	formData.append('video', data.file);
 
-	const response = await http.post('/predict', formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data'
-		},
-		onUploadProgress: onUploadProgress
-	});
+	try {
+		const response = await http.post('/predict', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			},
+			onUploadProgress: onUploadProgress
+		});
 
-	return response.data;
+		return response.data;
+	} catch (error) {
+		return error;
+	}
 };
 
 export const read_users = async (token: string) => {
