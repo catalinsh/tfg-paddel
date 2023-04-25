@@ -5,8 +5,6 @@
 	import LocaleSwitcher from './LocaleSwitcher.svelte';
 	import PaddelIcon from './icons/PaddelIcon.svelte';
 
-	export let currentUser: { username: string; id: number };
-
 	const logOutHandler = () => {
 		goto(`/${$locale}`, { replaceState: true });
 		localStorage.removeItem('token');

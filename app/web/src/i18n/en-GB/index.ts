@@ -1,6 +1,8 @@
 import type { BaseTranslation } from '../i18n-types';
 
 export default {
+	PAGE_DESCRIPTION:
+		"PaDDeL website to interact with models trained to detect Parkinson's Disease made by the University of Burgos",
 	LANGUAGE_SELECTION: 'Open language selection',
 	ADMINISTRATION: 'Administration',
 	PREDICT: 'Predict',
@@ -18,5 +20,10 @@ export default {
 	UPLOAD_A_FILE: 'Upload a file',
 	OR_DRAG_AND_DROP: 'or drag and drop',
 	SEND: 'Send',
-	UNIVERSITY_OF_BURGOS: 'University of Burgos'
+	UNIVERSITY_OF_BURGOS: 'University of Burgos',
+	LOG_IN: 'Log in',
+	USERNAME: 'Username',
+	PASSWORD: 'Password',
+	LOG_IN_TO_YOUR_ACCOUNT: 'Log in to your account',
+	BACK: 'Back'
 } satisfies BaseTranslation;

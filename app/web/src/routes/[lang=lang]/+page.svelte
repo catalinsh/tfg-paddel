@@ -22,7 +22,7 @@
 	};
 </script>
 
-<div class="mx-auto max-w-xl md:max-w-3xl">
+<div class="mx-auto max-w-xl px-8 sm:px-12 md:max-w-3xl lg:px-16">
 	<SmallNav />
 
 	{#if !submitted}
@@ -30,7 +30,7 @@
 	{:else if !result}
 		<div class="mt-8 border-b border-zinc-900/10 pb-8 dark:border-white/10">
 			<div class="h-1.5 w-full rounded-sm bg-zinc-200 dark:bg-zinc-700">
-				<div class="h-1.5 rounded-sm bg-indigo-600 dark:bg-indigo-400" style="width: {progress}%" />
+				<div class="h-1.5 rounded-sm bg-blue-600 dark:bg-blue-400" style="width: {progress}%" />
 			</div>
 			<div class="mt-2 flex justify-between text-sm" id="email-error">
 				<span>{uploadSpeed.toFixed(2)} MB/s</span>
@@ -41,7 +41,7 @@
 			<div class="mt-8 flex flex-col items-center gap-4">
 				<svg
 					aria-hidden="true"
-					class="h-16 w-16 animate-spin fill-indigo-600 text-zinc-200 dark:fill-indigo-400 dark:text-zinc-700"
+					class="h-16 w-16 animate-spin fill-blue-600 text-zinc-200 dark:fill-blue-400 dark:text-zinc-700"
 					viewBox="0 0 100 101"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"

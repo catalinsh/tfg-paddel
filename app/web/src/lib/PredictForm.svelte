@@ -2,6 +2,7 @@
 	import LL from '$i18n/i18n-svelte';
 	import VideoIcon from '$lib/icons/VideoIcon.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import ButtonPrimary from './ButtonPrimary.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -39,7 +40,12 @@
 	};
 </script>
 
-<form on:submit|preventDefault={submitHandler} class="grid grid-cols-1 gap-6 p-4 sm:grid-cols-6">
+<h1 class="text-xl font-semibold leading-7 text-gray-900">{$LL.PREDICT()}</h1>
+<p class="mt-1 text-base leading-6 text-gray-600">
+	{$LL.PREDICT_HELP()}
+</p>
+
+<form on:submit|preventDefault={submitHandler} class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
 	<div class="flex flex-col gap-2 sm:col-span-3">
 		<span class="font-semibold">{$LL.YOUR_DOMINANT_HAND()}</span>
 		<label class="flex items-center gap-2">
@@ -66,7 +72,7 @@
 
 	<label class="sm:col-span-3">
 		<span class="font-semibold">{$LL.AGE()}</span>
-		<div class="mt-1 flex rounded-sm">
+		<div class="mt-2 flex rounded-md">
 			<input
 				bind:value={age}
 				type="number"
@@ -75,10 +81,10 @@
 				step="1"
 				name="full-name"
 				required
-				class="w-14 rounded-l-sm text-right"
+				class="w-14 rounded-l-md text-right"
 			/>
 			<span
-				class="inline-flex select-none items-center rounded-r-sm border border-l-0 border-gray-500 px-3"
+				class="inline-flex select-none items-center rounded-r-md border border-l-0 border-gray-500 px-3"
 			>
 				{$LL.YEARS()}
 			</span>
@@ -98,19 +104,24 @@
 	</div>
 
 	<div class="col-span-full">
-		<label for="video-upload" class="block text-base font-semibold leading-6"
-			>{$LL.VIDEO_FILE()}</label
-		>
-		<label
+		<span class="block text-base font-semibold leading-6">
+			{$LL.VIDEO_FILE()}
+		</span>
+
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
 			on:drop|preventDefault={fileDropHandler}
 			on:dragover|preventDefault
-			class="mt-1 flex justify-center rounded-sm border border-dashed border-gray-500 px-6 py-10"
+			on:click={() => {
+				fileInput.click();
+			}}
+			class="mt-2 flex justify-center rounded-md border border-dashed border-gray-500 px-6 py-10"
 		>
 			<div class="select-none text-center">
 				<VideoIcon class="mx-auto h-12 w-12 text-gray-400" />
-				<div class="mt-4 inline-flex text-sm leading-6 text-gray-600">
-					<span
-						class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+				<div class="mt-4 inline text-sm text-gray-600">
+					<label
+						class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
 					>
 						<span>{$LL.UPLOAD_A_FILE()}</span>
 						<input
@@ -123,10 +134,10 @@
 							id="video-upload"
 							class="sr-only"
 						/>
-					</span>
-					<p class="pl-1">{$LL.OR_DRAG_AND_DROP()}</p>
+					</label>
+					<span>{$LL.OR_DRAG_AND_DROP()}</span>
 				</div>
-				<p class="text-xs leading-5 text-gray-600">
+				<p class="text-xs mt-2 text-gray-600 break-all">
 					{#if !file}
 						MP4, AVI, MKV, MOV...
 					{:else}
@@ -134,13 +145,8 @@
 					{/if}
 				</p>
 			</div>
-		</label>
+		</div>
 	</div>
 
-	<button
-		type="submit"
-		class="rounded-sm bg-neutral-600 py-2.5 font-semibold text-white hover:bg-neutral-700 sm:col-span-2"
-	>
-		{$LL.SEND()}
-	</button>
+	<ButtonPrimary type="submit" class="sm:col-span-full">{$LL.SEND()}</ButtonPrimary>
 </form>

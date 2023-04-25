@@ -9,5 +9,3 @@ export const load: LayoutLoad<{ locale: Locales }> = async ({ params }) => {
 
 	return { locale };
 };
-
-export const ssr = false;

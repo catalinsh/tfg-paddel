@@ -29,6 +29,7 @@
 		await loadLocaleAsync(newLocale);
 
 		setLocale(newLocale);
+		localStorage.setItem("currentLocale", newLocale);
 
 		document.querySelector('html')?.setAttribute('lang', localeLanguageCode(newLocale));
 
@@ -38,8 +39,6 @@
 
 		invalidateAll();
 	};
-
-	const handlePopStateEvent = async ({ state }: PopStateEvent) => switchLocale(state.locale, false);
 
 	$: if (browser) {
 		const lang = $page.params.lang as Locales;
@@ -52,20 +51,21 @@
 	}
 
 	let isDropdownOpen = false;
-	let container: HTMLElement;
 	const toggleDropdown = () => {
 		isDropdownOpen = !isDropdownOpen;
 	};
-	const onWindowClick = (e: MouseEvent) => {
-		if (!container.contains(e.target as Node)) {
-			isDropdownOpen = false;
-		}
-	};
+
+	const handleFocusOut = ({ relatedTarget, currentTarget }: FocusEvent) => {
+		if (relatedTarget instanceof HTMLElement) {
+			if ((currentTarget as HTMLElement).contains(relatedTarget)) {
+				return
+			}
+		} 
+    	isDropdownOpen = false
+	}
 </script>
 
-<svelte:window on:popstate={handlePopStateEvent} on:click={onWindowClick} />
-
-<div class="relative inline-block" bind:this={container}>
+<div class="relative inline-block" on:focusout={handleFocusOut}>
 	<div>
 		<button
 			on:click={toggleDropdown}
@@ -82,9 +82,9 @@
 	</div>
 
 	<div
-		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-sm border border-neutral-300 bg-white shadow-lg focus:outline-none"
+		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-lg focus:outline-none"
+		style:visibility={isDropdownOpen ? 'visible' : 'hidden'}
 		role="menu"
-		class:hidden={!isDropdownOpen}
 		aria-orientation="vertical"
 		aria-labelledby="menu-button"
 		tabindex="-1"
@@ -96,7 +96,6 @@
 						href={`${replaceLocaleInUrl($page.url, l)}`}
 						class="flex flex-shrink-0 justify-between px-4 py-2 align-middle text-sm hover:bg-neutral-200"
 						role="menuitem"
-						tabindex="-1"
 						aria-current={l === $locale ? 'location' : undefined}
 					>
 						<span>

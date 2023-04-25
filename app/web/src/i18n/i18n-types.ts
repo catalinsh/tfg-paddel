@@ -15,6 +15,10 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * P​a​D​D​e​L​ ​w​e​b​s​i​t​e​ ​t​o​ ​i​n​t​e​r​a​c​t​ ​w​i​t​h​ ​m​o​d​e​l​s​ ​t​r​a​i​n​e​d​ ​t​o​ ​d​e​t​e​c​t​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​ ​m​a​d​e​ ​b​y​ ​t​h​e​ ​U​n​i​v​e​r​s​i​t​y​ ​o​f​ ​B​u​r​g​o​s
+	 */
+	PAGE_DESCRIPTION: string
+	/**
 	 * O​p​e​n​ ​l​a​n​g​u​a​g​e​ ​s​e​l​e​c​t​i​o​n
 	 */
 	LANGUAGE_SELECTION: string
@@ -86,9 +90,33 @@ type RootTranslation = {
 	 * U​n​i​v​e​r​s​i​t​y​ ​o​f​ ​B​u​r​g​o​s
 	 */
 	UNIVERSITY_OF_BURGOS: string
+	/**
+	 * L​o​g​ ​i​n
+	 */
+	LOG_IN: string
+	/**
+	 * U​s​e​r​n​a​m​e
+	 */
+	USERNAME: string
+	/**
+	 * P​a​s​s​w​o​r​d
+	 */
+	PASSWORD: string
+	/**
+	 * L​o​g​ ​i​n​ ​t​o​ ​y​o​u​r​ ​a​c​c​o​u​n​t
+	 */
+	LOG_IN_TO_YOUR_ACCOUNT: string
+	/**
+	 * B​a​c​k
+	 */
+	BACK: string
 }
 
 export type TranslationFunctions = {
+	/**
+	 * PaDDeL website to interact with models trained to detect Parkinson's Disease made by the University of Burgos
+	 */
+	PAGE_DESCRIPTION: () => LocalizedString
 	/**
 	 * Open language selection
 	 */
@@ -161,6 +189,26 @@ export type TranslationFunctions = {
 	 * University of Burgos
 	 */
 	UNIVERSITY_OF_BURGOS: () => LocalizedString
+	/**
+	 * Log in
+	 */
+	LOG_IN: () => LocalizedString
+	/**
+	 * Username
+	 */
+	USERNAME: () => LocalizedString
+	/**
+	 * Password
+	 */
+	PASSWORD: () => LocalizedString
+	/**
+	 * Log in to your account
+	 */
+	LOG_IN_TO_YOUR_ACCOUNT: () => LocalizedString
+	/**
+	 * Back
+	 */
+	BACK: () => LocalizedString
 }
 
 export type Formatters = {}
