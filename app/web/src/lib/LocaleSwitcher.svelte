@@ -7,12 +7,7 @@
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
 	import LanguageIcon from '$lib/icons/LanguageIcon.svelte';
-	import { replaceLocaleInUrl } from './utils';
-
-	const localeLanguageCode = (l: Locales) => {
-		const locale = new Intl.Locale(l);
-		return locale.language;
-	};
+	import { localeLanguageCode, replaceLocaleInUrl } from './utils';
 
 	const localeLanguage = (l: Locales) => {
 		const locale = new Intl.Locale(l);
@@ -82,7 +77,7 @@
 	</div>
 
 	<div
-		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-lg focus:outline-none"
+		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-md focus:outline-none"
 		style:visibility={isDropdownOpen ? 'visible' : 'hidden'}
 		role="menu"
 		aria-orientation="vertical"

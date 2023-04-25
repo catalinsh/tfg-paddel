@@ -27,5 +27,8 @@ export default {
 	LOG_IN_TO_YOUR_ACCOUNT: 'Acceda a su cuenta',
 	BACK: 'Volver',
 	LOG_OUT: 'Cerrar sesión',
-	PROCESSING_DATA: 'Procesando datos...'
+	SENDING_DATA: 'Enviando datos...',
+	PROCESSING_DATA: 'Procesando datos, por favor no salga de la página...',
+	SOURCE_CODE: 'Código fuente',
+	API_DOCS: 'Documentación de la API'
 } satisfies Translation;

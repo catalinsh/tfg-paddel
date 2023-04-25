@@ -27,5 +27,8 @@ export default {
 	LOG_IN_TO_YOUR_ACCOUNT: 'Log in to your account',
 	BACK: 'Back',
 	LOG_OUT: 'Log out',
-	PROCESSING_DATA: 'Processing data...'
+	SENDING_DATA: 'Sending data...',
+	PROCESSING_DATA: 'Processing data, please don\'t leave the page...',
+	SOURCE_CODE: 'Source code',
+	API_DOCS: 'API documentation'
 } satisfies BaseTranslation;

@@ -115,9 +115,21 @@ type RootTranslation = {
 	 */
 	LOG_OUT: string
 	/**
-	 * P​r​o​c​e​s​s​i​n​g​ ​d​a​t​a​.​.​.
+	 * S​e​n​d​i​n​g​ ​d​a​t​a​.​.​.
+	 */
+	SENDING_DATA: string
+	/**
+	 * P​r​o​c​e​s​s​i​n​g​ ​d​a​t​a​,​ ​p​l​e​a​s​e​ ​d​o​n​'​t​ ​l​e​a​v​e​ ​t​h​e​ ​p​a​g​e​.​.​.
 	 */
 	PROCESSING_DATA: string
+	/**
+	 * S​o​u​r​c​e​ ​c​o​d​e
+	 */
+	SOURCE_CODE: string
+	/**
+	 * A​P​I​ ​d​o​c​u​m​e​n​t​a​t​i​o​n
+	 */
+	API_DOCS: string
 }
 
 export type TranslationFunctions = {
@@ -222,9 +234,21 @@ export type TranslationFunctions = {
 	 */
 	LOG_OUT: () => LocalizedString
 	/**
-	 * Processing data...
+	 * Sending data...
+	 */
+	SENDING_DATA: () => LocalizedString
+	/**
+	 * Processing data, please don't leave the page...
 	 */
 	PROCESSING_DATA: () => LocalizedString
+	/**
+	 * Source code
+	 */
+	SOURCE_CODE: () => LocalizedString
+	/**
+	 * API documentation
+	 */
+	API_DOCS: () => LocalizedString
 }
 
 export type Formatters = {}
