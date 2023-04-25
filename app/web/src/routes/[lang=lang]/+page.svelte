@@ -4,12 +4,15 @@
 	import SmallNav from '$lib/SmallNav.svelte';
 	import { predict } from '$lib/api';
 	import type { AxiosProgressEvent } from 'axios';
+	import LL from '$i18n/i18n-svelte'
 
 	let progress = 0;
+	$: uploadFinished = progress === 100;
 	let uploadSpeed = NaN;
 	let submitted = false;
-	let uploadFinished = false;
 	let result: object;
+
+
 
 	const submitHandler = async (e: CustomEvent) => {
 		submitted = true;
@@ -17,7 +20,6 @@
 		result = await predict(e.detail, (e: AxiosProgressEvent) => {
 			progress = (100 * e.loaded) / e.total!;
 			uploadSpeed = e.rate! / 1000000;
-			uploadFinished = e.loaded === e.total!;
 		});
 	};
 </script>
@@ -55,7 +57,7 @@
 						fill="currentFill"
 					/>
 				</svg>
-				<span class="text-sm">Procesando datos...</span>
+				<span class="text-sm">{$LL.PROCESSING_DATA()}</span>
 			</div>
 		{/if}
 	{:else}

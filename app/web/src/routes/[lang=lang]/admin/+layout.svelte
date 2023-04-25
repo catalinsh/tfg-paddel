@@ -15,10 +15,14 @@
 	const currentUser = data.currentUser;
 </script>
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+{#if currentUser}
+<div class="mx-auto max-w-xl px-8 sm:px-12 md:max-w-3xl lg:px-16">
 	<div class="mx-auto max-w-2xl">
 		<BigNav />
 		<slot />
 		<Footer />
 	</div>
 </div>
+{/if}
+
+

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { locale } from '$i18n/i18n-svelte';
+	import LL, { locale } from '$i18n/i18n-svelte';
 	import ButtonSecondary from './ButtonSecondary.svelte';
 	import LocaleSwitcher from './LocaleSwitcher.svelte';
 	import PaddelIcon from './icons/PaddelIcon.svelte';
@@ -11,14 +11,13 @@
 	};
 </script>
 
-<nav class="flex justify-between py-2">
-	<a href="/{$locale}" class="group inline-flex items-center gap-2 p-2">
-		<PaddelIcon class="h-7 w-7" />
-		<span class="hidden font-bold group-hover:underline sm:inline">PaDDeL</span>
+<nav class="flex justify-between py-6">
+	<a href={`/${$locale}`} class="flex items-center gap-2 hover:underline">
+		<PaddelIcon class="h-8 w-8" />
+		<span class="sr-only font-bold sm:not-sr-only">PaDDeL</span>
 	</a>
 	<div class="flex items-center gap-2">
+		<ButtonSecondary on:click={logOutHandler}>{$LL.LOG_OUT()}</ButtonSecondary>
 		<LocaleSwitcher />
-
-		<ButtonSecondary on:click={logOutHandler}>Log out</ButtonSecondary>
 	</div>
 </nav>

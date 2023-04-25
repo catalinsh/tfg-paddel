@@ -8,6 +8,7 @@
 	import SmallNav from '$lib/SmallNav.svelte';
 	import ButtonSecondary from '$lib/ButtonSecondary.svelte';
 	import BackIcon from '$lib/icons/BackIcon.svelte';
+	import LocaleSwitcher from '$lib/LocaleSwitcher.svelte';
 
 	const currentToken = localStorage.getItem('token');
 
@@ -29,8 +30,14 @@
 	};
 </script>
 
-<div class="max-w-lg mx-auto px-8 sm:px-12 lg:px-16 py-6">
-	<ButtonSecondary href={`/${$locale}`} class="inline-flex gap-1 items-center pl-2"><BackIcon class="h-5 w-5 inline"></BackIcon> {$LL.BACK()}</ButtonSecondary>
+<div class="mx-auto max-w-lg px-8 py-6 sm:px-12 lg:px-16">
+	<div class="flex items-center justify-between">
+		<ButtonSecondary href={`/${$locale}`} class="inline-flex items-center gap-1 pl-2">
+			<BackIcon class="inline h-5 w-5" />
+			{$LL.BACK()}
+		</ButtonSecondary>
+		<LocaleSwitcher />
+	</div>
 
 	<div class="mt-12">
 		<div class="text-center">
@@ -41,7 +48,7 @@
 		</h2>
 	</div>
 
-	<form class="space-y-6 mt-8" on:submit|preventDefault={submitHandler}>
+	<form class="mt-8 space-y-6" on:submit|preventDefault={submitHandler}>
 		<div>
 			<label for="username" class="block text-sm font-medium leading-6 text-gray-900">
 				{$LL.USERNAME()}

@@ -31,7 +31,7 @@ type RootTranslation = {
 	 */
 	PREDICT: string
 	/**
-	 * F​i​l​l​ ​a​n​d​ ​s​e​n​d​ ​t​h​i​s​ ​f​o​r​m​ ​t​o​ ​r​e​c​i​e​v​e​ ​a​ ​p​r​e​d​i​c​t​i​o​n​.
+	 * F​i​l​l​ ​i​n​ ​a​n​d​ ​s​e​n​d​ ​t​h​i​s​ ​f​o​r​m​ ​t​o​ ​r​e​c​i​e​v​e​ ​a​ ​p​r​e​d​i​c​t​i​o​n​.
 	 */
 	PREDICT_HELP: string
 	/**
@@ -110,6 +110,14 @@ type RootTranslation = {
 	 * B​a​c​k
 	 */
 	BACK: string
+	/**
+	 * L​o​g​ ​o​u​t
+	 */
+	LOG_OUT: string
+	/**
+	 * P​r​o​c​e​s​s​i​n​g​ ​d​a​t​a​.​.​.
+	 */
+	PROCESSING_DATA: string
 }
 
 export type TranslationFunctions = {
@@ -130,7 +138,7 @@ export type TranslationFunctions = {
 	 */
 	PREDICT: () => LocalizedString
 	/**
-	 * Fill and send this form to recieve a prediction.
+	 * Fill in and send this form to recieve a prediction.
 	 */
 	PREDICT_HELP: () => LocalizedString
 	/**
@@ -209,6 +217,14 @@ export type TranslationFunctions = {
 	 * Back
 	 */
 	BACK: () => LocalizedString
+	/**
+	 * Log out
+	 */
+	LOG_OUT: () => LocalizedString
+	/**
+	 * Processing data...
+	 */
+	PROCESSING_DATA: () => LocalizedString
 }
 
 export type Formatters = {}

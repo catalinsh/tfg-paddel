@@ -27,7 +27,7 @@ export const predict = async (
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			},
-			onUploadProgress: onUploadProgress
+			onUploadProgress: onUploadProgress,
 		});
 
 		return response.data;

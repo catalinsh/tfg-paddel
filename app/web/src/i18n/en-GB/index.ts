@@ -6,7 +6,7 @@ export default {
 	LANGUAGE_SELECTION: 'Open language selection',
 	ADMINISTRATION: 'Administration',
 	PREDICT: 'Predict',
-	PREDICT_HELP: 'Fill and send this form to recieve a prediction.',
+	PREDICT_HELP: 'Fill in and send this form to recieve a prediction.',
 	LEFT: 'Left',
 	RIGHT: 'Right',
 	YOUR_DOMINANT_HAND: 'Your dominant hand',
@@ -25,5 +25,7 @@ export default {
 	USERNAME: 'Username',
 	PASSWORD: 'Password',
 	LOG_IN_TO_YOUR_ACCOUNT: 'Log in to your account',
-	BACK: 'Back'
+	BACK: 'Back',
+	LOG_OUT: 'Log out',
+	PROCESSING_DATA: 'Processing data...'
 } satisfies BaseTranslation;

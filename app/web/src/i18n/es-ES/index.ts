@@ -24,6 +24,8 @@ export default {
 	LOG_IN: 'Entrar',
 	USERNAME: 'Nombre de usuario',
 	PASSWORD: 'Contraseña',
-	LOG_IN_TO_YOUR_ACCOUNT: 'Entre a su cuenta',
-	BACK: 'Volver'
+	LOG_IN_TO_YOUR_ACCOUNT: 'Acceda a su cuenta',
+	BACK: 'Volver',
+	LOG_OUT: 'Cerrar sesión',
+	PROCESSING_DATA: 'Procesando datos...'
 } satisfies Translation;
