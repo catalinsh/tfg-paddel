@@ -28,7 +28,7 @@ export default {
 	BACK: 'Back',
 	LOG_OUT: 'Log out',
 	SENDING_DATA: 'Sending data...',
-	PROCESSING_DATA: 'Processing data, please don\'t leave the page...',
+	PROCESSING_DATA: "Processing data, please don't leave the page...",
 	SOURCE_CODE: 'Source code',
 	API_DOCS: 'API documentation'
 } satisfies BaseTranslation;

@@ -1,4 +1,4 @@
-import type { Locales } from "$i18n/i18n-types";
+import type { Locales } from '$i18n/i18n-types';
 
 export const replaceLocaleInUrl = (url: URL, locale: string, full = false): string => {
 	const [, , ...rest] = url.pathname.split('/');

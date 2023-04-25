@@ -137,7 +137,7 @@
 					</label>
 					<span>{$LL.OR_DRAG_AND_DROP()}</span>
 				</div>
-				<p class="text-xs mt-2 text-gray-600 break-all">
+				<p class="mt-2 break-all text-xs text-gray-600">
 					{#if !file}
 						MP4, AVI, MKV, MOV...
 					{:else}

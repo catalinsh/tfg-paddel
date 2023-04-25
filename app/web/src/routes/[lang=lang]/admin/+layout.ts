@@ -5,13 +5,13 @@ export const load = (async () => {
 	const token = localStorage.getItem('token');
 
 	if (!token) {
-		return { currentUser: null }
+		return { currentUser: null };
 	}
 
-	const currentUser = await get_current_user(token!)
+	const currentUser = await get_current_user(token!);
 
 	if (!currentUser) {
-		return { currentUser: null }
+		return { currentUser: null };
 	}
 
 	return { currentUser };

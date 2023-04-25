@@ -4,14 +4,14 @@
 	import { baseLocale, locales } from '$i18n/i18n-util';
 	import resolveAcceptLanguage from 'resolve-accept-language';
 
-	const currentLocale = localStorage.getItem("currentLocale");
+	const currentLocale = localStorage.getItem('currentLocale');
 
 	if (currentLocale) {
 		goto(`/${currentLocale}`, { replaceState: true });
 	} else {
 		const userLanguage = navigator.language;
 		const preferredLocale = resolveAcceptLanguage(userLanguage, locales, baseLocale) as Locales;
-		localStorage.setItem("currentLocale", preferredLocale);
+		localStorage.setItem('currentLocale', preferredLocale);
 		goto(`/${preferredLocale}`, { replaceState: true });
 	}
 </script>

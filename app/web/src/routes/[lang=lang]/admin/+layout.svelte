@@ -16,13 +16,11 @@
 </script>
 
 {#if currentUser}
-<div class="mx-auto max-w-xl px-8 sm:px-12 md:max-w-3xl lg:px-16">
-	<div class="mx-auto max-w-2xl">
-		<BigNav />
-		<slot />
-		<Footer />
+	<div class="mx-auto max-w-xl px-8 sm:px-12 md:max-w-3xl lg:px-16">
+		<div class="mx-auto max-w-2xl">
+			<BigNav />
+			<slot />
+			<Footer />
+		</div>
 	</div>
-</div>
 {/if}
-
-
