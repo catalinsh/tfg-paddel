@@ -68,24 +68,24 @@
 			type="button"
 			class="flex items-center rounded-full p-1.5 hover:bg-neutral-200"
 			class:bg-neutral-200={isDropdownOpen}
-			id="menu-button"
-			aria-expanded="true"
+			id="locale-menu-button"
+			aria-expanded={isDropdownOpen}
 			aria-haspopup="true"
+			aria-controls="locale-menu"
 		>
 			<span class="sr-only">{$LL.LANGUAGE_SELECTION()}</span>
 			<LanguageIcon class="h-6 w-6" />
 		</button>
 	</div>
 
-	<div
-		class="absolute right-0 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-md focus:outline-none"
+	<ul
+		id="locale-menu"
+		class="absolute right-0 p-1 z-10 mt-3 w-32 origin-top-right rounded-md border border-neutral-300 bg-white shadow-md focus:outline-none"
 		style:visibility={isDropdownOpen ? 'visible' : 'hidden'}
 		role="menu"
 		aria-orientation="vertical"
-		aria-labelledby="menu-button"
-		tabindex="-1"
+		aria-labelledby="locale-menu-button"
 	>
-		<div class="p-1" role="none">
 			<li class="list-none">
 				{#each locales as l}
 					<a
@@ -103,6 +103,5 @@
 					</a>
 				{/each}
 			</li>
-		</div>
-	</div>
+		</ul>
 </div>

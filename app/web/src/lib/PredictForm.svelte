@@ -46,8 +46,8 @@
 </p>
 
 <form on:submit|preventDefault={submitHandler} class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">
-	<div class="flex flex-col gap-2 sm:col-span-3">
-		<span class="font-semibold">{$LL.YOUR_DOMINANT_HAND()}</span>
+	<div role="radiogroup" aria-labelledby="dominant-hand-field" class="flex flex-col gap-2 sm:col-span-3">
+		<span id="dominant-hand-field" class="font-semibold">{$LL.YOUR_DOMINANT_HAND()}</span>
 		<label class="flex items-center gap-2">
 			<input bind:group={dominantHand} type="radio" name="dominant-hand" value="0" required />
 			<span>{$LL.LEFT()}</span>
@@ -58,8 +58,8 @@
 		</label>
 	</div>
 
-	<div class="flex flex-col gap-2 sm:col-span-3">
-		<span class="font-semibold">{$LL.HAND_SHOWN_IN_VIDEO()}</span>
+	<div role="radiogroup" aria-labelledby="video-hand-field" class="flex flex-col gap-2 sm:col-span-3">
+		<span id="video-hand-field" class="font-semibold">{$LL.HAND_SHOWN_IN_VIDEO()}</span>
 		<label class="flex items-center gap-2">
 			<input bind:group={videoHand} type="radio" name="video-hand" value="0" required />
 			<span>{$LL.LEFT()}</span>
@@ -91,8 +91,8 @@
 		</div>
 	</label>
 
-	<div class="flex flex-col gap-2 sm:col-span-3">
-		<span class="font-semibold">{$LL.SEX()}</span>
+	<div role="radiogroup" aria-labelledby="sex-field" class="flex flex-col gap-2 sm:col-span-3">
+		<span id="sex-field" class="font-semibold">{$LL.SEX()}</span>
 		<label class="flex items-center gap-2">
 			<input bind:group={sex} type="radio" name="sex" value="0" required />
 			<span>{$LL.MALE()}</span>

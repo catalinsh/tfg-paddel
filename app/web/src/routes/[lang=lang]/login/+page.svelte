@@ -3,12 +3,11 @@
 	import { goto } from '$app/navigation';
 	import PaddelIcon from '$lib/icons/PaddelIcon.svelte';
 	import { token_login } from '$lib/api';
-	import Footer from '$lib/Footer.svelte';
 	import ButtonPrimary from '$lib/ButtonPrimary.svelte';
-	import SmallNav from '$lib/SmallNav.svelte';
 	import ButtonSecondary from '$lib/ButtonSecondary.svelte';
 	import BackIcon from '$lib/icons/BackIcon.svelte';
 	import LocaleSwitcher from '$lib/LocaleSwitcher.svelte';
+	import { onMount } from 'svelte';
 
 	const currentToken = localStorage.getItem('token');
 
@@ -18,6 +17,11 @@
 
 	let username: string;
 	let password: string;
+	let usernameInput: HTMLInputElement;
+
+	onMount(async () => {
+		usernameInput.focus();
+	});
 
 	const submitHandler = async () => {
 		const result = await token_login(username, password);
@@ -39,52 +43,55 @@
 		<LocaleSwitcher />
 	</div>
 
-	<div class="mt-12">
-		<div class="text-center">
-			<PaddelIcon class="inline h-16 w-16 stroke-blue-600" />
-		</div>
-		<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-			{$LL.LOG_IN_TO_YOUR_ACCOUNT()}
-		</h2>
-	</div>
-
-	<form class="mt-8 space-y-6" on:submit|preventDefault={submitHandler}>
-		<div>
-			<label for="username" class="block text-sm font-medium leading-6 text-gray-900">
-				{$LL.USERNAME()}
-			</label>
-			<div class="mt-2">
-				<input
-					bind:value={username}
-					id="username"
-					name="username"
-					type="text"
-					autocomplete="nickname"
-					required
-					class="block w-full rounded-md"
-				/>
+	<main>
+		<div class="mt-12">
+			<div class="text-center">
+				<PaddelIcon class="inline h-16 w-16 stroke-blue-600" />
 			</div>
+			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+				{$LL.LOG_IN_TO_YOUR_ACCOUNT()}
+			</h2>
 		</div>
 
-		<div>
-			<div class="block items-center justify-between">
-				<label for="password" class="block text-sm font-medium leading-6 text-gray-900">
-					{$LL.PASSWORD()}
+		<form class="mt-8 space-y-6" on:submit|preventDefault={submitHandler}>
+			<div>
+				<label for="username" class="block text-sm font-medium leading-6 text-gray-900">
+					{$LL.USERNAME()}
 				</label>
+				<div class="mt-2">
+					<input
+						bind:this={usernameInput}
+						bind:value={username}
+						id="username"
+						name="username"
+						type="text"
+						autocomplete="nickname"
+						required
+						class="block w-full rounded-md"
+					/>
+				</div>
 			</div>
-			<div class="mt-2">
-				<input
-					bind:value={password}
-					id="password"
-					name="password"
-					type="password"
-					autocomplete="current-password"
-					required
-					class="block w-full rounded-md"
-				/>
-			</div>
-		</div>
 
-		<ButtonPrimary type="submit" on:click={submitHandler}>{$LL.LOG_IN()}</ButtonPrimary>
-	</form>
+			<div>
+				<div class="block items-center justify-between">
+					<label for="password" class="block text-sm font-medium leading-6 text-gray-900">
+						{$LL.PASSWORD()}
+					</label>
+				</div>
+				<div class="mt-2">
+					<input
+						bind:value={password}
+						id="password"
+						name="password"
+						type="password"
+						autocomplete="current-password"
+						required
+						class="block w-full rounded-md"
+					/>
+				</div>
+			</div>
+
+			<ButtonPrimary type="submit" on:click={submitHandler}>{$LL.LOG_IN()}</ButtonPrimary>
+		</form>
+	</main>
 </div>

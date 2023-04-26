@@ -75,7 +75,7 @@ type RootTranslation = {
 	 */
 	VIDEO_FILE: string
 	/**
-	 * U​p​l​o​a​d​ ​a​ ​f​i​l​e
+	 * U​p​l​o​a​d​ ​v​i​d​e​o​ ​f​i​l​e
 	 */
 	UPLOAD_A_FILE: string
 	/**
@@ -194,7 +194,7 @@ export type TranslationFunctions = {
 	 */
 	VIDEO_FILE: () => LocalizedString
 	/**
-	 * Upload a file
+	 * Upload video file
 	 */
 	UPLOAD_A_FILE: () => LocalizedString
 	/**

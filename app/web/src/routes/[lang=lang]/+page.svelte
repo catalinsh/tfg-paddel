@@ -26,31 +26,33 @@
 <div class="mx-auto max-w-xl px-8 sm:px-12 md:max-w-3xl lg:px-16">
 	<SmallNav />
 
-	{#if !submitted}
-		<PredictForm on:submit={submitHandler} />
-	{:else if !result}
-		<div class="mt-8 text-center">
-			<span class="inline-flex items-center gap-2 px-4 text-left text-sm font-semibold">
-				<LoadingIcon
-					class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-zinc-200 dark:fill-blue-400 dark:text-zinc-700"
-				/>
-				{#if !uploadFinished}
-					{$LL.SENDING_DATA()}
-				{:else}
-					{$LL.PROCESSING_DATA()}
-				{/if}
-			</span>
-			<div class="mt-4 h-1.5 w-full rounded-sm bg-zinc-200 dark:bg-zinc-700">
-				<div class="h-1.5 rounded-sm bg-blue-600 dark:bg-blue-400" style="width: {progress}%" />
+	<main>
+		{#if !submitted}
+			<PredictForm on:submit={submitHandler} />
+		{:else if !result}
+			<div class="mt-8 text-center">
+				<span class="inline-flex items-center gap-2 px-4 text-left text-sm font-semibold">
+					<LoadingIcon
+						class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-zinc-200 dark:fill-blue-400 dark:text-zinc-700"
+					/>
+					{#if !uploadFinished}
+						{$LL.SENDING_DATA()}
+					{:else}
+						{$LL.PROCESSING_DATA()}
+					{/if}
+				</span>
+				<div class="mt-4 h-1.5 w-full rounded-sm bg-zinc-200 dark:bg-zinc-700">
+					<div class="h-1.5 rounded-sm bg-blue-600 dark:bg-blue-400" style="width: {progress}%" />
+				</div>
+				<div class="mt-2 flex justify-between text-sm" id="email-error">
+					<span>{uploadSpeed.toFixed(2)} MB/s</span>
+					<span>{progress.toFixed(2)}%</span>
+				</div>
 			</div>
-			<div class="mt-2 flex justify-between text-sm" id="email-error">
-				<span>{uploadSpeed.toFixed(2)} MB/s</span>
-				<span>{progress.toFixed(2)}%</span>
-			</div>
-		</div>
-	{:else}
-		{JSON.stringify(result)}
-	{/if}
+		{:else}
+			{JSON.stringify(result)}
+		{/if}
+	</main>
 
 	<Footer />
 </div>

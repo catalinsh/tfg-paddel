@@ -17,7 +17,7 @@ export default {
 	MALE: 'Masculino',
 	FEMALE: 'Femenino',
 	VIDEO_FILE: 'Archivo de vídeo',
-	UPLOAD_A_FILE: 'Suba un archivo',
+	UPLOAD_A_FILE: 'Suba un archivo de vídeo',
 	OR_DRAG_AND_DROP: 'o arrastre y suelte',
 	SEND: 'Enviar',
 	UNIVERSITY_OF_BURGOS: 'Universidad de Burgos',
