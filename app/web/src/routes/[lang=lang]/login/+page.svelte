@@ -48,9 +48,9 @@
 			<div class="text-center">
 				<PaddelIcon class="inline h-16 w-16 stroke-blue-600" />
 			</div>
-			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+			<h1 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 				{$LL.LOG_IN_TO_YOUR_ACCOUNT()}
-			</h2>
+			</h1>
 		</div>
 
 		<form class="mt-8 space-y-6" on:submit|preventDefault={submitHandler}>
