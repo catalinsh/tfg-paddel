@@ -1,4 +1,4 @@
-import axios, { type AxiosProgressEvent } from 'axios';
+import axios, { AxiosError, type AxiosProgressEvent } from 'axios';
 import { PUBLIC_API_LOCATION } from '$env/static/public';
 
 const http = axios.create({
@@ -31,8 +31,8 @@ export const predict = async (
 		});
 
 		return response.data;
-	} catch (error) {
-		return error;
+	} catch (error: any) {
+		return error.response || {};
 	}
 };
 

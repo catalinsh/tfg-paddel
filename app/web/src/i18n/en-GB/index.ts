@@ -30,5 +30,10 @@ export default {
 	SENDING_DATA: 'Sending data...',
 	PROCESSING_DATA: "Processing data, please don't leave the page...",
 	SOURCE_CODE: 'Source code',
-	API_DOCS: 'API documentation'
+	API_DOCS: 'API documentation',
+	USERNAME_OR_PASSWORD_WRONG: 'Username or password wrong.',
+	PREDICTION_RESULT: 'According to the used model, there is a {percentage:string}% chance that you have Parkinson\'s Disease.',
+	THERE_WAS_A_PROBLEM: 'There was a problem',
+	CANNOT_PROCESS_VIDEO: 'Can\'t process video, please check it.',
+	SOMETHING_WENT_WRONG: 'Something went terribly wrong.'
 } satisfies BaseTranslation;

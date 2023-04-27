@@ -18,18 +18,23 @@
 	let username: string;
 	let password: string;
 	let usernameInput: HTMLInputElement;
+	let submitted = false;
+	let alert: HTMLElement;
 
 	onMount(async () => {
 		usernameInput.focus();
 	});
 
 	const submitHandler = async () => {
+		submitted = false;
 		const result = await token_login(username, password);
-
+		
 		if (result) {
 			const token = result.access_token;
 			localStorage.setItem('token', token);
 			goto(`/${$locale}/admin`, { replaceState: true });
+		} else {
+			submitted = true;
 		}
 	};
 </script>
@@ -53,6 +58,19 @@
 			</h1>
 		</div>
 
+		<div class="rounded-md mt-8 bg-red-50 p-4" aria-live="assertive" style:display={submitted ? 'block' : 'none'}>
+			<div class="flex">
+			  <div class="flex-shrink-0">
+				<svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+				</svg>
+			  </div>
+			  <div class="ml-3">
+				<p class="text-sm font-medium text-red-800">Username or password wrong.</p>
+			  </div>
+			</div>
+		  </div>
+
 		<form class="mt-8 space-y-6" on:submit|preventDefault={submitHandler}>
 			<div>
 				<label for="username" class="block text-sm font-medium leading-6 text-gray-900">
@@ -66,7 +84,6 @@
 						name="username"
 						type="text"
 						autocomplete="nickname"
-						required
 						class="block w-full rounded-md"
 					/>
 				</div>
@@ -85,7 +102,6 @@
 						name="password"
 						type="password"
 						autocomplete="current-password"
-						required
 						class="block w-full rounded-md"
 					/>
 				</div>
