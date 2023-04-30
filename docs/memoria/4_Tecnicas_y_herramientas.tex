@@ -3,76 +3,138 @@
 
 \section{Herramientas de desarrollo}
 
-Este capítulo detalla las distintas herramientas, librerías y frameworks que se
-han utilizado durante el desarrollo del proyecto.
+Este capítulo detalla las distintas herramientas, librerías y frameworks que
+fueron utilizadas durante el desarrollo de este proyecto.
 
-\subsection{Windows Subsystem for Linux}
+\subsection{Fedora Linux}
 
-Windows Subsystem for Linux (WSL) es una utilidad creada principalmente por
-Microsoft y Canonical (Mantenedores de Ubuntu) que permite utilizar un sistema
-operativo Linux desde Windows sin grandes pérdidas de rendimiento. Existen
-varias opciones de distribución que se pueden utilizar (Kali Linux, OpenSUSE,
-etc.), pero la mas utilizada y mejor mantenida para WSL es Ubuntu, por lo que es
-la que se ha utilizado.
+Aunque al iniciar el proyecto se utilizó Windows 10 como sistema operativo
+principal, la mayor parte del desarrollo ha sido realizado en la distribución de
+Linux \href{https://fedoraproject.org/}{Fedora}, en concreto versiones 37 y 38.
 
-La mayor parte del desarrollo ha sido realizada desde WSL, donde se ha instalado
-tanto \LaTeX{} como Python 3.9 y algunas dependencias, proceso mucho más simple
-de realizar en Linux que en Windows.
+Fedora se caracteriza por que sus repositorios se actualizan regularmente para
+incluir las últimas versiones estables de la mayoría de programas, al contrario
+de lo que ocurriría en una distribución como Debian estable. Pese a esto, Fedora
+es considerada como una distribución bastante estable y, duarante el desarrollo
+de este proyecto, no se han encontrado problemas fuera de lo común.
+
+Han sido instalados de forma nativa Python 3.9 para la fase de investigación,
+\href{https://www.tug.org/texlive/}{\TeX{} Live} para la compilación de esta
+documentación y \href{https://www.docker.com/}{Docker} para el desarrollo de la
+aplicación web.
 
 \subsection{Python}
 
+Python es un lenguaje de programación diseñado con el objetivo de ser fácil de
+escribir, para lograr esto existe una gran cantidad de abstracciones y detalles
+de los que se encarga, mientras que en otros lenguajes debería encargarse el
+programador. Esto tiene muchas ventajas, pero también algunas desventajas, como,
+por ejemplo, que se pierde el control sobre la ejecución del programa que podría
+dar un lenguaje como C o C++, lo que significa que, en general, un mismo
+programa escrito completamente en Python va a ser más lento que su contrapartida
+escrita en un lenguaje de programación de más bajo nivel en el que se pueden
+especificar detalles como, por ejemplo, la gestión de memoria.
 
-\subsection{Visual Studio Code}
+Pero Python tiene otra cualidad muy importante, y es su facilidad para
+interactuar con código escrito en C o C++ mediante lo que se conoce como
+\textit{bindings} o \textit{wrappers}. Esto permite al programador tener mayor
+control sobre las partes más críticas de un programa, escribiendolas en C por
+ejemplo, mientras que las partes de menor importancia se pueden escribir
+rápidamente en Python.
 
-Visual Studio Code (VS Code) es un popular editor de texto altamente extensible
-orientado al desarrollo creado por Microsoft. Gracias a su gran extensibilidad
-es posible utilizarlo cómodamente en casi cualquier escenario. Mediante una de
-estas extensiones (denominada literalmente WSL) se puede conectar con WSL y
-utilizar los programas que tiene instalados como si hubiese sido ejecutado
-diréctamente desde un sistema operativo Linux.
+Un ejemplo perfecto de lo anterior es la librería
+\href{https://github.com/numpy/numpy}{NumPy}, utilizada para la gestión de
+matrices, entre muchas otras cosas. Esta librería implementa su funcionalidad
+principal en C y expone una interfaz en Python para facilitar su uso.
 
-En este caso se ha utilizado VS Code para:
+Este patrón se repite una y otra vez en el campo del aprendizaje automático,
+donde los algoritmos de aprendizaje se implementan a bajo nivel para que su
+ejecución sea lo más rápida posible, mientras que se expone una interfaz a alto
+nivel en Python para interactuar con los mismos. Ejemplos de esto son las
+librerías \href{https://github.com/pytorch/pytorch}{PyTorch} y
+\href{https://github.com/tensorflow/tensorflow}{TensorFlow}.
 
-\begin{itemize}
-      \item Crear tanto esta memoria como los anexos mediante la extensión
-            \href{https://github.com/James-Yu/LaTeX-Workshop}{\LaTeX{} Workshop}
-            que integra distintos compiladores de \LaTeX{} (pdfTeX, XeTeX, LuaTeX,
-            etc.) dentro del programa y añade otras funcionalidades que hacen la
-            edición de código \LaTeX{} mucho más conveniente.
-      \item Crear la aplicación web, que utiliza el framework de JavaScript
-            SvelteKit, mediante multitud de extensiones para integrar la multitud
-            de librerías utilizadas (Svelte, TypeScript, Prettier, etc.).
-      \item Editar archivos de configuración utilizados para la creación de los
-            contenedores de Docker que componen la totalidad de la aplicación web
-            (web, API y proxy inverso).
-\end{itemize}
+\subsection{Jupyter Notebook}
 
+Jupyter Notebook es una herramienta que permite crear un archivo con extensión
+\texttt{.ipynb}, en el que el código Python se divide en ``celdas'' que se
+pueden ejecutar individualmente, pero manteniendo y compartiendo las variables
+establecidas de forma global entre todas estas celdas.
+
+Esta herramienta fue de especial utilidad durante la fase de investigación, ya
+que permite observar detenidamente los cambios que se producen entre celdas y,
+así, encontrar problemas sin tener que ejecutar el código completo desde el
+principio cada vez que se realice un cambio, como ocurriría con un
+\textit{debugger}.
+
+Además de lo anterior Jupyter Notebook permite documentar de forma clara el
+código mediante otro tipo de celda, en el que se puede escribir código en
+Markdown, que es, en cierto modo, una alternativa menos verbosa a HTML.
+
+\subsection{Docker}
+
+Docker permite la creación y gestión de contenedores, un contenedor se puede ver
+como un sistema operativo dentro del anfitrión, pero sin llegar a ser una
+máquina virtual, debido a que se utiliza el \textit{kernel} de Linux del sistema
+anfitrión y los archivos del contenedor existen en el sistema de archivos del
+anfitrión. Esto hace que la diferencia de rendimiento entre utilizar un
+contenedor y ejecutar programas de forma nativa sea mínima.
+
+Un contenedor de Docker se basa en lo que se conoce como una imágen, que es un
+sistema de archivos preconfigurado para el propósito del contenedor. Se puede
+encontrar una gran cantidad de imágenes en \href{https://hub.docker.com/}{Docker
+Hub}, como, por ejemplo, postgres, node o python que ya incluyen los ejecutables
+para utilizar cada herramienta respectiva. Pero, es posible que se necesite
+mayor control sobre la configuración de la imagen sobre la que se va a construir
+el contenedor, en estos casos se pueden utilizar lo que se conoce como
+\textit{Dockerfile} para crear una imagen tomando como base otra imagen ya
+existente.
+
+Un \textit{Dockerfile} es un archivo que determina la imagen de base a utilizar
+(cualquier imagen de \href{https://hub.docker.com/}{Docker Hub} u otros sitios)
+y los comandos a ejecutar para crear la imagen que se desea obtener. Si se
+desease empezar de cero se puede utilizar una imagen de Ubuntu o Debian como
+base.
+
+Además de \textit{Dockerfile} existe otro tipo de archivo denominado
+\textit{docker-compose.yml} utilizado para coordinar sistemas compuestos por
+multiples contenedores que interactúan entre sí. La aplicación web de este
+proyecto utiliza \textit{docker-compose.yml} para determinar las interacciones
+entre los cuatro contenedores que existe (web, API, proxy inverso y base de
+datos).
 
 \subsection{PyCharm}
 
-PyCharm es un Entorno de Desarrollo Integrado (IDE, por sus siglas en inglés)
-creado y mantenido por JetBrains, una compañía que se dedica a crear software y
-cuyos productos más representativos son multitud de IDEs para diferentes
-lenguajes de programación (IntelliJ (Java), CLion (C y C++), GoLand (Go), etc.).
+PyCharm es un Entorno de Desarrollo Integrado (IDE) creado y mantenido por
+JetBrains, una compañía que se dedica a crear software y cuyos productos más
+representativos son multitud de IDEs para diferentes lenguajes de programación
+(IntelliJ (Java), CLion (C y C++), GoLand (Go), etc.).
 
-El objetivo de PyCharm es facilitar el desarrollo de aplicaciones que utilizad
+El objetivo de PyCharm es facilitar el desarrollo de aplicaciones que utilizan
 Python y da soporte amplio tanto para los habituales ficheros \texttt{.py} como
-para \texttt{.ipynb} (Notebooks de Jupyter), que han sido utilizados
-extensamente en el proyecto.
+para \texttt{.ipynb} (Jupyter Notebook).
 
-Además, PyCharm por defecto permite la integración con entornos WSL de forma muy
-fácil, simplemente se le debe indicar la localización del ejecutable de Python
-en el sistema de archivos de la distribución de WSL.
+En este proyecto PyCharm fue utilizado para esarrollar la librería PADDEL
+durante la fase de investigación, que contiene el código de Python común a los
+Notebooks de Jupyter utilizados durante la fase de investigación.
 
-En este proyecto PyCharm se ha utilizado para:
+\subsection{Visual Studio Code}
 
-\begin{enumerate}
-      \item Desarrollar la librería PADDEL, que contiene el código de Python común
-            a los Notebooks de Jupyter utilizados durante la fase de investigación
-            y a la aplicación web.
-      \item Desarrollar la API que utiliza la aplicación web.
-\end{enumerate}
+Visual Studio Code (VS Code) es un editor de texto orientado al desarrollo
+creado por Microsoft. Gracias a su gran extensibilidad es posible utilizarlo
+cómodamente en casi cualquier escenario.
 
+Fue utilizado en la creación de esta documentación en conjunto con la extensión
+\href{https://github.com/James-Yu/LaTeX-Workshop}{\LaTeX{} Workshop} que integra
+distintos compiladores de \LaTeX{} (pdfTeX, XeTeX, LuaTeX, etc.) dentro del
+programa y añade otras funcionalidades que hacen trabajar \LaTeX{} mucho más
+conveniente.
+
+Además, gracias a la extensión
+\href{https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers}{Dev
+Containers}, VS Code puede ser lanzado desde contenedores de Docker, permitiendo
+interactuar con las utilidades del contenedor. Gracias a esto VS Code ha sido la
+herramienta utilizada para desarrollar por completo la aplicación web.
 
 \subsection{Git}
 
@@ -82,30 +144,29 @@ y guardar de forma segura los cambios que se han ido realizado con el tiempo en
 la plataforma GitHub.
 
 Aunque existen varias herramientas con interfaces gráficas que envuelven el
-funcionamiento de Git (GitKraken, GitHub Desktop, etc.) para este proyecto se ha
-utilizado directamente el comando \texttt{git} desde una terminal de WSL.
-
+funcionamiento de Git (GitKraken, GitHub Desktop, etc.) para este proyecto se
+utilizó directamente el comando \texttt{git} desde una terminal de Linux.
 
 \subsection{OpenCV}
 
 OpenCV es una librería de visión artificial que contine varias utilidades para
 interactuar con archivos de vídeo e imágenes de forma similar a como se
 trabajaría en un programa como MATLAB. OpenCV está escrito en C y C++ pero tiene
-\textit{bindings} que permiten interactuar con sus APIs desde Python.
+\textit{bindings} que permiten interactuar con sus interfaces desde Python.
 
-En este proyecto se usa para leer y decodificar los archivos de vídeo
-utilizados.
-
+En este proyecto se usa para leer y decodificar los archivos de vídeo utilizados
+durante la fase de investigación.
 
 \subsection{MediaPipe}
 
 MediaPipe es una librería de aprendizaje automático mantenida por Google que da
 acceso a varios modelos preentrenados que se centran en la detección de
 características corporales a partir de flujos de imágenes, en este caso se
-utilizó MediaPipe Hands, cuyo objetivo es extraer varios puntos que definen un
-esqueleto ligeramente simplificado de la mano humana.
+utilizó MediaPipe Hands\cite{zhang2020mediapipe}, cuyo objetivo es extraer
+varios puntos que definen un esqueleto ligeramente simplificado de la mano
+humana.
 
-\begin{figure}[h]
+\begin{figure}[H]
       \centering
       \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/mano.jpg}}
       \subfloat{\includegraphics[width=0.33\textwidth]{herramientas_desarrollo/pose.jpg}}
@@ -113,6 +174,12 @@ esqueleto ligeramente simplificado de la mano humana.
       \caption{MediaPipe Hands}
 \end{figure}
 
+Como se puede ver el resultado es bastante bueno, además, al utilizar vídeos
+MediaPipe utiliza la información de los fotogramas anteriores para determinar de
+forma más exacta la pose en los fotogramas posteriores. Esto es muy útil para
+mejorar la precisión de las poses obtenidas, pero tiene la pega de que, al
+necesitar información de pasos previos, el proceso de extracción de poses no se
+puede paralelizar.
 
 \subsection{FastAPI}
 
@@ -127,22 +194,86 @@ código de Python utilizado para crear, entrenar y utilizar los modelos desde
 cualquier dispositivo y lenguaje de programación (siempre y cuando permita
 realizar peticiones HTTP). Con esto se consigue que en el futuro se puedan crear
 nuevas formas para interactuar con los modelos sin necesidad de alterar el
-código ya existente, por ejemplo, se podría crear una aplicación móvil para
+código ya existente. Se podría, por ejemplo, crear una aplicación móvil para
 facilitar la toma y subida de vídeos. Además estas nuevas aplicaciones podrían
 estar creadas por personas ajenas al proyecto que necesiten una implementación
 diferente para su caso de uso específico.
 
+\subsection{SvelteKit}
 
-\subsection{NextJS}
+Para el frontend de la aplicación, es decir, todo lo que va a ver un usuario de
+la web (HTML, CSS y JavaScript), se ha utilizado SvelteKit, que es un framework
+de JavaScript basado en Svelte, es similar a otros frameworks más populares como
+React o Angular, y se caracteriza por tener una sintaxis muy clara y simple
+además de reducir el tamaño de los archivos que se envían al navegador del
+cliente, haciendo que, en general, las páginas creadas con SvelteKit sean más
+rápidas que sus contrapartidas.
 
+\subsection{Typescript}
+
+JavaScript es un lenguaje de programación que no dispone de tipado estático, lo
+hace muy difícil detectar problemas fuera del tiempo de ejecución.
+
+\href{https://www.typescriptlang.org/}{TypeScript} es un lenguaje de
+programación desarrollado por Microsoft que utiliza una sintaxis de base muy
+similar a la de JavaScript, pero añadiendo tipado estático. Los navegadores no
+``entienden'' TypeScript, por lo que éste debe ser compilado a JavaScript antes
+de ser enviado al usuario. Durante esta compilación se pueden detectar multitud
+de errores gracias al tipado.
+
+\subsection{Typesafe i18n}
+
+\href{https://github.com/ivanhofer/typesafe-i18n}{Typesafe i18n} es una librería
+escrita en TypeScript que se puede utilizar para internacionalizar aplicaciones
+web, es decir, añadir soporte para más idiomas, de forma simple y mediante unas
+convenciones predefinidas.
+
+Para ello se crea un archivo para cada idioma al que se de soporte en el que se
+definen las variables con las cadenas de texto utilizadas a traves de la web en
+el idioma respectivo. Cada uno de estos archivos debe contener las mismas
+variables.
+
+A continuación en los lugares donde se usen cadenas de texto se debe importar la
+variable \texttt{LL} que es un objeto con todas las traducciones que se puede
+usar en la página respectiva para establecer las cadenas de texto dependiendo
+del idioma.
+
+\subsection{Axios}
+
+\href{https://github.com/axios/axios}{Axios} es una librería de JavaScript que
+envuelve la función nativa \texttt{fetch} para hacerla más amigable y fácil de
+usar. Se caracteriza por soportar tipos de TypeScript y simplificar la
+realización de peticiones HTTP.
+
+En este proyecto se ha utilizado esta librería para realizar peticiones REST a
+la API desde el navegador del usuario. Para ello se han creado multitud de
+funciones que reflejan los \textit{endpoints} de la API y, así, permitir su uso
+desde el resto del sitio web.
+
+\subsection{Tailwind CSS}
+
+\href{https://tailwindcss.com/}{Tailwind CSS} es una librería de clases de CSS
+su funcionamiento es similar a \href{https://getbootstrap.com/}{Bootstrap} en
+cuanto a que existen multitud de clases que realizan diferentes acciones, la
+diferencia está en que Tailwind CSS es mucho más modular que Bootstrap, es
+decir, las clases realizan cambions muy pequeños sobre los objetos a los que
+afectan. Esto hace que Tailwind sea más lento de escribir que su contrapartida,
+pero al mismo tiempo permite un nivel mucho mayor de configuración sobre el
+diseño de una página web.
+
+\subsection{Prettier}
+
+\href{https://prettier.io/}{Prettier} es un formateador de código, creado
+concretamente para dar un formato consistente a archivos de HTML, CSS,
+JavaScript, TypeScript, etc.
 
 \subsection{Caddy}
 
 En las fases iniciales de desarrollo se decidió que la API debería estar alojada
-en la ruta \texttt{/api}, mientras el resto de rutas debería llevar a la web
-(SvelteKit). Esto significa que van a existir dos servicios funcionando de forma
-paralela (Web y API), y que dependiendo de la ruta a la que se realize una
-petición, ésta debería ser redirigida a un servicio u otro.
+en el subdominio \texttt{api.}, mientras el dominio principal debería llevar a
+la web (SvelteKit). Esto significa que van a existir dos servicios funcionando
+de forma paralela (Web y API), y que dependiendo del dominio al que se realize
+una petición, ésta debería ser redirigida a un servicio u otro.
 
 Esta situación es uno de los casos de uso idóneos para un proxy inverso, que es
 un servicio que recibe peticiones HTTP, las altera si es necesario, y las
@@ -171,31 +302,9 @@ asegurar que el funcionamiento de la aplicación va a seguir siendo el mismo en
 el entorno final de producción (ya que hay ligeras diferencias dependiendo de si
 un navegador utiliza HTTP o HTTPS).
 
-Es por todo lo anterior que, al final, se decidió usar Caddy.
+Es por todo lo anterior que, en última instancia, se decidió usar Caddy.
 
-
-\subsection{Docker}
-
-Docker es una herramienta que permita la creación y gestión de contenedores de
-sistemas operativos aislados del sistema anfitrión y entre sí con un
-\textit{overhead} my pequeño con respecto a una ejecución nativa.
-
-En este caso se ha utilizado Docker para facilitar el despliegue de la
-aplicación web, con tres contenedores (API, web y proxy inverso), en cualquier
-máquina que disponga de Docker. La única configuración que se debe realizar para
-desplegar la aplicación es la creación de un archivo de variables de entorno
-(\texttt{.env}) en el que se definen valores específicos al entorno (nombre de
-dominio, puertos en los que escuchar las peticiones).
-
-Docker permite la creación de redes locales de contenedores, en este caso se
-utiliza una de estas redes para permitir la conexión entre los tres contenedores
-como si fuesen máquinas distintas conectadas a una misma red local donde la
-única máquina (contenedor) con conexión al exterior es la que está ejecutando el
-servicio del proxy inverso, por el que tienen que pasar todas las peticiones
-antes de llegar al servicio de API o al de web.
-
-
-\subsection{Formateado del código}
+\subsection{Formateado de código Python}
 
 Se han utilizado las siguientes herramientas para realizar el formateado del
 código escrito en Python de forma automática:
@@ -205,19 +314,18 @@ código escrito en Python de forma automática:
             sentencias \texttt{import} y variables innecesarias.
       \item \textbf{Isort}: herramienta para la reordenación de sentencias
             \texttt{import}.
-      \item \textbf{Black}: formateador de código caracterizado por un enfoque en
-            convenciones, por esto permite una configuración muy limitada por
+      \item \textbf{Black}: formateador de código caracterizado por un enfoque
+            en convenciones, por esto permite una configuración muy limitada por
             parte del usuario.
 \end{itemize}
-
 
 \subsection{Make}
 
 A través del proyecto hay comandos de cierta complejidad que se repiten con
-bastante frecuencia (\textit{e.g.} formatear el código, lanzar contenedores, limpiar
-contenedores, etc.), para facilitar el uso de estos comandos se ha utilizado la
-utilidad GNU Make, que viene por defecto en la mayoría de sistemas operativos de
-tipo Linux y se puede instalar tanto en Windows como en MacOS.
+bastante frecuencia (\textit{e.g.} formatear el código, lanzar contenedores,
+limpiar contenedores, etc.), para facilitar el uso de estos comandos se ha
+utilizado la utilidad GNU Make, que viene por defecto en la mayoría de sistemas
+operativos de tipo Linux y se puede instalar tanto en Windows como en MacOS.
 
 El funcionamiento de Make consiste en la creación de un archivo denominado
 \texttt{Makefile} que contiene diferentes comandos y secuencias de comandos con
@@ -237,3 +345,19 @@ comando \texttt{make format} (siempre desde el mismo directorio en el que se
 encuentra \texttt{Makefile}) para ejecutar la secuencia de comandos denominada
 \texttt{format}, que, en este caso ejecutará varios comandos para realizar un
 formato del código.
+
+\subsection{TSFresh}
+
+\href{https://github.com/blue-yonder/tsfresh}{TSFresh}\cite{christ2018time} es
+una librería de Python que se encarga del preprocesado y la extracción de
+características de series temporales.
+
+Una serie temporal es una secuencia ordenada de valores numéricos con un valor
+temporal asociado. Estas secuencias por sí solas no son de mucha utilidad para
+entrenar un modelo, por lo que en la fase de preprocesado se debe realizar una
+extracción de características sobre las mismas y así obtener características
+numéricas que sí se pueden utilizar para entrenar un modelo.
+
+TSFresh establece una forma estándar para extraer estas características,
+permitiendo extraer características propias además de las, aproximadamente, 700
+características que extrae por defecto.

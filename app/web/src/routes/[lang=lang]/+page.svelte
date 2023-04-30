@@ -4,8 +4,10 @@
 	import SmallNav from '$lib/SmallNav.svelte';
 	import { predict } from '$lib/api';
 	import type { AxiosProgressEvent } from 'axios';
-	import LL from '$i18n/i18n-svelte';
+	import LL, {locale} from '$i18n/i18n-svelte';
 	import LoadingIcon from '$lib/icons/LoadingIcon.svelte';
+	import ButtonSecondary from '$lib/ButtonSecondary.svelte';
+	import BackIcon from '$lib/icons/BackIcon.svelte';
 
 	let progress = 0;
 	$: uploadFinished = progress === 100;

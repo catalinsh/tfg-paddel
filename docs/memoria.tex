@@ -6,8 +6,8 @@
     \setcounter{section}{0}
     \setcounter{figure}{0}
     \setcounter{table}{0}
-    \chapter*{#1}
-    \addcontentsline{toc}{chapter}{#1}
+    \chapter*{\thechapter.\enskip #1}
+    \addcontentsline{toc}{chapter}{\thechapter.\enskip #1}
     \markboth{#1}{#1}
 }
 
