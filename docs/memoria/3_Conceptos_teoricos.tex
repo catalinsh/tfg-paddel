@@ -1,2 +1,65 @@
 \capitulo{Conceptos teóricos}
 \label{cha:Conceptos teóricos}
+
+Este capítulo define algunos de los conceptos teóricos que se mencionan en este
+documento.
+
+\subsection{Preprocesado}
+
+La información con la que se entrene un modelo de aprendizaje automático
+determina en gran medida el rendimiento que podrá alcanzar, debido a esto es muy
+frecuente realizar un paso previo a la creación del modelo, denominado
+\textit{preprocesado}.
+
+El objetivo del preprocesado es transformar la entrada de datos iniciales con el
+objetivo de permitir y facilitar que un modelo se adapte a los mismos.
+
+El preprocesado también tiene una gran influencia sobre el tiempo de computación
+necesario para entrenar un modelo y sobre la complejidad que necesitará para
+adaptarse a los datos.
+
+El preprocesado suele componerse de algunos de los siguientes pasos.
+
+\subsubsection{Extracción de características}
+
+La extracción de características es el proceso de identificar, seleccionar y
+transformar atributos relevantes de los datos de entrada para su uso en un
+modelo. Por ejemplo, en este proyecto, se han extraido características como la
+velocidad de movimiento o amplitud a partir de un vídeo.
+
+Existen diversas técnicas para la extracción de características, incluyendo las
+selección manual de características, o técnicas automatizadas como la reducción
+de dimensionalidad, la extracción de características basada en redes neuronales
+\cite{intrator1991feature}, entre otras. La elección de la técnica de extracción
+de características depende del conjunto de datos, del problema específico de
+aprendizaje automático que se está abordando y del tipo de modelo de aprendizaje
+automático que se está utilizando.
+
+\subsubsection{Selección de características}
+
+En general, los datos de entrada pueden ser muy complejos y estar compuestos por
+una gran cantidad de información redundante o no relevante para el modelo. La
+selección de características se utiliza para identificar  las características
+más relevantes y representativas de los datos, que pueden ser utilizadas para
+entrenar modelos de aprendizaje automático con mayor eficacia.
+
+En la selección de características, se pueden utilizar técnicas como el análisis
+de componentes principales (PCA) \cite{mackiewicz1993principal}, el análisis
+discriminante lineal (LDA) \cite{xanthopoulos2013linear} o pruebas de
+significancia.
+
+\subsubsection{Normalización}
+
+Existen modelos muy sensibles a que existan diferencias en la escala de los
+distintos atributos, como, por ejemplo, \textit{k-nearest neighbors}, por lo que
+es muy habitual que en la fase de preprocesado se realize una normalización de
+los datos, es decir, transformarlos de tal forma que utilicen la misma escala,
+en general se suelen tomar valores en los intervalos $[0, 1]$ o $[-1, 1]$.
+
+Aunque lo más habitual es que la normalización se haga sin distorsionar las
+diferencias entre los valores previos, existen situaciones en las que puede ser
+ventajoso utilizar un método de normalización que sí altere estas diferencias,
+por ejemplo, la normalización por cuantiles \cite{enwiki:1138433182}, en la que
+se modifican los valores para que sigan una distribución normal, lo que consigue
+que, si existen valores muy lejanos a los valores más comunes
+(\textit{outliers}), estos se acerquen al resto. 
