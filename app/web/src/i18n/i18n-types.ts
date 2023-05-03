@@ -135,10 +135,10 @@ type RootTranslation = {
 	 */
 	USERNAME_OR_PASSWORD_WRONG: string
 	/**
-	 * A​c​c​o​r​d​i​n​g​ ​t​o​ ​t​h​e​ ​u​s​e​d​ ​m​o​d​e​l​,​ ​t​h​e​r​e​ ​i​s​ ​a​ ​{​p​e​r​c​e​n​t​a​g​e​}​%​ ​c​h​a​n​c​e​ ​t​h​a​t​ ​y​o​u​ ​h​a​v​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​.
+	 * A​c​c​o​r​d​i​n​g​ ​t​o​ ​t​h​e​ ​m​o​d​e​l​ ​u​s​e​d​,​ ​t​h​e​r​e​ ​i​s​ ​a​ ​{​p​e​r​c​e​n​t​a​g​e​}​%​ ​c​h​a​n​c​e​ ​t​h​a​t​ ​y​o​u​ ​h​a​v​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​.
 	 * @param {string} percentage
 	 */
-	PREDICTION_RESULT: RequiredParams<'percentage'>
+	PREDICTION_RESULT_DESC: RequiredParams<'percentage'>
 	/**
 	 * T​h​e​r​e​ ​w​a​s​ ​a​ ​p​r​o​b​l​e​m
 	 */
@@ -151,6 +151,10 @@ type RootTranslation = {
 	 * S​o​m​e​t​h​i​n​g​ ​w​e​n​t​ ​t​e​r​r​i​b​l​y​ ​w​r​o​n​g​.
 	 */
 	SOMETHING_WENT_WRONG: string
+	/**
+	 * P​r​e​d​i​c​t​i​o​n​ ​R​e​s​u​l​t
+	 */
+	PREDICTION_RESULT: string
 }
 
 export type TranslationFunctions = {
@@ -275,9 +279,9 @@ export type TranslationFunctions = {
 	 */
 	USERNAME_OR_PASSWORD_WRONG: () => LocalizedString
 	/**
-	 * According to the used model, there is a {percentage}% chance that you have Parkinson's Disease.
+	 * According to the model used, there is a {percentage}% chance that you have Parkinson's Disease.
 	 */
-	PREDICTION_RESULT: (arg: { percentage: string }) => LocalizedString
+	PREDICTION_RESULT_DESC: (arg: { percentage: string }) => LocalizedString
 	/**
 	 * There was a problem
 	 */
@@ -290,6 +294,10 @@ export type TranslationFunctions = {
 	 * Something went terribly wrong.
 	 */
 	SOMETHING_WENT_WRONG: () => LocalizedString
+	/**
+	 * Prediction Result
+	 */
+	PREDICTION_RESULT: () => LocalizedString
 }
 
 export type Formatters = {}

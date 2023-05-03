@@ -32,8 +32,9 @@ export default {
 	SOURCE_CODE: 'Código fuente',
 	API_DOCS: 'Documentación de la API',
 	USERNAME_OR_PASSWORD_WRONG: 'Usuario o contraseña incorrectos.',
-	PREDICTION_RESULT: 'Según el modelo usado, existe una probabilidad del {percentage}% de que usted padezca la Enfermedad de Parkinson.',
+	PREDICTION_RESULT_DESC: 'Según el modelo usado, existe una probabilidad del {percentage}% de que usted padezca la Enfermedad de Parkinson.',
 	THERE_WAS_A_PROBLEM: 'Ha habido un problema',
 	CANNOT_PROCESS_VIDEO: 'No se ha podido procesar el archivo enviado, verifíquelo por favor.',
-	SOMETHING_WENT_WRONG: 'Algo ha ido mal.'
+	SOMETHING_WENT_WRONG: 'Algo ha ido mal.',
+	PREDICTION_RESULT: "Reasultado de la Predicción"
 } satisfies Translation;
