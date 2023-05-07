@@ -11,7 +11,7 @@
 	};
 </script>
 
-<nav class="flex justify-between py-6">
+<nav class="flex justify-between py-4">
 	<a href={`/${$locale}`} class="flex items-center gap-2 hover:underline">
 		<PaddelIcon class="h-8 w-8" />
 		<span class="sr-only font-bold sm:not-sr-only">PaDDeL</span>

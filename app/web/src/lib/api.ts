@@ -70,3 +70,21 @@ export const token_login = async (username: string, password: string) => {
 		return null;
 	}
 };
+
+export const create_user = async (username: string, password: string) => {
+	try {
+		const response = await http.post('/users/', {username, password}, {headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }});
+		return response.data;
+	} catch (error) {
+		return null;
+	}
+}
+
+export const delete_user = async (user_id: number) => {
+	try {
+		const response = await http.delete(`/users/${user_id}`, {headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }});
+		return response.data;
+	} catch (error) {
+		return null;
+	}
+}
