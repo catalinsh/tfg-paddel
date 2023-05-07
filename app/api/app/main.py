@@ -185,6 +185,17 @@ def read_user(
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+@app.delete("/users/{user_id}", response_model=schemas.User, tags=["users"])
+def read_user(
+    _: Annotated[schemas.User, Depends(get_current_user)],
+    user_id: int,
+    db: Session = Depends(get_db),
+):
+    db_user = crud.delete_user(db, user_id=user_id)
+    print(db_user)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
 
 ##############
 # PREDICTION #
