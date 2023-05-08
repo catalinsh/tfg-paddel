@@ -63,3 +63,163 @@ por ejemplo, la normalización por cuantiles \cite{enwiki:1138433182}, en la que
 se modifican los valores para que sigan una distribución normal, lo que consigue
 que, si existen valores muy lejanos a los valores más comunes
 (\textit{outliers}), estos se acerquen al resto. 
+
+\subsection{Clasificación}
+
+En el ámbito del aprendizaje automático, clasificar instancias en categorías
+predeterminadas es uno de los principales problemas a resolver.
+
+En general, la resolución de un problema de clasificación se caracteriza por
+delimitar qué zonas del espacio que contiene todas las instancias posibles
+pertenecen a cada categoría, es decir, definir fronteras a partir de las cuales
+las instancias pasan de una categoría a otra.
+
+Existe una gran cantidad de métodos y algoritmos de clasificación que se pueden
+utilizar para determinar estas fronteras, dependiendo del problema específico
+que se intente resolver unos algoritmos se comportarán mejor que otros.
+
+% TODO: Algunos ejemplos de algoritmos con alguna gráfica de clasificación con 2
+% características.
+
+\subsection{Sobreajuste}
+
+Normalmente solo se dispone de una pequeña muestra para entrenar un modelo que
+encuentre la regla general que define la población y se adapte lo mejor posible
+a esta.
+
+El problema de esto es que, si se utilizan todos los datos disponibles durante
+el entrenamiento, no existe ninguna forma para verificar el comportamiento del
+modelo cuando se encuentre con instancias que no ha visto durante el
+entrenamiento. Esto hace posible que el modelo ``memorice'' los datos con los
+que se ha entrenado pero no generalice bien al encontrarse con datos nuevos.
+Esto se conoce como sobreajuste.
+
+% TODO: Añadir alguna gráfica.
+
+Una solución muy común al sobreajuste es separar los datos disponibles en dos
+grupos, un conjunto de entrenamiento y un conjunto de test. Durante el
+entrenamiento el modelo solo tendrá acceso al conjunto de datos de
+entrenamiento, mientras que el conjunto de test es utilizado para determinar el
+rendimiento del modelo sobre datos nuevos mediante una de las métricas de
+evaluación que se verán a continuación.
+
+\subsection{Evaluación del modelo}
+
+Para determinar si un modelo es mejor que otro es necesario definir alguna
+métrica que asigne un valor numérico al rendimiento de cada modelo.
+
+La métrica más intuitiva es lo que se conoce como precisión (\textit{accuracy}),
+que es simplemente la proporción de predicciones (clasificaciones) acertadas del
+total de predicciones realizadas.
+
+Al igual que ocurren con el algoritmo de clasificación empleado, la métrica que
+se use debe ser seleccionada en función del problema en cuestión. Una situación
+muy común en la que utilizar la precisión no es lo más ideal es cuando se
+trabaja con conjuntos de datos desbalanceados, es decir, cuando existen más
+instancias de una clase que de otra.
+
+Lo anterior es muy común en el ámbito médico cuando se intenta crear un modelo
+que determine si un paciente padece una enfermedad concreta o no. En estas
+situaciones se suele tener un grupo de control muy grande que no padece la
+enfermedad y un grupo relativamente pequeño que sí la padece. Si, por ejemplo,
+las proporciones de clases son 95\% y 5\% respectivamente, un modelo que siempre
+prediga que el paciente no padece la enfermedad en cuestión obtendrá una
+precisión del 95\%, lo que podría dar la falsa impresión de que se ajusta bien a
+los datos, cuando, en realidad, es un modelo completamente inútil.
+
+Algunas alternativas a la precisión incluyen:
+
+\begin{itemize}
+    \item \textbf{Sensibilidad}: Para una clase concreta, indica la capacidad
+    del modelo de clasificar correctamente instancias de esa clase. En el caso
+    médico esta métrica podría ser interesante para encontrar aquellos pacientes
+    que sí padecen la enfermedad, aunque se clasifiquen mal algunos que no la
+    padecen.
+    \item \textbf{Especificidad}: Para una clase concreta, indica la capacidad
+    del modelo para clasificar correctamente instancias que no pertenecen esa
+    clase.
+    \item \textbf{Valor-F1}: Es una medida que combina la sensibilidad y la
+    especificidad mediante una media armónica.
+\end{itemize}
+
+\subsection{Fuga de información}
+
+En el campo del aprendizaje automático las fugas de información se producen
+cuando, de alguna forma, se utiliza información perteneciente al conjunto de
+datos de test para entrenar un modelo, esto no significa únicamente utilizar
+instancias de test durante el entrenamiento, las fugas de información se pueden
+producir de forma mucho más sutil y ser difíciles de detectar. Por ejemplo, si
+se utilizase el conjunto de test para seleccionar las características durante el
+preprocesado se estaría produciendo una fuga de información.
+
+Las fugas de información no son algo que debería ser siempre evitado, existen en
+las que son necesarias dependiendo del caso concreto. Pero sí que es importante
+que sean detectadas y tenidas en cuenta a la hora de analizar los resultados
+obtenidos, ya que, en caso contrario, se podría llegar a conclusiones equívocas.
+
+\subsection{Validación cruzada}
+
+En un apartado anterior se ha visto que para evitar el sobreajuste se puede
+dividir la muestra de datos disponible en un conjunto de datos de entrenamiento
+y uno de test. Al realizar esta división es posible que, en especial al trabajar
+con muestras pequeñas, se realice una división que no sea útil para validar el
+modelo. Por ejemplo, si por casualidad se seleccionase un conjunto de test
+``fácil de predecir'' con en conjunto den entrenamiento dado, se medirá un
+rendimiento mayor al real.
+
+La solución a esto es la validación cruzada, que consiste en utilizar múltiples
+pares de conjuntos de validación y test, de tal forma que se entrenen y validen
+tantos modelos como cantidad de estos pares y cada instancia sea utilizada para
+la validación una vez, el resultado final de la validación es la media de la
+métrica elegida de cada iteración.
+
+Existen varios métodos para determinar el número de iteraciones a realizar y el
+tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
+
+\begin{itemize}
+    \item \textbf{\textit{Leave-One-Out}}: Para una muestra de tamaño $N$,
+    consiste en realizar $N$ iteraciones de entrenamiento y validación
+    utilizando cada vez una única instancia para el conjunto de test. Es un
+    método que se acerca bastante al rendimiento que se obtendría si se
+    utilizase la muestra entera como conjunto de entrenamiento, pero tiene el
+    problema de que se van a tener que realizar $N$ iteraciones, lo que implica
+    un tiempo de computación necesario muy grande.
+    \item \textbf{\textit{K-fold}}: Consite en dividir la muestra en conjuntos
+    de entrenamiento y test de proporciones $(K-1)/K$ y $1/K$ respectivamente,
+    realizando un total de $K$ iteraciones.
+\end{itemize}
+
+\subsection{Optimización de hiperparámetros}
+
+Los algoritmos de clasificación suelen tener parámetros que determinan la forma
+en la que se van a ajustar a los datos, por ejemplo, la tasa de aprendizaje o el
+número de iteraciones máximas, estos valores se denominan hiperparámetros.
+
+El proceso de búsqueda dentro del espacio que contiene todas las combinaciones
+posibles de hiperparámetros para un algoritmo concreto se denomina optimización
+de hiperparámetros.
+
+En general, la optimiazción de hiperparámetros consiste en probar diferentes
+combinaciones de valores y realizar el proceso de entrenamiento y test mediante
+validación cruzada con una métrica adecuada hasta dar con la combinación más
+adecuada. Existen varias formas para realizar esto, como, por ejemplo:
+
+\begin{itemize}
+    \item \textbf{\textit{Grid search}}: Proceso mediante el cual se definen los
+    valores posibles que puede tomar cada parámetro y se prueba cada combinación
+    de estos valores hasta encontral el mejor. Es una búsqueda exhaustiva que
+    puede dar lugar a una gran cantidad de combinaciones, lo que implica un
+    tiempo de computación muy grande.
+    \item \textbf{\textit{Randomized search}}: Proceso similar al anterior en el
+    que se especifican los valores posibles para cada parámetro, pero en este
+    caso se realiza la búsqueda de forma aleatoria de forma que se limita el
+    tiempo de computación necesario. Se puede utilizar para obtener una vista
+    general del espacio de combinaciones de parámetros para realizar
+    posteriormente una búsqueda más exhaustiva en un subespacio más pequeño.
+    \item \textbf{\textit{Técnicas de optimización}}: Existen diversos métodos
+    que intentan determinar la forma que tiene el rendimiento del modelo con
+    respecto al espacio de combinaciones de parámetros posibles utilizando
+    iteraciones anteriores para buscar los valores óptimos sin tener que probar
+    todas las combinaciones como ocurre con \textit{grid search}. Un ejemplo de
+    esto es la Optimización Bayesiana.
+\end{itemize}
