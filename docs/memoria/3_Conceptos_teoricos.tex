@@ -12,7 +12,7 @@ frecuente realizar un paso previo a la creación del modelo, denominado
 \textit{preprocesado}.
 
 El objetivo del preprocesado es transformar la entrada de datos iniciales con el
-objetivo de permitir y facilitar que un modelo se adapte a los mismos.
+fin de permitir y facilitar que un modelo se adapte a los mismos.
 
 El preprocesado también tiene una gran influencia sobre el tiempo de computación
 necesario para entrenar un modelo y sobre la complejidad que necesitará para
@@ -25,7 +25,7 @@ El preprocesado suele componerse de algunos de los siguientes pasos.
 La extracción de características es el proceso de identificar, seleccionar y
 transformar atributos relevantes de los datos de entrada para su uso en un
 modelo. Por ejemplo, en este proyecto, se han extraido características como la
-velocidad de movimiento o amplitud a partir de un vídeo.
+velocidad o amplitud de movimiento a partir de un vídeo.
 
 Existen diversas técnicas para la extracción de características, incluyendo las
 selección manual de características, o técnicas automatizadas como la reducción
@@ -37,10 +37,10 @@ automático que se está utilizando.
 
 \subsubsection{Selección de características}
 
-En general, los datos de entrada pueden ser muy complejos y estar compuestos por
-una gran cantidad de información redundante o no relevante para el modelo. La
-selección de características se utiliza para identificar  las características
-más relevantes y representativas de los datos, que pueden ser utilizadas para
+Los datos de entrada pueden ser muy complejos y estar compuestos por una gran
+cantidad de información redundante o no relevante para el modelo. La selección
+de características se utiliza para identificar  las características más
+relevantes y representativas de los datos, que pueden ser utilizadas para
 entrenar modelos de aprendizaje automático con mayor eficacia.
 
 En la selección de características, se pueden utilizar técnicas como el análisis
@@ -57,12 +57,12 @@ los datos, es decir, transformarlos de tal forma que utilicen la misma escala,
 en general se suelen tomar valores en los intervalos $[0, 1]$ o $[-1, 1]$.
 
 Aunque lo más habitual es que la normalización se haga sin distorsionar las
-diferencias entre los valores previos, existen situaciones en las que puede ser
-ventajoso utilizar un método de normalización que sí altere estas diferencias,
-por ejemplo, la normalización por cuantiles \cite{enwiki:1138433182}, en la que
-se modifican los valores para que sigan una distribución normal, lo que consigue
-que, si existen valores muy lejanos a los valores más comunes
-(\textit{outliers}), estos se acerquen al resto. 
+diferencias existentes entre los valores previos, existen situaciones en las que
+puede ser ventajoso utilizar un método de normalización que sí altere estas
+diferencias, por ejemplo, la normalización por cuantiles
+\cite{enwiki:1138433182}, en la que se modifican los valores para que sigan una
+distribución normal, lo que consigue que, si existen valores muy lejanos a los
+valores más comunes (\textit{outliers}), estos se acerquen al resto. 
 
 \subsection{Clasificación}
 
@@ -89,15 +89,15 @@ a esta.
 
 El problema de esto es que, si se utilizan todos los datos disponibles durante
 el entrenamiento, no existe ninguna forma para verificar el comportamiento del
-modelo cuando se encuentre con instancias que no ha visto durante el
-entrenamiento. Esto hace posible que el modelo ``memorice'' los datos con los
-que se ha entrenado pero no generalice bien al encontrarse con datos nuevos.
-Esto se conoce como sobreajuste.
+modelo cuando se encuentre con instancias que no ha visto antes. Esto hace
+posible que el modelo ``memorice'' los datos con los que se ha entrenado pero no
+generalice bien al encontrarse con datos nuevos. Esto se conoce como
+sobreajuste.
 
 % TODO: Añadir alguna gráfica.
 
 Una solución muy común al sobreajuste es separar los datos disponibles en dos
-grupos, un conjunto de entrenamiento y un conjunto de test. Durante el
+grupos, un conjunto de entrenamiento y un conjunto de test o prueba. Durante el
 entrenamiento el modelo solo tendrá acceso al conjunto de datos de
 entrenamiento, mientras que el conjunto de test es utilizado para determinar el
 rendimiento del modelo sobre datos nuevos mediante una de las métricas de
@@ -152,10 +152,11 @@ producir de forma mucho más sutil y ser difíciles de detectar. Por ejemplo, si
 se utilizase el conjunto de test para seleccionar las características durante el
 preprocesado se estaría produciendo una fuga de información.
 
-Las fugas de información no son algo que debería ser siempre evitado, existen en
-las que son necesarias dependiendo del caso concreto. Pero sí que es importante
-que sean detectadas y tenidas en cuenta a la hora de analizar los resultados
-obtenidos, ya que, en caso contrario, se podría llegar a conclusiones equívocas.
+Las fugas de información no son algo que debería ser siempre evitado, existen
+situaciones en las que son necesarias dependiendo del caso concreto. Pero sí es
+importante que sean detectadas y tenidas en cuenta a la hora de analizar los
+resultados obtenidos, ya que, en caso contrario, se podría llegar a conclusiones
+equívocas.
 
 \subsection{Validación cruzada}
 
@@ -164,14 +165,14 @@ dividir la muestra de datos disponible en un conjunto de datos de entrenamiento
 y uno de test. Al realizar esta división es posible que, en especial al trabajar
 con muestras pequeñas, se realice una división que no sea útil para validar el
 modelo. Por ejemplo, si por casualidad se seleccionase un conjunto de test
-``fácil de predecir'' con en conjunto den entrenamiento dado, se medirá un
+``fácil de predecir'' con el conjunto de entrenamiento dado, se medirá un
 rendimiento mayor al real.
 
 La solución a esto es la validación cruzada, que consiste en utilizar múltiples
 pares de conjuntos de validación y test, de tal forma que se entrenen y validen
 tantos modelos como cantidad de estos pares y cada instancia sea utilizada para
-la validación una vez, el resultado final de la validación es la media de la
-métrica elegida de cada iteración.
+la validación al menos una vez, el resultado final de la validación es la media
+de la métrica elegida de cada iteración.
 
 Existen varios métodos para determinar el número de iteraciones a realizar y el
 tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
@@ -199,7 +200,7 @@ El proceso de búsqueda dentro del espacio que contiene todas las combinaciones
 posibles de hiperparámetros para un algoritmo concreto se denomina optimización
 de hiperparámetros.
 
-En general, la optimiazción de hiperparámetros consiste en probar diferentes
+En general, la optimización de hiperparámetros consiste en probar diferentes
 combinaciones de valores y realizar el proceso de entrenamiento y test mediante
 validación cruzada con una métrica adecuada hasta dar con la combinación más
 adecuada. Existen varias formas para realizar esto, como, por ejemplo:
@@ -207,7 +208,7 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
 \begin{itemize}
     \item \textbf{\textit{Grid search}}: Proceso mediante el cual se definen los
     valores posibles que puede tomar cada parámetro y se prueba cada combinación
-    de estos valores hasta encontral el mejor. Es una búsqueda exhaustiva que
+    de estos valores hasta encontral la mejor. Es una búsqueda exhaustiva que
     puede dar lugar a una gran cantidad de combinaciones, lo que implica un
     tiempo de computación muy grande.
     \item \textbf{\textit{Randomized search}}: Proceso similar al anterior en el
