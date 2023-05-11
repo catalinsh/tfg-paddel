@@ -359,7 +359,101 @@ extensión
 
 \subsection{Librería PADDEL}
 
+La libraría PADDEL se trata de una librería de Python que se puede instalar
+mediante el comando \texttt{pip}, se puede instalar pasándole la ruta donde se
+encuentra el archivo \texttt{pyproject.toml}, por ejemplo:
+
+\texttt{pip install ./paddel}
+
+La librería contiene diferentes módulos que se utilizan para el preprocesado de
+los vídeos de paciente y el entrenamiento de modelos.
+
+\subsubsection{Configuración}
+
+Para configurar algunos parámetros del funcionamiento se ha optado por utilizar
+variables de entorno, gracias a la librería
+\href{https://docs.pydantic.dev/latest/}{Pydantic} las siguientes variables de
+entorno son leídas e interpretadas cuando una de ellas sea necesitada por
+primera vez:
+
+\begin{itemize}
+    \item \texttt{PADDEL\_MIN\_DETECTION\_SECONDS}: Tiempo mínimo de detección en
+    segundos para que un vídeo no se descarte debido a no tener suficientes
+    fotogramas seguidos con poses detectadas. Por defecto es 15 segundos.
+    \item \texttt{PADDEL\_ROLLING\_STD\_SECONDS}: Ventana utilizada para el cálculo
+    de la desviación estándar móvil en la extracción de algunas características,
+    esto se utiliza para obtener un umbral y, así, saber cuando considerar o no
+    máximos locales dentro de una secuencia de valores. Por defecto es 3
+    segundos.
+    \item \texttt{PADDEL\_SLOT\_SIZE\_SECONDS}: Para las características que se
+    calculan como una diferencia entre la parte inicial y final de una secuencia
+    de poses (vídeo), es el tamaño de cada una de estas partes. No puede ser
+    mayor que \texttt{PADDEL\_MIN\_DETECTION\_SECONDS} y establecerlo a más de
+    $\frac{1}{2}$ de su valor puede ser problemático. Por defecto es 7 segundos.
+    \item \texttt{PADDEL\_MAX\_PROCESSES}: Número máximo de procesos a utilizar en
+    operaciones paralelizadas. Por defecto es el número de núcleos del
+    procesador de la máquina donde se ejecute la librería.
+\end{itemize}
+
+\subsubsection{Tipos}
+
+Esta librería utiliza extensamente el tipado que ofrece Python por defecto,
+aunque este no es impuesto en tiempo de ejecución, resulta muy útil al ser
+utilizado con un entorno de desarrollo integrado (IDE) ya que se pueden obtener
+ayudas y avisos que serían imposibles de obtener de otro modo.
+
+El archivo \texttt{types.py} contine las definiciones de algunos tipos complejos
+que se utilizan a través de la librería debido a que son específicos a este
+problema concreto. Algunos de estos tipos incluyen:
+
+\begin{itemize}
+    \item \texttt{Image}: Definido como un array de Numpy de cualquier dimensión
+    que tenga como tipo de dato números enteros sin signo de 8 bits, lo que se
+    corresponde con imágenes en RGB, RGBA, BGR, etc.
+    \item \texttt{Video}: Definido como un objeto iterable de objetos de tipo
+    \texttt{Image}, lo que es lógico, ya que un vídeo es una secuencia de
+    imágenes.
+    \item \texttt{Point}: Definido como una tupla con componenetes \textit{x},
+    \textit{y} y \textit{z} representa un punto en un espacio de tres
+    dimensiones, es utilizado para definir las \textit{landmarks} que componen
+    una pose de la mano.
+\end{itemize}
+
+\subsubsection{Convenciones del código}
+
+En la librería se han seguido las convenciones de formato definidas por
+\href{https://github.com/psf/black}{Black}, que es una libería de formateado de
+código para Python, escrita en Python.
+
+Se ha seleccionado Black debido a que incluye mucha opiniones predefinidas y
+limita en gran medida las opciones que puede controlar el usuario, esto puede
+parecer una desventaja, pero en este caso simplemente se deseaba una utilidad
+que diese un aspecto homogéneo al código con el menor esfuerzo posible por parte
+del programador. Además, gracias a la limitada personalización que ofrece Black,
+se cumple con el principio de Convención sobre Configuración
+\cite{eswiki:125269135}.
+
+Además de Black, se utilizan las herramientas
+\href{https://github.com/PyCQA/autoflake}{autoflake},
+\href{https://github.com/PyCQA/isort}{isort} y
+\href{https://github.com/python/mypy}{mypy} para eliminar sentencias
+\texttt{import} y variables no utilizadas, reordenar las sentencias
+\texttt{import} y comprobar el tipado estático utilizado respectivamente.
+
+Como antes, el uso de estas herramientas se simplifica gracias al uso de la
+utilidad \texttt{make}. En este caso el archivo \texttt{Makefile} aporta los siguientes comandos:
+
+\begin{itemize}
+    \item \texttt{make lint}:
+    \item \texttt{make format}
+\end{itemize}
+
+\subsection{Notebooks de Jupyter}
+
+
+
 \section{Compilación, instalación y ejecución del proyecto}
+
 
 
 \section{Pruebas del sistema}

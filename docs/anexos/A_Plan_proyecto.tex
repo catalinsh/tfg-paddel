@@ -30,7 +30,22 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           posterior en la aplicación web.
 \end{itemize}
 
-\subsection{Sprint 1 (6/2/2023  12/2/2023)}
+Haber decidido en esta fase inicial la estructura que va a tener el proyecto y
+de forma aproximada las herramientas que van a ser utilizadas a ayudado en gran
+medida durante el desarrollo, debido a que las funcionalidades de todas las
+piezas están bien definidas y separadas.
+
+\subsection{Sprint 1 (6/2/2023 -- 12/2/2023)}
+
+En este sprint se avanzó en la parte del preprocesado de los vídeos, extrayendo
+diferentes atributos a partir del esqueleto que obtenido a través de MediaPipe.
+
+Además, se separó el proceso de construcción de los contenedores de Docker
+dependiento de si se lanzan en un entorno de desarrollo o en producción.
+Optimizando el despliegue en producción, mientras que, en desarrollo, se
+muestran mensajes adicionales y observa los archivos para reaccionar a cambios.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Añadir extracción de frecuencia de toques a partir de la secuencia de
@@ -43,8 +58,13 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           y producción.
 \end{itemize}
 
+\subsection{Sprint 2 (13/2/2023 -- 19/2/2023)}
 
-\subsection{Sprint 2 (13/2/2023  19/2/2023)}
+Este sprint se centra en el preprocesado de los vídeos, añadiendo la extracción
+de varias características utilizadas en trabajos anteriores en este área de las
+series temporales con las poses de la mano.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Añadir extracción de amplitud media.
@@ -57,7 +77,13 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
     \item Actualizar fichero README.md.
 \end{itemize}
 
-\subsection{Sprint 3 (20/2/2023  26/2/2023)}
+\subsection{Sprint 3 (20/2/2023 -- 26/2/2023)}
+
+En este sprint se añadió la extracción de caracerísticas mediante la librería
+TSFresh que extrae al rededor de 750 características adicionales a las que se
+extraían hasta este punto.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Añadir extracción de características mediante TSFresh.
@@ -65,7 +91,13 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           mejorando el cacheado de los pasos.
 \end{itemize}
 
-\subsection{Sprint 4 (27/2/2023  5/3/2023)}
+\subsection{Sprint 4 (27/2/2023 -- 5/3/2023)}
+
+En este sprint se cambió la extracción de características propias para
+aprovechar las metodologías ya implementadas por TSFresh, además de realizar
+algunos cambios sobre la memoria.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Añadir herramientas de desarrollo a la memoria.
@@ -73,22 +105,37 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           previos para que sea compatible con la librería TSFresh.
 \end{itemize}
 
-\subsection{Sprint 5 (6/3/2023  12/3/2023)}
+\subsection{Sprint 5 (6/3/2023 -- 12/3/2023)}
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Actualizar sección de herramientas de desarrollo.
 \end{itemize}
 
-\subsection{Sprint 6 (13/3/2023  19/3/2023)}
+\subsection{Sprint 6 (13/3/2023 -- 19/3/2023)}
+
+En este sprint se comienzan a entrenar los primeros modelos de aprendizaje
+mediante una técnica que se conoce como \textit{grid search}. Además se mejora
+la implementación de la extracción de las marcas temporales de las series
+temporales.
+
+Tareas realizadas:
 
 \begin{itemize}
-    \item Implementar obtimización de hiperparámetros para varios modelos
+    \item Implementar optimización de hiperparámetros para varios modelos
           mediante \textit{grid search}.
     \item Añadir información temporal a la extracción de poses de Mediapipe a
           partir de la tasa de fotogramas.
 \end{itemize}
 
-\subsection{Sprint 7 (20/3/2023  26/3/2023)}
+\subsection{Sprint 7 (20/3/2023 -- 26/3/2023)}
+
+En este sprint se cambian algunos detalles sobre la optimización de
+hiperparámetros, utilizando más modelos y cambiando los parámetros de la
+validación cruzada.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Añadir Perceptrón multicapa, Adaboost y XGBoost a los modelos de la
@@ -99,12 +146,18 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
           única características, si está utilizando la mano dominante.
 \end{itemize}
 
-\subsection{Sprint 8 (27/3/2023  2/4/2023)}
+\subsection{Sprint 8 (27/3/2023 -- 2/4/2023)}
+
+En este sprint se crean visualizaciones de los resultados obtenidos durante la
+optimización de hiperparámetros, además, se añade un parámetro adiciona, el
+número de características a seleccionar.
+
+Tareas realizadas:
 
 \begin{itemize}
     \item Arreglar Makefile para la compilación de la documentación.
     \item Añadir generación de gráficas con los resultados obtenidos de la
-          optimización de hiperparámetros mediante \textit{grid search}.
+    optimización de hiperparámetros mediante \textit{grid search}.
     \item Añadir selección del número de características a utilizar a la
           optimización de hiperparámetros.
     \item Refactorizar librería.
@@ -112,6 +165,97 @@ Antes de comenzar el sprint 1 se realizaron las siguientes tareas:
     \item Implementar una barra de navegación básica.
 \end{itemize}
 
+\subsection{Sprint 9 (3/4/2023 -- 9/4/2023)}
+
+En este sprint se realizaron varios cambios sobre los diferentes componentes del
+proyecto.
+
+Tareas realizadas:
+
+\begin{itemize}
+    \item Actualizar el manual del programador con los cambios realizados hasta
+    este punto.
+    \item Añadir requisitos de la apliación web.
+    \item Añadir diagrama general de casos de uso.
+    \item Cambiar la estructura de directorios del frontend de la web.
+    \item Añadir y configurar contenedor de base de datos PostgreSQL al proyecto
+    de Docker.
+    \item Configurar la API para interactuar con la base de datos, creando, los
+    modelos de SQLAlchemy con los que se va a trabajar.
+    \item Añadir algunos endpoints para permitir una gestión muy básica de
+    usuarios.
+    \item Bloquear la versión de los contenedores de Docker para evitar
+    problemas de dependencias en el futuro.
+    \item Añadir persistencia de datos entre creaciones del contenedor de la
+    base de datos.
+    \item Bloquear versiones de las dependencias de Python. Debido a la versión
+    2 de Pandas, se rompe parte de la funcionalidad.
+    \item Implementar una versión inicial del endpoint para obtener una
+    predicción a partir de un vídeo.
+\end{itemize}
+
+\subsection{Sprint 10 (10/4/2023 -- 16/4/2023)}
+
+En este sprint se realizaron varias tareas sobre la aplicación web para permitir
+la fácil interacción con el formulario para obtener predicciones.
+
+Tareas realizadas:
+
+\begin{itemize}
+    \item Añadir y estilizar un formulario básico para interactuar desde el frontend con la
+    API y obtener un predicción.
+    \item Utilizar JavaScript para enviar los contenidos de este formulario de
+    forma correcta al endpoint.
+    \item Añadir barra de progreso de subida del vídeo una vez el formulario es enviado.
+    \item Implementar el entrenamiento del modelo final con todos los datos y
+    añadirlo a la API para poder realizar la predicción.
+    \item Añadir funcionalidad de arrastrar y soltar al formulario para subir el
+    vídeo.
+\end{itemize}
+
+\subsection{Sprint 11 (17/4/2023 -- 23/4/2023)}
+
+En este sprint se internacionalizó la aplicación web, entre otras cosas de menor
+importancia.
+
+Tareas realizadas:
+
+\begin{itemize}
+    \item Crear prototipos (mockups) para la página principal y para la gestión de modelos.
+    \item Internacionalizar la aplicación mediante TypeSafe-i18n y añadir un selector de idioma.
+    \item Añadir autenticación mediante tókenes JWT (JSON Web Token) a la API.
+\end{itemize}
+
+\subsection{Sprint 12 (24/4/2023 -- 30/4/2023)}
+
+En este sprint se solucionaron algunos bugs y mejoró la accesibilidad de la
+apliación web en gran medida gracias a un
+\href{https://www.udacity.com/course/web-accessibility--ud891}{curso sobre
+accesibilidad} que se realizó.
+
+Tareas realizadas:
+
+\begin{itemize}
+    \item Implementar la autenticación de usuario con la API desde la página web.
+    \item Refactorizar y limpiar el código de la web.
+    \item Solucionar bug de idioma indefinido.
+    \item Pulir los estilos de algunos elementos de la web.
+    \item Solucionar bug pantalla de administración se muestra brevemente antes de login.
+    \item Mejorar accesibilidad del HTML.
+    \item Añadir mensajes acompañando a la predicción dependiendo del resultado.
+\end{itemize}
+
+\subsection{Sprint 13 (1/5/2023 -- 7/5/2023)}
+
+En este sprint se implementó la administración de usuarios desde la página web.
+
+\begin{itemize}
+    \item Pulir la pantalla de resultados de la web.
+    \item Añadir ejecución de un script SQL por defecto en la creación de la
+    base de datos.
+    \item Añadir endpoints para crear y eliminar usuarios en la API.
+    \item Añadir página de gestión de usuarios.
+\end{itemize}
 
 \section{Estudio de viabilidad}
 
