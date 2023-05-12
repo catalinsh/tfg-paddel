@@ -157,8 +157,16 @@ def create_user(
     db: Session = Depends(get_db),
 ):
     db_user = crud.get_user_by_username(db, username=user.username)
+
     if db_user:
-        raise HTTPException(status_code=400, detail="Username already registered")
+        raise HTTPException(status_code=400, detail={"Username already registered"})
+
+    if len(user.password) < 8:
+        raise HTTPException(status_code=400, detail="Password has to be at least 8 characters long")
+    
+    if len(user.username) < 3:
+        raise HTTPException(status_code=400, detail="Username has to be at least 3 characters long")
+
     user.password = get_password_hash(user.password)
     return crud.create_user(db=db, user=user)
 
@@ -187,10 +195,13 @@ def read_user(
 
 @app.delete("/users/{user_id}", response_model=schemas.User, tags=["users"])
 def read_user(
-    _: Annotated[schemas.User, Depends(get_current_user)],
+    current_user: Annotated[schemas.User, Depends(get_current_user)],
     user_id: int,
     db: Session = Depends(get_db),
 ):
+    if current_user.id == user_id:
+        raise HTTPException(status_code=401, detail="You can't delete yourself")
+
     db_user = crud.delete_user(db, user_id=user_id)
     print(db_user)
     if db_user is None:

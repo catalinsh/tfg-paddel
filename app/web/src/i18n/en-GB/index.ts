@@ -36,5 +36,15 @@ export default {
 	THERE_WAS_A_PROBLEM: 'There was a problem',
 	CANNOT_PROCESS_VIDEO: 'Can\'t process video, please check it.',
 	SOMETHING_WENT_WRONG: 'Something went terribly wrong.',
-	PREDICTION_RESULT: "Prediction Result"
+	PREDICTION_RESULT: "Prediction Result",
+	USER_MANAGEMENT: "User Management",
+	USER_MANAGEMENT_DESC: "A list of all the users in your account including their name, title, email and role.",
+	ADD_USER: "Add user",
+	ID: "ID",
+	ACTIONS: "Actions",
+	DELETE: "Delete",
+	PASSWORD_TOO_SHORT: "Password must be at least 8 characters long.",
+	LOGIN_FAILED: "Username or password wrong.",
+	USER_ALREADY_EXISTS: "This user already exists.",
+	USERNAME_TOO_SHORT: "Usernames must be at least 3 characters long.",
 } satisfies BaseTranslation;

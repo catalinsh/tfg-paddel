@@ -4,8 +4,11 @@
 	import { read_users, create_user, delete_user } from '$lib/api';
 	import ButtonPrimary from '$lib/ButtonPrimary.svelte';
 	import ButtonSecondary from '$lib/ButtonSecondary.svelte';
+	import type { LayoutData } from './$types';
+	import LoadingIcon from '$lib/icons/LoadingIcon.svelte';
 
 	const token = localStorage.getItem('token');
+	export let data: LayoutData;
 
 	if (!token) {
 		goto(`/${$locale}/login`, { replaceState: true });
@@ -15,12 +18,18 @@
 	}
 
 	let usersLoading = read_users(token!);
-	let selectedUser: {username: string, id: number};
+	let selectedUser: { username: string; id: number };
 	let createUserModal: HTMLDialogElement;
 	let deleteUserModal: HTMLDialogElement;
+	let createUserErrorMessage: string;
 
 	const newUserHandler = async (e: Event) => {
 		const formData = new FormData(e.target as HTMLFormElement);
+
+		if ((formData.get('username') as string).length < 3) {
+			createUserErrorMessage = $LL.USERNAME_TOO_SHORT();
+			return;
+		}
 
 		const newUser = await create_user(
 			formData.get('username') as string,
@@ -29,100 +38,127 @@
 
 		if (newUser) {
 			createUserModal.close();
-			usersLoading = await read_users(token!);
+			usersLoading = read_users(token!);
 			(e.target as HTMLFormElement).reset();
+		} else if ((formData.get('password') as string).length < 8) {
+			createUserErrorMessage = $LL.PASSWORD_TOO_SHORT();
+		} else {
+			createUserErrorMessage = $LL.USER_ALREADY_EXISTS();
 		}
 	};
 
 	const deleteSelectedUser = async () => {
 		const deletedUser = await delete_user(selectedUser.id);
-		if(deletedUser) {
+		if (deletedUser) {
 			deleteUserModal.close();
-			usersLoading = await read_users(token!);
+			usersLoading = read_users(token!);
 		}
-	}
+	};
 </script>
 
 <div class="mx-auto mt-8 max-w-xl px-4 sm:px-6 md:max-w-3xl lg:px-8">
 	<div class="sm:flex sm:items-center">
 		<div class="sm:flex-auto">
-			<h1 class="text-base font-semibold leading-6 text-neutral-900">User management</h1>
-			<p class="mt-2 text-sm text-neutral-700">
-				A list of all the users in your account including their name, title, email and role.
-			</p>
+			<h1 class="text-base font-semibold leading-6 text-neutral-900">{$LL.USER_MANAGEMENT()}</h1>
+			<p class="mt-2 text-sm text-neutral-700">{$LL.USER_MANAGEMENT_DESC()}</p>
 		</div>
 		<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
 			<button
 				on:click={() => createUserModal.showModal()}
 				type="button"
 				class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-				>Add user</button
+				>{$LL.ADD_USER()}</button
 			>
 		</div>
 	</div>
 	<div class="mt-8 flow-root">
 		<div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
 			<div class="inline-block min-w-full py-2 align-middle">
-				<table class="min-w-full border-separate border-spacing-0">
-					<thead>
-						<tr>
-							<th
-								scope="col"
-								class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-neutral-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
-								>Id</th
+				{#key usersLoading}
+					{#await usersLoading}
+						<div class="mt-8 text-center">
+							<span
+								class="inline-flex items-center gap-2 px-4 text-left text-sm font-semibold"
+								aria-live="assertive"
 							>
-							<th
-								scope="col"
-								class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 backdrop-blur backdrop-filter sm:table-cell"
-								>Username</th
-							>
-							<th
-								scope="col"
-								class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-2 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"
-							>
-								<span class="sr-only">Actions</span>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#await usersLoading}
-							Fetching users...
-						{:then users}
-							{#each users as user}
+								<LoadingIcon
+									class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200 dark:fill-blue-400 dark:text-neutral-700"
+								/>
+								Fetching Users...
+							</span>
+						</div>
+					{:then users}
+						<table class="min-w-full border-separate border-spacing-0">
+							<thead>
 								<tr>
-									<td
-										class="whitespace-nowrap border-b border-neutral-200 py-4 pl-4 pr-3 text-sm font-medium text-neutral-900 sm:pl-6 lg:pl-8"
-										>{user.id}</td
+									<th
+										scope="col"
+										class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-neutral-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
+										>{$LL.ID()}</th
 									>
-									<td
-										class="whitespace-nowrap border-b border-neutral-200 px-3 py-4 text-sm text-neutral-500 sm:table-cell"
-										>{user.username}</td
+									<th
+										scope="col"
+										class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 backdrop-blur backdrop-filter sm:table-cell"
+										>{$LL.USERNAME()}</th
 									>
-									<td
-										class="relative whitespace-nowrap border-b border-neutral-200 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+									<th
+										scope="col"
+										class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 py-3.5 pl-3 pr-2 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8"
 									>
-										<!--
-										<button class="mr-4 text-blue-600 hover:text-blue-900">
-											Edit<span class="sr-only">, {user.username}</span>
-										</button>
-										-->
-										<button
-											on:click={() => {
-												selectedUser = user;
-												deleteUserModal.showModal();
-											}}
-											class="text-red-600 hover:text-red-900"
-										>
-											Delete<span class="sr-only">, {user.username}</span>
-										</button>
-									</td>
+										<span class="sr-only">{$LL.ACTIONS()}</span>
+									</th>
 								</tr>
-							{/each}
-						{:catch e}
-							Could not fetch userlist, reason: {e.message}
-						{/await}
-					</tbody>
-				</table>
+							</thead>
+							<tbody>
+								{#each users as user}
+									<tr>
+										<td
+											class="whitespace-nowrap border-b border-neutral-200 py-4 pl-4 pr-3 text-sm font-medium text-neutral-900 sm:pl-6 lg:pl-8"
+											>{user.id}</td
+										>
+										<td
+											class="whitespace-nowrap border-b border-neutral-200 px-3 py-4 text-sm text-neutral-500 sm:table-cell"
+											>{user.username}</td
+										>
+										<td
+											class="relative whitespace-nowrap border-b border-neutral-200 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+										>
+											<!--
+									<button class="mr-4 text-blue-600 hover:text-blue-900">
+										Edit<span class="sr-only">, {user.username}</span>
+									</button>
+									-->
+											{#if user.id !== data.currentUser.id}
+												<button
+													on:click={() => {
+														selectedUser = user;
+														deleteUserModal.showModal();
+													}}
+													class="text-red-600 hover:text-red-900"
+												>
+													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
+												</button>
+											{:else}
+												<button
+													on:click={() => {
+														selectedUser = user;
+														deleteUserModal.showModal();
+													}}
+													class="text-gray-300"
+													disabled
+												>
+													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
+												</button>
+											{/if}
+										</td>
+									</tr>
+								{/each}
+							</tbody>
+						</table>
+					{:catch e}
+						Could not fetch userlist, reason: {e.message}
+					{/await}
+				{/key}
 			</div>
 		</div>
 	</div>
@@ -166,7 +202,8 @@
 							</h3>
 							<div class="mt-2">
 								<p class="text-sm text-gray-500">
-									Are you sure you want to permanently delete this account? This action cannot be undone.
+									Are you sure you want to permanently delete this account? This action cannot be
+									undone.
 								</p>
 							</div>
 						</div>
@@ -208,6 +245,31 @@
 						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
 							Create new user
 						</h3>
+
+						{#if createUserErrorMessage}
+							<div class="mt-2 rounded-md bg-red-50 p-4" aria-live="assertive">
+								<div class="flex">
+									<div class="flex-shrink-0">
+										<svg
+											class="h-5 w-5 text-red-400"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+											aria-hidden="true"
+										>
+											<path
+												fill-rule="evenodd"
+												d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+									</div>
+									<div class="ml-3">
+										<p class="text-sm font-medium text-red-800">{createUserErrorMessage}</p>
+									</div>
+								</div>
+							</div>
+						{/if}
+
 						<form on:submit|preventDefault={newUserHandler} class="mt-2">
 							<div>
 								<label for="username" class="block text-sm font-medium leading-6 text-gray-900">
@@ -242,7 +304,10 @@
 							</div>
 							<ButtonPrimary class="mt-4" type="submit">Create user</ButtonPrimary>
 							<ButtonSecondary
-								on:click={() => createUserModal.close()}
+								on:click={() => {
+									createUserModal.close();
+									createUserErrorMessage = '';
+								}}
 								class="mt-2 w-full"
 								type="submit">Cancel</ButtonSecondary
 							>

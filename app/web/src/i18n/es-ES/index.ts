@@ -36,5 +36,15 @@ export default {
 	THERE_WAS_A_PROBLEM: 'Ha habido un problema',
 	CANNOT_PROCESS_VIDEO: 'No se ha podido procesar el archivo enviado, verifíquelo por favor.',
 	SOMETHING_WENT_WRONG: 'Algo ha ido mal.',
-	PREDICTION_RESULT: "Reasultado de la Predicción"
+	PREDICTION_RESULT: "Resultado de la Predicción",
+	USER_MANAGEMENT: "Gestión de usuarios",
+	USER_MANAGEMENT_DESC: "La siguiente lista presenta los usuarios que existen dentro de la aplicación.",
+	ADD_USER: "Añadir usuario",
+	ID: "ID",
+	ACTIONS: "Acciones",
+	DELETE: "Eliminar",
+	PASSWORD_TOO_SHORT: "La contraseña debe tener al menos 8 caracteres.",
+	LOGIN_FAILED: "Usuario o contraseña incorrectos.",
+	USER_ALREADY_EXISTS: "Este usuario ya existe.",
+	USERNAME_TOO_SHORT: "Los nombres de usuario deben tener al menos 3 caracteres.",
 } satisfies Translation;

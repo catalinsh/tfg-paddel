@@ -155,6 +155,46 @@ type RootTranslation = {
 	 * P​r​e​d​i​c​t​i​o​n​ ​R​e​s​u​l​t
 	 */
 	PREDICTION_RESULT: string
+	/**
+	 * U​s​e​r​ ​M​a​n​a​g​e​m​e​n​t
+	 */
+	USER_MANAGEMENT: string
+	/**
+	 * A​ ​l​i​s​t​ ​o​f​ ​a​l​l​ ​t​h​e​ ​u​s​e​r​s​ ​i​n​ ​y​o​u​r​ ​a​c​c​o​u​n​t​ ​i​n​c​l​u​d​i​n​g​ ​t​h​e​i​r​ ​n​a​m​e​,​ ​t​i​t​l​e​,​ ​e​m​a​i​l​ ​a​n​d​ ​r​o​l​e​.
+	 */
+	USER_MANAGEMENT_DESC: string
+	/**
+	 * A​d​d​ ​u​s​e​r
+	 */
+	ADD_USER: string
+	/**
+	 * I​D
+	 */
+	ID: string
+	/**
+	 * A​c​t​i​o​n​s
+	 */
+	ACTIONS: string
+	/**
+	 * D​e​l​e​t​e
+	 */
+	DELETE: string
+	/**
+	 * P​a​s​s​w​o​r​d​ ​m​u​s​t​ ​b​e​ ​a​t​ ​l​e​a​s​t​ ​8​ ​c​h​a​r​a​c​t​e​r​s​ ​l​o​n​g​.
+	 */
+	PASSWORD_TOO_SHORT: string
+	/**
+	 * U​s​e​r​n​a​m​e​ ​o​r​ ​p​a​s​s​w​o​r​d​ ​w​r​o​n​g​.
+	 */
+	LOGIN_FAILED: string
+	/**
+	 * T​h​i​s​ ​u​s​e​r​ ​a​l​r​e​a​d​y​ ​e​x​i​s​t​s​.
+	 */
+	USER_ALREADY_EXISTS: string
+	/**
+	 * U​s​e​r​n​a​m​e​s​ ​m​u​s​t​ ​b​e​ ​a​t​ ​l​e​a​s​t​ ​3​ ​c​h​a​r​a​c​t​e​r​s​ ​l​o​n​g​.
+	 */
+	USERNAME_TOO_SHORT: string
 }
 
 export type TranslationFunctions = {
@@ -298,6 +338,46 @@ export type TranslationFunctions = {
 	 * Prediction Result
 	 */
 	PREDICTION_RESULT: () => LocalizedString
+	/**
+	 * User Management
+	 */
+	USER_MANAGEMENT: () => LocalizedString
+	/**
+	 * A list of all the users in your account including their name, title, email and role.
+	 */
+	USER_MANAGEMENT_DESC: () => LocalizedString
+	/**
+	 * Add user
+	 */
+	ADD_USER: () => LocalizedString
+	/**
+	 * ID
+	 */
+	ID: () => LocalizedString
+	/**
+	 * Actions
+	 */
+	ACTIONS: () => LocalizedString
+	/**
+	 * Delete
+	 */
+	DELETE: () => LocalizedString
+	/**
+	 * Password must be at least 8 characters long.
+	 */
+	PASSWORD_TOO_SHORT: () => LocalizedString
+	/**
+	 * Username or password wrong.
+	 */
+	LOGIN_FAILED: () => LocalizedString
+	/**
+	 * This user already exists.
+	 */
+	USER_ALREADY_EXISTS: () => LocalizedString
+	/**
+	 * Usernames must be at least 3 characters long.
+	 */
+	USERNAME_TOO_SHORT: () => LocalizedString
 }
 
 export type Formatters = {}
