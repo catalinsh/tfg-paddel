@@ -223,6 +223,31 @@ type RootTranslation = {
 	 * F​e​t​c​h​i​n​g​ ​u​s​e​r​s​.​.​.
 	 */
 	FETCHING_USERS: string
+	/**
+	 * C​o​u​l​d​ ​n​o​t​ ​f​e​t​c​h​ ​u​s​e​r​s​.
+	 */
+	USER_FETCH_ERROR: string
+	/**
+	 * A​r​e​ ​y​o​u​ ​s​u​r​e​ ​y​o​u​ ​w​a​n​t​ ​t​o​ ​p​e​r​m​a​n​e​n​t​l​y​ ​d​e​l​e​t​e​ ​t​h​i​s​ ​a​c​c​o​u​n​t​?​ ​T​h​i​s​ ​a​c​t​i​o​n​ ​c​a​n​n​o​t​ ​b​e​ ​u​n​d​o​n​e​.
+	 */
+	DELETE_USER_CHECK: string
+	/**
+	 * D​e​l​e​t​e​ ​{​u​s​e​r​}​'​s​ ​a​c​c​o​u​n​t​?
+	 * @param {string} user
+	 */
+	DELETE_USER_CHECK_TITLE: RequiredParams<'user'>
+	/**
+	 * C​a​n​c​e​l
+	 */
+	CANCEL: string
+	/**
+	 * C​r​e​a​t​e​ ​n​e​w​ ​u​s​e​r
+	 */
+	CREATE_NEW_USER: string
+	/**
+	 * C​r​e​a​t​e​ ​u​s​e​r
+	 */
+	CREATE_USER: string
 }
 
 export type TranslationFunctions = {
@@ -434,6 +459,30 @@ export type TranslationFunctions = {
 	 * Fetching users...
 	 */
 	FETCHING_USERS: () => LocalizedString
+	/**
+	 * Could not fetch users.
+	 */
+	USER_FETCH_ERROR: () => LocalizedString
+	/**
+	 * Are you sure you want to permanently delete this account? This action cannot be undone.
+	 */
+	DELETE_USER_CHECK: () => LocalizedString
+	/**
+	 * Delete {user}'s account?
+	 */
+	DELETE_USER_CHECK_TITLE: (arg: { user: string }) => LocalizedString
+	/**
+	 * Cancel
+	 */
+	CANCEL: () => LocalizedString
+	/**
+	 * Create new user
+	 */
+	CREATE_NEW_USER: () => LocalizedString
+	/**
+	 * Create user
+	 */
+	CREATE_USER: () => LocalizedString
 }
 
 export type Formatters = {}

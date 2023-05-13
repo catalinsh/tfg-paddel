@@ -1,8 +1,17 @@
-import axios, { AxiosError, type AxiosProgressEvent } from 'axios';
+import axios, { type AxiosProgressEvent } from 'axios';
 import { PUBLIC_API_LOCATION } from '$env/static/public';
+import { goto } from '$app/navigation';
 
 const http = axios.create({
 	baseURL: PUBLIC_API_LOCATION
+});
+
+http.interceptors.response.use((response) => response, async (error) => {
+	const locale = window.location.pathname.split("/")[1];
+	if (error.response.status = 401) {
+		goto(`/${locale}/login`, { replaceState: true });
+	}
+	throw error;
 });
 
 export const predict = async (

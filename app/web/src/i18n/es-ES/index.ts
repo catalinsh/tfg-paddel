@@ -54,4 +54,10 @@ export default {
 	MODEL_MANAGEMENT_DESC: "Aquí puede ver los modelos presentes en la aplicación, añadir más modelos y seleccionar el modelo a utilizar para realizar las predicciones.",
 	MODELNAME_TOO_SHORT: "Los nombres de modelo deben tener al menos 3 caracteres.",
 	FETCHING_USERS: "Obteniendo usuarios...",
+	USER_FETCH_ERROR: 'No se pudieron obtener los usuarios.',
+	DELETE_USER_CHECK: '¿Está seguro de que desea eliminar esta cuenta? Esta acción no se puede deshacer.',
+	DELETE_USER_CHECK_TITLE: '¿Eliminar la cuenta de {user}?',
+	CANCEL: 'Cancelar',
+	CREATE_NEW_USER: 'Crear nuevo usuario',
+	CREATE_USER: 'Crear usuario',
 } satisfies Translation;
