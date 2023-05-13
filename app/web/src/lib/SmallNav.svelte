@@ -12,7 +12,7 @@
 	</a>
 
 	<div class="flex items-center gap-2">
-		<ButtonPrimary href={`/${$locale}/admin`}>
+		<ButtonPrimary href={`/${$locale}/admin/models`}>
 			{$LL.ADMINISTRATION()}
 		</ButtonPrimary>
 		<LocaleSwitcher />

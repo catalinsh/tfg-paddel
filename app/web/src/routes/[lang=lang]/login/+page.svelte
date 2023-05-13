@@ -31,7 +31,7 @@
 		if (result) {
 			const token = result.access_token;
 			localStorage.setItem('token', token);
-			goto(`/${$locale}/admin`, { replaceState: true });
+			goto(`/${$locale}/admin/models`, { replaceState: true });
 		} else {
 			submitted = true;
 		}
