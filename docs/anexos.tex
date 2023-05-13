@@ -1,3 +1,14 @@
+% Capítulo
+\newcommand{\capitulo}[1]{
+    \stepcounter{chapter}
+    \setcounter{section}{0}
+    \setcounter{figure}{0}
+    \setcounter{table}{0}
+    \chapter*{Apéndice \thechapter.\enskip #1}
+    \addcontentsline{toc}{chapter}{\thechapter.\enskip #1}
+    \markboth{#1}{#1}
+}
+
 \input{common/preambulo.tex}
 
 \let\oldtitle\thetitle

@@ -1,8 +1,14 @@
-\capitulo{Conceptos teóricos}
-\label{cha:Conceptos teóricos}
+\capitulo{Conceptos teóricos}\label{cha:Conceptos teóricos}
 
 Este capítulo define algunos de los conceptos teóricos que se mencionan en este
 documento.
+
+\subsection{Aprendizaje Automático}
+
+El aprendizaje automático es un área de la inteligencia artificial que consiste
+en el diseño de algoritmos y modelos que permitan a los ordenadores aprender la
+regla general que define un conjunto de datos sin ser explícitamente programados
+para ello.
 
 \subsection{Preprocesado}
 
@@ -30,7 +36,7 @@ velocidad o amplitud de movimiento a partir de un vídeo.
 Existen diversas técnicas para la extracción de características, incluyendo las
 selección manual de características, o técnicas automatizadas como la reducción
 de dimensionalidad, la extracción de características basada en redes neuronales
-\cite{intrator1991feature}, entre otras. La elección de la técnica de extracción
+~\cite{intrator1991feature}, entre otras. La elección de la técnica de extracción
 de características depende del conjunto de datos, del problema específico de
 aprendizaje automático que se está abordando y del tipo de modelo de aprendizaje
 automático que se está utilizando.
@@ -44,8 +50,8 @@ relevantes y representativas de los datos, que pueden ser utilizadas para
 entrenar modelos de aprendizaje automático con mayor eficacia.
 
 En la selección de características, se pueden utilizar técnicas como el análisis
-de componentes principales (PCA) \cite{mackiewicz1993principal}, el análisis
-discriminante lineal (LDA) \cite{xanthopoulos2013linear} o pruebas de
+de componentes principales (PCA)~\cite{mackiewicz1993principal}, el análisis
+discriminante lineal (LDA)~\cite{xanthopoulos2013linear} o pruebas de
 significancia.
 
 \subsubsection{Normalización}
@@ -60,7 +66,7 @@ Aunque lo más habitual es que la normalización se haga sin distorsionar las
 diferencias existentes entre los valores previos, existen situaciones en las que
 puede ser ventajoso utilizar un método de normalización que sí altere estas
 diferencias, por ejemplo, la normalización por cuantiles
-\cite{enwiki:1138433182}, en la que se modifican los valores para que sigan una
+~\cite{enwiki:1138433182}, en la que se modifican los valores para que sigan una
 distribución normal, lo que consigue que, si existen valores muy lejanos a los
 valores más comunes (\textit{outliers}), estos se acerquen al resto. 
 
@@ -224,3 +230,4 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
     todas las combinaciones como ocurre con \textit{grid search}. Un ejemplo de
     esto es la Optimización Bayesiana.
 \end{itemize}
+f
