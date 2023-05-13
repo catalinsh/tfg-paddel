@@ -135,7 +135,7 @@ type RootTranslation = {
 	 */
 	USERNAME_OR_PASSWORD_WRONG: string
 	/**
-	 * A​c​c​o​r​d​i​n​g​ ​t​o​ ​t​h​e​ ​m​o​d​e​l​ ​u​s​e​d​,​ ​t​h​e​r​e​ ​i​s​ ​a​ ​{​p​e​r​c​e​n​t​a​g​e​}​%​ ​c​h​a​n​c​e​ ​t​h​a​t​ ​y​o​u​ ​h​a​v​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​.
+	 * A​c​c​o​r​d​i​n​g​ ​t​o​ ​t​h​e​ ​m​o​d​e​l​ ​u​s​e​d​,​ ​t​h​e​r​e​ ​i​s​ ​a​ ​{​p​e​r​c​e​n​t​a​g​e​}​%​ ​c​h​a​n​c​e​ ​t​h​a​t​ ​y​o​u​ ​h​a​v​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​.​ ​P​l​e​a​s​e​ ​t​a​k​e​ ​t​h​i​s​ ​r​e​s​u​l​t​ ​w​i​t​h​ ​a​ ​b​i​g​ ​g​r​a​i​n​ ​o​f​ ​s​a​l​t​,​ ​i​t​ ​i​s​ ​i​n​ ​n​o​ ​w​a​y​ ​s​u​b​s​t​i​t​u​t​e​ ​f​o​r​ ​a​ ​p​r​o​f​e​s​s​i​o​n​a​l​ ​a​s​s​e​s​s​m​e​n​t​.​ ​I​f​ ​y​o​u​ ​s​u​s​p​e​c​t​ ​y​o​u​ ​m​i​g​h​t​ ​h​a​v​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​D​i​s​e​a​s​e​,​ ​p​l​e​a​s​e​ ​t​a​l​k​ ​w​i​t​h​ ​y​o​u​r​ ​d​o​c​t​o​r​.
 	 * @param {string} percentage
 	 */
 	PREDICTION_RESULT_DESC: RequiredParams<'percentage'>
@@ -413,7 +413,7 @@ export type TranslationFunctions = {
 	 */
 	USERNAME_OR_PASSWORD_WRONG: () => LocalizedString
 	/**
-	 * According to the model used, there is a {percentage}% chance that you have Parkinson's Disease.
+	 * According to the model used, there is a {percentage}% chance that you have Parkinson's Disease. Please take this result with a big grain of salt, it is in no way substitute for a professional assessment. If you suspect you might have Parkinson's Disease, please talk with your doctor.
 	 */
 	PREDICTION_RESULT_DESC: (arg: { percentage: string }) => LocalizedString
 	/**

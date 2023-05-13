@@ -32,7 +32,7 @@ export default {
 	SOURCE_CODE: 'Source code',
 	API_DOCS: 'API documentation',
 	USERNAME_OR_PASSWORD_WRONG: 'Username or password wrong.',
-	PREDICTION_RESULT_DESC: 'According to the model used, there is a {percentage:string}% chance that you have Parkinson\'s Disease.',
+	PREDICTION_RESULT_DESC: 'According to the model used, there is a {percentage:string}% chance that you have Parkinson\'s Disease. Please take this result with a big grain of salt, it is in no way substitute for a professional assessment. If you suspect you might have Parkinson\'s Disease, please talk with your doctor.',
 	THERE_WAS_A_PROBLEM: 'There was a problem',
 	CANNOT_PROCESS_VIDEO: 'Can\'t process video, please check it.',
 	SOMETHING_WENT_WRONG: 'Something went terribly wrong.',
