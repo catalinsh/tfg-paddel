@@ -53,4 +53,5 @@ export default {
 	MODEL_MANAGEMENT: "Model management",
 	MODEL_MANAGEMENT_DESC: "A list of all the models in the application, you can upload new models and select the default model to use for predictions.",
 	MODELNAME_TOO_SHORT: "Model names have to be at least 3 characters long.",
+	FETCHING_USERS: "Fetching users...",
 } satisfies BaseTranslation;

@@ -64,10 +64,11 @@ def select_model(db: Session, model_id: int):
     previous_selected_model = get_selected_model(db)
     if previous_selected_model:
         previous_selected_model.selected = None
-        db.commit()
+        db.flush()
 
     selected_model = get_model(db, model_id)
     selected_model.selected = True
+    
     db.commit()
 
     return selected_model

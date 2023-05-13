@@ -219,6 +219,10 @@ type RootTranslation = {
 	 * M​o​d​e​l​ ​n​a​m​e​s​ ​h​a​v​e​ ​t​o​ ​b​e​ ​a​t​ ​l​e​a​s​t​ ​3​ ​c​h​a​r​a​c​t​e​r​s​ ​l​o​n​g​.
 	 */
 	MODELNAME_TOO_SHORT: string
+	/**
+	 * F​e​t​c​h​i​n​g​ ​u​s​e​r​s​.​.​.
+	 */
+	FETCHING_USERS: string
 }
 
 export type TranslationFunctions = {
@@ -426,6 +430,10 @@ export type TranslationFunctions = {
 	 * Model names have to be at least 3 characters long.
 	 */
 	MODELNAME_TOO_SHORT: () => LocalizedString
+	/**
+	 * Fetching users...
+	 */
+	FETCHING_USERS: () => LocalizedString
 }
 
 export type Formatters = {}
