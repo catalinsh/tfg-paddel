@@ -47,4 +47,6 @@ export default {
 	LOGIN_FAILED: "Username or password wrong.",
 	USER_ALREADY_EXISTS: "This user already exists.",
 	USERNAME_TOO_SHORT: "Usernames must be at least 3 characters long.",
+	USERS: "Users",
+	MODELS: "Models",
 } satisfies BaseTranslation;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { locale } from '$i18n/i18n-svelte';
+	import LL, { locale } from '$i18n/i18n-svelte';
 	import { goto } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import BigNav from '$lib/BigNav.svelte';
@@ -40,7 +40,7 @@
 								d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"
 							/>
 						</svg>
-						<span>Usuarios</span>
+						<span>{$LL.USERS()}</span>
 					</a>
 					<a
 						href={`/${$locale}/admin/models`}
@@ -61,7 +61,7 @@
 								d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
 							/>
 						</svg>
-						<span>Modelos</span>
+						<span>{$LL.MODELS()}</span>
 					</a>
 				</div>
 			</div>

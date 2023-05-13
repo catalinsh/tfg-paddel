@@ -47,4 +47,6 @@ export default {
 	LOGIN_FAILED: "Usuario o contraseña incorrectos.",
 	USER_ALREADY_EXISTS: "Este usuario ya existe.",
 	USERNAME_TOO_SHORT: "Los nombres de usuario deben tener al menos 3 caracteres.",
+	USERS: "Usuarios",
+	MODELS: "Modelos",
 } satisfies Translation;

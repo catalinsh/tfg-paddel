@@ -4,6 +4,7 @@ from pathlib import Path
 import pickle
 from tempfile import NamedTemporaryFile
 from typing import Annotated, Union
+import uuid
 import pandas as pd
 from pydantic import BaseModel
 
@@ -194,7 +195,7 @@ def read_user(
     return db_user
 
 @app.delete("/users/{user_id}", response_model=schemas.User, tags=["users"])
-def read_user(
+def delete_user(
     current_user: Annotated[schemas.User, Depends(get_current_user)],
     user_id: int,
     db: Session = Depends(get_db),
@@ -203,15 +204,63 @@ def read_user(
         raise HTTPException(status_code=401, detail="You can't delete yourself")
 
     db_user = crud.delete_user(db, user_id=user_id)
-    print(db_user)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
 
+
+####################
+# MODEL MANAGEMENT #
+####################
+
+@app.post("/models", response_model=schemas.Model, tags=["models"])
+def add_model(
+    _: Annotated[schemas.User, Depends(get_current_user)],
+    name: str = Form(),
+    model: UploadFile = File(),
+    db: Session = Depends(get_db),
+):
+    db_model = crud.get_model_by_name(db, name=name)
+    if db_model:
+        raise HTTPException(status_code=400, detail="Model name already exists")
+
+    filename = str(uuid.uuid4())
+    path = Path("/data") / f"{filename}.pkl"
+    
+    contents = model.file.read()
+    with open(path, "wb") as f:
+        f.write(contents)
+
+    model = crud.add_model(db, name, str(path))
+
+    return model
+
+@app.delete("/models", response_model=schemas.Model, tags=["models"])
+def delete_model(
+    _: Annotated[schemas.User, Depends(get_current_user)],
+    model_id: int,
+    db: Session = Depends(get_db),
+):
+    db_model = crud.delete_user(db, model_id=model_id)
+    if db_model is None:
+        raise HTTPException(status_code=404, detail="Model not found")
+    return db_model
+
+
+@app.get("/models/", response_model=list[schemas.Model], tags=["models"])
+def read_models(
+    _: Annotated[schemas.User, Depends(get_current_user)],
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    models = crud.get_models(db=db, skip=skip, limit=limit)
+    return models
+
+
 ##############
 # PREDICTION #
 ##############
-
 
 @app.post("/predict")
 def obtain_prediction(
@@ -233,6 +282,8 @@ def obtain_prediction(
         fresh_features,
         detection_time,
     ) = extract_video_features(file_path)
+
+    os.remove(file_path)
 
     if detection_time < settings.min_detection_seconds:
         raise HTTPException(

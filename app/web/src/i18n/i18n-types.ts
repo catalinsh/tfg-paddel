@@ -195,6 +195,14 @@ type RootTranslation = {
 	 * U​s​e​r​n​a​m​e​s​ ​m​u​s​t​ ​b​e​ ​a​t​ ​l​e​a​s​t​ ​3​ ​c​h​a​r​a​c​t​e​r​s​ ​l​o​n​g​.
 	 */
 	USERNAME_TOO_SHORT: string
+	/**
+	 * U​s​e​r​s
+	 */
+	USERS: string
+	/**
+	 * M​o​d​e​l​s
+	 */
+	MODELS: string
 }
 
 export type TranslationFunctions = {
@@ -378,6 +386,14 @@ export type TranslationFunctions = {
 	 * Usernames must be at least 3 characters long.
 	 */
 	USERNAME_TOO_SHORT: () => LocalizedString
+	/**
+	 * Users
+	 */
+	USERS: () => LocalizedString
+	/**
+	 * Models
+	 */
+	MODELS: () => LocalizedString
 }
 
 export type Formatters = {}
