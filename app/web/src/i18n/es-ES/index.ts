@@ -60,4 +60,5 @@ export default {
 	CANCEL: 'Cancelar',
 	CREATE_NEW_USER: 'Crear nuevo usuario',
 	CREATE_USER: 'Crear usuario',
+	MODEL_NAME_ALREADY_EXISTS: 'Nombre de modelo ya existe.',
 } satisfies Translation;

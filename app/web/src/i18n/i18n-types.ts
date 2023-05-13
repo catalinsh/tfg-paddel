@@ -248,6 +248,10 @@ type RootTranslation = {
 	 * C​r​e​a​t​e​ ​u​s​e​r
 	 */
 	CREATE_USER: string
+	/**
+	 * M​o​d​e​l​ ​w​i​t​h​ ​t​h​a​t​ ​n​a​m​e​ ​a​l​r​e​a​d​y​ ​e​x​i​s​t​s​.
+	 */
+	MODEL_NAME_ALREADY_EXISTS: string
 }
 
 export type TranslationFunctions = {
@@ -483,6 +487,10 @@ export type TranslationFunctions = {
 	 * Create user
 	 */
 	CREATE_USER: () => LocalizedString
+	/**
+	 * Model with that name already exists.
+	 */
+	MODEL_NAME_ALREADY_EXISTS: () => LocalizedString
 }
 
 export type Formatters = {}

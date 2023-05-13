@@ -12,7 +12,7 @@
 	const currentToken = localStorage.getItem('token');
 
 	if (currentToken) {
-		goto(`/${$locale}/admin`, { replaceState: true });
+		goto(`/${$locale}/admin/models`, { replaceState: true });
 	}
 
 	let username: string;

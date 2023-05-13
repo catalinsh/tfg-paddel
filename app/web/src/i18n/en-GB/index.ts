@@ -60,4 +60,5 @@ export default {
 	CANCEL: 'Cancel',
 	CREATE_NEW_USER: 'Create new user',
 	CREATE_USER: 'Create user',
+	MODEL_NAME_ALREADY_EXISTS: 'Model with that name already exists.',
 } satisfies BaseTranslation;

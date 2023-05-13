@@ -55,10 +55,8 @@
 			addModelModal.close();
 			modelsLoading = read_models();
 			(e.target as HTMLFormElement).reset();
-		} else if ((formData.get('password') as string).length < 8) {
-			addModelErrorMessage = $LL.PASSWORD_TOO_SHORT();
 		} else {
-			addModelErrorMessage = $LL.USER_ALREADY_EXISTS();
+			addModelErrorMessage = $LL.MODEL_NAME_ALREADY_EXISTS();
 		}
 	};
 

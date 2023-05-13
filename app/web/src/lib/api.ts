@@ -8,7 +8,7 @@ const http = axios.create({
 
 http.interceptors.response.use((response) => response, async (error) => {
 	const locale = window.location.pathname.split("/")[1];
-	if (error.response.status = 401) {
+	if (error.response.status === 401) {
 		goto(`/${locale}/login`, { replaceState: true });
 	}
 	throw error;

@@ -220,9 +220,12 @@ def add_model(
     model: UploadFile = File(),
     db: Session = Depends(get_db),
 ):
+    if len(name) < 3:
+        raise HTTPException(status_code=400, detail="Model name has to be at least 3 characters long")
+
     db_model = crud.get_model_by_name(db, name=name)
     if db_model:
-        raise HTTPException(status_code=400, detail="Model name already exists")
+        raise HTTPException(status_code=400, detail="Model with that name already exists")
 
     filename = str(uuid.uuid4())
     path = Path("/data") / f"{filename}.pkl"
