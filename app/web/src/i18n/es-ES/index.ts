@@ -61,4 +61,13 @@ export default {
 	CREATE_NEW_USER: 'Crear nuevo usuario',
 	CREATE_USER: 'Crear usuario',
 	MODEL_NAME_ALREADY_EXISTS: 'Nombre de modelo ya existe.',
+	FETCHING_MODELS: 'Obteniendo modelos...',
+	MODEL_NAME: 'Nombre de modelo',
+	SELECTED: 'Seleccionado',
+	SELECT: 'Seleccionar',
+	MODEL_FETCH_ERROR: 'Error al obtener los modelos obtener .',
+	DELETE_MODEL_CHECK_TITLE: '¿Eliminar el modelo {model}?',
+	DELETE_MODEL_CHECK: '¿Está seguro de que desea eliminar este modelo? Esta acción no se puede deshacer.',
+	PICKLE_FILE: 'Archivo binario de Pickle.',
+	MODEL_FILE: 'Archivo del modelo',
 } satisfies Translation;

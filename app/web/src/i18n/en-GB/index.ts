@@ -61,4 +61,13 @@ export default {
 	CREATE_NEW_USER: 'Create new user',
 	CREATE_USER: 'Create user',
 	MODEL_NAME_ALREADY_EXISTS: 'Model with that name already exists.',
+	FETCHING_MODELS: 'Fetching models...',
+	MODEL_NAME: 'Model name',
+	SELECTED: 'Selected',
+	SELECT: 'Select',
+	MODEL_FETCH_ERROR: 'Could not fetch models.',
+	DELETE_MODEL_CHECK_TITLE: 'Delete model {model:string}?',
+	DELETE_MODEL_CHECK: 'Are you sure you want to permanently delete this model? This action cannot be undone.',
+	PICKLE_FILE: 'Pickled binary file.',
+	MODEL_FILE: 'Model file',
 } satisfies BaseTranslation;

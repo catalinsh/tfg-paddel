@@ -252,6 +252,43 @@ type RootTranslation = {
 	 * M​o​d​e​l​ ​w​i​t​h​ ​t​h​a​t​ ​n​a​m​e​ ​a​l​r​e​a​d​y​ ​e​x​i​s​t​s​.
 	 */
 	MODEL_NAME_ALREADY_EXISTS: string
+	/**
+	 * F​e​t​c​h​i​n​g​ ​m​o​d​e​l​s​.​.​.
+	 */
+	FETCHING_MODELS: string
+	/**
+	 * M​o​d​e​l​ ​n​a​m​e
+	 */
+	MODEL_NAME: string
+	/**
+	 * S​e​l​e​c​t​e​d
+	 */
+	SELECTED: string
+	/**
+	 * S​e​l​e​c​t
+	 */
+	SELECT: string
+	/**
+	 * C​o​u​l​d​ ​n​o​t​ ​f​e​t​c​h​ ​m​o​d​e​l​s​.
+	 */
+	MODEL_FETCH_ERROR: string
+	/**
+	 * D​e​l​e​t​e​ ​m​o​d​e​l​ ​{​m​o​d​e​l​}​?
+	 * @param {string} model
+	 */
+	DELETE_MODEL_CHECK_TITLE: RequiredParams<'model'>
+	/**
+	 * A​r​e​ ​y​o​u​ ​s​u​r​e​ ​y​o​u​ ​w​a​n​t​ ​t​o​ ​p​e​r​m​a​n​e​n​t​l​y​ ​d​e​l​e​t​e​ ​t​h​i​s​ ​m​o​d​e​l​?​ ​T​h​i​s​ ​a​c​t​i​o​n​ ​c​a​n​n​o​t​ ​b​e​ ​u​n​d​o​n​e​.
+	 */
+	DELETE_MODEL_CHECK: string
+	/**
+	 * P​i​c​k​l​e​d​ ​b​i​n​a​r​y​ ​f​i​l​e​.
+	 */
+	PICKLE_FILE: string
+	/**
+	 * M​o​d​e​l​ ​f​i​l​e
+	 */
+	MODEL_FILE: string
 }
 
 export type TranslationFunctions = {
@@ -491,6 +528,42 @@ export type TranslationFunctions = {
 	 * Model with that name already exists.
 	 */
 	MODEL_NAME_ALREADY_EXISTS: () => LocalizedString
+	/**
+	 * Fetching models...
+	 */
+	FETCHING_MODELS: () => LocalizedString
+	/**
+	 * Model name
+	 */
+	MODEL_NAME: () => LocalizedString
+	/**
+	 * Selected
+	 */
+	SELECTED: () => LocalizedString
+	/**
+	 * Select
+	 */
+	SELECT: () => LocalizedString
+	/**
+	 * Could not fetch models.
+	 */
+	MODEL_FETCH_ERROR: () => LocalizedString
+	/**
+	 * Delete model {model}?
+	 */
+	DELETE_MODEL_CHECK_TITLE: (arg: { model: string }) => LocalizedString
+	/**
+	 * Are you sure you want to permanently delete this model? This action cannot be undone.
+	 */
+	DELETE_MODEL_CHECK: () => LocalizedString
+	/**
+	 * Pickled binary file.
+	 */
+	PICKLE_FILE: () => LocalizedString
+	/**
+	 * Model file
+	 */
+	MODEL_FILE: () => LocalizedString
 }
 
 export type Formatters = {}

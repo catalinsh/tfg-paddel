@@ -104,7 +104,7 @@
 								<LoadingIcon
 									class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200 dark:fill-blue-400 dark:text-neutral-700"
 								/>
-								Fetching Models...
+								{$LL.FETCHING_MODELS()}
 							</span>
 						</div>
 					{:then models}
@@ -119,7 +119,7 @@
 									<th
 										scope="col"
 										class="sticky top-0 z-10 border-b border-neutral-300 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-neutral-900 backdrop-blur backdrop-filter sm:table-cell"
-										>{$LL.USERNAME()}</th
+										>{$LL.MODEL_NAME()}</th
 									>
 									<th
 										scope="col"
@@ -145,14 +145,14 @@
 										>
 											{#if model.selected}
 												<span class="mr-4 text-gray-500">
-													Selected<span class="sr-only">, {model.name}</span>
+													{$LL.SELECTED()}<span class="sr-only">, {model.name}</span>
 												</span>
 											{:else}
 												<button on:click={() => {
 													selectedModel = model;
 													selectModel();
 												}} class="mr-4 text-blue-600 hover:text-blue-900">
-													Select<span class="sr-only">, {model.name}</span>
+													{$LL.SELECT()}<span class="sr-only">, {model.name}</span>
 												</button>
 											{/if}
 
@@ -184,7 +184,7 @@
 							</tbody>
 						</table>
 					{:catch e}
-						Could not fetch model list, reason: {e.message}
+						{$LL.MODEL_FETCH_ERROR()}
 					{/await}
 				{/key}
 			</div>
@@ -226,12 +226,13 @@
 						</div>
 						<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
 							<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-								Delete {#if selectedModel}{selectedModel.name}{/if}'s account?
+								{#if selectedModel}
+									{$LL.DELETE_MODEL_CHECK_TITLE({model: selectedModel.name})}
+								{/if}
 							</h3>
 							<div class="mt-2">
 								<p class="text-sm text-gray-500">
-									Are you sure you want to permanently delete this account? This action cannot be
-									undone.
+									{$LL.DELETE_MODEL_CHECK()}
 								</p>
 							</div>
 						</div>
@@ -242,13 +243,13 @@
 						on:click={deleteSelectedModel}
 						type="button"
 						class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-						>Delete</button
+						>{$LL.DELETE()}</button
 					>
 					<button
 						on:click={() => deleteModelModal.close()}
 						type="button"
 						class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-						>Cancel</button
+						>{$LL.CANCEL()}</button
 					>
 				</div>
 			</div>
@@ -271,7 +272,7 @@
 				<div class="bg-white px-4 pb-4 pt-5 sm:p-6">
 					<div class="text-center sm:mt-0 sm:text-left">
 						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-							Add new model
+							{$LL.ADD_MODEL()}
 						</h3>
 
 						{#if addModelErrorMessage}
@@ -301,7 +302,7 @@
 						<form on:submit|preventDefault={newModelHandler} class="mt-2">
 							<div>
 								<label for="name" class="block text-sm font-medium leading-6 text-gray-900">
-									Model name
+									{$LL.MODEL_NAME()}
 								</label>
 								<div class="mt-2">
 									<input id="name" name="name" type="text" class="block w-full rounded-md" />
@@ -311,7 +312,7 @@
 							<div class="mt-4">
 								<div class="block items-center justify-between">
 									<label for="password" class="block text-sm font-medium leading-6 text-gray-900">
-										Model file
+										{$LL.MODEL_FILE()}
 									</label>
 								</div>
 								<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -344,7 +345,7 @@
 										</div>
 										<p class="mt-2 break-all text-xs text-gray-600">
 											{#if !file}
-												MP4, AVI, MKV, MOV...
+												{$LL.PICKLE_FILE()}
 											{:else}
 												{file.name}
 											{/if}
@@ -352,14 +353,14 @@
 									</div>
 								</div>
 							</div>
-							<ButtonPrimary class="mt-4" type="submit">Create Model</ButtonPrimary>
+							<ButtonPrimary class="mt-4" type="submit">{$LL.ADD_MODEL()}</ButtonPrimary>
 							<ButtonSecondary
 								on:click={() => {
 									addModelModal.close();
 									addModelErrorMessage = '';
 								}}
 								class="mt-2 w-full"
-								type="submit">Cancel</ButtonSecondary
+								type="submit">{$LL.CANCEL()}</ButtonSecondary
 							>
 						</form>
 					</div>
