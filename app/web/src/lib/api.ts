@@ -36,10 +36,10 @@ export const predict = async (
 	}
 };
 
-export const read_users = async (token: string) => {
+export const read_users = async () => {
 	try {
 		const response = await http.get('/users/', {
-			headers: { accept: 'application/json', Authorization: `Bearer ${token}` }
+			headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }
 		});
 		return response.data;
 	} catch (error) {
@@ -47,10 +47,10 @@ export const read_users = async (token: string) => {
 	}
 };
 
-export const get_current_user = async (token: string) => {
+export const get_current_user = async () => {
 	try {
 		const response = await http.get('/users/current', {
-			headers: { accept: 'application/json', Authorization: `Bearer ${token}` }
+			headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }
 		});
 		return response.data;
 	} catch (error) {
@@ -73,7 +73,7 @@ export const token_login = async (username: string, password: string) => {
 
 export const create_user = async (username: string, password: string) => {
 	try {
-		const response = await http.post('/users/', {username, password}, {headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }});
+		const response = await http.post('/users/', { username, password }, { headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` } });
 		return response.data;
 	} catch (error) {
 		return null;
@@ -82,7 +82,60 @@ export const create_user = async (username: string, password: string) => {
 
 export const delete_user = async (user_id: number) => {
 	try {
-		const response = await http.delete(`/users/${user_id}`, {headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }});
+		const response = await http.delete(`/users/${user_id}`, { headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` } });
+		return response.data;
+	} catch (error) {
+		return null;
+	}
+}
+
+export const read_models = async () => {
+	try {
+		const response = await http.get('/models/', {
+			headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` }
+		});
+		return response.data;
+	} catch (error) {
+		return [];
+	}
+};
+
+export const add_model = async (
+	name: string,
+	model: File
+) => {
+	const formData = new FormData();
+	formData.append('name', name);
+	formData.append('model', model);
+
+	try {
+		const response = await http.post('/models/', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				'Authorization': `Bearer ${localStorage.getItem("token")}`
+			},
+		});
+
+		return response.data;
+	} catch (error: any) {
+		return null;
+	}
+}
+
+export const delete_model = async (model_id: number) => {
+	try {
+		const response = await http.delete(`/models/${model_id}`, { headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` } });
+		return response.data;
+	} catch (error) {
+		return null;
+	}
+}
+
+export const select_model = async (model_id: number) => {
+	const formData = new FormData();
+	formData.append('model_id', model_id.toString());
+	try {
+		const response = await http.post(`/select_model`, formData, { headers: { accept: 'application/json', Authorization: `Bearer ${localStorage.getItem("token")}` } });
 		return response.data;
 	} catch (error) {
 		return null;

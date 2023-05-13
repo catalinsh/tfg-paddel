@@ -37,7 +37,7 @@ export default {
 	CANNOT_PROCESS_VIDEO: 'Can\'t process video, please check it.',
 	SOMETHING_WENT_WRONG: 'Something went terribly wrong.',
 	PREDICTION_RESULT: "Prediction Result",
-	USER_MANAGEMENT: "User Management",
+	USER_MANAGEMENT: "User management",
 	USER_MANAGEMENT_DESC: "A list of all the users in your account including their name, title, email and role.",
 	ADD_USER: "Add user",
 	ID: "ID",
@@ -49,4 +49,8 @@ export default {
 	USERNAME_TOO_SHORT: "Usernames must be at least 3 characters long.",
 	USERS: "Users",
 	MODELS: "Models",
+	ADD_MODEL: "Add model",
+	MODEL_MANAGEMENT: "Model management",
+	MODEL_MANAGEMENT_DESC: "A list of all the models in the application, you can upload new models and select the default model to use for predictions.",
+	MODELNAME_TOO_SHORT: "Model names have to be at least 3 characters long.",
 } satisfies BaseTranslation;

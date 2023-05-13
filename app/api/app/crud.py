@@ -46,4 +46,28 @@ def get_model(db: Session, model_id: int):
     return db.query(models.Model).filter(models.Model.id == model_id).first()
 
 def get_models(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Model).offset(skip).limit(limit).all()
+    return db.query(models.Model).order_by(models.Model.id.asc()).offset(skip).limit(limit).all()
+
+def delete_model(db: Session, model_id: int):
+    query = db.query(models.Model).filter(models.Model.id == model_id)
+    model = query.first()
+    if model:
+        query.delete()
+        db.commit()
+        return model
+    return None
+
+def get_selected_model(db: Session):
+    return db.query(models.Model).filter(models.Model.selected == True).first()
+
+def select_model(db: Session, model_id: int):
+    previous_selected_model = get_selected_model(db)
+    if previous_selected_model:
+        previous_selected_model.selected = None
+        db.commit()
+
+    selected_model = get_model(db, model_id)
+    selected_model.selected = True
+    db.commit()
+
+    return selected_model

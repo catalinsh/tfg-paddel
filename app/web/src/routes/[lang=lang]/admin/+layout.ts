@@ -8,7 +8,7 @@ export const load = (async () => {
 		return { currentUser: null };
 	}
 
-	const currentUser = await get_current_user(token!);
+	const currentUser = await get_current_user();
 
 	if (!currentUser) {
 		return { currentUser: null };

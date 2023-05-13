@@ -49,4 +49,8 @@ export default {
 	USERNAME_TOO_SHORT: "Los nombres de usuario deben tener al menos 3 caracteres.",
 	USERS: "Usuarios",
 	MODELS: "Modelos",
+	ADD_MODEL: "Añadir modelo",
+	MODEL_MANAGEMENT: "Administración de modelos",
+	MODEL_MANAGEMENT_DESC: "Aquí puede ver los modelos presentes en la aplicación, añadir más modelos y seleccionar el modelo a utilizar para realizar las predicciones.",
+	MODELNAME_TOO_SHORT: "Los nombres de modelo deben tener al menos 3 caracteres.",
 } satisfies Translation;

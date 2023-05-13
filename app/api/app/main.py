@@ -127,7 +127,7 @@ def get_current_user(
     return user
 
 
-@app.post("/token", response_model=Token)
+@app.post("/token", response_model=Token, tags=["users"])
 def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: Session = Depends(get_db),
@@ -213,7 +213,7 @@ def delete_user(
 # MODEL MANAGEMENT #
 ####################
 
-@app.post("/models", response_model=schemas.Model, tags=["models"])
+@app.post("/models/", response_model=schemas.Model, tags=["models"])
 def add_model(
     _: Annotated[schemas.User, Depends(get_current_user)],
     name: str = Form(),
@@ -235,15 +235,22 @@ def add_model(
 
     return model
 
-@app.delete("/models", response_model=schemas.Model, tags=["models"])
+@app.delete("/models/{model_id}", response_model=schemas.Model, tags=["models"])
 def delete_model(
     _: Annotated[schemas.User, Depends(get_current_user)],
     model_id: int,
     db: Session = Depends(get_db),
 ):
-    db_model = crud.delete_user(db, model_id=model_id)
+    selected_model = crud.get_selected_model(db)
+    if (selected_model.id == model_id):
+        raise HTTPException(status_code=400, detail="Selected model cannot be deleted")
+
+    db_model = crud.delete_model(db, model_id=model_id)
     if db_model is None:
         raise HTTPException(status_code=404, detail="Model not found")
+    
+    os.remove(db_model.path)
+
     return db_model
 
 
@@ -257,18 +264,27 @@ def read_models(
     models = crud.get_models(db=db, skip=skip, limit=limit)
     return models
 
+@app.post("/select_model", response_model=schemas.Model, tags=["models"])
+def select_model(
+    _: Annotated[schemas.User, Depends(get_current_user)],
+    model_id: int = Form(),
+    db: Session = Depends(get_db),
+):
+    return crud.select_model(db, model_id)
+
 
 ##############
 # PREDICTION #
 ##############
 
-@app.post("/predict")
+@app.post("/predict", tags=["predictions"])
 def obtain_prediction(
     video_hand: Side = Form(),
     dominant_hand: Side = Form(),
     sex: Gender = Form(),
     age: int = Form(),
     video: UploadFile = File(),
+    db: Session = Depends(get_db),
 ):
     file = NamedTemporaryFile()
     file_path = file.name
@@ -299,7 +315,9 @@ def obtain_prediction(
 
     all_features = all_features.to_frame().T
 
-    with open(Path("/data/model.pkl"), "rb") as f:
+    clf_path = crud.get_selected_model(db).path
+
+    with open(clf_path, "rb") as f:
         clf = pickle.load(f)
 
     return list(clf.predict_proba(all_features)[0])

@@ -17,7 +17,7 @@
 		goto(`/${$locale}/login`, { replaceState: true });
 	}
 
-	let usersLoading = read_users(token!);
+	let usersLoading = read_users();
 	let selectedUser: { username: string; id: number };
 	let createUserModal: HTMLDialogElement;
 	let deleteUserModal: HTMLDialogElement;
@@ -38,7 +38,7 @@
 
 		if (newUser) {
 			createUserModal.close();
-			usersLoading = read_users(token!);
+			usersLoading = read_users();
 			(e.target as HTMLFormElement).reset();
 		} else if ((formData.get('password') as string).length < 8) {
 			createUserErrorMessage = $LL.PASSWORD_TOO_SHORT();
@@ -51,7 +51,7 @@
 		const deletedUser = await delete_user(selectedUser.id);
 		if (deletedUser) {
 			deleteUserModal.close();
-			usersLoading = read_users(token!);
+			usersLoading = read_users();
 		}
 	};
 </script>

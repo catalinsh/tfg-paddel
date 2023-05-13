@@ -156,7 +156,7 @@ type RootTranslation = {
 	 */
 	PREDICTION_RESULT: string
 	/**
-	 * U​s​e​r​ ​M​a​n​a​g​e​m​e​n​t
+	 * U​s​e​r​ ​m​a​n​a​g​e​m​e​n​t
 	 */
 	USER_MANAGEMENT: string
 	/**
@@ -203,6 +203,22 @@ type RootTranslation = {
 	 * M​o​d​e​l​s
 	 */
 	MODELS: string
+	/**
+	 * A​d​d​ ​m​o​d​e​l
+	 */
+	ADD_MODEL: string
+	/**
+	 * M​o​d​e​l​ ​m​a​n​a​g​e​m​e​n​t
+	 */
+	MODEL_MANAGEMENT: string
+	/**
+	 * A​ ​l​i​s​t​ ​o​f​ ​a​l​l​ ​t​h​e​ ​m​o​d​e​l​s​ ​i​n​ ​t​h​e​ ​a​p​p​l​i​c​a​t​i​o​n​,​ ​y​o​u​ ​c​a​n​ ​u​p​l​o​a​d​ ​n​e​w​ ​m​o​d​e​l​s​ ​a​n​d​ ​s​e​l​e​c​t​ ​t​h​e​ ​d​e​f​a​u​l​t​ ​m​o​d​e​l​ ​t​o​ ​u​s​e​ ​f​o​r​ ​p​r​e​d​i​c​t​i​o​n​s​.
+	 */
+	MODEL_MANAGEMENT_DESC: string
+	/**
+	 * M​o​d​e​l​ ​n​a​m​e​s​ ​h​a​v​e​ ​t​o​ ​b​e​ ​a​t​ ​l​e​a​s​t​ ​3​ ​c​h​a​r​a​c​t​e​r​s​ ​l​o​n​g​.
+	 */
+	MODELNAME_TOO_SHORT: string
 }
 
 export type TranslationFunctions = {
@@ -347,7 +363,7 @@ export type TranslationFunctions = {
 	 */
 	PREDICTION_RESULT: () => LocalizedString
 	/**
-	 * User Management
+	 * User management
 	 */
 	USER_MANAGEMENT: () => LocalizedString
 	/**
@@ -394,6 +410,22 @@ export type TranslationFunctions = {
 	 * Models
 	 */
 	MODELS: () => LocalizedString
+	/**
+	 * Add model
+	 */
+	ADD_MODEL: () => LocalizedString
+	/**
+	 * Model management
+	 */
+	MODEL_MANAGEMENT: () => LocalizedString
+	/**
+	 * A list of all the models in the application, you can upload new models and select the default model to use for predictions.
+	 */
+	MODEL_MANAGEMENT_DESC: () => LocalizedString
+	/**
+	 * Model names have to be at least 3 characters long.
+	 */
+	MODELNAME_TOO_SHORT: () => LocalizedString
 }
 
 export type Formatters = {}
