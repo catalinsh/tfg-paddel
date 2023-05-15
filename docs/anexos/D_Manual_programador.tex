@@ -44,8 +44,8 @@ En la raíz del proyecto se pueden encontrar los siguentes directorios:
     \hphantom{0cm}{}
     \begin{minipage}[t]{10cm}
         \normalfont
-        Proyecto de NextJS (framework de JavaScript) que implementa el \textit{frontend}
-        de la aplicación{.}
+        Proyecto de SvelteKit (framework de JavaScript) que implementa el
+        \textit{frontend} de la aplicación{.}
     \end{minipage}.
 }
 
@@ -233,7 +233,7 @@ Para utilizar un entorno integrado para realizar el desarrollo se deben utilizar
 herramientas que pueden conectarse a contenedores de Docker, como, por ejemplo,
 \href{https://code.visualstudio.com/}{Visual Studio Code} con la extensión
 \href{https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers}{Dev
-    Containers} o IDEs de JetBrains, como IntelliJ o Pycharm, con el plugin de
+Containers} o IDEs de JetBrains, como IntelliJ o Pycharm, con el plugin de
 Docker.
 
 En los siguientes apartados se detalla el proceso de desarrollo sobre los
@@ -280,17 +280,18 @@ generales que sigue son:
 \subsubsection{Web}
 
 El contenedor \textit{web} es un proyecto basado en NodeJS que utiliza el
-framework de JavaScript NextJS, este framework está basado en React, una
+framework de JavaScript SvelteKit, este framework está basado en Svelte, una
 librería de JavaScript que permite la creación de componentes interactivos y
 reutilizables dentro de una web. Debido a esto, la
-\href{https://nextjs.org/docs/getting-started}{documentación de NextJS} es un
-recurso de gran valor para el desarrollo de este proyecto.
+\href{https://kit.svelte.dev/docs/introduction}{documentación de SvelteKit} es
+un recurso de gran valor para el desarrollo de este proyecto.
 
 En la raíz del proyecto existen varios archivos de interés:
 
 \begin{itemize}
-    \item \texttt{Dockerfile}: Define cómo se crea el contendor.
-    \item \texttt{next.config.js}: Define algunas configuraciones para NextJS.
+    \item \texttt{Dockerfile}: Define cómo se crea el contendor de Docker.
+    \item \texttt{svelte.config.js}: Define algunas configuraciones para
+    SvelteKit.
     \item \texttt{package.json}: Especifica detalles sobre el proyecto de NodeJS
           como nombre del proyecto, autor, dependencias y algunos comandos de
           utilidad.
@@ -300,22 +301,37 @@ En la raíz del proyecto existen varios archivos de interés:
           que se va a ejecutar la aplicación de forma exacta.
     \item \texttt{postcss.config.js}, \texttt{tailwind.config.js}: Archivos
           utilizados para la configuración de Tailwind CSS.
-    \item \texttt{tsconfig.json}: Archivo que configura el compilador de
-          TypeScript.
-    \item \texttt{.eslint.json}: Archivo de configuración de ESLint.
+    \item \texttt{vite.config.ts}: Archivo que configura Vite, que es la
+    herramienta utilizada para lanzar el servidor local de la página web en el
+    entorno de desarrollo.
+    \item \texttt{.prettierrc}: Archivo de configuración de Prettier, que es el
+    formateador de código utilizado para esta parte de la aplicación.
 \end{itemize}
 
 Aunque los archivos anteriores son importantes, la mayoría de cambios y
-adiciones se realizan dentro de los directorios \texttt{/pages/}, que define la
-estructura de páginas de la web, y \texttt{/components/}, donde se encuentran
-los diferentes componentes reutilizables de la web.
+adiciones se realizan dentro de los directorios \texttt{/src/routes}, que define
+la estructura de páginas de la web, y \texttt{/src/lib}, donde se encuentran los
+diferentes componentes reutilizables de la web, además de algunos archivos de
+TypeScript (\texttt{.ts}) con funciones de utilidad y el archivo \texttt{api.ts}
+que implementa una interfaz que refleja las llamadas que se pueden hacer a la
+API implementada con FastAPI.
+
+Además cabe destacar el directorio \texttt{/src/i18n} que contiene los idiomas
+soportados por la aplicación en diferentes carpetas, \texttt{en-GB} y
+\texttt{es-ES}, con las traducciones. La implementación realizada permite añadir
+nuevos idiomas simplemente creando una nueva carpeta con el código de idioma y
+país respectivos, por ejemplo, para añadir el idioma portugues se añadiría la
+carpeta \texttt{pt-PT}, se copiarían los archivos de la carpeta \texttt{es-ES} y
+editarían para añadir las traducciones necesarias. La página con el nuevo idioma
+debería aparecer en el menú de selección de idioma y ser accesible en la ruta
+\texttt{/pt-PT/} de la web.
 
 Los archivos estáticos que se utilizan, imágenes, vídeos, iconos, se almacenan
-en el directorio \texttt{/public/}.
+en el directorio \texttt{/static/}.
 
-En el directorio \texttt{/styles/} se alojan los archivos que definen los
-estilos (CSS) de la web, el contenido de esta carpeta es bastante escaso debido
-al extenso uso de las clases que provee la librería Tailwind CSS.
+En el archivo \texttt{/src/app.css} se definen definen los estilos (CSS)
+globales de la web, el contenido de este archivo es bastante escaso debido al
+extenso uso de las clases que provee la librería Tailwind CSS.
 
 \subsection{Documentación}
 
@@ -359,22 +375,22 @@ extensión
 
 \subsection{Librería PADDEL}
 
-La libraría PADDEL se trata de una librería de Python que se puede instalar
-mediante el comando \texttt{pip}, se puede instalar pasándole la ruta donde se
-encuentra el archivo \texttt{pyproject.toml}, por ejemplo:
+La libraría PADDEL es una librería de Python que se puede instalar mediante el
+comando \texttt{pip} pasándole la ruta donde se encuentra el archivo
+\texttt{pyproject.toml}, por ejemplo:
 
 \texttt{pip install ./paddel}
 
 La librería contiene diferentes módulos que se utilizan para el preprocesado de
-los vídeos de paciente y el entrenamiento de modelos.
+los vídeos del paciente y el entrenamiento de modelos.
 
 \subsubsection{Configuración}
 
 Para configurar algunos parámetros del funcionamiento se ha optado por utilizar
 variables de entorno, gracias a la librería
 \href{https://docs.pydantic.dev/latest/}{Pydantic} las siguientes variables de
-entorno son leídas e interpretadas cuando una de ellas sea necesitada por
-primera vez:
+entorno son leídas e interpretadas cuando el módulo sea importado por primera
+vez:
 
 \begin{itemize}
     \item \texttt{PADDEL\_MIN\_DETECTION\_SECONDS}: Tiempo mínimo de detección en
@@ -397,10 +413,10 @@ primera vez:
 
 \subsubsection{Tipos}
 
-Esta librería utiliza extensamente el tipado que ofrece Python por defecto,
-aunque este no es impuesto en tiempo de ejecución, resulta muy útil al ser
-utilizado con un entorno de desarrollo integrado (IDE) ya que se pueden obtener
-ayudas y avisos que serían imposibles de obtener de otro modo.
+Esta librería utiliza extensamente el tipado estático que ofrece Python por
+defecto, aunque este no es impuesto en tiempo de ejecución, resulta muy útil al
+ser utilizado con un entorno de desarrollo integrado (IDE) ya que se pueden
+obtener ayudas y avisos que no se podría de otro modo.
 
 El archivo \texttt{types.py} contine las definiciones de algunos tipos complejos
 que se utilizan a través de la librería debido a que son específicos a este
@@ -441,7 +457,8 @@ Además de Black, se utilizan las herramientas
 \texttt{import} y comprobar el tipado estático utilizado respectivamente.
 
 Como antes, el uso de estas herramientas se simplifica gracias al uso de la
-utilidad \texttt{make}. En este caso el archivo \texttt{Makefile} aporta los siguientes comandos:
+utilidad \texttt{make}. En este caso el archivo \texttt{Makefile} aporta los
+siguientes comandos:
 
 \begin{itemize}
     \item \texttt{make lint}:
@@ -450,10 +467,162 @@ utilidad \texttt{make}. En este caso el archivo \texttt{Makefile} aporta los sig
 
 \subsection{Notebooks de Jupyter}
 
+Para ejecutar los notebooks de Jupyter del proyecto se debe instalar la librería
+Paddel, además de Jupyter en el sistema anfitrión, para esto se puede utilizar
+el archivo \texttt{requirements.txt} presente en la raíz del proyecto:
 
+\texttt{pip install -r requirements.txt}
+
+Tras el paso anterior se puede lanzar el kernel de IPython (backend que utiliza
+Jupyter) mediante en comando:
+
+\texttt{jupyter notebook}
+
+Este comando inicia un servidor web al que se puede acceder de forma local
+mediante cualquiera de los enlaces que se muentran por consola (acceder de forma
+remota resulta algo más complicado dependiendo de casos), en esta página web se
+muestra un explorador de archivos mediante el que se puede navegar a la
+localización donde se encuentran los notebooks de Jupyter (\texttt{/notebooks/})
+y abrir el notebook que se desee utilizar.
+
+Existen los siguientes notebooks:
+
+\begin{itemize}
+    \item \texttt{00-train.ipynb}: Utilizado para entrenar una multitud de
+    modelos, buscar los parámetros óptimos de los mismos mediante la técnica
+    conocida como \textit{grid search} y exportar los resultados a un fichero
+    \texttt{.csv}.
+    \item \texttt{01-plots.ipynb}: Utiliza los resultados obtenidos en la
+    ejecución del notebook anterior para crear diferentes gráficas que pueden
+    revelar información adicional sobre el comportamiento de los algoritmos
+    utilizados con diferentes combinaciones de parámetros y conjuntos de datos
+    de entrada.
+    \item \texttt{02-model.ipynb}: Utilizado para entrenar un modelo final que
+    vaya a ser utilizado en la aplicación web para realizar las predicciones. En
+    este caso en entrenamiento se realiza con el conjunto de datos completo. Los
+    parametros utilizados para el modelo serán los que se consideren más
+    adecuados en base al los resultados observados en la ejecución de los
+    notebooks anteriores.
+\end{itemize}
 
 \section{Compilación, instalación y ejecución del proyecto}
 
+La mayor parte de este proyecto ha sido realizada Python, un lenguaje
+interpretado (no compilado), por lo que estas partes no necesitan ser
+compiladas.
 
+\subsection{API}
+
+Para lanzar la API se necesita un entorno con la versión 3.9 de Python
+disponible, dependiendo del sistema operativo puede ser necesario instalar la
+librería \href{https://ffmpeg.org}{FFmpeg} para poder realizar el procesado de
+vídeo al realizar las predicciones.
+
+A continuación se deberán instalar las dependencias recogidas en el fichero
+\texttt{requirements.txt} mediante:
+
+\texttt{pip install -r requirements.txt}
+
+Además, la API necesita tener acceso a una base de datos PostgreSQL para
+almacenar de forma persistenete la información con la que trabaja. Se puede
+comunicar la información de acceso a dicha base de datos mediante las siguientes
+variables de entorno:
+
+\begin{itemize}
+    \item \texttt{DB\_USER}: Usuario a utilizar para acceder a la base de datos.
+    \item \texttt{DB\_PASSWORD}: Constraseña para el usuario definido por
+    \texttt{DB\_USER}.
+    \item \texttt{DB\_NAME}: Nombre de la base de datos a utilizar.
+\end{itemize}
+
+Para controlar la sesión de los usuarios se utilizan cadenas JWT (JSON Web
+Token), las cuales deben ser firmadas mediante una clave secreta que también
+debe ser establecida mediante una variable de entorno denominada
+\texttt{SECRET\_KEY}. Esta variable puede ser cualquier cadena de texto pero es
+recomendable que sea generada mediante una herramienta de criptografía diseñada
+para este propósito, como el comando \texttt{openssl} presente en la mayoría de
+distribuciones de Linux:
+
+\texttt{openssl rand -hex 32}
+
+Con el que se obtiene una salida similar a la siguiente:
+
+\texttt{5e95e9e53d95d2892a63682a118a834429f43f3fd3eb951eda7811d9a1ad3f64}
+
+Una vez las dependencias están instaladas y las variables de entorno
+establecidas se puede lanzar el servidor de la API de forma local mediante:
+
+\texttt{uvicorn app.main:app}
+
+Gracias a utilizar FastAPI se crea automáticamente la ruta \texttt{/docs} que
+presenta una interfaz que muestra las diferentes acciones que permite hacer la
+API además de permitir ejecuar estas acciones para comprobar su correcto
+funcionamiento de forma bastante conveniente.
+
+\subsection{Web}
+
+Para utilizar la aplicación web se necesita un entorno que disponga de
+\href{https://nodejs.org/}{NodeJS}, en concreto la versión 18 es la ideal, al
+ser la utilizada durante el desarrollo del proyecto, además, si nos se ha
+instalado con NodeJS, se debe instalar \href{https://www.npmjs.com/}{NPM}
+también, que es el gestor de paquetes de Node.
+
+Para instalar las dependencias del proyecto se utiliza:
+
+\texttt{npm install} o \texttt{npm i}
+
+Los comandos anteriores leen los archivos \texttt{package.json} y
+\texttt{package-lock.json} e instalan los paquetes declarados en estos.
+
+La aplicación web ha sido realizada mediante el framework SvelteKit, y utiliza
+archivos \texttt{.ts} y \texttt{.svelte} que no son interpretables por un
+navegador, por lo que deben ser convertidos a únicamente ficheros
+\texttt{.html}, \texttt{.css} y \texttt{.js}. Para esto se realiza una
+compilación mediante el comando \texttt{npm run build} que realiza la conversión
+anterior además de realizar ciertas optimizaciones como eliminar código no
+utilizado para reducir el tamaño final de los archivos. Una vez realizada la
+compilación, los archivos finales se almacenan en el directorio
+\texttt{/build/}.
+
+Esta aplicación web sirve como \textit{frontend} para la API, por lo que
+necesita saber cómo comunicarse con la ella, para esto se utiliza la variable de
+entorno \texttt{PUBLIC\_API\_LOCATION} que podría tomar el valor
+\texttt{http://localhost:44444} por ejemplo.
+
+\subsection{Ejecución mediante Docker}
+
+Este proyecto está compuesto por varias piezas que interactúan entre sí,
+instalar todos los programas y dependencias, además de desplegar una base de
+datos, puede resultar una tarea ardua y tediosa, asimismo, dependiendo del
+sistema sobre el que se esté intentando realizar el despliegue puede introducir
+inconsistencias en los procesos definidos anteriormente.
+
+Debido a lo anterior se ha optado por utilizar la conocida herramienta
+\href{https://www.docker.com/}{Docker}, gracias a esto se pueden definir
+diferentes contenedores con entornos controlados sobre los que se pueden
+realizar los pasos de instalación de forma determinista, (obteniendo siempre los
+mismos resultados).
+
+El único requisito para realizar un despliegue mediante Docker es, valga la
+redundancia, tener Docker instalado en el sistema.
+
+Para establecer las diferentes variables de entorno mencionadas anteriormente se
+utiliza un fichero de variables de entorno denominado \texttt{.env}, un ejemplo
+con los posibles valores de estas variables se encuentra en el fichero
+\texttt{sample.env}.
+
+Para realizar el despliegue se utiliza el comando \texttt{make prod} desde la
+ruta \texttt{/app/}, donde sen encuentran los archivos
+\texttt{docker-compose.yml}. Si no se dispone de la utilidad \texttt{make} se
+puede utilizar:
+
+\texttt{docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d}
+
+Este comando iniciará una base de datos PostgreSQL, lanzará el servicio de la
+API, compilará e iniciará el servicio de la web y lanzará un proxy inverso para
+permitir el acceso a la API y a la web mediante distintos subdominios, por
+ejemplo, \texttt{https://localhost} para acceder a la web y
+\texttt{https://api.localhost} para acceder a la API (estas rutas son definidas
+en el fichero \texttt{.env}).
 
 \section{Pruebas del sistema}

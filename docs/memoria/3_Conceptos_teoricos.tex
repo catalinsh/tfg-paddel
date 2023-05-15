@@ -1,21 +1,26 @@
-\capitulo{Conceptos teóricos}\label{cha:Conceptos teóricos}
+\capitulo{Conceptos teóricos}
+\label{cha:Conceptos teóricos}
 
 Este capítulo define algunos de los conceptos teóricos que se mencionan en este
 documento.
 
-\subsection{Aprendizaje Automático}
+\section{Minería de Datos}
 
-El aprendizaje automático es un área de la inteligencia artificial que consiste
-en el diseño de algoritmos y modelos que permitan a los ordenadores aprender la
-regla general que define un conjunto de datos sin ser explícitamente programados
-para ello.
+La minería de datos es un área de la inteligencia artificial que consiste en el
+diseño de algoritmos y modelos que permitan a los ordenadores aprender la regla
+general que define un conjunto de datos sin ser explícitamente programados para
+ello.
+
+La minería de datos incluye, además de algoritmos de aprendizaje, todas las
+metodologías y técnicas utilizadas para el tratamiento y filtrado del conjunto
+de datos disponible.
 
 \subsection{Preprocesado}
 
 La información con la que se entrene un modelo de aprendizaje automático
 determina en gran medida el rendimiento que podrá alcanzar, debido a esto es muy
 frecuente realizar un paso previo a la creación del modelo, denominado
-\textit{preprocesado}.
+\textit{preprocesado} \cite{enwiki:1138293751}.
 
 El objetivo del preprocesado es transformar la entrada de datos iniciales con el
 fin de permitir y facilitar que un modelo se adapte a los mismos.
@@ -52,7 +57,7 @@ entrenar modelos de aprendizaje automático con mayor eficacia.
 En la selección de características, se pueden utilizar técnicas como el análisis
 de componentes principales (PCA)~\cite{mackiewicz1993principal}, el análisis
 discriminante lineal (LDA)~\cite{xanthopoulos2013linear} o pruebas de
-significancia.
+significancia, entre otras.
 
 \subsubsection{Normalización}
 
@@ -70,9 +75,11 @@ diferencias, por ejemplo, la normalización por cuantiles
 distribución normal, lo que consigue que, si existen valores muy lejanos a los
 valores más comunes (\textit{outliers}), estos se acerquen al resto. 
 
+\subsection{Aprendizaje supervisado}
+
 \subsection{Clasificación}
 
-En el ámbito del aprendizaje automático, clasificar instancias en categorías
+En el ámbito del aprendizaje supervisado, clasificar instancias en categorías
 predeterminadas es uno de los principales problemas a resolver.
 
 En general, la resolución de un problema de clasificación se caracteriza por
@@ -162,7 +169,7 @@ Las fugas de información no son algo que debería ser siempre evitado, existen
 situaciones en las que son necesarias dependiendo del caso concreto. Pero sí es
 importante que sean detectadas y tenidas en cuenta a la hora de analizar los
 resultados obtenidos, ya que, en caso contrario, se podría llegar a conclusiones
-equívocas.
+equívocas (demasiado optimistas por ejemplo).
 
 \subsection{Validación cruzada}
 
@@ -193,7 +200,9 @@ tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
     un tiempo de computación necesario muy grande.
     \item \textbf{\textit{K-fold}}: Consite en dividir la muestra en conjuntos
     de entrenamiento y test de proporciones $(K-1)/K$ y $1/K$ respectivamente,
-    realizando un total de $K$ iteraciones.
+    realizando un total de $K$ iteraciones. Además se puede realizar varias
+    repeticiones de este tipo de validación cruzada para reducir la variabilidad
+    del error obtenido.
 \end{itemize}
 
 \subsection{Optimización de hiperparámetros}
@@ -208,7 +217,7 @@ de hiperparámetros.
 
 En general, la optimización de hiperparámetros consiste en probar diferentes
 combinaciones de valores y realizar el proceso de entrenamiento y test mediante
-validación cruzada con una métrica adecuada hasta dar con la combinación más
+validación cruzada con una métrica apropiado hasta dar con la combinación más
 adecuada. Existen varias formas para realizar esto, como, por ejemplo:
 
 \begin{itemize}
@@ -230,4 +239,3 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
     todas las combinaciones como ocurre con \textit{grid search}. Un ejemplo de
     esto es la Optimización Bayesiana.
 \end{itemize}
-f
