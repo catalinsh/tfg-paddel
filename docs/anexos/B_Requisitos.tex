@@ -37,16 +37,31 @@ manera deberá responder el programa, etc.). En este caso se ha seguido UML
 
 \section{Objetivos generales}
 
+Durante la fase de investigación del proyecto se ha creado una multitud de
+modelos de inteligencia artificial con diferentes grados de precisión para
+detectar la enfermedad de Parkinson en un individuo. Estos modelos son
+almacenados como archivos binarios y los conocimientos específicos de
+programación requeridos para su uso hacen imposible que la persona media o
+personal médico pueda obtener una predicción.
+
+El objetivo principal de esta aplicación es implementar una interfaz intuitiva
+para interactuar con los modelos sin la necesidad de que el usuario final altere
+de ninguna forma su equipo informático.
+
+Como objetivo secundario, la aplicación debe permitir a los usuarios registrados
+seleccionar el modelo utilizado mediante la misma interfaz usada para realizar
+las predicciones.
+
 \section{Catálogo de requisitos}
 
 \subsection{Requisitos funcionales}
 
 \begin{enumerate}[start=1,label={\bfseries RF\arabic*:}]
-    \item El sistema debe permitir diferenciar entre dos roles: Usuario normal y
-          Administrador.
+    \item El sistema debe permitir diferenciar entre dos roles: Usuario normal
+          (que no ha iniciado sesión) y Administrador.
     \item Cualquier usuario debe poder subir un archivo de vídeo junto con
           información adicional para ser procesados por un modelo de
-          inteligencia artifical y obtener el resultado.
+          inteligencia artifical y obtener una predicción.
     \item Los usuarios administradores deben poder iniciar sesión con su nombre
           de usuario y contraseña respectivos.
     \item Los usuarios administradores deben poder finalizar su sesión.
@@ -60,6 +75,12 @@ manera deberá responder el programa, etc.). En este caso se ha seguido UML
           disponibles.
     \item Un administrador debe poder seleccionar de la lista de modelos
           disponibles aquel que se va a utilizar para realizar predicciones.
+    \item Un administrador debe tener acceso a una lista con todos los usuarios
+          registrados en la aplicación.
+    \item Un administrador debe poder añadir nuevos usuarios de tipo
+          administrador a la aplicación, especificando su nombre de usuario y
+          contraseña.
+    \item Un administrador debe poder eliminar usuarios de la aplicación.
 \end{enumerate}
 
 \subsection{Requisitos no funcionales}
@@ -77,6 +98,8 @@ manera deberá responder el programa, etc.). En este caso se ha seguido UML
 \end{enumerate}
 
 \section{Especificación de requisitos}
+
+
 
 \subsection{Actores}
 

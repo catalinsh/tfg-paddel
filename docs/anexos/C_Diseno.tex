@@ -10,12 +10,24 @@ fácil.
 
 En este anexo se intenta definir de forma clara el modo en que se van a
 almacenar los datos, las distintas interacciones que deberán existir entre las
-partes de la aplicación y la forma en la que el usuario final debeá interactuar
+partes de la aplicación y la forma en la que el usuario final deberá interactuar
 con ellas.
 
 \section{Diseño de datos}
 
+En este apartado se explica de forma detallada la forma en la que se almacenan
+los datos con los que trabaja la aplicación (información de usuario, información
+sobre los modelos y los archivos binarios de estos modelos).
 
+En este caso se ha optado por utilizar el sistema gestor de bases de datos
+PostgreSQL, esta decisión es debido a que ya existía cierta familiaridad con el
+programa y a que es ampliamente soportado por SQLAlchemy, la librería ORM
+(Object-Relational Mapping) utilizada en la API.
+
+El diseño de datos creado es muy simple debido a que la aplicación en sí es muy
+simple, su objetivo principal es permitir la fácil utilización de modelos
+previamente entrenados para obtener predicciones y selección de los mismos por
+parte de los administradores.
 
 \section{Diseño procedimental}
 
