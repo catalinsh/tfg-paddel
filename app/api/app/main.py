@@ -7,6 +7,7 @@ from typing import Annotated, Union
 import uuid
 import pandas as pd
 from pydantic import BaseModel
+from sklearn.base import BaseEstimator
 
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, Depends, File, Form, HTTPException, UploadFile, status
@@ -231,12 +232,21 @@ def add_model(
     path = Path("/data") / f"{filename}.pkl"
     
     contents = model.file.read()
+
+    try:
+        clf = pickle.loads(contents)
+    except pickle.UnpicklingError as e:
+        raise HTTPException(status_code=422, detail="File does not look like a sklearn estimator")
+
+    if not isinstance(clf, BaseEstimator):
+        raise HTTPException(status_code=422, detail="File does not look like a sklearn estimator")
+
     with open(path, "wb") as f:
         f.write(contents)
 
-    model = crud.add_model(db, name, str(path))
+    new_model = crud.add_model(db, name, str(path))
 
-    return model
+    return new_model
 
 @app.delete("/models/{model_id}", response_model=schemas.Model, tags=["models"])
 def delete_model(

@@ -21,7 +21,7 @@
 	let addModelModal: HTMLDialogElement;
 	let deleteModelModal: HTMLDialogElement;
 	let addModelErrorMessage: string;
-	let file: File;
+	let file: File | null;
 	let fileInput: HTMLInputElement;
 
 	const fileDropHandler = (e: DragEvent) => {
@@ -49,15 +49,24 @@
 			return;
 		}
 
-		const newModel = await add_model(name, file);
-
-		if (newModel) {
-			addModelModal.close();
-			modelsLoading = read_models();
-			(e.target as HTMLFormElement).reset();
-		} else {
-			addModelErrorMessage = $LL.MODEL_NAME_ALREADY_EXISTS();
+		try {
+			const newModel = await add_model(name, file!);
+			if (newModel) {
+				addModelModal.close();
+				modelsLoading = read_models();
+				(e.target as HTMLFormElement).reset();
+				addModelErrorMessage = ""
+				file = null;
+			}
+		} catch (error: any) {
+			if (error.response.status === 400) {
+				addModelErrorMessage = $LL.MODEL_NAME_ALREADY_EXISTS();
+			} else if (error.response.status === 422) {
+				addModelErrorMessage = "Invalid model";
+			}
 		}
+
+		
 	};
 
 	const deleteSelectedModel = async () => {
@@ -358,6 +367,7 @@
 								on:click={() => {
 									addModelModal.close();
 									addModelErrorMessage = '';
+									file = null;
 								}}
 								class="mt-2 w-full"
 								type="submit">{$LL.CANCEL()}</ButtonSecondary

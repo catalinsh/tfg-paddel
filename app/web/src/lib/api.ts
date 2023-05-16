@@ -127,7 +127,7 @@ export const add_model = async (
 
 		return response.data;
 	} catch (error: any) {
-		return null;
+		throw error;
 	}
 }
 
