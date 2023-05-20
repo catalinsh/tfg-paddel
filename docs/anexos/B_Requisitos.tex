@@ -1,15 +1,11 @@
-\newcounter{ncu}
-\setcounter{ncu}{0}
 \newcommand{\cu}[9]{
-    \addtocounter{ncu}{1}
-
     \begin{table}[p]
         \centering
         \begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
             \toprule
-            \textbf{CU-\arabic{ncu}}      & \textbf{#1} \\
+            \textbf{CU-#1}      & \textbf{#2} \\
             \toprule
-            \textbf{Versión}              & #2          \\
+            \textbf{Versión}              & 1.0          \\
             \textbf{Autor}                & \theauthor  \\
             \textbf{Requisitos asociados} & #3          \\
             \textbf{Descripción}          & #4          \\
@@ -20,7 +16,7 @@
             \textbf{Importancia}          & #9          \\
             \bottomrule
         \end{tabularx}
-        \caption{CU-\arabic{ncu} #1.}
+        \caption{CU-#1 #2.}
     \end{table}
 }
 
@@ -86,8 +82,8 @@ las predicciones.
 \subsection{Requisitos no funcionales}
 
 \begin{enumerate}[start=1,label={\bfseries RNF\arabic*:}]
-    \item El tiempo desde que un usuario sube un vídeo y sus datos hasta que
-          recibe el resultado debe ser inferior a un minuto.
+    \item El tiempo desde que un usuario termina de subir el vídeo y sus datos
+          hasta que recibe el resultado debe ser inferior a un minuto.
     \item El sistema debe ser fácil de usar, con una interfaz intuitiva que el
           usuario entienda de forma inmediata.
     \item La página web deberá utilizar etiquetas y atributos HTML de tal forma
@@ -98,8 +94,6 @@ las predicciones.
 \end{enumerate}
 
 \section{Especificación de requisitos}
-
-
 
 \subsection{Actores}
 
@@ -114,10 +108,12 @@ Existen dos tipos de actores en esta aplicación:
 
 \subsection{Casos de uso}
 
-\imagen{anexos/diagrama_casos_de_uso.pdf}{Diagrama general de casos de uso}{0.5}
+Un caso de uso es la descripción de una interacción que el sistema debe permitir
+realizar al usuario o usuarios pertinentes.
 
-\cu{Obtener predicción}
-{1.0}
+\imagen{anexos/diagrama_casos_de_uso.pdf}{Diagrama general de casos de uso}{1}
+
+\cu{1}{Obtener predicción}
 {RF2}
 {Cualquier usuario debe poder obtener un predicción utilizado un modelo.}
 {Estar en la página respectiva de la web.}
@@ -137,14 +133,13 @@ Existen dos tipos de actores en esta aplicación:
 {}
 {
     \begin{itemize}
-        \item [1] No se pueden extraer fotogramas con pose suficientes.
+        \item [1] No se pueden extraer fotogramas con poses suficientes.
         \item [2] La información adicional introducida no es válida.
     \end{itemize}
 }
 {Alta}
 
-\cu{Iniciar sesión}
-{1.0}
+\cu{2}{Iniciar sesión}
 {RF1, RF3}
 {Los usuarios administradores deben poder iniciar sesión con sus credenciales.}
 {Estar en la página de inicio de sesión.}
@@ -165,8 +160,7 @@ Existen dos tipos de actores en esta aplicación:
 }
 {Alta}
 
-\cu{Finalizar sesión}
-{1.0}
+\cu{2}{Finalizar sesión}
 {RF1, RF4}
 {Los usuarios administradores deben poder finalizar su sesión.}
 {Tener una sesión activa.}
@@ -182,8 +176,7 @@ Existen dos tipos de actores en esta aplicación:
 {}
 {Media}
 
-\cu{Ver lista de modelos}
-{1.0}
+\cu{4.1}{Ver lista de modelos}
 {RF1, RF6}
 {Los usuarios administradores deben poder ver la lista con los modelos disponibles.}
 {}
@@ -192,7 +185,7 @@ Existen dos tipos de actores en esta aplicación:
         \def\labelenumi{\arabic{enumi}.}
         \tightlist
         \item El usuario accede a la página de gestión de modelos.
-        \item Se muetra una lista con los modelos existentes junto con algunas acciones.
+        \item Se muestra una lista con los modelos existentes junto con algunas acciones.
     \end{enumerate}
 }
 {}
@@ -203,8 +196,31 @@ Existen dos tipos de actores en esta aplicación:
 }
 {Alta}
 
-\cu{Añadir modelo}
-{1.0}
+\cu{4.2}{Seleccionar modelo}
+{RF1, RF9}
+{Los usuarios administradores deben poder seleccionar el modelo a usar para realizar predicciones.}
+{El usuario debe estar en la lista de modelos.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para seleccionar un modelo
+              concreto de la lista de modelos.
+        \item Se informa al usuario de que el modelo ha sido seleccionado y es
+              el que se va a utilizar para realizar predicciones.
+    \end{enumerate}
+}
+{
+    La base de datos cambia para establecer el modelo respectivo como seleccionado.
+}
+{
+    \begin{itemize}
+        \item [1] Usuario no ha iniciado sesión.
+    \end{itemize}
+}
+{Alta}
+
+\cu{4.3}{Añadir modelo}
 {RF1, RF7}
 {Los usuarios administradores deben poder añadir modelos.}
 {El usuario debe estar en la lista de modelos.}
@@ -230,8 +246,7 @@ Existen dos tipos de actores en esta aplicación:
 }
 {Alta}
 
-\cu{Eliminar modelo}
-{1.0}
+\cu{4.4}{Eliminar modelo}
 {RF1, RF8}
 {Los usuarios administradores deben poder eliminar modelos.}
 {El usuario debe estar en la lista de modelos.}
@@ -255,23 +270,67 @@ Existen dos tipos de actores en esta aplicación:
 }
 {Alta}
 
-\cu{Seleccionar modelo}
-{1.0}
-{RF1, RF9}
-{Los usuarios administradores deben poder seleccionar el modelo a usar para realizar predicciones.}
-{El usuario debe estar en la lista de modelos.}
+\cu{5.1}{Ver lista de usuarios}
+{RF1, RF6}
+{Los usuarios administradores deben poder ver la lista con los usuarios existentes.}
+{}
 {
     \begin{enumerate}
         \def\labelenumi{\arabic{enumi}.}
         \tightlist
-        \item El usuario hace clic en el botón para seleccionar un modelo
-              concreto de la lista de modelos.
-        \item Se informa al usuario de que el modelo ha sido seleccionado y es
-              el que se va a utilizar para realizar predicciones.
+        \item El usuario accede a la página de gestión de usuarios.
+        \item Se muestra una lista con los usuarios existentes junto con algunas acciones que se puede realizar sobre los mismos.
+    \end{enumerate}
+}
+{}
+{
+    \begin{itemize}
+        \item [1] Usuario no ha iniciado sesión.
+    \end{itemize}
+}
+{Alta}
+
+\cu{5.2}{Añadir usuario}
+{RF1, RF7}
+{Los usuarios administradores deben poder añadir nuevos usuarios al sistema.}
+{El usuario debe estar en la página con la lista de usuarios.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para añadir un usuario.
+        \item Se abre un formulario donde se pide el nombre de usuario junto con
+        su contraseña.
+        \item El usuario rellena el formulario y lo envía.
+        \item Se devuelve al usuario a la lista de usuarios, donde el nuevo
+              usuario debería estar presente.
+    \end{enumerate}
+}
+{}
+{
+    \begin{itemize}
+        \item [1] Usuario no ha iniciado sesión.
+        \item [3] Nombre de usuario demasiado corto.
+        \item [3] Contraseña demasiado corta.
+    \end{itemize}
+}
+{Alta}
+
+\cu{5.3}{Eliminar usuario}
+{RF1, RF8}
+{Los usuarios administradores deben poder eliminar usuarios.}
+{El usuario debe estar en la lista de usuarios.}
+{
+    \begin{enumerate}
+        \def\labelenumi{\arabic{enumi}.}
+        \tightlist
+        \item El usuario hace clic en el botón para eliminar un usuario concreto.
+        \item Se abre una ventana modal que pregunta al usuario si está seguro.
+        \item Si está seguro, se refresca la página mostrando la información actualizada.
     \end{enumerate}
 }
 {
-    La base de datos cambia para establecer el modelo respectivo como seleccionado.
+    El usuario ha sido eliminado de la base de datos.
 }
 {
     \begin{itemize}
