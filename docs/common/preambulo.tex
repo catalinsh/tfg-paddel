@@ -21,6 +21,7 @@
 \usepackage{subfig}
 \usepackage[shortlabels]{enumitem}
 \usepackage{dirtree}
+\usepackage{amsmath}
 
 % Enlaces
 \usepackage[colorlinks]{hyperref}
@@ -130,7 +131,7 @@
 
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
-    \begin{table}
+    \begin{table}[H]
         \begin{center}
             \rowcolors {2}{gray!35}{}
             \begin{tabular}{#2}
