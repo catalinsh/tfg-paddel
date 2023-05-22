@@ -167,7 +167,7 @@ encuentran varios archivos \textit{docker-compose} de tipo YAML:
 \end{itemize}
 
 Gracias al uso de Docker Compose se crea una red interna de Docker que conecta
-los diferentes contenedores entre sí y estableciendo \textit{hostnames} simples
+los diferentes contenedores entre sí y establece \textit{hostnames} simples
 que pueden utilizar para conectarse unos con otros. Por ejemplo, el proxy
 inverso puede realizar una petición HTTP a la API en la ruta
 \texttt{http://api}.
@@ -225,7 +225,7 @@ Para el desarrollo de la aplicación, como es de esperar, se utiliza el comando
 Docker y creado el archivo \texttt{.env}).
 
 En modo desarrollo se pueden editar los ficheros directamente desde el sistema
-anfitrión y los cambios se van a ver reflejados sobre los contenedores, esto
+anfitrión y los cambios se van a ver reflejados sobre los contenedores. Esto
 puede ser útil para realizar cambios pequeños en los que no se necesiten las
 ayudas que puede dar una IDE.
 
@@ -280,7 +280,7 @@ generales que sigue son:
 \subsubsection{Web}
 
 El contenedor \textit{web} es un proyecto basado en NodeJS que utiliza el
-framework de JavaScript SvelteKit, este framework está basado en Svelte, una
+framework de JavaScript SvelteKit. Este framework está basado en Svelte, una
 librería de JavaScript que permite la creación de componentes interactivos y
 reutilizables dentro de una web. Debido a esto, la
 \href{https://kit.svelte.dev/docs/introduction}{documentación de SvelteKit} es
@@ -316,21 +316,21 @@ TypeScript (\texttt{.ts}) con funciones de utilidad y el archivo \texttt{api.ts}
 que implementa una interfaz que refleja las llamadas que se pueden hacer a la
 API implementada con FastAPI.
 
-Además cabe destacar el directorio \texttt{/src/i18n} que contiene los idiomas
+Además, cabe destacar el directorio \texttt{/src/i18n} que contiene los idiomas
 soportados por la aplicación en diferentes carpetas, \texttt{en-GB} y
 \texttt{es-ES}, con las traducciones. La implementación realizada permite añadir
 nuevos idiomas simplemente creando una nueva carpeta con el código de idioma y
-país respectivos, por ejemplo, para añadir el idioma portugues se añadiría la
+país respectivos. Por ejemplo, para añadir el idioma portugues se añadiría la
 carpeta \texttt{pt-PT}, se copiarían los archivos de la carpeta \texttt{es-ES} y
 editarían para añadir las traducciones necesarias. La página con el nuevo idioma
 debería aparecer en el menú de selección de idioma y ser accesible en la ruta
 \texttt{/pt-PT/} de la web.
 
-Los archivos estáticos que se utilizan, imágenes, vídeos, iconos, se almacenan
-en el directorio \texttt{/static/}.
+Los archivos estáticos que se utilizan, como imágenes, vídeos, iconos, se
+almacenan en el directorio \texttt{/static/}.
 
 En el archivo \texttt{/src/app.css} se definen definen los estilos (CSS)
-globales de la web, el contenido de este archivo es bastante escaso debido al
+globales de la web. El contenido de este archivo es bastante escaso debido al
 extenso uso de las clases que provee la librería Tailwind CSS.
 
 \subsection{Documentación}
@@ -387,7 +387,7 @@ los vídeos del paciente y el entrenamiento de modelos.
 \subsubsection{Configuración}
 
 Para configurar algunos parámetros del funcionamiento se ha optado por utilizar
-variables de entorno, gracias a la librería
+variables de entorno. Gracias a la librería
 \href{https://docs.pydantic.dev/latest/}{Pydantic} las siguientes variables de
 entorno son leídas e interpretadas cuando el módulo sea importado por primera
 vez:
@@ -414,7 +414,7 @@ vez:
 \subsubsection{Tipos}
 
 Esta librería utiliza extensamente el tipado estático que ofrece Python por
-defecto, aunque este no es impuesto en tiempo de ejecución, resulta muy útil al
+defecto. Aunque este no es impuesto en tiempo de ejecución, resulta muy útil al
 ser utilizado con un entorno de desarrollo integrado (IDE) ya que se pueden
 obtener ayudas y avisos que no se podría de otro modo.
 
@@ -441,12 +441,12 @@ En la librería se han seguido las convenciones de formato definidas por
 \href{https://github.com/psf/black}{Black}, que es una libería de formateado de
 código para Python, escrita en Python.
 
-Se ha seleccionado Black debido a que incluye mucha opiniones predefinidas y
-limita en gran medida las opciones que puede controlar el usuario, esto puede
-parecer una desventaja, pero en este caso simplemente se deseaba una utilidad
-que diese un aspecto homogéneo al código con el menor esfuerzo posible por parte
-del programador. Además, gracias a la limitada personalización que ofrece Black,
-se cumple con el principio de Convención sobre Configuración
+Se ha seleccionado Black debido a que incluye muchas opiniones predefinidas y
+limita en gran medida la configuración que puede controlar el usuario. Esto
+puede parecer una desventaja, pero en este caso simplemente se deseaba una
+utilidad que diese un aspecto homogéneo al código con el menor esfuerzo posible
+por parte del programador. Además, gracias a la limitada personalización que
+ofrece Black, se cumple con el principio de Convención sobre Configuración
 \cite{eswiki:125269135}.
 
 Además de Black, se utilizan las herramientas
@@ -461,26 +461,29 @@ utilidad \texttt{make}. En este caso el archivo \texttt{Makefile} aporta los
 siguientes comandos:
 
 \begin{itemize}
-    \item \texttt{make lint}:
-    \item \texttt{make format}
+    \item \texttt{make lint}: Realiza un análisis del código con las
+    herramientas anteriores notificando de posibles problemas pero sin realizar
+    correcciones.
+    \item \texttt{make format}: Es igual que el comando anterior, pero se
+    aplican correcciones al código.
 \end{itemize}
 
 \subsection{Notebooks de Jupyter}
 
 Para ejecutar los notebooks de Jupyter del proyecto se debe instalar la librería
-Paddel, además de Jupyter en el sistema anfitrión, para esto se puede utilizar
+Paddel, además de Jupyter en el sistema anfitrión. Para esto se puede utilizar
 el archivo \texttt{requirements.txt} presente en la raíz del proyecto:
 
 \texttt{pip install -r requirements.txt}
 
 Tras el paso anterior se puede lanzar el kernel de IPython (backend que utiliza
-Jupyter) mediante en comando:
+Jupyter) mediante el comando:
 
 \texttt{jupyter notebook}
 
 Este comando inicia un servidor web al que se puede acceder de forma local
 mediante cualquiera de los enlaces que se muentran por consola (acceder de forma
-remota resulta algo más complicado dependiendo de casos), en esta página web se
+remota resulta algo más complicado dependiendo de casos). En esta página web se
 muestra un explorador de archivos mediante el que se puede navegar a la
 localización donde se encuentran los notebooks de Jupyter (\texttt{/notebooks/})
 y abrir el notebook que se desee utilizar.
@@ -499,7 +502,7 @@ Existen los siguientes notebooks:
     de entrada.
     \item \texttt{02-model.ipynb}: Utilizado para entrenar un modelo final que
     vaya a ser utilizado en la aplicación web para realizar las predicciones. En
-    este caso en entrenamiento se realiza con el conjunto de datos completo. Los
+    este caso el entrenamiento se realiza con el conjunto de datos completo. Los
     parametros utilizados para el modelo serán los que se consideren más
     adecuados en base al los resultados observados en la ejecución de los
     notebooks anteriores.
@@ -514,7 +517,7 @@ compiladas.
 \subsection{API}
 
 Para lanzar la API se necesita un entorno con la versión 3.9 de Python
-disponible, dependiendo del sistema operativo puede ser necesario instalar la
+disponible. Dependiendo del sistema operativo puede ser necesario instalar la
 librería \href{https://ffmpeg.org}{FFmpeg} para poder realizar el procesado de
 vídeo al realizar las predicciones.
 
@@ -547,7 +550,8 @@ distribuciones de Linux:
 
 Con el que se obtiene una salida similar a la siguiente:
 
-\texttt{5e95e9e53d95d2892a63682a118a834429f43f3fd3eb951eda7811d9a1ad3f64}
+\texttt{5e95e9e53d95d2892a63682a118a834429f43f3fd3eb951eda781-}\\
+\texttt{1d9a1ad3f64}
 
 Una vez las dependencias están instaladas y las variables de entorno
 establecidas se puede lanzar el servidor de la API de forma local mediante:
@@ -563,7 +567,7 @@ funcionamiento de forma bastante conveniente.
 
 Para utilizar la aplicación web se necesita un entorno que disponga de
 \href{https://nodejs.org/}{NodeJS}, en concreto la versión 18 es la ideal, al
-ser la utilizada durante el desarrollo del proyecto, además, si nos se ha
+ser la utilizada durante el desarrollo del proyecto. Además, si no se ha
 instalado con NodeJS, se debe instalar \href{https://www.npmjs.com/}{NPM}
 también, que es el gestor de paquetes de Node.
 
@@ -571,7 +575,7 @@ Para instalar las dependencias del proyecto se utiliza:
 
 \texttt{npm install} o \texttt{npm i}
 
-Los comandos anteriores leen los archivos \texttt{package.json} y
+Los comandos anteriores leen los archivos \texttt{package.json} y \linebreak
 \texttt{package-lock.json} e instalan los paquetes declarados en estos.
 
 La aplicación web ha sido realizada mediante el framework SvelteKit, y utiliza
@@ -591,16 +595,16 @@ entorno \texttt{PUBLIC\_API\_LOCATION} que podría tomar el valor
 
 \subsection{Ejecución mediante Docker}
 
-Este proyecto está compuesto por varias piezas que interactúan entre sí,
-instalar todos los programas y dependencias, además de desplegar una base de
-datos, puede resultar una tarea ardua y tediosa, asimismo, dependiendo del
-sistema sobre el que se esté intentando realizar el despliegue puede introducir
+Este proyecto está compuesto por varias piezas que interactúan entre sí.
+Instalar todos los programas y dependencias, además de desplegar una base de
+datos, puede resultar una tarea ardua y tediosa. Asimismo, dependiendo del
+sistema sobre el que se esté intentando realizar el despliegue, pueden existir
 inconsistencias en los procesos definidos anteriormente.
 
 Debido a lo anterior se ha optado por utilizar la conocida herramienta
 \href{https://www.docker.com/}{Docker}, gracias a esto se pueden definir
 diferentes contenedores con entornos controlados sobre los que se pueden
-realizar los pasos de instalación de forma determinista, (obteniendo siempre los
+realizar los pasos de instalación de forma determinista (obteniendo siempre los
 mismos resultados).
 
 El único requisito para realizar un despliegue mediante Docker es, valga la
@@ -618,11 +622,19 @@ puede utilizar:
 
 \texttt{docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d}
 
-Este comando iniciará una base de datos PostgreSQL, lanzará el servicio de la
-API, compilará e iniciará el servicio de la web y lanzará un proxy inverso para
-permitir el acceso a la API y a la web mediante distintos subdominios, por
-ejemplo, \texttt{https://localhost} para acceder a la web y
-\texttt{https://api.localhost} para acceder a la API (estas rutas son definidas
-en el fichero \texttt{.env}).
+Este comando realiza varias tareas:
+
+\begin{itemize}
+    \item Inicia una base de datos PostgreSQL.
+    \item Lanza el servicio de la API.
+    \item Compila e inicia el servicio de la web.
+    \item Lanza un proxy inverso para permitir el acceso a la API y a la web
+    mediante distintos subdominios.
+\end{itemize}
+
+Una vez lanzados los contenedores se pueden usar las urls establecidas en el
+fichero \texttt{.env} para acceder a los servicios, por defecto:
+\texttt{https://localhost} para acceder a la web y
+\texttt{https://api.localhost} para acceder a la API.
 
 \section{Pruebas del sistema}

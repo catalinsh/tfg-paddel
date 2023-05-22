@@ -75,6 +75,20 @@
     \FloatBarrier
 }
 
+% Comando para insertar una imagen en un lugar concreto.
+% Los parámetros son:
+% 1 --> Ruta absoluta/relativa de la figura
+% 2 --> Texto a pie de figura
+% 3 --> Tamaño en tanto por uno relativo al ancho de página
+\newcommand{\imagenConBorde}[3]{
+    \begin{figure}[!h]
+        \centering
+        \fbox{\includegraphics[width=#3\textwidth]{#1}}
+        \caption{#2}\label{fig:#1}
+    \end{figure}
+    \FloatBarrier
+}
+
 % Comando para insertar una imagen sin posición.
 % Los parámetros son:
 % 1 --> Ruta absoluta/relativa de la figura
