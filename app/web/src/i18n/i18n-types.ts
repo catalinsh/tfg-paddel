@@ -47,7 +47,7 @@ type RootTranslation = {
 	 */
 	YOUR_DOMINANT_HAND: string
 	/**
-	 * H​a​n​d​ ​s​h​o​w​n​ ​i​n​ ​v​i​d​e​o
+	 * H​a​n​d​ ​s​h​o​w​n​ ​i​n​ ​t​h​e​ ​v​i​d​e​o
 	 */
 	HAND_SHOWN_IN_VIDEO: string
 	/**
@@ -87,7 +87,7 @@ type RootTranslation = {
 	 */
 	SEND: string
 	/**
-	 * U​n​i​v​e​r​s​i​t​y​ ​o​f​ ​B​u​r​g​o​s
+	 * U​n​i​v​e​r​s​i​d​a​d​ ​d​e​ ​B​u​r​g​o​s
 	 */
 	UNIVERSITY_OF_BURGOS: string
 	/**
@@ -144,7 +144,7 @@ type RootTranslation = {
 	 */
 	THERE_WAS_A_PROBLEM: string
 	/**
-	 * C​a​n​'​t​ ​p​r​o​c​e​s​s​ ​v​i​d​e​o​,​ ​p​l​e​a​s​e​ ​c​h​e​c​k​ ​i​t​.
+	 * C​a​n​'​t​ ​p​r​o​c​e​s​s​ ​v​i​d​e​o​,​ ​p​l​e​a​s​e​ ​c​h​e​c​k​ ​i​t​ ​o​u​t​.
 	 */
 	CANNOT_PROCESS_VIDEO: string
 	/**
@@ -325,7 +325,7 @@ export type TranslationFunctions = {
 	 */
 	YOUR_DOMINANT_HAND: () => LocalizedString
 	/**
-	 * Hand shown in video
+	 * Hand shown in the video
 	 */
 	HAND_SHOWN_IN_VIDEO: () => LocalizedString
 	/**
@@ -365,7 +365,7 @@ export type TranslationFunctions = {
 	 */
 	SEND: () => LocalizedString
 	/**
-	 * University of Burgos
+	 * Universidad de Burgos
 	 */
 	UNIVERSITY_OF_BURGOS: () => LocalizedString
 	/**
@@ -421,7 +421,7 @@ export type TranslationFunctions = {
 	 */
 	THERE_WAS_A_PROBLEM: () => LocalizedString
 	/**
-	 * Can't process video, please check it.
+	 * Can't process video, please check it out.
 	 */
 	CANNOT_PROCESS_VIDEO: () => LocalizedString
 	/**

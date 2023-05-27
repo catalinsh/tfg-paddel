@@ -19,7 +19,7 @@
 		</div>
 		<div class="mt-8 md:order-1 md:mt-0">
 			<p class="text-center text-xs leading-5 text-neutral-600">
-				&copy; 2023 {$LL.UNIVERSITY_OF_BURGOS()}
+				&copy; 2023 <a href="https://www.ubu.es" class="underline hover:no-underline">{$LL.UNIVERSITY_OF_BURGOS()}</a>
 			</p>
 		</div>
 	</div>

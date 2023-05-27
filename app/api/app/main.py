@@ -28,7 +28,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Paddel",
-    description="Documentation for the API for the PaDDeL website.",
+    description="Documentation of the API for the PaDDeL website.",
     version="0.1",
 )
 
