@@ -36,15 +36,20 @@ El preprocesado suele componerse de algunos de los siguientes pasos.
 La extracción de características es el proceso de identificar, seleccionar y
 transformar atributos relevantes de los datos de entrada para su uso en un
 modelo. Por ejemplo, en este proyecto, se han extraido características como la
-velocidad o amplitud de movimiento a partir de un vídeo.
+velocidad o amplitud de movimiento de los dedos a partir de un vídeo de la
+prueba de <<finger-tapping>>.
 
-Existen diversas técnicas para la extracción de características, incluyendo las
+Existen diversas técnicas para la extracción de características, incluyendo la
 selección manual de características, o técnicas automatizadas como la reducción
 de dimensionalidad, la extracción de características basada en redes neuronales
-~\cite{intrator1991feature}, entre otras. La elección de la técnica de extracción
-de características depende del conjunto de datos, del problema específico de
-aprendizaje automático que se está abordando y del tipo de modelo de aprendizaje
-automático que se está utilizando.
+~\cite{intrator1991feature}, entre otras. La elección de la técnica de
+extracción de características depende del conjunto de datos, del problema
+específico de aprendizaje automático que se está abordando y del tipo de modelo
+de aprendizaje automático que se está utilizando. En este proyecto se ha
+realizado una extracción manual para obtener algunas características como la
+frecuencia de toques y la velocidad del movimiento de <<finger-tapping>>, además
+de una extracción de múltiples características genéricas de series temporales
+mediante la librería TSFresh \cite{christ2018time}.
 
 \subsubsection{Selección de características}
 
@@ -80,22 +85,22 @@ valores más comunes (\textit{outliers}), estos se acerquen al resto.
 Dentro del aprendizaje automático existen tres ramas o variantes dependiendo del
 conjunto de datos del que se disponga, ya que estos datos son los que determinan
 las técnicas, algoritmos y metodologías que se podrán utilizar, estas variantes
-son el aprendizaje no supervisado, en el que los datos no están etiquetados, es
-decir, el atributo que se desea predecir es desconocido (el ejemplo más
-característico es el \textit{clustering}), aprendizaje semisupervisado, en el
-que solo una parte de los datos están etiquetados, y el aprendizaje supervisado,
-en el que el conjunto de datos está completamente etiquetado, este último es el
-tipo de aprendizaje utilizado realizado en el proyecto y del que trata este
-apartado.
+son:
+\begin{itemize}
+    \item Aprendizaje no supervisado, en el que los datos no están
+    etiquetados, es decir, el atributo que se desea predecir es desconocido (el
+    ejemplo más característico es el \textit{clustering})
+    \item Aprendizaje semisupervisado, en el que solo una parte de los datos
+    están etiquetados.
+    \item Aprendizaje supervisado, en el que el conjunto de datos está
+    completamente etiquetado. Este es el tipo de aprendizaje utilizado realizado
+    en el proyecto y del que trata este apartado.
+\end{itemize}
 
-El enfoque del aprendizaje supervisado consiste en la utilización de dos
-conjuntos de datos, uno de entrenamiento (con datos etiquetados) y otro de test
-(con datos no etiquetados), a continuación se utiliza un algoritmo de
-aprendizaje para crear un modelo que <<aprenda>> de las instancias del conjunto
-de entrenamiento una regla o procedimiento que le permita identificar los datos
-del conjunto de test con la mayor precisión posible
-\cite{learned2014introduction}.
-
+El enfoque del aprendizaje supervisado consiste en la utilización de una muestra
+completamete etiquetada de un conjunto de datos para crear un modelo que
+<<aprenda>> de las instancias de la muestra la regla general que define el
+conjunto de datos completo \cite{learned2014introduction}.
 
 \subsection{Clasificación}
 
@@ -104,12 +109,36 @@ predeterminadas es uno de los principales problemas a resolver.
 
 En general, la resolución de un problema de clasificación se caracteriza por
 delimitar qué zonas del espacio que contiene todas las instancias posibles
-pertenecen a cada categoría, es decir, definir fronteras a partir de las cuales
-las instancias pasan de una categoría a otra.
+pertenecen a cada categoría (espacio de datos), es decir, definir fronteras de
+decisión a partir de las cuales las instancias pasan de una categoría a otra.
 
 Existe una gran cantidad de métodos y algoritmos de clasificación que se pueden
 utilizar para determinar estas fronteras, dependiendo del problema específico
-que se intente resolver unos algoritmos se comportarán mejor que otros.
+que se intente resolver unos algoritmos se comportarán mejor que otros. También
+cabe destacar que algunos algoritmos permiten obtener la probabilidad de
+pertenencia a cada clase, como, por ejemplo, máquinas de vectores de soporte
+(SVM).
+
+Además, dependiendo de la variable objetivo que se intenta predecir existen
+distintos tipos de clasificación:
+
+\begin{itemize}
+    \item \textbf{Clasificación binaria}: Es el tipo de clasificación más
+    simple, la variable objetivo tiene dos valores posibles, es decir, se va a
+    intentar categorizar instancias en dos clases. Este es el tipo usado en este
+    caso, ya que se está intentando determinar si un individuo tiene
+    bradicinesia o no.
+    \item \textbf{Clasificación multiclase}: Este tipo de clasificación es
+    similar al anterior, la diferencia está en que la variable objetivo puede
+    tomar más de dos valores, es decir, se busca clasificar las instancias en
+    más de dos clases.
+    \item \textbf{Clasificación ordenada}: En este tipo de clasificación las
+    clases tienen un orden, un ejemplo sería si en este proyecto se buscase
+    determinar el grado de severidad de la bradicinesia detectada (por ejemplo
+    inexistente, bajo, medio y algo). Además, este tipo de clasificación es muy
+    similar a un problema de regresión, ya que se puede asignar valores
+    numéricos a cada categoría determinando el orden
+\end{itemize}
 
 % TODO: Algunos ejemplos de algoritmos con alguna gráfica de clasificación con 2
 % características.
@@ -139,11 +168,42 @@ evaluación que se verán a continuación.
 \subsection{Evaluación del modelo}
 
 Para determinar si un modelo es mejor que otro es necesario definir alguna
-métrica que asigne un valor numérico al rendimiento de cada modelo.
+métrica que asigne un valor numérico al rendimiento de cada modelo. Estas
+métricas utilizan las variables que contiene la matriz de confusión. Por
+ejemplo, la matriz de confusión para clasificación binaria es la siguiente.
+
+\newcommand\confBox[2]{
+  \fbox{\lower0.75cm
+    \vbox to 2.5cm{\vfil
+      \hbox to 2.5cm{\hfil\parbox{1.8cm}{#1\\#2}\hfil}
+      \vfil}%
+  }%
+}
+
+\begin{table}[H]
+\begin{center}
+\noindent
+\renewcommand\arraystretch{1.5}
+\setlength\tabcolsep{0pt}
+\begin{tabular}{c >{\bfseries}r @{\hspace{0.7em}}c @{\hspace{0.4em}}c @{\hspace{0.7em}}l}
+    \multirow{10}{*}{\parbox{1.1cm}{\bfseries \centering Valor\\real}} & 
+      & \multicolumn{2}{c}{\bfseries Predicción} & \\
+    & & \bfseries p & \bfseries n & \bfseries total \\
+    & p & \confBox{Verdadero}{Positivo} & \confBox{Falso}{Negativo} & P \\[2.4em]
+    & n & \confBox{Falso}{Positivo} & \confBox{Verdadero}{Negativo} & N \\
+    & total & P & N &
+\end{tabular}
+\end{center}
+\caption{Matriz de confusión}
+\end{table}
 
 La métrica más intuitiva es lo que se conoce como precisión (\textit{accuracy}),
 que es simplemente la proporción de predicciones (clasificaciones) acertadas del
 total de predicciones realizadas.
+
+$$
+\text{precisión} = \frac{VP + VN}{VP + VN + FP + VN}
+$$
 
 Al igual que ocurren con el algoritmo de clasificación empleado, la métrica que
 se use debe ser seleccionada en función del problema en cuestión. Una situación
@@ -168,11 +228,22 @@ Algunas alternativas a la precisión incluyen:
     médico esta métrica podría ser interesante para encontrar aquellos pacientes
     que sí padecen la enfermedad, aunque se clasifiquen mal algunos que no la
     padecen.
+    $$
+    \text{sensibilidad} = \frac{VP}{VP + FP}
+    $$
     \item \textbf{Especificidad}: Para una clase concreta, indica la capacidad
     del modelo para clasificar correctamente instancias que no pertenecen esa
     clase.
+    $$
+    \text{especificidad} = \frac{TP}{VP + FN}
+    $$
     \item \textbf{Valor-F1}: Es una medida que combina la sensibilidad y la
     especificidad mediante una media armónica.
+    $$
+    \text{especificidad}
+    = \frac{\text{sensibilidad}\cdot\text{especificidad}}{\text{sensibilidad} + \text{especificidad}}
+    = \frac{VP}{VP + \frac{1}{2}(FP + FN)}
+    $$
 \end{itemize}
 
 \subsection{Fuga de información}
@@ -221,8 +292,8 @@ tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
     \item \textbf{\textit{K-fold}}: Consite en dividir la muestra en conjuntos
     de entrenamiento y test de proporciones $(K-1)/K$ y $1/K$ respectivamente,
     realizando un total de $K$ iteraciones. Además se puede realizar varias
-    repeticiones de este tipo de validación cruzada para reducir la variabilidad
-    del error obtenido.
+    repeticiones de este tipo de validación cruzada (don distintas particiones
+    aleatorias) para reducir la variabilidad del error obtenido.
 \end{itemize}
 
 \subsection{Optimización de hiperparámetros}
@@ -243,9 +314,10 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
 \begin{itemize}
     \item \textbf{\textit{Grid search}}: Proceso mediante el cual se definen los
     valores posibles que puede tomar cada parámetro y se prueba cada combinación
-    de estos valores hasta encontral la mejor. Es una búsqueda exhaustiva que
-    puede dar lugar a una gran cantidad de combinaciones, lo que implica un
-    tiempo de computación muy grande.
+    de los mismos hasta encontrar la mejor. Es una búsqueda exhaustiva que puede
+    dar lugar a una gran cantidad de combinaciones, lo que puede implicar un
+    tiempo de computación muy grande dependiendo del número de parámetros y sus
+    posibles valores.
     \item \textbf{\textit{Randomized search}}: Proceso similar al anterior en el
     que se especifican los valores posibles para cada parámetro, pero en este
     caso se realiza la búsqueda de forma aleatoria de forma que se limita el

@@ -1,27 +1,49 @@
 \capitulo{Objetivos del proyecto}
 \label{cha:Objetivos del proyecto}
 
+\section{Objetivos generales}
+
 El objetivo principal de este proyecto es la creación de un sistema basado en la
-inteligencia artificial que permita la indentificación de la enfermedad de
-Parkinson de forma consistente utilizando como entrada un vídeo de un gesto
-específico (además de otra información), además este sistema debería ser
-utilizable por la persona media. Para alcanzar este objetivo se plantean los
-siguientes objetivos específicos:
+inteligencia artificial que permita la detección de bradicinesia de forma
+consistente utilizando como entrada un vídeo de la prueba de <<finger-tapping>>
+(además de otra información), además este sistema debería ser utilizable por la
+persona media. Para alcanzar este objetivo se plantean los siguientes objetivos
+específicos:
 
 \begin{enumerate}
     \item Revisar los trabajos previos relacionados para obtener unos
     conocimientos iniciales sobre el tema e identificar qué métodos funcionan
     mejor y peor.
-    \item Diseñar e implementar una secuencia de pasos para extraer
-    características relevantes de los vídeos para su uso en algoritmos de
-    aprendizaje automático.
+    \item Diseñar e implementar una secuencia de pasos o <<pipeline>> para
+    extraer características relevantes de los vídeos para su uso en algoritmos
+    de aprendizaje automático.
     \item Buscar un modelo que se ajuste considerablemente bien a los datos
-    disponibles mediante alguna de las técnicas existentes en el campo de la
-    inteligencia artificial para este propósito.
-    \item Crear una aplicación web para interactuar de forma sencilla con los
-    modelos y obtener predicciones. Debido al público de una aplicación de este
-    tipo se debe tener muy en cuenta la accesibilidad a la hora de diseñarla.
-    \item Añadir un panel de administración a la aplicación para actulizar el
-    modelo utilizado para realizar las predicciones.
+    disponibles mediante alguna de las técnicas existentes en el campo del
+    aprendizaje automático para este propósito.
+    \item Crear una aplicación web que permita subir un vídeo de la prueba,
+    extraer una serie de características del mismo y proporcionárselas a un
+    modelo de aprendizaje automático que sea capaz de devolver una predicción
+    relativa a la presencia o no de bradicinesia en el paciente.
+    \item Debido al público de una aplicación de este tipo se debe tener muy en
+    cuenta la accesibilidad a la hora de diseñarla.
+    \item Incluir en la aplicación web la funcionalidad de gestión de usuarios
+    así como la posibilidad de actualizar el modelo utilizado para realizar las
+    predicciones por parte de un administrador.
     \item Documentar el trabajo realizado.
 \end{enumerate}
+
+\section{Objetivos técnicos}
+
+Los siguientes objetivos han están relacionados con los aspéctos técnicos de la
+aplicación.
+
+\begin{itemize}
+    \item Utilizar Docker para facilitar el despliegue de la
+    aplicación en cualquier equipo que tenga el motor de Docker instalado.
+    \item Crear una API (Application Programming Interface) accesible mediante
+    internet desde cualquier máquina para separar de forma clara el <<backend>>
+    y el <<frontend>> y permitir la extensión futura de la aplicación.
+    \item Internacionalizar la aplicación para permitir el uso de la misma en
+    varios idiomas y realizar una detección automática del idioma preferido por
+    el usuario.
+\end{itemize}
