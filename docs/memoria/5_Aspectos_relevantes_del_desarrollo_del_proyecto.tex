@@ -1,3 +1,61 @@
 \capitulo{Aspectos relevantes del desarrollo del proyecto}
 \label{cha:Aspectos relevantes del desarrollo del proyecto}
 
+Este apartado contiene algunos aspectos relevantes sobre el desarrollo del
+proyecto, incluyendo las razones detrás de las decisiones tomadas durante este y
+el impacto que dichas decisiones han tenido sobre los resultados obtenidos.
+
+\section{Fase de experimentación}
+
+El conjunto de datos disponible durante la fase de experimentación consisten en
+158 muestras con los siguientes ``atributos'':
+
+\begin{itemize}
+    \item Si la persona correspondiente a la instancia padece la enfermedad de
+    Parkinson. Es lo que se busca predecir.
+    \item Archivo de vídeo de una mano de la persona realizando la prueba de
+    <<finger-tapping>>.
+    \item Mano que aparece en el vídeo (izquierda o derecha).
+    \item Fecha en la que se ha tomado el vídeo (irrelevante).
+    \item Edad de la persona.
+    \item Sexo de la persona.
+    \item Mano dominante de la persona.
+\end{itemize}
+
+Cabe destacar que se ha tomado una muestra de cada mano de cada persona. Por lo
+que este conjunto de datos ha sido obtenido de 79 personas. Aún así, se ha
+tomado cada mano como una instancia distinta con el objetivo de tener más
+instancias con las que trabajar.
+
+Además, se dispone de 69 instancias de personas que padecen la enfermedad de
+Parkinson y 89 instancias de personas sanas, por lo que se está trabajando con
+un conjunto de datos ligeramente desbalanceado. Esto deberá tenerse en cuenta
+para que no influya en los resultados obtenidos, por ejemplo, seleccionando
+métricas adecuadas.
+
+\subsection{Procesado de vídeo}
+
+El objetivo de la fase de experimentación es crear un sistema que tenga por
+entrada los atributos antes mencionados (salvo el objetivo) y por salida si esos
+atributos corresponden con una persona que padece la enfermedad de Parkinson
+(posiblemente junto con el grado de confianza de la predicción).
+
+Los algoritmos de aprendizaje automático típicamente están diseñados para
+trabajar con atributos numéricos, por lo que los atributos disponibles deben ser
+transformados durante el preprocesado. Esto se puede realizar en la mayoría de
+casos mediante simples métodos de minería de datos, como, por ejemplo, la
+codificación de variables categóricas. Pero hay un problema, el archivo de
+vídeo.
+
+En este caso, una imagen es una matriz bidimensional donde cada celda contiene
+una 3-tupla representando los valores rojo, verde y azul del pixel con el que se
+corresponde. Un vídeo es una secuencia de imágenes junto con información
+adicional, es este caso sólamente es relevante la tasa de refresco, que es la
+frecuencia a la que ha sido capturada cada imagen. Esto es de gran importancia
+para dar una componente temporal a las imágenes.
+
+Con lo anterior se puede ver que un vídeo no se puede utilizar de forma directa,
+sino que deberá pasar por una fase de preprocesado para ser transformado a un
+conjunto de valores numéricos que lo describen.
+
+

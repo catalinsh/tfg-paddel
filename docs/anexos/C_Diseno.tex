@@ -29,10 +29,28 @@ simple. Su objetivo principal es permitir la fácil utilización de modelos
 previamente entrenados para obtener predicciones y selección de los mismos por
 parte de los administradores.
 
+En la base de datos se almacenan las siguientes entidades:
+
+\begin{itemize}
+    \item \textbf{Usuario (User)}: Corresponde con los usuarios registrados en
+    la aplicación. Dispone de los campos \textit{id}, \textit{username} y
+    \textit{password}.
+    \item \textbf{Modelo (Model)}: Corresponde con los modelos disponibles
+    dentro de la aplicación. Dispone de los campos \textit{id}, \textit{name},
+    \textit{path} y \textit{selected}.
+\end{itemize}
+
+Para determinar el modelo seleccionado se utiliza el campo \textit{selected},
+que es de tipo booleano, puede valer \textit{null} y su valor es único. De modo
+que este campo vale \textit{true} para el modelo seleccionado y \textit{null}
+para todos los demás.
+
 \section{Diseño procedimental}
 
 \section{Diseño arquitectónico}
 
-\imagenConBorde{mockups/index.png}{Mockup de la página principal}{0.8}
-
-\imagenConBorde{mockups/modelos.png}{Mockup de la página de gestión de modelos}{0.8}
+El diseño arquitectónico de la aplicación fue seleccionado sin consultar ningún
+patrón preexistente. Símplemente se tomaron las decisiones que parecían más
+lógicas en su momento. Pese a esto, la aplicación ha tomado una estructura muy
+similar al patrón arquitectónico conocido como MVP
+(\textit{Model-View-Presenter})

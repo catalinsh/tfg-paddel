@@ -55,9 +55,15 @@ las predicciones.
 \begin{enumerate}[start=1,label={\bfseries RF\arabic*:}]
     \item El sistema debe permitir diferenciar entre dos roles: Usuario normal
           (que no ha iniciado sesión) y Administrador.
+
+          \imagenConBorde{mockups/login.png}{Mockup de la página de inicio de sesión}{0.5}
+          
     \item Cualquier usuario debe poder subir un archivo de vídeo junto con
           información adicional para ser procesados por un modelo de
           inteligencia artifical y obtener una predicción.
+
+          \imagenConBorde{mockups/index.png}{Mockup de la página principal}{0.8}
+
     \item Los usuarios administradores deben poder iniciar sesión con su nombre
           de usuario y contraseña respectivos.
     \item Los usuarios administradores deben poder finalizar su sesión.
@@ -65,6 +71,9 @@ las predicciones.
           cierres del navegador durante 24 horas.
     \item Un administrador debe poder gestionar una lista con los modelos
           disponibles.
+
+          \imagenConBorde{mockups/modelos.png}{Mockup de la página de gestión de modelos}{0.8}
+
     \item Un administrador debe poder añadir modelos a la lista de modelos
           disponibles.
     \item Un administrador debe poder eliminar modelos de la lista de modelos
@@ -73,6 +82,9 @@ las predicciones.
           disponibles aquel que se va a utilizar para realizar predicciones.
     \item Un administrador debe tener acceso a una lista con todos los usuarios
           registrados en la aplicación.
+
+          \imagenConBorde{mockups/usuarios.png}{Mockup de la página de gestión de usuarios}{0.8}
+
     \item Un administrador debe poder añadir nuevos usuarios de tipo
           administrador a la aplicación, especificando su nombre de usuario y
           contraseña.
@@ -268,7 +280,7 @@ realizar al usuario o usuarios pertinentes.
         \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
-{Alta}
+{Media}
 
 \cu{5.1}{Ver lista de usuarios}
 {RF1, RF6}
@@ -288,7 +300,7 @@ realizar al usuario o usuarios pertinentes.
         \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
-{Alta}
+{Baja}
 
 \cu{5.2}{Añadir usuario}
 {RF1, RF7}
@@ -314,7 +326,7 @@ realizar al usuario o usuarios pertinentes.
         \item [3] Contraseña demasiado corta.
     \end{itemize}
 }
-{Alta}
+{Baja}
 
 \cu{5.3}{Eliminar usuario}
 {RF1, RF8}
@@ -337,4 +349,4 @@ realizar al usuario o usuarios pertinentes.
         \item [1] Usuario no ha iniciado sesión.
     \end{itemize}
 }
-{Alta}
+{Baja}
