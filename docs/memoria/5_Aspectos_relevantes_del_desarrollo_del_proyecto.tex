@@ -52,10 +52,62 @@ una 3-tupla representando los valores rojo, verde y azul del pixel con el que se
 corresponde. Un vídeo es una secuencia de imágenes junto con información
 adicional, es este caso sólamente es relevante la tasa de refresco, que es la
 frecuencia a la que ha sido capturada cada imagen. Esto es de gran importancia
-para dar una componente temporal a las imágenes.
+para dar una componente temporal al vídeo.
 
 Con lo anterior se puede ver que un vídeo no se puede utilizar de forma directa,
-sino que deberá pasar por una fase de preprocesado para ser transformado a un
-conjunto de valores numéricos que lo describen.
+sino que deberá pasar por una fase multietapa de preprocesado para ser
+transformado a un conjunto de valores numéricos que lo describen.
 
+\subsubsection{Extracción de <<landmarks>>}
 
+Una <<landmark>> en el campo de la visión aritificial es un punto de referencia
+que se corresponde con un objeto físico. El objetivo de esta fase es convertir
+el vídeo de la prueba de <<finger-tapping>> a una secuencia o serie temporal de
+conjuntos de <<landmarks>> los cuales representan la posición de la mano durante
+un instante concreto.
+
+El primer paso para lograr esto es leer las imágenes del archivo de vídeo, esto
+ha sido logrado mediante la librería de <<bindings>> de OpenCV para Python.
+OpenCV es una librería de uso general para realizar tareas relacionadas con la
+visión artificial, y permite leer multitud de formatos de vídeo mediante un
+flujo de imágenes.
+
+Se ha tomado especial precaución para no cargar en memoria todas las imágenes
+del vídeo, sino ir leyéndolas cuando son necesarias. Un archivo de vídeo ocupa
+relativamente poco espacio en disco debido a que está codificado mediante un
+<<codec>> determinado, lo que reduce el tamaño del archivo. Pero, para poder
+trabajar con las imágenes del vídeo, este debe ser decodificado.
+
+La magnitud de lo anterior se ve claramente con el siguiente ejemplo. Un vídeo
+con una resolución de 1920x1080 a 30 fotogramas por segundo codificado mediante
+el codec H264 que ocupa 50,7MB, decodificado, ocuparía en torno a los 3,7GB.
+
+A continuación se deben extraer las <<landmarks>> de las imágenes leidas. Esto
+ha sido logrado mediante la librería Mediapipe Hands \cite{zhang2020mediapipe},
+que permite extraer los siguentes puntos a partir de una imágen:
+
+\imagen{relevant_aspects/hand-landmarks.png}{Mediapipe Hands <<Landmarks>>}{1}
+
+Debido a la perspectiva desde la que se han tomados los vídeos de la prueba de
+<<finger-tapping>> hay algunas <<landmarks>> que quedan ocultas en varias
+ocasiones, lo que hace su posición detectada poco fiable. Por lo que se desechan
+las <<landmarks>> en el intervalo [9-17] para solo tomar en cuenta la parte
+``frontal'' de la mano.
+
+Mediapipe Hands ofrece la posibilidad de extraer <<landmarks>> de las imágenes
+como si estas no tuviesen relación entre sí o realizar la extracción teniendo en
+cuenta que se trata de un vídeo, así teniendo en cuenta resultados anteriores
+para determinar de forma más precisa las <<landmarks>> del fotograma actual.
+Esto tiene la gran desventaja de que hace imposible la paralelización de este
+proceso (debido a que cada extracción depende de los resultados anteriores).
+
+Lo anterior no tiene un gran efecto durante la fase de investigación, ya que sí
+se puede paralelizar la extracción de <<landmarks>> de cada vídeo. Donde sí
+tiene efecto es sobre la aplicación web, empeorando la experiencia de los
+usuarios.
+
+En última instancia se tomó la decisión de no usar paralelización, y así obtener
+resultados más precisos. Una alternativa planteada fue realizar la extracción en
+paralelo solamente en la aplicación, pero esto se descartó ya que esto podría
+introducir inconsistencias y variables adicionales que deberían ser tomadas en
+cuenta.
