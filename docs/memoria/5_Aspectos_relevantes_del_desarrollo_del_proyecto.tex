@@ -111,3 +111,39 @@ resultados más precisos. Una alternativa planteada fue realizar la extracción 
 paralelo solamente en la aplicación, pero esto se descartó ya que esto podría
 introducir inconsistencias y variables adicionales que deberían ser tomadas en
 cuenta.
+
+\subsubsection{Extracción de series temporales}
+
+Tras el proceso descrito en el apartado anterior se dispone una secuencia de
+datos similar a la siguiente:
+
+\imagen{relevant_aspects/poses_series.png}{Serie temporal de <<landmarks>>}{1}
+
+Cada fila representa la pose de la mano durante un fotograma concreto. Se puede
+observar que el índice es una fecha completa en lugar de otras opciones más
+convenientes como los segundos desde el inicio del vídeo o lo que se conoce como
+<<timestamp>>. Esto es una imposición de TSFresh para poder realizar la
+extracción de características teniendo en cuenta esta componente temporal.
+
+Cada celda representa el punto en el espacio en el que se encuentra la
+<<landmark>> correspondiente en un instante de tiempo.
+
+Aunque estas series temporales son una simplificación muy grande de lo vídeos
+iniciales, aún no son del todo útiles. Al ser información sobre la posición en
+el espacio, es dependiente de la forma en la que ha sido tomada la grabación. En
+un entorno controlado esto no sería mucho problema, pero en este caso, como se
+desea hacer el uso del sistema accesible a cualquier persona sin necesitar
+equipamiento especial, se deben buscar alternativas.
+
+En este caso se ha decidido tomar el ángulo entre el ángulo entre la punta del
+dedo pulgar, la muñeca y la punta del dedo índice. Esta medida es útil ya que no
+depende de cómo se ha tomado el vídeo ni del tamaño de la mano de la persona.
+Quedando como resultado una serie temporal como la siguiente:
+
+\imagen{relevant_aspects/angle_series.png}{Serie temporal de ángulos}{0.5}
+
+La unidad usada en estos ángulos es el radián.
+
+\subsection{Extracción de características}
+
+
