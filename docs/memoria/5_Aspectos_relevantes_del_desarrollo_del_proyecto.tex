@@ -163,7 +163,7 @@ máximos gracias a la función \texttt{find\_peaks} de la librería
 \href{https://scipy.org/}{scipy}. Pero esta función por si sola no da muy buenos
 resultados.
 
-\imagen{relevant_aspects/raw_peaks.png}{Máximos}{0.8}
+\imagen{relevant_aspects/raw_peaks.png}{Amplitudes}{0.7}
 
 El eje horizontal representa el tiempo que ha transcurrido desde el inicio del
 vídeo. El eje vertical representa el ángulo en radianes entre el dedo índice, la
@@ -179,9 +179,41 @@ sobre diferentes vídeos, se determinó que la mejor opción es establecer la
 prominencia mínima (parámetro \texttt{prominence} de find\_peaks) que debe tener
 un máximo local para ser considerado.
 
-La prominencia se define como la medida que determina 
+La prominencia se define como la medida que determina cuánto destaca un máximo
+con respecto a sus máximos más cercanos. Se probaron varios valores estáticos,
+pero como cada vídeo tiene características diferentes era necesario utilizar
+algo más dinámico. La desviación típica se comportaba bastante bien, pero cuando
+la amplitud variaba con el tiempo (síntoma de la enfermedad de Parkinson) los
+máximos de menor magnitud no eran detectados.
 
+Lo anterior fue solucionado  mediante el uso de una desviación típica móvil. Se
+establece una ventana que determina la ``zona'' a la que pertenece un valor y se
+utiliza la desviación típica de esa ``zona'' como prominencia mínima para que el
+punto pueda ser considerado un máximo.
 
+\imagen{relevant_aspects/rolling_std_peaks.png}{Amplitudes mediante desviación típica móvil}{0.7}
 
+Se puede apreciar que los resultados son ampliamente mejores. Incluso cuando la
+amplitud decrece con el tiempo:
+
+\imagen{relevant_aspects/rolling_std_peaks_id.png}{Amplitudes mediante desviación típica móvil con la enfermedad de Parkinson}{0.7}
+
+Aunque si el movimiento es errático, los resultados también lo son, como es de
+esperar.
+
+\imagen{relevant_aspects/rolling_std_peaks_erratic.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
+
+Para detectar los toques (mínimos) es tan simple como utilizar la serie de
+ángulos negada para detectar los puntos donde se encuentran los máximos. Además
+se ha establecido un umbral para que solo se consideren toques si se encuentra
+entre 0 y 0.1 radianes.
+
+\imagen{relevant_aspects/rolling_std_valleys.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
+
+A continuación se van a detallar algunas de las características extraídas de
+mayor interés. Estos valores ya son atributos que describen el vídeo, por lo que
+pueden ser utilizados para la generación de un modelo.
+
+\paragraph{Velocidad media}
 
 
