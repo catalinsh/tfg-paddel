@@ -144,6 +144,44 @@ Quedando como resultado una serie temporal como la siguiente:
 
 La unidad usada en estos ángulos es el radián.
 
-\subsection{Extracción de características}
+\subsubsection{Extracción de características}
+
+El último paso para convertir un archivo de vídeo a atributos útiles para
+entrenar un modelo de aprendizaje es extraer características que describan la
+serie temporal obtenida. Algunos de estos atributos han sido extraídos de forma
+específica teniendo en cuenta este problema concreto, mientras que otros (la
+mayoría) son atributos genéricos de series temporales.
+
+\paragraph{Detección de toques y amplitudes}
+
+Para varios atributos específicos al problema han sido utilizados los instantes
+de tiempo en los que se producen toques (el pulgar y el índice tocan) y
+amplitudes máximas en el movimiento de <<finger-tapping>>.
+
+La detección de estos instantes ha sido realizada mediante una búsqueda de
+máximos gracias a la función \texttt{find\_peaks} de la librería
+\href{https://scipy.org/}{scipy}. Pero esta función por si sola no da muy buenos
+resultados.
+
+\imagen{relevant_aspects/raw_peaks.png}{Máximos}{0.8}
+
+El eje horizontal representa el tiempo que ha transcurrido desde el inicio del
+vídeo. El eje vertical representa el ángulo en radianes entre el dedo índice, la
+muñeca y el pulgar.
+
+Se puede apreciar que obtener todos los máximos locales no es la mejor opción,
+debe incorporarse algún criterio para determinar si un máximo debería tenerse en
+cuenta o no. La función \texttt{find\_peaks} tiene algunos parámetros para este
+propósito.
+
+Tras probar varias opciones y comprobar manualmente los resultados obtenidos
+sobre diferentes vídeos, se determinó que la mejor opción es establecer la
+prominencia mínima (parámetro \texttt{prominence} de find\_peaks) que debe tener
+un máximo local para ser considerado.
+
+La prominencia se define como la medida que determina 
+
+
+
 
 
