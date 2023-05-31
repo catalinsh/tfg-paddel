@@ -235,12 +235,12 @@ Algunas alternativas a la precisión incluyen:
     del modelo para clasificar correctamente instancias que no pertenecen esa
     clase.
     $$
-    \text{especificidad} = \frac{TP}{VP + FN}
+    \text{especificidad} = \frac{VP}{VP + FN}
     $$
     \item \textbf{Valor-F1}: Es una medida que combina la sensibilidad y la
     especificidad mediante una media armónica.
     $$
-    \text{especificidad}
+    \text{F1}
     = \frac{\text{sensibilidad}\cdot\text{especificidad}}{\text{sensibilidad} + \text{especificidad}}
     = \frac{VP}{VP + \frac{1}{2}(FP + FN)}
     $$
@@ -248,13 +248,14 @@ Algunas alternativas a la precisión incluyen:
 
 \subsection{Fuga de información}
 
-En el campo del aprendizaje automático las fugas de información se producen
-cuando, de alguna forma, se utiliza información perteneciente al conjunto de
-datos de test para entrenar un modelo, esto no significa únicamente utilizar
-instancias de test durante el entrenamiento, las fugas de información se pueden
-producir de forma mucho más sutil y ser difíciles de detectar. Por ejemplo, si
-se utilizase el conjunto de test para seleccionar las características durante el
-preprocesado se estaría produciendo una fuga de información.
+En el campo del aprendizaje automático las fugas de información (<<information
+leaks>>) se producen cuando, de alguna forma, se utiliza información perteneciente
+al conjunto de datos de test para entrenar un modelo, esto no significa
+únicamente utilizar instancias de test durante el entrenamiento, las fugas de
+información se pueden producir de forma mucho más sutil y ser difíciles de
+detectar. Por ejemplo, si se utilizase el conjunto de test para seleccionar las
+características durante el preprocesado se estaría produciendo una fuga de
+información.
 
 Las fugas de información no son algo que debería ser siempre evitado, existen
 situaciones en las que son necesarias dependiendo del caso concreto. Pero sí es

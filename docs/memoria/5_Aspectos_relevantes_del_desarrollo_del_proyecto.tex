@@ -8,7 +8,7 @@ el impacto que dichas decisiones han tenido sobre los resultados obtenidos.
 \section{Fase de experimentación}
 
 El conjunto de datos disponible durante la fase de experimentación consisten en
-158 muestras con los siguientes ``atributos'':
+158 muestras con los siguientes <<atributos>>:
 
 \begin{itemize}
     \item Si la persona correspondiente a la instancia padece la enfermedad de
@@ -35,7 +35,7 @@ métricas adecuadas.
 
 \subsection{Procesado de vídeo}
 
-El objetivo de la fase de experimentación es crear un sistema que tenga por
+El objetivo de la fase de experimentación es crear un sistema que tenga como
 entrada los atributos antes mencionados (salvo el objetivo) y por salida si esos
 atributos corresponden con una persona que padece la enfermedad de Parkinson
 (posiblemente junto con el grado de confianza de la predicción).
@@ -92,7 +92,7 @@ Debido a la perspectiva desde la que se han tomados los vídeos de la prueba de
 <<finger-tapping>> hay algunas <<landmarks>> que quedan ocultas en varias
 ocasiones, lo que hace su posición detectada poco fiable. Por lo que se desechan
 las <<landmarks>> en el intervalo [9-17] para solo tomar en cuenta la parte
-``frontal'' de la mano.
+<<frontal>> de la mano.
 
 Mediapipe Hands ofrece la posibilidad de extraer <<landmarks>> de las imágenes
 como si estas no tuviesen relación entre sí o realizar la extracción teniendo en
@@ -176,7 +176,7 @@ propósito.
 
 Tras probar varias opciones y comprobar manualmente los resultados obtenidos
 sobre diferentes vídeos, se determinó que la mejor opción es establecer la
-prominencia mínima (parámetro \texttt{prominence} de find\_peaks) que debe tener
+prominencia mínima (parámetro \texttt{prominence} de \texttt{find\_peaks}) que debe tener
 un máximo local para ser considerado.
 
 La prominencia se define como la medida que determina cuánto destaca un máximo
@@ -187,8 +187,8 @@ la amplitud variaba con el tiempo (síntoma de la enfermedad de Parkinson) los
 máximos de menor magnitud no eran detectados.
 
 Lo anterior fue solucionado  mediante el uso de una desviación típica móvil. Se
-establece una ventana que determina la ``zona'' a la que pertenece un valor y se
-utiliza la desviación típica de esa ``zona'' como prominencia mínima para que el
+establece una ventana que determina la <<zona>> a la que pertenece un valor y se
+utiliza la desviación típica de esa <<zona>> como prominencia mínima para que el
 punto pueda ser considerado un máximo.
 
 \imagen{relevant_aspects/rolling_std_peaks.png}{Amplitudes mediante desviación típica móvil}{0.7}
@@ -206,7 +206,7 @@ esperar.
 Para detectar los toques (mínimos) es tan simple como utilizar la serie de
 ángulos negada para detectar los puntos donde se encuentran los máximos. Además
 se ha establecido un umbral para que solo se consideren toques si se encuentra
-entre 0 y 0.1 radianes.
+entre 0 y 0,1 radianes.
 
 \imagen{relevant_aspects/rolling_std_valleys.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
 
@@ -251,5 +251,66 @@ resultados.
 
 Por último se sustituyeron las característica <<mano dominante>> y <<mano que
 aparece en el vídeo>> por una única característica <<es la mano que aparece en
-el vídeo la dominante>> con el objetivo de reducir la conocida ``maldición de la
-dimensionalidad'' al mismo tiempo que se mantiene la información relevante.
+el vídeo la dominante>> con el objetivo de reducir la conocida <<maldición de la
+dimensionalidad>> al mismo tiempo que se mantiene la información relevante.
+
+\subsection{Normalización}
+
+Algunos algoritmos se ven muy afectados por la escala en la que se presentan los
+atributos, uno de los casos más claros es <<\textit{k} vecinos más cercanos>>.
+
+Debido a esto es importante normalizar los atributos. Se han probado varios
+métodos y encontrado que la normalización por cuantiles funciona ligeramente
+mejor que sus contrapartidas.
+
+La normalización por cuantiles se caracteriza por hacer que los estadísticos de
+cada atributo sean idénticos a los de una distribución concreta (en este caso
+una distribución uniforme). Esto se consigue ignorando la magnitud de un
+atributo y teniendo en cuenta únicamente su posición en la secuencia de todas
+las instancias ordenadas según el atributo que se está normalizando.
+
+Al no tener en cuenta la magnitud, la transformación anterior es de gran
+utilidad para tratar lo que se conoce como <<outliers>>, que son instancias con
+atributos que se alejan mucho de la regla.
+
+\subsection{Entrenamiento}
+
+En este punto se dispone de 4 conjuntos de datos sobre 156 instancias:
+
+\begin{itemize}
+    \item \textbf{Atributos iniciales}: Atributos de los que se disponía al
+    inicio, como la edad o el sexo de la persona.
+    \item \textbf{Atributos extraídos de vídeo propios}: Son los atributos cuya
+    extracción ha sido descrita en los apartados anteriores, como la velocidad
+    del movimiento o la frecuencia de toques.
+    \item \textbf{Atributos extraídos de vídeo con TSFresh}: Son los 794
+    atributos del vídeo extraídos mediante TSFresh.
+    \item \textbf{Variable objetivo}: Si la instancia corresponde con una
+    persona que padece la enfermedad de Parkinson. Es lo que se intenta predecir.
+\end{itemize}
+
+A priori es muy difícil o incluso imposible saber cómo van a comportarse
+diferentes algoritmos al enfrentarse a distintos subconjuntos de la información
+diponible. Por lo que la única opción es probar diferentes configuraciones con
+la esperanza de encontrar una que se adapte considerablemente bien a los datos.
+En este sentido el aprendizaje automático es más un arte que una ciencia exacta.
+
+En este caso se ha realizado una búsqueda exhaustiva (o \textit{grid-search})
+con las siguientes variables:
+
+\begin{itemize}
+    \item \textbf{Conjunto de datos}: El conjunto de datos utilizado para el
+    entrenamiento ha sido cambiado de dos formas distintas:
+    \begin{itemize}
+        \item Distintas combinaciones del los conjuntos de datos anteriores.
+        \item Selección de un distinto número de los atributos según su
+        relevancia estimada mediante TSFresh.
+    \end{itemize}
+    \item \textbf{Algoritmo de aprendizaje}: Se han probado varios algoritmos de
+    aprendizaje. (Máquinas de vectores de soporte, Naive Bayes, \textit{k}
+    vecinos más cercanos, Perceptrón multicapa, AdaBoost, etc.)
+    \item \textbf{Opciones de los algoritmos}: Se ha variado la configuración de
+    cada uno de los algoritmos anteriores.
+\end{itemize}
+
+
