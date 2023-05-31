@@ -210,10 +210,46 @@ entre 0 y 0.1 radianes.
 
 \imagen{relevant_aspects/rolling_std_valleys.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
 
+\paragraph{Características detectadas}
+
 A continuación se van a detallar algunas de las características extraídas de
 mayor interés. Estos valores ya son atributos que describen el vídeo, por lo que
 pueden ser utilizados para la generación de un modelo.
 
-\paragraph{Velocidad media}
+\begin{itemize}
+    \item \textbf{Velocidad media del movimiento}: Una característica de la
+    bradicinesia es la ralentización del movimiento. Esto va a ser reflejado en
+    la velocidad media (en radianes por segundo) que tiene el movimiento
+    \item \textbf{Frecuencia de amplitudes y toques}: Dos magnitudes que miden
+    cuantos toques o amplitudes se realizan por segundo de media durante el
+    movimineto.
+    \item \textbf{Amplitud media}: Otra característica de la enfermedad de
+    Párkinson es la debilidad, lo que se puede ver reflejado sobre la amplitud
+    media del movimiento. Es simplemente la media de las amplitudes antes
+    detectadas.
+\end{itemize}
 
+Además de las anteriores, se extrayeron 794 características genéricas
+mediante la librería TSFresh.
 
+\subsection{Limpieza de datos}
+
+En este punto se dispone de un conjunto de 158 instancias y unos 800 atributos,
+algunos de ellos categóricos, estos deberán ser codificados para que sean
+atributos numéricos, con los que se trabaja mejor.
+
+Además, se determinó que todas las instancias deberán tener un tiempo de
+detección de la mano realizando la prueba de <<finger-tapping>> mínimo de 15
+segundos para garantizar en cierto modo la precisión de los atributos extraidos
+y poder compara instancias con el mínimo número de influencias sobre las que no
+se tiene control.
+
+Debido a la decisión anterior se pasó de disponer de 158 instancias a únicamente
+156. Esto es desafortunado debido al ya pequeño número de muestras, pero se
+consideró una pérdida que merece la pena con el fin de obtener mejores
+resultados.
+
+Por último se sustituyeron las característica <<mano dominante>> y <<mano que
+aparece en el vídeo>> por una única característica <<es la mano que aparece en
+el vídeo la dominante>> con el objetivo de reducir la conocida ``maldición de la
+dimensionalidad'' al mismo tiempo que se mantiene la información relevante.
