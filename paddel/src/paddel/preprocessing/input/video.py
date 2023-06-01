@@ -10,6 +10,14 @@ from paddel.preprocessing.input.time_series import extract_time_series
 
 
 def extract_video_features(video_path: Path) -> tuple[pd.Series, pd.Series, float]:
+    """Extract features from video at given path.
+
+    Args:
+        video_path (Path): Video path.
+
+    Returns:
+        tuple[pd.Series, pd.Series, float]: Video features.
+    """
     poses_ts = extract_poses_ts(video_path)
 
     # If no poses detected

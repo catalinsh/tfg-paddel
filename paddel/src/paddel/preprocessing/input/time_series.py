@@ -11,10 +11,14 @@ def angle_between(
 ) -> float:
     """Get angle between 3 points in n-dimensional euclidean
     space.
-    :param a_in: First point.
-    :param b_in: Second point.
-    :param c_in: Third point.
-    :return: Angle in radians, 0 if any of the point coincide.
+
+    Args:
+        a_in (npt.ArrayLike): First point.
+        b_in (npt.ArrayLike): Second point.
+        c_in (npt.ArrayLike): Third point.
+
+    Returns:
+        float: Angle in radians, 0 if any of the point coincide.
     """
     a = np.asarray(a_in)
     b = np.asarray(b_in)
@@ -33,6 +37,14 @@ def angle_between(
 
 
 def extract_time_series(poses: pd.DataFrame) -> pd.DataFrame:
+    """Extract time series used for feature extraction.
+
+    Args:
+        poses (pd.DataFrame): Time series of poses.
+
+    Returns:
+        pd.DataFrame: Time series for feature extraction.
+    """
     ts_df = pd.DataFrame()
 
     ts_df["angle"] = angle_between(

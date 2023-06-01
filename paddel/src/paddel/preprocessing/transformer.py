@@ -1,3 +1,4 @@
+import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from tsfresh.feature_selection.relevance import calculate_relevance_table
 
@@ -7,7 +8,16 @@ class FeatureSelector(TransformerMixin, BaseEstimator):
         self.n_features = n_features
         self.relevant_features = None
 
-    def fit(self, X, y):
+    def fit(self, X: pd.Dataframe, y: pd.Series):
+        """Fits selector to given data
+
+        Args:
+            X (pd.Dataframe): Dataset to fit to.
+            y (pd.Series): Target variable to fit to.
+
+        Returns:
+            BaseEstimator: self.
+        """
         if not self.n_features:
             return self
 
@@ -19,6 +29,15 @@ class FeatureSelector(TransformerMixin, BaseEstimator):
         return self
 
     def transform(self, X, y=None):
+        """Selects the better attributes found in fitting phase.
+
+        Args:
+            X (pd.Dataframe): Dataset to transform.
+            y (pd.Dataframe, optional): Target column. Defaults to None.
+
+        Returns:
+            pd.Dataframe: Dataset with only most relevant features.
+        """
         if self.n_features:
             return X[self.relevant_features]
         return X

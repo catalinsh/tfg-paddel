@@ -10,6 +10,14 @@ from paddel.preprocessing.input.features import extract_features
 
 
 def _get_cache_paths(cache_dir: Path) -> tuple[Path, Path, Path]:
+    """Get cache paths for the different datasets.
+
+    Args:
+        cache_dir (Path): Base cache path.
+
+    Returns:
+        tuple[Path, Path, Path]: Cached datasets paths.
+    """
     misc_df_path = cache_dir / "misc_df.pkl"
     classic_df_path = cache_dir / "classic_df.pkl"
     fresh_df_path = cache_dir / "fresh_df.pkl"
@@ -18,13 +26,29 @@ def _get_cache_paths(cache_dir: Path) -> tuple[Path, Path, Path]:
 
 
 def _load_pkl(file_path: Path) -> Union[pd.DataFrame, None]:
+    """Load pickled object from given path
+
+    Args:
+        file_path (Path): Path to the pickle binary file.
+
+    Returns:
+        Union[pd.DataFrame, None]: Loaded object.
+    """
     if not file_path.exists():
         return pd.DataFrame()
     with open(file_path, "rb") as f:
         return pickle.load(f)
 
 
-def _load_cache(cache_dir: Path):
+def _load_cache(cache_dir: Path) -> tuple:
+    """Load all datasets from cache.
+
+    Args:
+        cache_dir (Path): Base cache path.
+
+    Returns:
+        tuple: Loaded datasets.
+    """
     misc_df_path, classic_df_path, fresh_df_path = _get_cache_paths(cache_dir)
 
     misc_df = _load_pkl(misc_df_path)
@@ -35,6 +59,12 @@ def _load_cache(cache_dir: Path):
 
 
 def _save_pkl(file_path: Path, data: Any):
+    """Save given data as pickle object in given path.
+
+    Args:
+        file_path (Path): File to save data to.
+        data (Any): Data to save.
+    """
     with open(file_path, "wb") as f:
         pickle.dump(data, f)
 
@@ -45,6 +75,14 @@ def _save_cache(
     classic_df: pd.DataFrame,
     fresh_df: pd.DataFrame,
 ):
+    """Save datasets to cache.
+
+    Args:
+        cache_dir (Path): Cache base directory.
+        misc_df (pd.DataFrame): Miscelaneous dataframe.
+        classic_df (pd.DataFrame): Classic dataframe.
+        fresh_df (pd.DataFrame): TSFresh dataframe.
+    """
     cache_dir.mkdir(parents=True, exist_ok=True)
     misc_df_path, classic_df_path, fresh_df_path = _get_cache_paths(cache_dir)
 
@@ -54,6 +92,14 @@ def _save_cache(
 
 
 def _get_cached_video_paths(misc_df: pd.DataFrame) -> set[Path]:
+    """Get video paths of videos that are already cached.
+
+    Args:
+        misc_df (pd.DataFrame): Miscelaneous dataframe.
+
+    Returns:
+        set[Path]: Cached videos paths.
+    """
     if "video_path" in misc_df:
         return set(misc_df["video_path"])
     else:
@@ -63,6 +109,15 @@ def _get_cached_video_paths(misc_df: pd.DataFrame) -> set[Path]:
 def get_input_data(
     videos_dir: Path, cache_dir: Path = Path()
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Get raw data to use to train the models.
+
+    Args:
+        videos_dir (Path): Directory where the videos are located.
+        cache_dir (Path, optional): Directory to store cached data. Defaults to Path().
+
+    Returns:
+        tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]: Loaded data.
+    """
     misc_df, classic_df, fresh_df = _load_cache(cache_dir)
 
     video_paths = set(videos_dir.iterdir())

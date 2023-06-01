@@ -12,8 +12,14 @@ def read_video(path: Path) -> Video:
     """Iterate over the video frames from the video in the given path.
     It's expected for the path to point to a valid video file.
 
-    :param path: Video path.
-    :return: Video iterator.
+    Args:
+        path (Path): Video path.
+
+    Returns:
+        Video: Video iterator.
+
+    Yields:
+        Iterator[Video]: Video frames.
     """
     video_capture = cv2.VideoCapture(str(path))
 
@@ -28,8 +34,11 @@ def get_framerate(path: Path) -> float:
     """Extracts the video features from the video in
     the given path.
 
-    :param path: Path to video.
-    :return: Video framerate, -1 if file not readable.
+    Args:
+        path (Path): Path to video.
+
+    Returns:
+        float: Video framerate, -1 if file not readable.
     """
     vc = cv2.VideoCapture(str(path))
     framerate = vc.get(cv2.CAP_PROP_FPS)
@@ -40,7 +49,8 @@ def get_framerate(path: Path) -> float:
 def initialize_hands() -> Hands:
     """Initialize Mediapipe Hands object.
 
-    :return: Mediapipe Hands object.
+    Returns:
+        Hands: Mediapipe Hands object.
     """
     return Hands(
         static_image_mode=False,
@@ -54,9 +64,12 @@ def initialize_hands() -> Hands:
 def extract_image_pose(image: Image, hands: Hands) -> Optional[Pose]:
     """Extract hand landmarks from the given image.
 
-    :param image: Image to extract landmarks from.
-    :param hands: Mediapipe Hands object.
-    :return: Image landmarks or None.
+    Args:
+        image (Image): Image to extract landmarks from.
+        hands (Hands): Mediapipe Hands object.
+
+    Returns:
+        Optional[Pose]: Image landmarks or None.
     """
     hands_result = hands.process(image)
 
@@ -86,6 +99,14 @@ def extract_image_pose(image: Image, hands: Hands) -> Optional[Pose]:
 
 
 def longest_non_none_sequence(poses: Iterable[Optional[Pose]]) -> list[Pose]:
+    """Get longest sequence of not None elements.
+
+    Args:
+        poses (Iterable[Optional[Pose]]): Input sequence.
+
+    Returns:
+        list[Pose]: Output sequence.
+    """
     current: list[Pose] = []
     best: list[Pose] = []
 
@@ -108,8 +129,10 @@ def extract_poses(path: Path) -> list[Pose]:
     """Extract hand landmarks from the given file path into the given landmark path.
     It's expected for the path to point to a valid video file.
 
-    :param path: Video path.
-    :return: Video landmarks.
+    Args:
+        path (Path): Video path.
+    Returns:
+        list[Pose]: Video landmarks.
     """
     video = read_video(path)
 
@@ -120,6 +143,14 @@ def extract_poses(path: Path) -> list[Pose]:
 
 
 def extract_poses_ts(video_path: Path) -> pd.DataFrame:
+    """Extract timed poses from video at given path.
+
+    Args:
+        video_path (Path): Video path.
+
+    Returns:
+        pd.DataFrame: Timed poses.
+    """
     framerate = get_framerate(video_path)
     poses = extract_poses(video_path)
 

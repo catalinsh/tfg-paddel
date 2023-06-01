@@ -6,15 +6,27 @@ def select_by_values(data, column, *values):
 
 
 def plot_grid_search(
-    data,
-    title,
-    param_left,
-    param_bottom,
-    param_legend,
-    param_left_name,
-    param_bottom_name,
-    param_legend_name,
+    data: pd.Dataframe,
+    title: str,
+    param_left: str,
+    param_bottom: str,
+    param_legend: str,
+    param_left_name: str,
+    param_bottom_name: str,
+    param_legend_name: str,
 ):
+    """Generates and shows the results of a grid search done with sklean.
+
+    Args:
+        data (pd.Dataframe): Sklearn grid search result dataframe.
+        title (str): Plot title.
+        param_left (str): Parameter from data for the left axis.
+        param_bottom (str): Parameter from data for the bottom axis.
+        param_legend (str): Parame from data for the legend.
+        param_left_name (str): Tag for the left axis.
+        param_bottom_name (str): Tag for the bottom axis.
+        param_legend_name (str): Tag for the legend.
+    """
     data = data.groupby([param_bottom, param_legend], as_index=False).max(param_left)
 
     legends = data[param_legend].unique()

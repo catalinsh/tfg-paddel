@@ -7,8 +7,11 @@ import pandas as pd
 def extract_filename_fields(filename: str) -> dict[str, str]:
     """Extract the different fields from the given filename.
 
-    :param filename: Filename.
-    :return: Dictionary with fields.
+    Args:
+        filename (str): Filename.
+
+    Returns:
+        dict[str, str]: Dictionary with fields.
     """
     pattern = re.compile(
         r"(?P<sample_name>\w+)"
@@ -37,8 +40,11 @@ def extract_filename_fields(filename: str) -> dict[str, str]:
 def extract_misc_features(path: Path) -> pd.Series:
     """Obtains the filename features from the file in the given path.
 
-    :param path: Path to get features from.
-    :return: Dictionary with the parsed features.
+    Args:
+        path (Path): Path to get features from.
+
+    Returns:
+        pd.Series: Dictionary with the parsed features.
     """
     filename = path.stem
     fields = extract_filename_fields(filename)
