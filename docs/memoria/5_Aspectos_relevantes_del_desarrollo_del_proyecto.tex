@@ -273,7 +273,7 @@ Al no tener en cuenta la magnitud, la transformación anterior es de gran
 utilidad para tratar lo que se conoce como <<outliers>>, que son instancias con
 atributos que se alejan mucho de la regla.
 
-\subsection{Entrenamiento}
+\subsection{Búsqueda del mejor modelo}
 
 En este punto se dispone de 4 conjuntos de datos sobre 156 instancias:
 
@@ -309,8 +309,119 @@ con las siguientes variables:
     \item \textbf{Algoritmo de aprendizaje}: Se han probado varios algoritmos de
     aprendizaje. (Máquinas de vectores de soporte, Naive Bayes, \textit{k}
     vecinos más cercanos, Perceptrón multicapa, AdaBoost, etc.)
-    \item \textbf{Opciones de los algoritmos}: Se ha variado la configuración de
-    cada uno de los algoritmos anteriores.
+    \item \textbf{Parámetros de los algoritmos}: Se ha variado la configuración
+    de cada uno de los algoritmos anteriores. Este proceso se denomina
+    optimización de hiperparámetros.
+    
+    Además, existen combinaciones de parámetros sin sentido, por ejemplo, variar
+    el grado de la función para una máquina de vectores de soporte con
+    <<kernel>> lineal. Esto se debe tener en cuenta para no aumentar el tiempo
+    requerido de foma inútil.
 \end{itemize}
 
+Cabe destacar que la selección de características se realiza teniendo en cuenta
+la totalidad del conjunto de datos, no solo el de entrenamiento. Esto produce
+fugas de información durante la validación cruzada ya que las características
+seleccionadas son la consideradas mejores tanto para el conjunto de
+entrenemiento como el de test.
 
+Una opción para solventar lo anterior es realizar la selección de
+características en cada <<fold>> de la validación cruzada, usando únicamente el
+conjunto de entrenamiento. Pero esta operación es muy costosa al trabajar con
+cientos de atributos. Este cambio incrementa la duración de la búsqueda
+<<grid-search>> en varios órdenes de magnitud. Se tomó la decisión de aceptar
+las fugas de información ya que lo que se pretende es comparar el rendimiento de
+distintos modelos, por lo que los resultados van a seguir siendo relevantes.
+
+\subsubsection{Resultados}
+
+Tras realizar la búsqueda se ha obtenido una tabla de dimensiones bastante
+granded (con una fila por cada combinación de variables probada) con los
+resultados obtenidos.
+
+En este apartado se exponen los resultados obtenidos además de algunos detalles
+interesantes.
+
+
+
+\section{Fase de desarrollo de la aplicación}
+
+Se ha creado una aplicación web que permite interactuar con un modelo de
+aprendizaje automático de forma simple. Debido a las características del
+programa una aplicación móvil podría ser una buena alternativa para facilitar la
+toma del vídeo. Por esto se quiso facilitar en la medida de lo posible la
+extensión futura del sistema con cambios mínimos de funcionalidad preexistente.
+
+Para cumplir con lo anterior se decidió crear una API (Aplication Programming
+Interface) REST en la que se implemente toda la funcionalidad de la aplicación
+junto con un una página web que sirva como <<frontend>> que se comunique con la
+API mediante peticiones HTTP. Este enfoque deja la puerta abierta a futuras
+extensiones (como una aplicación móvil) sobre el sistema sin la necesidad de
+realizar cambios sobre el código ya existente. Estas extensiones podrían ser
+realizadas por cualquier persona, incluso si no ha estado involucrada en este
+proyecto con antelación.
+
+\subsection{Docker}
+
+Para facilitar la creación del entorno de desarrollo y el despliegue de la
+aplicación se ha empleado la popular herramienta Docker. Esto permite la
+creación de <<contenedores>> de forma determinista, es decir, obteniendo siempre
+un sistema idéntico, solucionando el típico problema de <<funciona en mi
+máquina>>.
+
+Para esta aplicación se emplean cuatro contenedores:
+
+\begin{itemize}
+    \item API (Basado en \href{https://fastapi.tiangolo.com/}{FastAPI})
+    \item Aplicación web (Basado en \href{https://kit.svelte.dev/}{SvelteKit})
+    \item Proxy inverso (Basado en \href{https://caddyserver.com/}{Caddy})
+    \item Base de datos (Basado en \href{https://www.postgresql.org/}{PostgreSQL})
+\end{itemize}
+
+\subsection{Proxy inverso}
+
+Un proxy inverso permite redireccionar peticiones de forma dinámica al destino
+adecuado. Esto es generalmente usado en lo que se conoce como balance de carga
+(\textit{load balancing}).
+
+Como tanto la API como la aplicación web están alojadas en la misma máquina se
+necesita alguna forma para diferenciar qué peticiones van a qué servicio. Se ha
+decidido que \textit{dominio} vaya a la aplicación web y que
+\textit{api.dominio} vaya a la api, en este caso \textit{dominio} es
+\href{https://paddel.catalin.sh}{paddel.catalin.sh}. Configuraciones como esta
+se deben realizar en el archivo \texttt{.env} en la raíz del proyecto de docker
+(directorio \texttt{/app} del repositorio).
+
+Para lograr lo anterior se deben añadir registros DNS desde el panel de
+administración del servidor de nombres de dominio elegido (CloudFlare en este
+caso) para hacer que \textit{dominio} y \textit{api.dominio} apunten a la
+dirección ip del equipo en el que se aloja la aplicación. Con esto se consigue
+que las peticiones realizadas a los dominios vayan lleguen a la máquina en
+cuestión.
+
+A continuación se debe redirigir la petición dentro de la máquina al contenedor
+respectivo. Para esto se utiliza el servidor web Caddy, que permite la creación
+de un proxy inverso con el que se pueden redirigir peticiones en función del
+dominio al que vayan dirigidas.
+
+Además, Caddy permite la obtención y renovación automática de certificados SSL
+de una entidad certificadora (en concreto \href{https://letsencrypt.org/}{Let's
+Encrypt}) cuyos certificados son de confianza en la mayoría de navegadores.
+
+\subsection{Make}
+
+GNU Make es una herramienta usada para coordinar la ejecución de secuencias de
+comandos. Es muy usada en el proceso de compilación de programas escritos en C o
+C++ debido a lo complejos que pueden llegar a ser los comandos necesarios.
+
+En este caso GNU Make ha sido usado para simplificar la ejecución de comandos
+comunes. Algunas acciones que se realizan son:
+
+\begin{itemize}
+    \item Lanzar los contenedores de Docker para el desarrollo.
+    \item Lanzar los contenedores de Docker para producción.
+    \item Buscar posibles errores de tipado en código Python.
+    \item Formatear el código Python.
+    \item Compilar los archivos \LaTeX{} para generar esta documentación.
+    \item \dots
+\end{itemize}
