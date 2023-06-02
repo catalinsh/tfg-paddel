@@ -224,7 +224,7 @@ pueden ser utilizados para la generación de un modelo.
     cuantos toques o amplitudes se realizan por segundo de media durante el
     movimineto.
     \item \textbf{Amplitud media}: Otra característica de la enfermedad de
-    Párkinson es la debilidad, lo que se puede ver reflejado sobre la amplitud
+    Parkinson es la debilidad, lo que se puede ver reflejado sobre la amplitud
     media del movimiento. Es simplemente la media de las amplitudes antes
     detectadas.
 \end{itemize}
@@ -425,3 +425,69 @@ comunes. Algunas acciones que se realizan son:
     \item Compilar los archivos \LaTeX{} para generar esta documentación.
     \item \dots
 \end{itemize}
+
+\subsection{Accesibilidad}
+
+El público objetivo de esta aplicación son aquellas personas que padezcan o
+puedan padecer la enfermedad de Parkinson. Los problemas de movilidad causados
+por esta enfermedad reducen la precisión con la que se puede usar una
+herramienta como un ratón y se debe utilizar métodos alternativos para los que
+se deberá implementar soporte explícitamente en el código de una página web.
+
+Para asegurar el uso correcto de las diferentes heramientas de accesibilidad que
+los navegadores implementan se ha realizado el
+\href{https://www.udacity.com/course/web-accessibility--ud891}{curso sobre
+accesibilidad web de Udacidy}, que se puede ver en
+\href{https://www.youtube.com/playlist?list=PLcJAkgdenpsci0IJziU4bCk3dTQLpJU7R}{esta
+lista de reproducción de YouTube}.
+
+El concepto más importante adquirido es lo que se conoce como <<accessibility
+tree>>, que es una estructura de árbol que se genera automáticamente a partir
+del código HTML de una página web. En esta estructura se eliminan todos los
+elementos visuales, y quedan solo aquellos elementos con contenido (encabezados,
+párrafos, etc.) o funcionalidad (botones, links, etc.).
+
+Cuando se utiliza una página web únicamente con el teclado (utilizando las
+teclas de tabulación y flechas) se está navegando a través de los elementos
+funcionales del árbol de accesibilidad.
+
+Otros conceptos sobre accesibilidad de gran importancia son:
+
+\begin{itemize}
+    \item Existen atributos ARIA (Accessible Rich Internet Applications) que
+    deben ser utilizados para especificar aspectos relacionados con la
+    accesibilidad como, por ejemplo, el orden de tabulado de los elementos.
+    \item Es importante utilizar elementos HTML preexistentes cuando sea
+    posible. Por ejemplo, utilizar el elemento \texttt{dialog} para crear
+    ventanas <<pop-up>> o emergentes en lugar de \texttt{div} que es un
+    contenedor genérico. Estos elementos más específicos añaden información
+    semántica sobre el propósito y el uso de un componente, además de
+    funcionalidad común adicional, por ejemplo, un elemento \texttt{dialog} se
+    cierra automáticamente al pulsar la tecla \texttt{Esc} sin necesidad de
+    añadir código JavaScript propio.
+    \item Existem patrones y métodos estándar para implementar componenes y
+    funcionalidades comunes en la web, como menús desplegables, listas, etc.
+    Estos se pueden encontrar en la
+    \href{https://www.w3.org/WAI/ARIA/apg/patterns/}{Guía de prácticas de
+    autoría de ARIA}, mantenida por el W3C (World Wide Web Consortium). Estas
+    recomendaciones homogeneizan la forma de uso de elementos comunes, lo que es
+    especialmente importante para personas con accesibilidad limitada.
+    \item Las personas con visión reducida dependen de un lector de pantalla
+    para saber el contenido al que están accediendo. Esto se debe tener en
+    cuenta para utilizar los atributos ARIA adecuados, por ejemplo:
+        \begin{itemize}
+            \item Para comunicar sobre el estado de una barra de progreso se
+            emplean los atributos \texttt{aria-valuenow}, \texttt{aria-valuemin}
+            y \texttt{aria-valuemax}.
+            \item Para anunciar al usuario de un mensaje si, por ejemplo, le
+            llega un correo mientras navega por su bandeja de entrada, se emplea
+            el atributo \texttt{aria-live}. Que puede tomar los valores
+            \texttt{assertive}, \texttt{off} y \texttt{default}, dependiendo del
+            tipo de interrupción que se desee realizar.
+        \end{itemize}
+\end{itemize}
+
+Estos conocimientos han sido utilizados a través de la aplicación y, aunque no
+ha sido probada por una persona con accesibilidad reducida, se ha intentado
+navegar la página únicamente con un lector de pantalla para buscar posibles
+errores y mejoras.
