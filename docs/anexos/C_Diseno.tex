@@ -15,9 +15,14 @@ con ellas.
 
 \section{Diseño de datos}
 
-En este apartado se explica de forma detallada la forma en la que se almacenan
-los datos con los que trabaja la aplicación (información de usuario, información
-sobre los modelos y los archivos binarios de estos modelos).
+Esta sección especifica la forma en la que se han gestionado los datos usados
+en el proyecto.
+
+\subsection{Base de datos de la aplicación}
+
+En este subapartado se explica de forma detallada la forma en la que se
+almacenan los datos con los que trabaja la aplicación (información de usuario,
+información sobre los modelos y los archivos binarios de estos modelos).
 
 En este caso se ha optado por utilizar el sistema gestor de bases de datos
 PostgreSQL. Esta decisión es debido a que ya existía cierta familiaridad con el
@@ -45,6 +50,11 @@ que es de tipo booleano, puede valer \textit{null} y su valor es único. De modo
 que este campo vale \textit{true} para el modelo seleccionado y \textit{null}
 para todos los demás.
 
+\subsection{Datos para la generación de modelos}
+
+Este subapartado describe los datos usados en la fase de investigación para
+entrenar, evaluar y generar los modelos.
+
 \section{Diseño procedimental}
 
 \section{Diseño arquitectónico}
@@ -52,5 +62,26 @@ para todos los demás.
 El diseño arquitectónico de la aplicación fue seleccionado sin consultar ningún
 patrón preexistente. Símplemente se tomaron las decisiones que parecían más
 lógicas en su momento. Pese a esto, la aplicación ha tomado una estructura muy
-similar al patrón arquitectónico conocido como MVP
-(\textit{Model-View-Presenter})
+similar a un patrón arquitectónico de cuatro capas.
+
+Los patrones multicapa son de gran utilidad para reducir las dependencias
+existentes entre las diferentes partes de la aplicación, aunque tienen la
+desventaja que impactar el rendimiento durante la comunicación entre capas y
+pueden provocar cambios en cascada.
+
+El patrón de cuatro capas está compuesto por:
+
+\begin{itemize}
+    \item \textbf{Capa de presentación}: Determina la forma en que el usuario
+    interactúa con la aplicación. En este caso corresponde con el frontend.
+    \item \textbf{Capa de servicios}: Sirve como fachada entre la capa de
+    presentación y la de lógica de negocios. En este caso corresponde con la API
+    REST creada.
+    \item \textbf{Capa de origen de datos}: Determina la comunicación con los
+    sistemas que contienen los datos con los que trabaja la aplicación. En este
+    caso es la base de datos en PostgreSQL.
+    \item \textbf{Capa de lógica de negocio}: Determina la forma en la que
+    trabaja la aplicación con los datos para cumplir con los requisitos
+    establecidos. En este caso corresponde con el código usado para realizar
+    predicciones y gestionar modelos y usuario.
+\end{itemize}

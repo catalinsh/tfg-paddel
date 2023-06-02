@@ -270,7 +270,7 @@ En este sprint se implementó la administración de usuarios desde la página we
 
 \section{Estudio de viabilidad}
 
-En este apartado se analiza algunos aspectos que de deberían tener el cuenta si
+En este apartado se analizan algunos aspectos que se deberían tener en cuenta si
 el producto creado en este proyecto fuese llevado a un entorno más real, en el
 que se tuviese que responder ante otras personas si hubiese algún problema.
 
@@ -286,13 +286,16 @@ Existen varios costes, tanto fijos como variables, que tendría esta aplicación
 \paragraph{Empleados}
 
 Durante el transcurso del desarrollo del proyecto se han invertido
-aproximadamente 300 horas de trabajo durante un periodo de 5 meses.
+aproximadamente 450 horas de trabajo durante un periodo de 5 meses.
 
-Estableciendo el salario del alumno a 15€ por hora se obtiene el siguiente
-salario mensual bruto:
+El salario medio en españa de un programador junior es de unos 22.000€, como de
+media se trabaja al rededor de 1.826 horas al año, esto equivale a unos 12€ por
+hora.
+
+Con estas cifras se obtiene el siguiente salario mensual bruto.
 
 $$
-300\text{ horas} * 15 \frac{\textup{€}}{hora} \text{ / } 5\text{ meses} = 900 \frac{\textup{€}}{mes}
+450\text{ horas} \times 12 \frac{\textup{€}}{hora} \text{ / } 5\text{ meses} = 1.080 \frac{\textup{€}}{mes}
 $$
 
 Para obtener el gasto que supone este salario se deben añadir los impuestos que
@@ -307,9 +310,9 @@ Seguridad Social}:
       \item \textbf{Desempleo}: Correspondiente al 5,50\%.
       \item \textbf{FOGASA} (Fondo de Garantía Salarial): Para abonar a los
       trabajadores el importe de salarios pendientes por diversas razones
-      relacionadas con la quiebra de una empresa. Corresponde al 0.20 \%.
+      relacionadas con la quiebra de una empresa. Corresponde al 0,20 \%.
       \item \textbf{Formación profesional}: Utilizado para incentivar la
-      formación de trabajadores. Corresponde al 0.60\%.
+      formación de trabajadores. Corresponde al 0,60\%.
 \end{itemize}
 
 Según los impustos anteriores el importe a pagar por la empresa en materia de
@@ -331,7 +334,7 @@ Estableciendo un periodo de amortización de 4 años para ambos bienes se obtien
 un coste anual de:
 
 $$
-\frac{1100\textup{€} + 1200\textup{€}}{4\text{ }años} = 575 \frac{\textup{€}}{años}
+\frac{1100\textup{€} + 1200\textup{€}}{4\text{ }años} = 575 \frac{\textup{€}}{año}
 $$
 
 Como el proyecto ha sido realizado durante 5 meses la amortización total en este
@@ -342,19 +345,19 @@ periodo de tiempo es de 239,58€.
 La aplicación debe ser alojada en una máquina con prestaciones suficientes como
 para cumplir con los requisitos funcionales y no funcionales establecidos.
 
-Una opción sería alquinar espacio en un centro de datos de colocación en el que
+Una opción sería alquilar espacio en un centro de datos de alojamiento en el que
 instalar un equipo informático propio, esto tiene ciertas ventajas al tener
 completo control sobre los componentes, pero al mismo tiempo supone un gasto muy
 grande, ya que se debe tener en cuenta el gasto inicial de adquisición del
 hardware que podría rondar entre 500€ y 1000€, además del gasto recurrente de
-alquiler de la colocación que, para un \textit{rack} de una unidad suele estar
-en torno a los 100€ mensuales.
+alquiler del alojamiento que, para un \textit{rack} de una unidad suele estar en
+torno a los 100€ mensuales.
 
 Otra opción, y por la que se ha decidido al final, es utilizar alguno de los
 servicios de alojamiento virtualizados ofrecidos por varios proveedores como
 Hetzner o OVH. Se han barajado ambas opciones y, aunque OVH dispone de una red
 con un servicio más rápido para España, Hetzner ofrece una mejor relación
-rendimiento / precio, por lo que el servicio utilizado para alojar la aplicación
+rendimiento/precio, por lo que el servicio utilizado para alojar la aplicación
 es el servidor virtualizado CPX21 (3 procesadores virtuales, 4GB de RAM, 80GB de
 almacenamiento, IPv4 y tráfico de subida de 20TB) de Hetzner, con un precio de
 9,13€ por mes.
@@ -363,7 +366,7 @@ La aplicación ha sido alojada durante los últimos 3 meses, por lo que el coste
 total de esto ha sido de:
 
 $$
-9,13 \frac{\textup{€}}{mes} * 3 \text{meses} = 27,39\textup{€}
+9,13 \frac{\textup{€}}{mes} \times 3 \text{meses} = 27,39\textup{€}
 $$
 
 Todo lo anterior resulta en unos costes totales por hardware de 266,97€.
@@ -377,7 +380,7 @@ no sería posible. El precio mensual de este producto es de 30,13€. Por lo que
 coste total durante estos 5 meses sería de:
 
 $$
-5\text{ meses} * 30,13 \frac{\textup{€}}{mes} = 150,65\textup{€}
+5\text{ meses} \times 30,13 \frac{\textup{€}}{mes} = 150,65\textup{€}
 $$
 
 \paragraph{Costes totales}
@@ -385,24 +388,23 @@ $$
 La siguiente tabla muestra de forma resumida los costes en los que se ha
 incurrido durante el desarrollo del proyecto.
 
-\tablaSmallSinColores{Costes}{c c}{costes}
-{ Concepto & Coste \\}{ 
-Empleados & 1283,88€ \\
-Hardware & 266,97€ \\
+\tablaSmallSinColores{Costes}{l r}{costes}
+{ Concepto & Coste (€) \\}{ 
+Empleados & 1283,88 \\
+Hardware & 266,97 \\
 Software & 150,65 \\
 \hline
-\textbf{Total} & \textbf{1701,50€} \\
+\textbf{Total} & \textbf{1701,50} \\
 }
 
 \subsubsection{Ganancias}
 
-Una opción que se ha tenido en cuenta para la obtención de ingresos es un modelo
-de suscripción donde los clientes pagan mensualmente para tener acceso a la
-aplicación. Pero al final, debido al carácter de código abierto de la aplicación
-se ha optado por permitir el uso de la aplicación para cualquier persona de
-forma gratuita. Debido a esto, esta empresa no obtendrá beneficios. Esto se
-podría solventar en cierto modo abriendo un portal de donaciones para intentar
-cubrir al menos los costes de alojamiento.
+Uno de los objetivos del proyecto es que el uso del sistema sea accesible, por
+lo que imponer una barrera monetaria iria directamente en contra de este
+objetivo. Por lo que se ha decidido que la aplicación web va a ser gratuita.
+Debido a esto, la empresa no obtendrá beneficios. Esto se podría solventar en
+cierto modo abriendo un portal de donaciones para intentar cubrir al menos los
+costes de alojamiento.
 
 \subsection{Viabilidad legal}
 
@@ -410,7 +412,7 @@ La siguiente tabla recopila las licencias de las diferentes librerías y
 utilidades de las que depende la aplicación junto con las licencias bajo las que
 han sido distribuidas.
 
-\tablaSmall{Licencias}{c c}{licencias}
+\tablaSmall{Resumen de licencias de las bibliotecas/herramientas utilizadas}{c c}{licencias}
 { Librería & Licencia \\}{ 
 numpy & 3-Clause BSD License \\
 pandas & 3-Clause BSD License \\
