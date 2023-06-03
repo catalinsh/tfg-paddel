@@ -189,8 +189,8 @@ ejemplo, la matriz de confusión para clasificación binaria es la siguiente.
     \multirow{10}{*}{\parbox{1.1cm}{\bfseries \centering Valor\\real}} & 
       & \multicolumn{2}{c}{\bfseries Predicción} & \\
     & & \bfseries p & \bfseries n & \bfseries total \\
-    & p & \confBox{Verdadero}{Positivo} & \confBox{Falso}{Negativo} & P \\[2.4em]
-    & n & \confBox{Falso}{Positivo} & \confBox{Verdadero}{Negativo} & N \\
+    & p$'$ & \confBox{True}{Positive} & \confBox{False}{Negative} & P$'$ \\[2.4em]
+    & n$'$ & \confBox{False}{Positive} & \confBox{True}{Negative} & N$'$ \\
     & total & P & N &
 \end{tabular}
 \end{center}
@@ -202,7 +202,7 @@ que es simplemente la proporción de predicciones (clasificaciones) acertadas de
 total de predicciones realizadas.
 
 $$
-\text{precisión} = \frac{VP + VN}{VP + VN + FP + VN}
+\text{precisión} = \frac{TP + TN}{TP + TN + FP + TN}
 $$
 
 Al igual que ocurren con el algoritmo de clasificación empleado, la métrica que
@@ -229,20 +229,20 @@ Algunas alternativas a la precisión incluyen:
     que sí padecen la enfermedad, aunque se clasifiquen mal algunos que no la
     padecen.
     $$
-    \text{sensibilidad} = \frac{VP}{VP + FP}
+    \text{sensibilidad} = \frac{TP}{TP + FP}
     $$
     \item \textbf{Especificidad}: Para una clase concreta, indica la capacidad
     del modelo para clasificar correctamente instancias que no pertenecen esa
     clase.
     $$
-    \text{especificidad} = \frac{VP}{VP + FN}
+    \text{especificidad} = \frac{TP}{TP + FN}
     $$
     \item \textbf{Valor-F1}: Es una medida que combina la sensibilidad y la
     especificidad mediante una media armónica.
     $$
     \text{F1}
     = \frac{\text{sensibilidad}\cdot\text{especificidad}}{\text{sensibilidad} + \text{especificidad}}
-    = \frac{VP}{VP + \frac{1}{2}(FP + FN)}
+    = \frac{TP}{TP + \frac{1}{2}(FP + FN)}
     $$
 \end{itemize}
 

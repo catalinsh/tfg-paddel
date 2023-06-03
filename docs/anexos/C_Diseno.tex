@@ -67,21 +67,27 @@ similar a un patrón arquitectónico de cuatro capas.
 Los patrones multicapa son de gran utilidad para reducir las dependencias
 existentes entre las diferentes partes de la aplicación, aunque tienen la
 desventaja que impactar el rendimiento durante la comunicación entre capas y
-pueden provocar cambios en cascada.
+pueden provocar cambios en cascada. Una característica importante es que las
+capas tienen un orden lógico y una capa solamente puede comunicarse con sus
+capas adyacentes. Además una capa solamente puede comenzar una petición hacia su
+capa inferior, la comunicación hacia la capa superior se realiza siempre en
+forma de respuesta.
 
-El patrón de cuatro capas está compuesto por:
+Las siguientes capas conforman el patrón de cuatro capas, en order de superior a
+inferior.
 
-\begin{itemize}
+\begin{enumerate}
     \item \textbf{Capa de presentación}: Determina la forma en que el usuario
-    interactúa con la aplicación. En este caso corresponde con el frontend.
+    interactúa con la aplicación. En este caso corresponde con el frontend, es
+    decir, la página web.
     \item \textbf{Capa de servicios}: Sirve como fachada entre la capa de
     presentación y la de lógica de negocios. En este caso corresponde con la API
     REST creada.
-    \item \textbf{Capa de origen de datos}: Determina la comunicación con los
-    sistemas que contienen los datos con los que trabaja la aplicación. En este
-    caso es la base de datos en PostgreSQL.
     \item \textbf{Capa de lógica de negocio}: Determina la forma en la que
     trabaja la aplicación con los datos para cumplir con los requisitos
     establecidos. En este caso corresponde con el código usado para realizar
     predicciones y gestionar modelos y usuario.
-\end{itemize}
+    \item \textbf{Capa de origen de datos}: Determina la comunicación con los
+    sistemas que contienen los datos con los que trabaja la aplicación. En este
+    caso es la base de datos en PostgreSQL.
+\end{enumerate}
