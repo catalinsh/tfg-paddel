@@ -8,7 +8,7 @@ class FeatureSelector(TransformerMixin, BaseEstimator):
         self.n_features = n_features
         self.relevant_features = None
 
-    def fit(self, X: pd.Dataframe, y: pd.Series):
+    def fit(self, X: pd.DataFrame, y: pd.Series):
         """Fits selector to given data
 
         Args:

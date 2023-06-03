@@ -1,3 +1,4 @@
 -e ./paddel[dev]
 
 jupyter
+click

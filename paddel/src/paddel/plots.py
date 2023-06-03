@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+import pandas as pd
 
 
 def select_by_values(data, column, *values):
@@ -6,7 +7,7 @@ def select_by_values(data, column, *values):
 
 
 def plot_grid_search(
-    data: pd.Dataframe,
+    data: pd.DataFrame,
     title: str,
     param_left: str,
     param_bottom: str,
@@ -27,7 +28,7 @@ def plot_grid_search(
         param_bottom_name (str): Tag for the bottom axis.
         param_legend_name (str): Tag for the legend.
     """
-    data = data.groupby([param_bottom, param_legend], as_index=False).max(param_left)
+    data = data.groupby([param_bottom, param_legend], as_index=False).agg({param_left: 'max'})
 
     legends = data[param_legend].unique()
 

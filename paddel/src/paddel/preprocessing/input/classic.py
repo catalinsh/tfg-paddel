@@ -116,7 +116,7 @@ def std_of_maximums(x: pd.Series) -> float:
     return np.std(maximums)
 
 
-def get_slots(x: pd.Series) -> tuple(pd.Series, pd.Series):
+def get_slots(x: pd.Series) -> tuple[pd.Series, pd.Series]:
     """Obtains subsequences from given series for the features that requiere time slot comparison.
 
     Args:

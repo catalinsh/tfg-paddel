@@ -91,7 +91,7 @@ def _save_cache(
     _save_pkl(fresh_df_path, fresh_df)
 
 
-def _get_cached_video_paths(misc_df: pd.DataFrame) -> set[Path]:
+def _get_cached_video_names(misc_df: pd.DataFrame) -> set[str]:
     """Get video paths of videos that are already cached.
 
     Args:
@@ -101,7 +101,7 @@ def _get_cached_video_paths(misc_df: pd.DataFrame) -> set[Path]:
         set[Path]: Cached videos paths.
     """
     if "video_path" in misc_df:
-        return set(misc_df["video_path"])
+        return set([p.name for p in misc_df["video_path"]])
     else:
         return set()
 
@@ -120,9 +120,10 @@ def get_input_data(
     """
     misc_df, classic_df, fresh_df = _load_cache(cache_dir)
 
-    video_paths = set(videos_dir.iterdir())
-    cached_video_paths = _get_cached_video_paths(misc_df)
-    missing_video_paths = video_paths - cached_video_paths
+    video_names = set([p.name for p in videos_dir.iterdir()])
+    cached_video_names = _get_cached_video_names(misc_df)
+    missing_video_names = video_names - cached_video_names
+    missing_video_paths = set([videos_dir / n for n in missing_video_names])
 
     if not missing_video_paths:
         return misc_df, classic_df, fresh_df
