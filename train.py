@@ -25,7 +25,7 @@ clf = None
 @contextmanager
 def suppress_stdout_stderr():
     """A context manager that redirects stdout and stderr to devnull"""
-    with open(devnull, 'w') as fnull:
+    with open(devnull, "w") as fnull:
         with redirect_stderr(fnull) as err, redirect_stdout(fnull) as out:
             yield (err, out)
 
@@ -71,26 +71,33 @@ class ChoiceOption(click.Option):
 @click.option(
     "--c",
     prompt="Regularization parameter",
-    default=1.0,
+    default=0.5,
     type=click.FloatRange(min=0, min_open=True),
 )
 @click.option(
     "--kernel",
     prompt="SVM kernel to use",
-    default=3,
+    default=2,
     type=click.Choice(["linear", "poly", "rbf", "sigmoid", "precomputed"]),
     cls=ChoiceOption,
 )
 @click.option(
     "--degree",
     prompt="Degree of the function (only for poly kernel)",
-    default=2,
+    default=5,
     type=click.INT,
+)
+@click.option(
+    "--gamma",
+    prompt="Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’",
+    default=1,
+    type=click.Choice(["scale", "auto"]),
+    cls=ChoiceOption,
 )
 @click.option(
     "--coef0",
     prompt="Independent term for kernel function (only for poly and sigmoid kernel)",
-    default=0.0,
+    default=1.0,
     type=click.INT,
 )
 @click.option(
@@ -99,12 +106,13 @@ class ChoiceOption(click.Option):
     default=1e-3,
     type=click.FloatRange(min=0, min_open=True),
 )
-def svc_function(c, kernel, degree, coef0, tol):
+def svc_function(c, kernel, degree, gamma, coef0, tol):
     global clf
     clf = SVC(
         C=c,
         kernel=kernel,
         degree=degree,
+        gamma=gamma,
         coef0=coef0,
         probability=True,
         tol=tol,
@@ -137,13 +145,54 @@ def knn_function(n_neighbors, metric):
     )
 
 
+@click.command()
+@click.option(
+    "--n_estimators",
+    prompt="Number of estimators to use",
+    default=1000,
+    type=click.IntRange(min=1),
+)
+@click.option(
+    "--criterion",
+    prompt="Split quality criterion",
+    default=1,
+    type=click.Choice(["gini", "entropy", "log_loss"]),
+    cls=ChoiceOption,
+)
+def random_forest_function(n_estimators, criterion):
+    global clf
+    clf = RandomForestClassifier(n_estimators=n_estimators, criterion=criterion)
+
+
+@click.command()
+@click.option(
+    "--criterion",
+    prompt="Split quality criterion",
+    default=1,
+    type=click.Choice(["gini", "entropy", "log_loss"]),
+    cls=ChoiceOption,
+)
+@click.option(
+    "--splitter",
+    prompt="Strategy to select split condition at nodes",
+    default=1,
+    type=click.Choice(["best", "random"]),
+    cls=ChoiceOption,
+)
+def decision_tree_function(criterion, splitter):
+    global clf
+    clf = DecisionTreeClassifier(
+        criterion=criterion,
+        splitter=splitter
+    )
+
+
 algorithmFunctions = {
     "Support Vector Machine": svc_function,
     "Naive Bayes": nb_function,
     "K Nearest Neighbors": knn_function,
-    "Random Forest": RandomForestClassifier,
-    "Decision Tree": DecisionTreeClassifier,
-    "Multilayer Perceptron": MLPClassifier,
+    "Random Forest": random_forest_function,
+    "Decision Tree": decision_tree_function,
     "AdaBoost": AdaBoostClassifier,
     "XGB": XGBClassifier,
 }
@@ -164,7 +213,7 @@ algorithmFunctions = {
 )
 @click.option(
     "--output_file",
-    prompt="Directory where feature extraction cache is located",
+    prompt="Model output file",
     default="./model.pkl",
     type=click.Path(exists=False, file_okay=True, dir_okay=False),
 )
@@ -177,6 +226,7 @@ algorithmFunctions = {
 @click.option(
     "--algorithm",
     prompt="Algorithm to use",
+    default=1,
     type=click.Choice(list(algorithmFunctions.keys())),
     cls=ChoiceOption,
 )
