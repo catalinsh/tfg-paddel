@@ -246,6 +246,9 @@ def add_model(
 
     new_model = crud.add_model(db, name, str(path))
 
+    if not crud.get_selected_model(db):
+        crud.select_model(db, new_model.id)
+    
     return new_model
 
 @app.delete("/models/{model_id}", response_model=schemas.Model, tags=["models"])
