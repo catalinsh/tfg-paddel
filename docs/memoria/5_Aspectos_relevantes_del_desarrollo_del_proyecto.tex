@@ -491,3 +491,39 @@ Estos conocimientos han sido utilizados a través de la aplicación y, aunque no
 ha sido probada por una persona con accesibilidad reducida, se ha intentado
 navegar la página únicamente con un lector de pantalla para buscar posibles
 errores y mejoras.
+
+\subsection{Autentificación}
+
+Para acceder al panel de gestión de modelos y usuarios es necesario realizar una
+verificación de identidad. Para esto se utiliza un simple nombre de usuario y
+contraseña. Cuando se introducen los datos estos son enviados a la API, donde se
+comparan con la base de datos \footnote{Las contraseñas se almacenan cifradas
+con <<salt>> mediante la función de hasheado <<bcrypt>>.}, si no se puede
+verificar la identidad se responde con un error.
+
+Si la verificación es exitosa se devuelve un JWT (JSON Web Token), que es una
+cadena de caracteres cuyo contenido puede ser descifrado por cualquier persona.
+La característica importante de estos JWT es que son firmados mediante una
+cadena secreta que se almacena en el servidor. Cualquier persona en posesión de
+esta cadena puede generar sus propios JWT, que se considerarán veraces por la
+aplicación.
+
+Este token se guarda en la memoria local (local storage) del navegador
+correspondiente al dominio de la web y se envía junto a todas las peticiones
+posteriores que se hacen a la API. Al contrario que las <<cookies>>, las
+variables almacenadas en memoria local no son eviadas automáticamente por el
+navegador con cada petición, sino que deben ser utilizadas explícitamente por el
+código JavaScript, esto elimina la posibilidad del ataque conocido como CSRF
+(Cross Site Request Forgery), que depende del uso de <<cookies>> como token de
+autentificación.
+
+Otra ventaja del uso de JWT es que se pueden utilizar de tal forma que no sea
+necesario almacenar información sobre la sesión de los usuarios en la base de
+datos. Como parte de la información cifrada que contiene el JWT se puede incluir
+la fecha de expiración del mismo, esto se procesa en el servidor para determinal
+su estado de expiración.
+
+Una gran desventaja de este método de autentificación es que si el navegador del
+usuario se viese comprometido el JWT podría ser utilizado para suplantar su
+identidad ante la aplicación. Pese a esto se ha optado por este método debido a
+su simplicidad.
