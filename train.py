@@ -181,10 +181,7 @@ def random_forest_function(n_estimators, criterion):
 )
 def decision_tree_function(criterion, splitter):
     global clf
-    clf = DecisionTreeClassifier(
-        criterion=criterion,
-        splitter=splitter
-    )
+    clf = DecisionTreeClassifier(criterion=criterion, splitter=splitter)
 
 
 algorithmFunctions = {
