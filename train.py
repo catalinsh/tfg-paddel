@@ -6,8 +6,7 @@ from pathlib import Path
 import click
 import pandas as pd
 
-from xgboost import XGBClassifier
-from sklearn.neural_network import MLPClassifier
+
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -119,6 +118,7 @@ def svc_function(c, kernel, degree, gamma, coef0, tol):
     )
 
 
+@click.command()
 def nb_function():
     global clf
     clf = GaussianNB()
@@ -184,14 +184,31 @@ def decision_tree_function(criterion, splitter):
     clf = DecisionTreeClassifier(criterion=criterion, splitter=splitter)
 
 
+@click.command()
+@click.option(
+    "--n_estimators",
+    prompt="Number of estimators (stumps) to use",
+    default=50,
+    type=click.IntRange(min=1),
+)
+@click.option(
+    "--learning_rate",
+    prompt="Learning rate",
+    default=1.0,
+    type=click.FloatRange(min=0, min_open=True),
+)
+def adaboost_function(n_estimators, learning_rate):
+    global clf
+    clf = AdaBoostClassifier(n_estimators=n_estimators, learning_rate=learning_rate)
+
+
 algorithmFunctions = {
     "Support Vector Machine": svc_function,
     "Naive Bayes": nb_function,
     "K Nearest Neighbors": knn_function,
     "Random Forest": random_forest_function,
     "Decision Tree": decision_tree_function,
-    "AdaBoost": AdaBoostClassifier,
-    "XGB": XGBClassifier,
+    "AdaBoost (with stump base estimator)": adaboost_function,
 }
 
 
@@ -233,7 +250,9 @@ def main(video_dir, cache_dir, output_file, algorithm, feature_amount):
 
     with suppress_stdout_stderr():
         if cache_dir != "-":
-            misc_df, classic_df, fresh_df, y = get_data(Path(video_dir), Path(cache_dir))
+            misc_df, classic_df, fresh_df, y = get_data(
+                Path(video_dir), Path(cache_dir)
+            )
         else:
             misc_df, classic_df, fresh_df, y = get_data(Path(video_dir))
 
