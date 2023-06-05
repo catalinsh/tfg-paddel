@@ -336,13 +336,80 @@ distintos modelos, por lo que los resultados van a seguir siendo relevantes.
 \subsubsection{Resultados}
 
 Tras realizar la búsqueda se ha obtenido una tabla de dimensiones bastante
-granded (con una fila por cada combinación de variables probada) con los
+grandes (con una fila por cada combinación de variables probada) con los
 resultados obtenidos.
 
 En este apartado se exponen los resultados obtenidos además de algunos detalles
 interesantes.
 
+\paragraph{Número de características} En un principio se realizó la búsqueda
+variando el número de características seleccionadas entre 1 y 120, obteniendo
+los siguientes resultados dependiendo esta cifra (cada punto corresponde con la
+configuración de mayor precisión con ese número de características).
 
+\imagen{results/1.png}{Resultados iniciales variando número de características}{0.7}
+
+Se pensó que se había alcanzado la <<maldición de la dimensionalidad>>, por la
+que utilizar más información para entrenar un modelo empeora la precisión, ya
+que muchas de las nuevas características van a ser menos relevantes.
+
+En este caso ocurrió al contrario, porque al ampliar el espacio de búsqueda para
+utilizar más características se obtuvieron los resultados siguientes.
+
+\imagen{results/2.png}{Resultados ampliando número de características probadas}{0.7}
+
+Se observa que la precisión aumenta hasta las 320 características seleccionadas.
+Esto puede resultar ilógico, ya que las características se seleccionan
+dependiendo de su relevancia estimada mediante pruebas de significancia. Se
+sospecha que esto es debido a la forma en la que tratan los algoritmos algunas
+combinaciones de atributos que no eran posibles al realizar una selección de
+menos características.
+
+\paragraph{Comparación de algoritmos}
+
+La figura \ref{fig:results/3.png} muestra la precisión de los algoritmos
+probados en función del número de características seleccionadas.
+
+\imagen{results/3.png}{Comparación de algoritmos}{0.7}
+
+Se aprecia que la mejor precisión se obtiene con SVC (Máquina de Vectores de
+Soporte) y 320 características seleccionadas, aunque Random Forest se queda
+bastante cerca.
+
+La figura \ref{fig:results/4.png} muestra la precisión del algoritmo SVM para
+diferentes funciones <<kernel>> y número de características seleccionadas.
+
+\imagen{results/4.png}{Comparación de algoritmos}{0.7}
+
+A continuación, en la figura \ref{fig:results/5.png} se muestra la diferencia de
+precisión entre distintos grados para SVM con <<kernel>> polinomial.
+
+\imagen{results/5.png}{Comparación de algoritmos}{0.7}
+
+Se puede ver que se alcanza la precisión máxima con un <<kernel>> polinomial de
+grado 8, seguido de los grados 5 y 7. 
+
+Aunque utilizar grado 8 ha dado la precisión máxima, la diferencia con respecto
+a utilizar grado 5 es negligente, por lo que se ha tomado la decisión de
+utilizar un modelo de grado 5 en lugar de grado 8 como modelo final para la
+aplicación web.
+
+\paragraph{Modelo final} Para generar el modelo final se ha utilizado el
+algoritmo SVM, seleccionando 320 características, con la siguiente
+configuración:
+
+\begin{itemize}
+    \item Parámetro de regularización (C): 0.5
+    \item Función <<kernel>>: polinomial
+    \item Grado de la función <<kernel>>: 5
+    \item Tolerancia para el criterio de parada: 0.001
+\end{itemize}
+
+Este modelo tiene una precisión medida del 78,8461538461539\%. Se debe tener en
+cuenta que este valor se ha medido realizando validación cruzada con 5
+repeticiones de 2 <<folds>>, por lo que esta precisión es la obtenida entenando
+modelos únicamente con el 50\% de los datos disponibles, entonces es de esperar
+que el rendimiento del modelo final, entrenado con todos los datos, sea mayor.
 
 \section{Fase de desarrollo de la aplicación}
 
