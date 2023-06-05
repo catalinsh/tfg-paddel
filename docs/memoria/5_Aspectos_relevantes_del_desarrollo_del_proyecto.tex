@@ -115,7 +115,7 @@ cuenta.
 \subsubsection{Extracción de series temporales}
 
 Tras el proceso descrito en el apartado anterior se dispone una secuencia de
-datos similar a la siguiente:
+datos similar a la de la figura \ref{fig:relevant_aspects/poses_series.png}:
 
 \imagen{relevant_aspects/poses_series.png}{Serie temporal de <<landmarks>>}{1}
 
@@ -138,11 +138,11 @@ equipamiento especial, se deben buscar alternativas.
 En este caso se ha decidido tomar el ángulo entre el ángulo entre la punta del
 dedo pulgar, la muñeca y la punta del dedo índice. Esta medida es útil ya que no
 depende de cómo se ha tomado el vídeo ni del tamaño de la mano de la persona.
-Quedando como resultado una serie temporal como la siguiente:
+Quedando como resultado una serie temporal como en la figura
+\ref{fig:relevant_aspects/angle_series.png}. La unidad usada en estos ángulos es
+el radián.
 
 \imagen{relevant_aspects/angle_series.png}{Serie temporal de ángulos}{0.5}
-
-La unidad usada en estos ángulos es el radián.
 
 \subsubsection{Extracción de características}
 
@@ -163,7 +163,7 @@ máximos gracias a la función \texttt{find\_peaks} de la librería
 \href{https://scipy.org/}{scipy}. Pero esta función por si sola no da muy buenos
 resultados.
 
-\imagen{relevant_aspects/raw_peaks.png}{Amplitudes}{0.7}
+\imagen{relevant_aspects/raw_peaks.png}{Máximos locales de la evolución de la amplitud a lo largo de un vídeo}{0.7}
 
 El eje horizontal representa el tiempo que ha transcurrido desde el inicio del
 vídeo. El eje vertical representa el ángulo en radianes entre el dedo índice, la
@@ -191,10 +191,10 @@ establece una ventana que determina la <<zona>> a la que pertenece un valor y se
 utiliza la desviación típica de esa <<zona>> como prominencia mínima para que el
 punto pueda ser considerado un máximo.
 
-\imagen{relevant_aspects/rolling_std_peaks.png}{Amplitudes mediante desviación típica móvil}{0.7}
+\imagen{relevant_aspects/rolling_std_peaks.png}{Máximos mediante desviación típica móvil de la evolución de la amplitud a lo largo de un vídeo}{0.7}
 
-Se puede apreciar que los resultados son ampliamente mejores. Incluso cuando la
-amplitud decrece con el tiempo:
+Se puede apreciar que los resultados son apreciablemente mejores. Incluso cuando
+la amplitud decrece con el tiempo:
 
 \imagen{relevant_aspects/rolling_std_peaks_id.png}{Amplitudes mediante desviación típica móvil con la enfermedad de Parkinson}{0.7}
 
@@ -208,7 +208,7 @@ Para detectar los toques (mínimos) es tan simple como utilizar la serie de
 se ha establecido un umbral para que solo se consideren toques si se encuentra
 entre 0 y 0,1 radianes.
 
-\imagen{relevant_aspects/rolling_std_valleys.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
+\imagen{relevant_aspects/rolling_std_valleys.png}{Detección de toques mediante desviación típica móvil}{0.7}
 
 \paragraph{Características detectadas}
 
@@ -291,7 +291,7 @@ En este punto se dispone de 4 conjuntos de datos sobre 156 instancias:
 
 A priori es muy difícil o incluso imposible saber cómo van a comportarse
 diferentes algoritmos al enfrentarse a distintos subconjuntos de la información
-diponible. Por lo que la única opción es probar diferentes configuraciones con
+disponible. Por lo que la única opción es probar diferentes configuraciones con
 la esperanza de encontrar una que se adapte considerablemente bien a los datos.
 En este sentido el aprendizaje automático es más un arte que una ciencia exacta.
 
@@ -342,7 +342,13 @@ resultados obtenidos.
 En este apartado se exponen los resultados obtenidos además de algunos detalles
 interesantes.
 
-\paragraph{Número de características} En un principio se realizó la búsqueda
+\paragraph{Número de características} Para la selección de características estas
+son ordenadas mediante una tabla de relevancia creada por TSFresh en la que se
+realiza un test de significancia (contraste de hipótesis) de cada atributo, los
+p-valores resultantes son posteriormente evaluados para detectar falsos
+positivos, dando resultada a la tabla de relevancia final.
+
+En un principio se realizó la búsqueda
 variando el número de características seleccionadas entre 1 y 120, obteniendo
 los siguientes resultados dependiendo esta cifra (cada punto corresponde con la
 configuración de mayor precisión con ese número de características).
@@ -359,18 +365,17 @@ utilizar más características se obtuvieron los resultados siguientes.
 \imagen{results/2.png}{Resultados ampliando número de características probadas}{0.7}
 
 Se observa que la precisión aumenta hasta las 320 características seleccionadas.
-Esto puede resultar ilógico, ya que las características se seleccionan
-dependiendo de su relevancia estimada mediante pruebas de significancia. Se
-sospecha que esto es debido a la forma en la que tratan los algoritmos algunas
-combinaciones de atributos que no eran posibles al realizar una selección de
-menos características.
+Esto puede resultar ilógico debido a que las características se seleccionan en
+orden de relevancia. Se sospecha que esto es debido a la forma en la que tratan los
+algoritmos algunas combinaciones de atributos que no eran posibles al realizar
+una selección de menos características.
 
 \paragraph{Comparación de algoritmos}
 
 La figura \ref{fig:results/3.png} muestra la precisión de los algoritmos
 probados en función del número de características seleccionadas.
 
-\imagen{results/3.png}{Comparación de algoritmos}{0.7}
+\imagen{results/3.png}{Precisión de diversos algoritmos dependiendo del número de características}{0.7}
 
 Se aprecia que la mejor precisión se obtiene con SVC (Máquina de Vectores de
 Soporte) y 320 características seleccionadas, aunque Random Forest se queda
@@ -379,12 +384,12 @@ bastante cerca.
 La figura \ref{fig:results/4.png} muestra la precisión del algoritmo SVM para
 diferentes funciones <<kernel>> y número de características seleccionadas.
 
-\imagen{results/4.png}{Comparación de algoritmos}{0.7}
+\imagen{results/4.png}{Precisión de SVM según el número de características y el <<kernel>> usado}{0.7}
 
 A continuación, en la figura \ref{fig:results/5.png} se muestra la diferencia de
 precisión entre distintos grados para SVM con <<kernel>> polinomial.
 
-\imagen{results/5.png}{Comparación de algoritmos}{0.7}
+\imagen{results/5.png}{Precisión de SVM con <<kernel>> polinomial en función del grado}{0.7}
 
 Se puede ver que se alcanza la precisión máxima con un <<kernel>> polinomial de
 grado 8, seguido de los grados 5 y 7. 
@@ -405,11 +410,11 @@ configuración:
     \item Tolerancia para el criterio de parada: 0.001
 \end{itemize}
 
-Este modelo tiene una precisión medida del 78,8461538461539\%. Se debe tener en
-cuenta que este valor se ha medido realizando validación cruzada con 5
-repeticiones de 2 <<folds>>, por lo que esta precisión es la obtenida entenando
-modelos únicamente con el 50\% de los datos disponibles, entonces es de esperar
-que el rendimiento del modelo final, entrenado con todos los datos, sea mayor.
+Este modelo tiene una precisión medida del 78,8462\%. Se debe tener en cuenta
+que este valor se ha medido realizando validación cruzada con 5 repeticiones con
+2 <<folds>>, por lo que esta precisión es la obtenida entenando modelos
+únicamente con el 50\% de los datos disponibles, entonces es de esperar que el
+rendimiento del modelo final, entrenado con todos los datos, sea mayor.
 
 \section{Fase de desarrollo de la aplicación}
 
@@ -453,7 +458,7 @@ adecuado. Esto es generalmente usado en lo que se conoce como balance de carga
 
 Como tanto la API como la aplicación web están alojadas en la misma máquina se
 necesita alguna forma para diferenciar qué peticiones van a qué servicio. Se ha
-decidido que \textit{dominio} vaya a la aplicación web y que
+decidido qué \textit{dominio} vaya a la aplicación web y qué
 \textit{api.dominio} vaya a la api, en este caso \textit{dominio} es
 \href{https://paddel.catalin.sh}{paddel.catalin.sh}. Configuraciones como esta
 se deben realizar en el archivo \texttt{.env} en la raíz del proyecto de docker
@@ -473,7 +478,8 @@ dominio al que vayan dirigidas.
 
 Además, Caddy permite la obtención y renovación automática de certificados SSL
 de una entidad certificadora (en concreto \href{https://letsencrypt.org/}{Let's
-Encrypt}) cuyos certificados son de confianza en la mayoría de navegadores.
+Encrypt}) cuyos certificados se consideran de confianza en la mayoría de
+navegadores.
 
 \subsection{Make}
 
@@ -549,7 +555,7 @@ Otros conceptos sobre accesibilidad de gran importancia son:
             \item Para anunciar al usuario de un mensaje si, por ejemplo, le
             llega un correo mientras navega por su bandeja de entrada, se emplea
             el atributo \texttt{aria-live}. Que puede tomar los valores
-            \texttt{assertive}, \texttt{off} y \texttt{default}, dependiendo del
+            \texttt{assertive}, \texttt{off} y \texttt{polite}, dependiendo del
             tipo de interrupción que se desee realizar.
         \end{itemize}
 \end{itemize}
@@ -564,9 +570,9 @@ errores y mejoras.
 Para acceder al panel de gestión de modelos y usuarios es necesario realizar una
 verificación de identidad. Para esto se utiliza un simple nombre de usuario y
 contraseña. Cuando se introducen los datos estos son enviados a la API, donde se
-comparan con la base de datos \footnote{Las contraseñas se almacenan cifradas
-con <<salt>> mediante la función de hasheado <<bcrypt>>.}, si no se puede
-verificar la identidad se responde con un error.
+comparan con la base de datos\footnote{Las contraseñas se almacenan cifradas con
+<<salt>> mediante la función de hasheado <<bcrypt>>.}, si no se puede verificar
+la identidad se responde con un error.
 
 Si la verificación es exitosa se devuelve un JWT (JSON Web Token), que es una
 cadena de caracteres cuyo contenido puede ser descifrado por cualquier persona.
@@ -586,11 +592,11 @@ autentificación.
 
 Otra ventaja del uso de JWT es que se pueden utilizar de tal forma que no sea
 necesario almacenar información sobre la sesión de los usuarios en la base de
-datos. Como parte de la información cifrada que contiene el JWT se puede incluir
-la fecha de expiración del mismo, esto se procesa en el servidor para determinal
-su estado de expiración.
+datos. Como parte de la información firmada que contiene el JWT se puede incluir
+la fecha de expiración del mismo, esto se procesa en el servidor para determinar
+su estado de validez.
 
 Una gran desventaja de este método de autentificación es que si el navegador del
-usuario se viese comprometido el JWT podría ser utilizado para suplantar su
+usuario se viese comprometido, el JWT podría ser utilizado para suplantar su
 identidad ante la aplicación. Pese a esto se ha optado por este método debido a
 su simplicidad.

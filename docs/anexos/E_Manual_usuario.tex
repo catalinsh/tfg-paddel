@@ -3,9 +3,17 @@
 
 \section{Introducción}
 
+Este apartado detalla la información que un usuario deberá tener para poder
+utilizar el software creado en el proyecto. El apartado se divide en dos
+secciones, una para la aplicación web y otra para el <<script>> de generación de
+modelos.
 
+\section{Aplicación web}
 
-\section{Requisitos de usuarios}
+Aquí se detalla la forma en la que se utiliza la aplicación web, documentando
+las diferentes funcionalidades disponibles.
+
+\subsection{Requisitos de usuarios}
 
 Para utilizar la aplicación el único requisito es disponer de una versión
 reciente (a ser posible de los últimos dos años) de un navegador, programa que
@@ -13,17 +21,17 @@ suele venir por defecto en la mayoría de sistemas operativos. Además, cabe
 destacar que la ejecución de JavaScript deberá estar permitida, aunque esto no
 debería suponer un problema, al tener que ser desacivada de forma manual.
 
-\section{Instalación}
+\subsection{Instalación}
 
 Como la aplicación está alojada en un servidor remoto, el usuario no necesita
 instalar ninguna dependencia específica.
 
-\section{Manual del usuario}
+\subsection{Manual del usuario}
 
 Desde un navegador se puede acceder a la aplicación mediante la url
 \href{https://paddle.catalin.sh}{paddel.catalin.sh}.
 
-\subsection{Formulario predicción}
+\subsubsection{Formulario predicción}
 
 La página principal consiste en un formulario desde el que se pueden subir los
 datos necesarios para realizar una predicción mediante los modelos:
@@ -65,7 +73,7 @@ error.
 
 \imagenConBorde{manual_usuario/05.png}{Error predicción}{1}
 
-\subsection{Cambio de idioma}
+\subsubsection{Cambio de idioma}
 
 Acceder a \href{https://paddle.catalin.sh}{paddel.catalin.sh} leerá el idioma
 preferido del navegador usado y redirigirá a la alternativa más adecuada de
@@ -82,7 +90,7 @@ en
 local} para \textit{recordar} el idioma seleccionado y utilizarlo en posteriores
 visitas a la aplicación.
 
-\subsection{Administración}
+\subsubsection{Administración}
 
 Para acceder al panel de administración se utiliza el botón <<Administración>>
 de la página principal, si el usuario tiene una sesión válida abierta, será
@@ -97,7 +105,7 @@ nombre de usuario y su contraseña.
 En caso de que los datos introducidos sean incorrecto se le notifica con un
 mensaje de error.
 
-\imagenConBorde{manual_usuario/08.png}{Selección de modelo}{0.6}
+\imagenConBorde{manual_usuario/08.png}{Error de inicio de sesión}{0.6}
 
 \paragraph{Administración de modelos}
 
@@ -109,10 +117,85 @@ aplicación.
 Para seleccionar el modelo a utilizar para realizar predicciones se puede
 utilizar el botón <<Seleccionar>> correspondiente.
 
-\imagenConBorde{manual_usuario/09.png}{Error inicio sesión}{1}
+\imagenConBorde{manual_usuario/09.png}{Selección de modelo}{1}
 
 \subparagraph{Añadir modelo}
 
 Añadir un nuevo modelo se puede realizar mediante el botón <<Añadir modelo>>,
 que abre una ventana modal con un formulario para añadir la información del
 nuevo modelo.
+
+\imagenConBorde{manual_usuario/10.png}{Añadir modelo}{1}
+
+\subparagraph{Eliminar modelo}
+
+Se puede eliminar cualquier modelo que no esté seleccionado haciendo clic sobre
+el botón <<Eliminar>>, esto abre una ventana modal de confirmación.
+
+\imagenConBorde{manual_usuario/11.png}{Confirmación eliminar modelo}{1}
+
+Una vez eliminado la lista de modelos se actualiza, reflejando la acción.
+
+\paragraph{Administración de usuarios}
+
+En este panel se pueden ver y gestionar los usuarios existentes en la
+aplicación.
+
+\subparagraph{Añadir usuario}
+
+Añadir un nuevo usuario se puede realizar mediante el botón <<Añadir usuario>>,
+que abre una ventana modal con un formulario para añadir la información del
+nuevo usuario.
+
+\imagenConBorde{manual_usuario/12.png}{Añadir usuario}{1}
+
+\subparagraph{Eliminar usuario}
+
+Al igual que para eliminar modelos, eliminar un usuario se realiza mediante el
+botón <<Eliminar>> del usuario correspondiente.
+
+\imagenConBorde{manual_usuario/13.png}{Confirmación eliminar usuario}{1}
+
+\section{Script generación modelos}
+
+Este <<script>>, localizado en el archivo \texttt{train.py} se utiliza para
+generar modelos compatibles con el sistema creado, por lo que se pueden subir a
+la aplicación web.
+
+\subsection{Requisitos de usuario}
+
+Este script requiere ser ejecutado con la versión 3.9 de Python. Para ello es
+recomendable utilizar un entorno virtual, ya sea mediante utilidades como
+\href{https://docs.conda.io/en/latest/}{Conda} o \textit{venv}. Por
+ejemplo, para crear un entorno virtual mediante \textit{venv}, se utiliza:
+
+\texttt{python -m venv venv}
+
+Este comando genera un entorno virtual en el directorio \texttt{venv} en
+relación a la ruta actual.
+
+A continuación, se debe activar el entorno, la forma de realizar esto es
+dependiente del sistema operativo:
+
+\texttt{source ./venv/bin/activate \# Linux/MacOS} \\
+
+\texttt{./venv/Scripts/activate.ps1 \# Windows con PowerShell} \\
+
+\texttt{./venv/Scripts/activate.bat \# Windows con CMD} \\
+
+El último paso antes de poder lanzar el <<script>> es instalar las dependencias.
+Para ello se utiliza el siguiente comando desde la raíz del proyecto.
+
+\texttt{pip install -r requirements.txt}
+
+Además, dependiendo del sistema operativo, puede ser necesario instalar
+\href{https://ffmpeg.org/}{FFmpeg}.
+
+\subsection{Instalación}
+
+El <<script>> no se instala en el sistema, una vez se han cumplido con los
+requisitos de usuario se puede ejecutar directamente.
+
+\subsection{Manual de usuario}
+
+
