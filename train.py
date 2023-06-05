@@ -204,7 +204,7 @@ algorithmFunctions = {
 )
 @click.option(
     "--cache_dir",
-    prompt="Directory where feature extraction cache is located",
+    prompt="Directory where feature extraction cache is located (input '-' to not use cache)",
     default="./data/cache",
     type=click.Path(exists=False, file_okay=False, dir_okay=True),
 )
@@ -232,7 +232,11 @@ def main(video_dir, cache_dir, output_file, algorithm, feature_amount):
     algorithmFunctions[algorithm](standalone_mode=False)
 
     with suppress_stdout_stderr():
-        misc_df, classic_df, fresh_df, y = get_data(Path(video_dir), Path(cache_dir))
+        if cache_dir != "-":
+            misc_df, classic_df, fresh_df, y = get_data(Path(video_dir), Path(cache_dir))
+        else:
+            misc_df, classic_df, fresh_df, y = get_data(Path(video_dir))
+
         data = pd.concat([misc_df, classic_df, fresh_df], axis=1)
 
         pipe = Pipeline(

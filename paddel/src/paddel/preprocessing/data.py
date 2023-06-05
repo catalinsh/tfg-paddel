@@ -7,7 +7,7 @@ from paddel.preprocessing.input.data import get_input_data
 
 
 def get_data(
-    videos_dir: Path, cache_dir: Path = Path()
+    videos_dir: Path, cache_dir: Path = None
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.Series]:
     """Obtains the data to train the models.
 

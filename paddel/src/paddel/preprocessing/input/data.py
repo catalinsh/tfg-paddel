@@ -49,11 +49,16 @@ def _load_cache(cache_dir: Path) -> tuple:
     Returns:
         tuple: Loaded datasets.
     """
-    misc_df_path, classic_df_path, fresh_df_path = _get_cache_paths(cache_dir)
+    if cache_dir:
+        misc_df_path, classic_df_path, fresh_df_path = _get_cache_paths(cache_dir)
 
-    misc_df = _load_pkl(misc_df_path)
-    classic_df = _load_pkl(classic_df_path)
-    fresh_df = _load_pkl(fresh_df_path)
+        misc_df = _load_pkl(misc_df_path)
+        classic_df = _load_pkl(classic_df_path)
+        fresh_df = _load_pkl(fresh_df_path)
+    else:
+        misc_df = pd.DataFrame()
+        classic_df = pd.DataFrame()
+        fresh_df = pd.DataFrame()
 
     return misc_df, classic_df, fresh_df
 
@@ -107,7 +112,7 @@ def _get_cached_video_names(misc_df: pd.DataFrame) -> set[str]:
 
 
 def get_input_data(
-    videos_dir: Path, cache_dir: Path = Path()
+    videos_dir: Path, cache_dir: Path
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Get raw data to use to train the models.
 
@@ -139,6 +144,7 @@ def get_input_data(
     )
     fresh_df = pd.concat([fresh_df, pd.DataFrame(results_fresh)], ignore_index=True)
 
-    _save_cache(cache_dir, misc_df, classic_df, fresh_df)
+    if cache_dir:
+        _save_cache(cache_dir, misc_df, classic_df, fresh_df)
 
     return misc_df, classic_df, fresh_df
