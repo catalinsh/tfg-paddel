@@ -19,7 +19,7 @@ Para utilizar la aplicación el único requisito es disponer de una versión
 reciente (a ser posible de los últimos dos años) de un navegador, programa que
 suele venir por defecto en la mayoría de sistemas operativos. Además, cabe
 destacar que la ejecución de JavaScript deberá estar permitida, aunque esto no
-debería suponer un problema, al tener que ser desacivada de forma manual.
+debería suponer un problema, al tener que ser desactivada de forma manual.
 
 \subsection{Instalación}
 
@@ -50,7 +50,7 @@ Una vez introducidos los datos se puede hacer click en el botón <<Enviar>>, si
 faltase algún dato el usuario es notificado por el navegador. Esto comenzará el
 proceso de envío de los datos, debido al tamaño relativamente grande que tienen
 los archivos de vídeo, este proceso puede ser de una duración bastante larga.
-Debido a eso el usuario pasa momentaneamente a una pantalla de carga antes de
+Debido a eso el usuario pasa momentáneamente a una pantalla de carga antes de
 mostrar el resultado.
 
 \imagenConBorde{manual_usuario/02.png}{Pantalla de carga formulario -- Subida}{1}
@@ -102,7 +102,7 @@ llevado a la página de inicio de sesión.
 Desde esta página un usuario administrador puede identificarse introduciendo su
 nombre de usuario y su contraseña.
 
-En caso de que los datos introducidos sean incorrecto se le notifica con un
+En caso de que los datos introducidos sean incorrectos se le notifica con un
 mensaje de error.
 
 \imagenConBorde{manual_usuario/08.png}{Error de inicio de sesión}{0.6}
@@ -112,14 +112,14 @@ mensaje de error.
 En este panel se pueden ver y gestionar los modelos disponibles en la
 aplicación.
 
-\subparagraph{Seleccionar modelo}
+\paragraph{Seleccionar modelo}
 
 Para seleccionar el modelo a utilizar para realizar predicciones se puede
 utilizar el botón <<Seleccionar>> correspondiente.
 
 \imagenConBorde{manual_usuario/09.png}{Selección de modelo}{1}
 
-\subparagraph{Añadir modelo}
+\paragraph{Añadir modelo}
 
 Añadir un nuevo modelo se puede realizar mediante el botón <<Añadir modelo>>,
 que abre una ventana modal con un formulario para añadir la información del
@@ -127,7 +127,7 @@ nuevo modelo.
 
 \imagenConBorde{manual_usuario/10.png}{Añadir modelo}{1}
 
-\subparagraph{Eliminar modelo}
+\paragraph{Eliminar modelo}
 
 Se puede eliminar cualquier modelo que no esté seleccionado haciendo clic sobre
 el botón <<Eliminar>>, esto abre una ventana modal de confirmación.
@@ -141,7 +141,7 @@ Una vez eliminado la lista de modelos se actualiza, reflejando la acción.
 En este panel se pueden ver y gestionar los usuarios existentes en la
 aplicación.
 
-\subparagraph{Añadir usuario}
+\paragraph{Añadir usuario}
 
 Añadir un nuevo usuario se puede realizar mediante el botón <<Añadir usuario>>,
 que abre una ventana modal con un formulario para añadir la información del
@@ -149,7 +149,7 @@ nuevo usuario.
 
 \imagenConBorde{manual_usuario/12.png}{Añadir usuario}{1}
 
-\subparagraph{Eliminar usuario}
+\paragraph{Eliminar usuario}
 
 Al igual que para eliminar modelos, eliminar un usuario se realiza mediante el
 botón <<Eliminar>> del usuario correspondiente.
@@ -198,4 +198,41 @@ requisitos de usuario se puede ejecutar directamente.
 
 \subsection{Manual de usuario}
 
+Con el entorno virtual de Python 3.9 activado el script se puede ejecutar
+mediante el comando:
 
+\texttt{python train.py}
+
+En primer lugar se pide la siguiente información sobre el sistema de archivos:
+
+\begin{itemize}
+    \item Directorio donde se encuentran los archivos de vídeo debidamente
+    nombrados.
+    \item Directorio en el que almacenar archivos binarios de Pickel de caché
+    para no tener que procesar todos los vídeos de nuevo en cada ejecución del
+    <<script>>. Si no se desea usar caché se puede introducir el valor <<->>.
+    \item Archivo de salida en el que se almacenará el modelo serializado
+    mediante Pickle. Este archivo se puede subir posteriormente a
+    \href{https://paddel.catalin.sh}{paddel.catalin.sh}.
+\end{itemize}
+
+\imagen{manual_usuario/14.png}{Introducción información sobre sistema de archivos}{1}
+
+A continuación, se pide elegir el número de características a seleccionar y el
+algoritmo a utilizar. Por defecto se selecciona la configuración del modelo
+final al que se llegó en la fase de investigación.
+
+\imagen{manual_usuario/15.png}{Selección número de características y algoritmo}{1}
+
+Por último se deben introducir los parámetros de configuración del algoritmo
+seleccionado.
+
+\imagen{manual_usuario/16.png}{Introducción de parámetros del algoritmo}{1}
+
+Una vez introducidos los datos, dará comienzo la extracción de características
+de los vídeos que no se encuentran en caché. Como en este caso ya se encuentran
+todos los vídeos en caché la creación del modelo es inmediata.
+
+Si no existiese caché, o se decidiese no usarla, el tiempo de ejecución
+dependerá del procesador utilizado, con un procesador moderno de 6 núcleos y 12
+hilos procesar los 158 vídeos toma unos 30 minutos.
