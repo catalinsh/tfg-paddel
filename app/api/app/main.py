@@ -158,6 +158,9 @@ def create_user(
     user: schemas.UserCreate,
     db: Session = Depends(get_db),
 ):
+    if len(crud.get_users(db)) == 100:
+        raise HTTPException(status_code=403, detail="Cannot add more than 100 users")
+
     db_user = crud.get_user_by_username(db, username=user.username)
 
     if db_user:
@@ -221,6 +224,9 @@ def add_model(
     model: UploadFile = File(),
     db: Session = Depends(get_db),
 ):
+    if len(crud.get_models(db)) == 100:
+        raise HTTPException(status_code=403, detail="Cannot add more than 100 models")
+
     if len(name) < 3:
         raise HTTPException(status_code=400, detail="Model name has to be at least 3 characters long")
 

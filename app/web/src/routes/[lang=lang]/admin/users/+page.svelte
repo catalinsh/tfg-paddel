@@ -62,14 +62,20 @@
 			<h1 class="text-base font-semibold leading-6 text-neutral-900">{$LL.USER_MANAGEMENT()}</h1>
 			<p class="mt-2 text-sm text-neutral-700">{$LL.USER_MANAGEMENT_DESC()}</p>
 		</div>
-		<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-			<button
-				on:click={() => createUserModal.showModal()}
-				type="button"
-				class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-				>{$LL.ADD_USER()}</button
-			>
-		</div>
+		{#key usersLoading}
+			{#await usersLoading then users}
+				{#if users.length < 100}
+					<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+						<button
+							on:click={() => createUserModal.showModal()}
+							type="button"
+							class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+							>{$LL.ADD_USER()}</button
+						>
+					</div>
+				{/if}
+			{/await}
+		{/key}
 	</div>
 	<div class="mt-8 flow-root">
 		<div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
@@ -124,11 +130,11 @@
 											class="relative whitespace-nowrap border-b border-neutral-200 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
 										>
 											{#if user.id === data.currentUser.id}
-												<button title="{$LL.CANT_REMOVE_YOURSELF()}" class="text-gray-300" disabled>
+												<button title={$LL.CANT_REMOVE_YOURSELF()} class="text-gray-300" disabled>
 													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
 												</button>
 											{:else if !user.removable}
-												<button title="{$LL.CANT_REMOVE_THIS_USER()}" class="text-gray-300" disabled>
+												<button title={$LL.CANT_REMOVE_THIS_USER()} class="text-gray-300" disabled>
 													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
 												</button>
 											{:else}

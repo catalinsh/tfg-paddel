@@ -91,14 +91,20 @@
 			<h1 class="text-base font-semibold leading-6 text-neutral-900">{$LL.MODEL_MANAGEMENT()}</h1>
 			<p class="mt-2 text-sm text-neutral-700">{$LL.MODEL_MANAGEMENT_DESC()}</p>
 		</div>
-		<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-			<button
-				on:click={() => addModelModal.showModal()}
-				type="button"
-				class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-				>{$LL.ADD_MODEL()}</button
-			>
-		</div>
+		{#key modelsLoading}
+			{#await modelsLoading then models}
+				{#if models.length < 100}
+				<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+					<button
+						on:click={() => addModelModal.showModal()}
+						type="button"
+						class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+						>{$LL.ADD_MODEL()}</button
+					>
+				</div>
+				{/if}
+			{/await}
+		{/key}
 	</div>
 	<div class="mt-8 flow-root">
 		<div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
