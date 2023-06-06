@@ -12,6 +12,7 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
+    removable: bool
 
     class Config:
         orm_mode = True

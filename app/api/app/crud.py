@@ -26,7 +26,7 @@ def create_user(db: Session, user: schemas.UserCreate):
 def delete_user(db: Session, user_id: int):
     query = db.query(models.User).filter(models.User.id == user_id)
     user = query.first()
-    if user:
+    if user and user.removable:
         query.delete()
         db.commit()
         return user

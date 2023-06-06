@@ -70,4 +70,6 @@ export default {
 	DELETE_MODEL_CHECK: 'Are you sure you want to permanently delete this model? This action cannot be undone.',
 	PICKLE_FILE: 'Pickled binary file.',
 	MODEL_FILE: 'Model file',
+	CANT_REMOVE_YOURSELF: 'You cannot remove yourself',
+	CANT_REMOVE_THIS_USER: 'This user cannot be removed',
 } satisfies BaseTranslation;

@@ -206,7 +206,7 @@ def delete_user(
 
     db_user = crud.delete_user(db, user_id=user_id)
     if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="User not found or can't be deleted.")
     return db_user
 
 

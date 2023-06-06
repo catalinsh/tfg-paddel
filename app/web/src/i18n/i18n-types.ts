@@ -289,6 +289,14 @@ type RootTranslation = {
 	 * M​o​d​e​l​ ​f​i​l​e
 	 */
 	MODEL_FILE: string
+	/**
+	 * Y​o​u​ ​c​a​n​n​o​t​ ​r​e​m​o​v​e​ ​y​o​u​r​s​e​l​f
+	 */
+	CANT_REMOVE_YOURSELF: string
+	/**
+	 * T​h​i​s​ ​u​s​e​r​ ​c​a​n​n​o​t​ ​b​e​ ​r​e​m​o​v​e​d
+	 */
+	CANT_REMOVE_THIS_USER: string
 }
 
 export type TranslationFunctions = {
@@ -564,6 +572,14 @@ export type TranslationFunctions = {
 	 * Model file
 	 */
 	MODEL_FILE: () => LocalizedString
+	/**
+	 * You cannot remove yourself
+	 */
+	CANT_REMOVE_YOURSELF: () => LocalizedString
+	/**
+	 * This user cannot be removed
+	 */
+	CANT_REMOVE_THIS_USER: () => LocalizedString
 }
 
 export type Formatters = {}

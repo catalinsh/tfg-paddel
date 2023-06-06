@@ -123,14 +123,12 @@
 										<td
 											class="relative whitespace-nowrap border-b border-neutral-200 py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-8 lg:pr-8"
 										>
-											{#if user.id !== data.currentUser.id}
-												<button
-													on:click={() => {
-														selectedUser = user;
-														deleteUserModal.showModal();
-													}}
-													class="text-red-600 hover:text-red-900"
-												>
+											{#if user.id === data.currentUser.id}
+												<button title="{$LL.CANT_REMOVE_YOURSELF()}" class="text-gray-300" disabled>
+													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
+												</button>
+											{:else if !user.removable}
+												<button title="{$LL.CANT_REMOVE_THIS_USER()}" class="text-gray-300" disabled>
 													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
 												</button>
 											{:else}
@@ -139,8 +137,7 @@
 														selectedUser = user;
 														deleteUserModal.showModal();
 													}}
-													class="text-gray-300"
-													disabled
+													class="text-red-600 hover:text-red-900"
 												>
 													{$LL.DELETE()}<span class="sr-only">, {user.username}</span>
 												</button>
@@ -194,7 +191,7 @@
 						<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
 							<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
 								{#if selectedUser}
-									{$LL.DELETE_USER_CHECK_TITLE({user: selectedUser.username})}
+									{$LL.DELETE_USER_CHECK_TITLE({ user: selectedUser.username })}
 								{/if}
 							</h3>
 							<div class="mt-2">

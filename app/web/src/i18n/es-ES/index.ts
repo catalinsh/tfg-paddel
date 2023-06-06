@@ -70,4 +70,6 @@ export default {
 	DELETE_MODEL_CHECK: '¿Está seguro de que desea eliminar este modelo? Esta acción no se puede deshacer.',
 	PICKLE_FILE: 'Archivo binario de Pickle.',
 	MODEL_FILE: 'Archivo del modelo',
+	CANT_REMOVE_YOURSELF: 'No se puede eliminar a si mismo',
+	CANT_REMOVE_THIS_USER: 'Este usuario no puede ser eliminado',
 } satisfies Translation;
