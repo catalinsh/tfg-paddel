@@ -1,12 +1,54 @@
 \capitulo{Conclusiones y Líneas de trabajo futuras}
 \label{cha:Conclusiones y Líneas de trabajo futuras}
 
-En el campo de la minería de datos la fase de preprocesado tiene tanta
-importancia como el propio entrenamiento de los modelos. En esta fase se
-determina lo complejos que deberán ser los modelos para adaptarse a los datos y
-el tiempo de entrenamiento que será necesario.
+Por último esta sección recopila las conclusiones a las que se ha llegado
+durante la realización del proyecto. Además de algunas líneas de trabajo
+futuras.
+
+\section{Conclusiones}
+
+Se han extraido las siguientes conclusiones durante el proyecto.
+
+\begin{itemize}
+    \item En el campo de la minería de datos la fase de preprocesado tiene tanta
+    importancia como el propio entrenamiento de los modelos. En esta fase se
+    determina lo complejos que deberán ser los modelos para adaptarse a los
+    datos y el tiempo de entrenamiento que será necesario.
+    \item Se ha creado una librería de Python instalable mediante \texttt{pip}
+    para centralizar el código común la fase de investigación (generación de
+    modelos) y la de desarrollo (aplicación web). Esta librería contiene todo el
+    código relacionado con el procesado de los vídeos para transformarlos a un
+    conjunto de características.
+    \item Para facilitar la interacción con los modelos generados por cualquier
+    programa, siempre que pueda realizar peticiones HTTP, se ha desarrollado una
+    API Rest mediante el framework FastAPI.
+    \item Se ha creado una aplicación web mediante un framework de JavaScript
+    (SvelteKit) para permitir a cualquier persona que disponga de una navegador
+    web interactuar con la API.
+    \item Se ha utilizado Docker para crear contenedores con las distintas
+    partes que componen la aplicación, simplificando en gran medida el proceso
+    de configuración del entorno de desarrollo y producción.
+    \item Con el objetivo de agilizar el proceso de creación de modelos se ha
+    implementado un <<script>> de Python que presenta una interfaz por línea de
+    comandos mediante la que se determinan distintos parámetros para crear un
+    modelo que se puede subir a la aplicación web.
+\end{itemize}
 
 \section{Lineas de trabajo futuras}
+
+Algunas líneas de trabajo futuro a corto o medio plazo:
+
+\begin{itemize}
+    \item Buscar alguna forma para acelerar el procesado de los vídeos,
+    actualmente esto toma unos 20 segundos, que es una espera muy larga al
+    utilizar la aplicación web.
+    \item Añadir la posibilidad de entrenar modelos directamente desde la
+    aplicación web, eliminando la necesidad de configurar el entorno para esto
+    de forma local.
+    \item Permitir el uso de múltiples modelos distintos desde el formulario
+    para obtener predicciones, posiblemente como un menú de <<Opciones
+    avanzadas>>.
+\end{itemize}
 
 El conjunto de datos utilizado contine muestras de personas que ya se conoce que
 padecen la enfermedad de Parkinson, debido a esto, en este proyecto se ha
