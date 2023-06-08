@@ -38,8 +38,8 @@ En la base de datos se almacenan las siguientes entidades:
 
 \begin{itemize}
     \item \textbf{Usuario (User)}: Corresponde con los usuarios registrados en
-    la aplicación. Dispone de los campos \textit{id}, \textit{username} y
-    \textit{password}.
+    la aplicación. Dispone de los campos \textit{id}, \textit{username}
+    \textit{password} y \textit{removable}.
     \item \textbf{Modelo (Model)}: Corresponde con los modelos disponibles
     dentro de la aplicación. Dispone de los campos \textit{id}, \textit{name},
     \textit{path} y \textit{selected}.
@@ -50,14 +50,11 @@ que es de tipo booleano, puede valer \textit{null} y su valor es único. De modo
 que este campo vale \textit{true} para el modelo seleccionado y \textit{null}
 para todos los demás.
 
-\subsection{Datos para la generación de modelos}
-
-Este subapartado describe los datos usados en la fase de investigación para
-entrenar, evaluar y generar los modelos.
-
 \section{Diseño procedimental}
 
 \imagen{sequence/secuencia_prediccion.pdf}{Diagrama de secuencia para la obtención de una predicción}{1}
+
+\imagen{sequence/secuencia_script.pdf}{Diagrama de secuencia para la generación de un modelo mediante el <<script>> de entrenamiento}{0.5}
 
 \section{Diseño arquitectónico}
 

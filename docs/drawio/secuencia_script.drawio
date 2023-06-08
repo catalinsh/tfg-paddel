@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-06-07T19:20:56.156Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/113.0" etag="Q_ZokxMg5mVgpRFQXGH1" version="21.3.7" type="device">
+<mxfile host="app.diagrams.net" modified="2023-06-07T19:07:02.990Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/113.0" etag="LAlLwrDxGam1DE2jtO79" version="21.3.7" type="device">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="1322" dy="657" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="581" dy="657" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,19 +13,19 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2NgsDoCjIwmhMlPLntnu-3" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" parent="1" vertex="1">
-          <mxGeometry x="70" y="40" width="20" height="660" as="geometry" />
+          <mxGeometry x="70" y="40" width="20" height="710" as="geometry" />
         </mxCell>
         <mxCell id="aM9ryv3xv72pqoxQDRHE-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NgsDoCjIwmhMlPLntnu-3" vertex="1">
-          <mxGeometry x="5" y="70" width="10" height="580" as="geometry" />
+          <mxGeometry x="5" y="70" width="10" height="620" as="geometry" />
         </mxCell>
         <mxCell id="2NgsDoCjIwmhMlPLntnu-10" value="&lt;div&gt;Script de&lt;/div&gt;&lt;div&gt;entrenamiento&lt;br&gt;&lt;/div&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
-          <mxGeometry x="140" y="40" width="100" height="660" as="geometry" />
+          <mxGeometry x="140" y="40" width="100" height="710" as="geometry" />
         </mxCell>
         <mxCell id="2NgsDoCjIwmhMlPLntnu-11" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NgsDoCjIwmhMlPLntnu-10" vertex="1">
-          <mxGeometry x="45" y="70" width="10" height="580" as="geometry" />
+          <mxGeometry x="45" y="70" width="10" height="610" as="geometry" />
         </mxCell>
         <mxCell id="2NgsDoCjIwmhMlPLntnu-16" value="Librería Paddel" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
-          <mxGeometry x="280" y="40" width="100" height="660" as="geometry" />
+          <mxGeometry x="280" y="40" width="100" height="690" as="geometry" />
         </mxCell>
         <mxCell id="2NgsDoCjIwmhMlPLntnu-18" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="2NgsDoCjIwmhMlPLntnu-16" vertex="1">
           <mxGeometry x="45" y="570" width="10" height="60" as="geometry" />

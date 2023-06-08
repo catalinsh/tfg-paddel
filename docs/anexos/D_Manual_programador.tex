@@ -638,3 +638,140 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 \texttt{https://api.localhost} para acceder a la API.
 
 \section{Pruebas del sistema}
+
+\newcounter{ncp}
+\setcounter{ncp}{0}
+
+\newcolumntype{L}[1]{>{\hsize=#1\hsize\RaggedRight} X}
+
+\newcommand{\cp}[7]{
+    \addtocounter{ncp}{1}
+
+    \raggedright
+    \begin{table}[H]
+    \begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
+    
+    \toprule
+    Identificador & CP\decimal{ncp} \\
+    Prioridad & #1 \\
+    Fecha de ejecución & #2 \\
+    Objetivo & #3 \\
+    Precondiciones & {#5} \\
+    Postcondiciones & {#6} \\
+    \specialrule{.8pt}{2pt}{0pt}
+
+    \multicolumn{2}{@{}p{\textwidth}@{}}{
+        \begin{hyphenrules}{nohyphenation}
+        \bgroup
+        \rowcolors{2}{gray!20}{white}
+        \def\arraystretch{1}
+        \setlength\tabcolsep{2px}
+        \scriptsize
+        \begin{tabularx}{\textwidth}{L{0.2}L{0.25}L{0.25}L{0.25}>{\centering\arraybackslash}L{0.05}}
+            \rowcolor[gray]{.9}
+            \textbf{Acción} & \textbf{Entrada} & \textbf{Salida Esperada} & \textbf{Salida Real} & \\
+            \specialrule{.4pt}{0pt}{2pt}
+            #7
+        \end{tabularx}
+        \egroup
+        \end{hyphenrules}
+    } \\
+
+    \specialrule{.8pt}{0pt}{0pt}
+    \end{tabular}
+    \caption{CP\decimal{ncp}: #4}
+    \end{table}
+}
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar la obtención de una predicción}
+    {Predicción}
+    {-}
+    {-}
+    {
+        Acceder a la página del formulario de predicción &  & Estar en la página del formulario & Estar en la página del formulario & \ding{51} \\
+        Introducir información & Mano dominante: Derecha; Mano del vídeo: Derecha; Edad: 71; Sexo: Femenino; Archivo de vídeo: archivo respectivo; & Formulario relleno & Formulario relleno & \ding{51} \\
+        Enviar información &  & Aparece pantalla de carga & Aparece pantalla de carga & \ding{51} \\
+        Esperar a que finalice el procesado &  & Probabilidad <50\% de padecer Parkinson & Probabilidad de 7.13\% de padecer Parkinson & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {No tener una sesión iniciada}
+    {}
+    {El usuario se encuentra en la página de inicio de sesión}
+    {El usuario ha accede al panel de administrador}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar el cierre de sesión}
+    {Cierre de Sesión}
+    {El usuario se encuentra en el panel de administrador}
+    {El usuario ha finalizado su sesión}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar añadir modelo}
+    {Añadir modelo}
+    {El usuario se encuentra en el panel de administración de modelos}
+    {Un modelo ha sido añadido}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar selección de modelo}
+    {Seleccionar modelo}
+    {El usuario se encuentra en el panel de administración de modelos}
+    {Un modelo diferente ha sido seleccionado}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar eliminar modelo}
+    {Eliminar modelo}
+    {El usuario se encuentra en el panel de administración de modelos}
+    {Un modelo diferente ha sido seleccionado}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar añadir usuario}
+    {Añadir usuario}
+    {El usuario se encuentra en el panel de administración de usuarios}
+    {Un usuario ha sido añadido}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar eliminar usuario}
+    {Eliminar usuario}
+    {El usuario se encuentra en el panel de administración de usuarios}
+    {Un modelo diferente ha sido seleccionado}
+    {
+         &  &  &  & \ding{51} \\
+    }
+
+\cp {Alta}
+    {08/06/2023}
+    {Probar cambio de idioma}
+    {Cambiar idioma}
+    {El usuario se encuentra en cualquier página de la aplicación}
+    {El idioma de las cadenas de texto que se muetran ha cambiado}
+    {
+         &  &  &  & \ding{51} \\
+    }
