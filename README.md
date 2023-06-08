@@ -1,6 +1,18 @@
 # PADDEL
 Repository for PADDEL (*PArkinson's Disease DEtection Library*).
 
+Author: Catalin Andrei, Cacuci
+
+This site can be accessed at [paddel.catalin.sh](https://paddel.catalin.sh)
+also, the API documentation can be found at
+[api.paddel.catalin.sh/docs](https://api.paddel.catalin.sh/docs).
+
+There is a default user that cannot be deleted with the following credentials:
+
+Username: `test`
+
+Password: `secret`
+
 ## Project structure
 This project has the following components:
 
@@ -28,6 +40,9 @@ Located in the `app` directory, it is comprized of the following Docker containe
   the PADDEL library. It's main purpose is to serve as an interface between the
   website and the library. Swagger documentation for the API can be accessed in
   the `/api/docs` path of a deployment of the containers.
+
+- **database**: PostgreSQL 15.2 based container. It is used by the API to
+  persist information.
 
 This folder also containes a `sample.env` file which contains environment
 variables used by the containers and some base values. It should be edited to
