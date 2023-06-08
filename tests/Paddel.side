@@ -1,0 +1,356 @@
+{
+  "id": "0ae67cdd-c2a4-4c6d-928d-734346d458d1",
+  "version": "2.0",
+  "name": "Paddel",
+  "url": "https://paddel.catalin.sh/en-GB/",
+  "tests": [{
+    "id": "071d8851-d437-477a-ae45-ccbf345a9dad",
+    "name": "Session",
+    "commands": [{
+      "id": "fab7159f-7942-40a2-98af-fb2426de8c7c",
+      "comment": "",
+      "command": "open",
+      "target": "https://paddel.catalin.sh/es-ES/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3d7156ce-97b3-4530-a0b9-b1b77cc78095",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1265x1388",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "77fd41e2-d696-4120-9ec0-d1dbed913dbe",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "d6677576-30c1-4716-85a3-7e47e389cb55",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "secret"
+    }, {
+      "id": "1bc00780-9fe1-4084-b6c2-4bd86cb7dcfa",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "f510efb9-ef2b-44d4-8852-e871147271ed",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.sm\\3A flex-auto > .text-base",
+      "targets": [
+        ["css=.sm\\3A flex-auto > .text-base", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Administración de modelos')]", "xpath:innerText"]
+      ],
+      "value": "Administración de modelos"
+    }, {
+      "id": "9e86eba7-e7c7-4084-b6e7-3c28fd72a8ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-1\\.5:nth-child(1)",
+      "targets": [
+        ["css=.py-1\\.5:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cerrar sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "100ec72a-9e3a-48a9-aef3-e30f62e77537",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Administración",
+      "targets": [
+        ["linkText=Administración", "linkText"],
+        ["css=.w-full:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Administración')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/es-ES/admin/models')]", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Administración')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d28c7052-653b-42bd-b991-287f62c25d74",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.mt-10",
+      "targets": [
+        ["css=.mt-10", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Acceda a su cuenta')]", "xpath:innerText"]
+      ],
+      "value": "Acceda a su cuenta"
+    }, {
+      "id": "57dacea1-3b5d-443c-92ce-7502680cd4ea",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "4ccddffc-2123-4a8d-bddc-304290e8bc7b",
+    "name": "Add-Remove user",
+    "commands": [{
+      "id": "becf5b94-75e4-43f0-aecb-dae651248ef4",
+      "comment": "",
+      "command": "open",
+      "target": "https://paddel.catalin.sh/es-ES/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bf31e694-14c0-498e-9c72-6308447b99ef",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "77883d28-d17f-40f4-8fb9-bb484f78c28e",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "secret"
+    }, {
+      "id": "0e115edb-bc78-46de-b427-6a9d248e826f",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "6ac193f1-3d01-4262-9053-cc1eb9d58a2d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.border-transparent > span",
+      "targets": [
+        ["css=.border-transparent > span", "css:finder"],
+        ["xpath=//div/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Usuarios')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0bb84d7-495f-4f8c-9e3d-428b54451cad",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-blue-600:nth-child(1)",
+      "targets": [
+        ["css=.bg-blue-600:nth-child(1)", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Añadir usuario')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d39487cc-b262-4c9c-aa07-5e4b25887be3",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "testuser"
+    }, {
+      "id": "d13ddb37-4d71-4b24-b448-ca7276cf9fd7",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "P@ssword"
+    }, {
+      "id": "44ed74e4-c42c-46a8-8d7d-000a7a6df420",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "97138b82-c83e-4f17-b094-570b4eb9464e",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//*[contains(text(), 'testuser')]",
+      "targets": [],
+      "value": "testuser"
+    }, {
+      "id": "24f735dc-5c72-4b50-b3d8-2d2c746a4f43",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//*[contains(text(), 'testuser')]/../td[3]/button",
+      "targets": [
+        ["css=tr:nth-child(3) .text-red-600", "css:finder"],
+        ["xpath=//tr[3]/td[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5dafc26e-bfe0-4696-ae54-9b6582901eaf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bg-red-600",
+      "targets": [
+        ["css=.bg-red-600", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//dialog/div/div/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1454b166-9f1e-464b-a7cf-2619fc9a2024",
+      "comment": "",
+      "command": "click",
+      "target": "css=.py-1\\.5:nth-child(1)",
+      "targets": [
+        ["css=.py-1\\.5:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cerrar sesión')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "752d3208-5575-4f98-bb3a-db662c81b269",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9f8e3de9-0be3-4dad-a3cd-1b55d9ad6be2",
+    "name": "Language",
+    "commands": [{
+      "id": "d5a03204-4fdb-46b4-aafb-c0b75d90a33b",
+      "comment": "",
+      "command": "open",
+      "target": "https://paddel.catalin.sh/en-GB",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a03e688c-d06c-4712-8736-edd2f0de05b8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1265x1388",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "91f9a45a-e419-4dc2-b264-c0d414c01347",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-xl",
+      "targets": [
+        ["css=.text-xl", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Predict')]", "xpath:innerText"]
+      ],
+      "value": "Predict"
+    }, {
+      "id": "5bc5b717-c2f8-4f14-9713-56f7c4a6e3d3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.h-6",
+      "targets": [
+        ["css=.h-6", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8a54612-3c70-43e5-95a1-03b5974b960c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-shrink-0:nth-child(2) > span",
+      "targets": [
+        ["css=.flex-shrink-0:nth-child(2) > span", "css:finder"],
+        ["xpath=//ul[@id='locale-menu']/li/a[2]/span", "xpath:idRelative"],
+        ["xpath=//a[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Español')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "dba0a72d-9c70-44a1-b064-d4bdeec5e3ff",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.text-xl",
+      "targets": [
+        ["css=.text-xl", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Predecir')]", "xpath:innerText"]
+      ],
+      "value": "Predecir"
+    }, {
+      "id": "0b4d1433-5fd1-4f6a-a06d-c9093a4a316b",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "8897f5b6-3de8-49ab-a0ba-a9e018e76bd3",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://paddel.catalin.sh/es-ES/login", "https://paddel.catalin.sh/en-GB/"],
+  "plugins": []
+}

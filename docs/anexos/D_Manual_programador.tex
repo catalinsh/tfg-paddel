@@ -639,6 +639,13 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \section{Pruebas del sistema}
 
+Este apartado presenta los casos de prueba que se han determinado para comprobar
+el correcto funcionamiento de la aplicación. Algunas de las pruebas se han
+realizado mediante la extensión de Chrome
+\href{https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd}{Selenium
+IDE} mientras que aquellas que requieren de subida de archivos se han tenido que
+realizar de forma manual.
+
 \newcounter{ncp}
 \setcounter{ncp}{0}
 
@@ -816,8 +823,8 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
     {La variable en almacenamiento local de idioma se cambia para reflejar el cambio}
     {
         Acceder a \texttt{/en-GB} &  & Estar en la página principal en inglés & Estar en la página principal en inglés & \ding{51} \\
+        Comprobar que la cadena de título es <<Predict>> &  & La cadena de título es <<Predict>> & La cadena de título es <<Predict>> & \ding{51} \\
         Hacer clic sobre el botón de cambio de idioma &  & Se abre un desplegable con los idiomas disponibles & Se abre un desplegable con los idiomas disponibles & \ding{51} \\
         Seleccionar el idioma español &  & La parte de idioma de la url cambia y se refleja el cambio sobre las cadenas de texto de la página & La parte de idioma de la url cambia y se refleja el cambio sobre las cadenas de texto de la página & \ding{51} \\
-        Comprobar que la la url ha cambiado &  & La url ha cambiado & La url ha cambiado & \ding{51} \\
         Comprobar que la cadena de título <<Predict>> cambia a <<Predecir>> &  & La cadena de título <<Predict>> cambia a <<Predecir>> & La cadena de título <<Predict>> cambia a <<Predecir>> & \ding{51} \\
     }
