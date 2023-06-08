@@ -7,7 +7,7 @@ el impacto que dichas decisiones han tenido sobre los resultados obtenidos.
 
 \section{Fase de experimentación}
 
-El conjunto de datos disponible durante la fase de experimentación consisten en
+El conjunto de datos disponible durante la fase de experimentación consiste en
 158 muestras con los siguientes <<atributos>>:
 
 \begin{itemize}
@@ -23,7 +23,7 @@ El conjunto de datos disponible durante la fase de experimentación consisten en
 \end{itemize}
 
 Cabe destacar que se ha tomado una muestra de cada mano de cada persona. Por lo
-que este conjunto de datos ha sido obtenido de 79 personas. Aún así, se ha
+que este conjunto de datos ha sido obtenido de 79 personas. Aun así, se ha
 tomado cada mano como una instancia distinta con el objetivo de tener más
 instancias con las que trabajar.
 
@@ -43,14 +43,14 @@ atributos corresponden con una persona que padece la enfermedad de Parkinson
 Los algoritmos de aprendizaje automático típicamente están diseñados para
 trabajar con atributos numéricos, por lo que los atributos disponibles deben ser
 transformados durante el preprocesado. Esto se puede realizar en la mayoría de
-casos mediante simples métodos de minería de datos, como, por ejemplo, la
+los casos mediante simples métodos de minería de datos, como, por ejemplo, la
 codificación de variables categóricas. Pero hay un problema, el archivo de
 vídeo.
 
 En este caso, una imagen es una matriz bidimensional donde cada celda contiene
-una 3-tupla representando los valores rojo, verde y azul del pixel con el que se
+una 3-tupla representando los valores rojo, verde y azul del píxel con el que se
 corresponde. Un vídeo es una secuencia de imágenes junto con información
-adicional, es este caso sólamente es relevante la tasa de refresco, que es la
+adicional, es este caso solamente es relevante la tasa de refresco, que es la
 frecuencia a la que ha sido capturada cada imagen. Esto es de gran importancia
 para dar una componente temporal al vídeo.
 
@@ -60,7 +60,7 @@ transformado a un conjunto de valores numéricos que lo describen.
 
 \subsubsection{Extracción de <<landmarks>>}
 
-Una <<landmark>> en el campo de la visión aritificial es un punto de referencia
+Una <<landmark>> en el campo de la visión artificial es un punto de referencia
 que se corresponde con un objeto físico. El objetivo de esta fase es convertir
 el vídeo de la prueba de <<finger-tapping>> a una secuencia o serie temporal de
 conjuntos de <<landmarks>> los cuales representan la posición de la mano durante
@@ -80,11 +80,11 @@ trabajar con las imágenes del vídeo, este debe ser decodificado.
 
 La magnitud de lo anterior se ve claramente con el siguiente ejemplo. Un vídeo
 con una resolución de 1920x1080 a 30 fotogramas por segundo codificado mediante
-el codec H264 que ocupa 50,7MB, decodificado, ocuparía en torno a los 3,7GB.
+el códec H264 que ocupa 50,7MB, decodificado, ocuparía en torno a los 3,7GB.
 
 A continuación se deben extraer las <<landmarks>> de las imágenes leidas. Esto
 ha sido logrado mediante la librería Mediapipe Hands \cite{zhang2020mediapipe},
-que permite extraer los siguentes puntos a partir de una imágen:
+que permite extraer los siguentes puntos a partir de una imagen:
 
 \imagen{relevant_aspects/hand-landmarks.png}{Mediapipe Hands <<Landmarks>>}{1}
 
@@ -129,7 +129,7 @@ Cada celda representa el punto en el espacio en el que se encuentra la
 <<landmark>> correspondiente en un instante de tiempo.
 
 Aunque estas series temporales son una simplificación muy grande de lo vídeos
-iniciales, aún no son del todo útiles. Al ser información sobre la posición en
+iniciales, aun no son del todo útiles. Al ser información sobre la posición en
 el espacio, es dependiente de la forma en la que ha sido tomada la grabación. En
 un entorno controlado esto no sería mucho problema, pero en este caso, como se
 desea hacer el uso del sistema accesible a cualquier persona sin necesitar
@@ -160,7 +160,7 @@ amplitudes máximas en el movimiento de <<finger-tapping>>.
 
 La detección de estos instantes ha sido realizada mediante una búsqueda de
 máximos gracias a la función \texttt{find\_peaks} de la librería
-\href{https://scipy.org/}{scipy}. Pero esta función por si sola no da muy buenos
+\href{https://scipy.org/}{scipy}. Pero esta función por sí sola no da muy buenos
 resultados.
 
 \imagen{relevant_aspects/raw_peaks.png}{Máximos locales de la evolución de la amplitud a lo largo de un vídeo}{0.7}
@@ -204,7 +204,7 @@ esperar.
 \imagen{relevant_aspects/rolling_std_peaks_erratic.png}{Amplitudes mediante desviación típica móvil con movimiento errático}{0.7}
 
 Para detectar los toques (mínimos) es tan simple como utilizar la serie de
-ángulos negada para detectar los puntos donde se encuentran los máximos. Además
+ángulos negada para detectar los puntos donde se encuentran los máximos. Además,
 se ha establecido un umbral para que solo se consideren toques si se encuentra
 entre 0 y 0,1 radianes.
 
@@ -222,14 +222,14 @@ pueden ser utilizados para la generación de un modelo.
     la velocidad media (en radianes por segundo) que tiene el movimiento
     \item \textbf{Frecuencia de amplitudes y toques}: Dos magnitudes que miden
     cuantos toques o amplitudes se realizan por segundo de media durante el
-    movimineto.
+    movimiento.
     \item \textbf{Amplitud media}: Otra característica de la enfermedad de
     Parkinson es la debilidad, lo que se puede ver reflejado sobre la amplitud
     media del movimiento. Es simplemente la media de las amplitudes antes
     detectadas.
 \end{itemize}
 
-Además de las anteriores, se extrayeron 794 características genéricas
+Además de las anteriores, se extrajeron 794 características genéricas
 mediante la librería TSFresh.
 
 \subsection{Limpieza de datos}
@@ -240,8 +240,8 @@ atributos numéricos, con los que se trabaja mejor.
 
 Además, se determinó que todas las instancias deberán tener un tiempo de
 detección de la mano realizando la prueba de <<finger-tapping>> mínimo de 15
-segundos para garantizar en cierto modo la precisión de los atributos extraidos
-y poder compara instancias con el mínimo número de influencias sobre las que no
+segundos para garantizar en cierto modo la precisión de los atributos extraídos
+y poder comparar instancias con el mínimo número de influencias sobre las que no
 se tiene control.
 
 Debido a la decisión anterior se pasó de disponer de 158 instancias a únicamente
@@ -249,7 +249,7 @@ Debido a la decisión anterior se pasó de disponer de 158 instancias a únicame
 consideró una pérdida que merece la pena con el fin de obtener mejores
 resultados.
 
-Por último se sustituyeron las característica <<mano dominante>> y <<mano que
+Por último, se sustituyeron las característica <<mano dominante>> y <<mano que
 aparece en el vídeo>> por una única característica <<es la mano que aparece en
 el vídeo la dominante>> con el objetivo de reducir la conocida <<maldición de la
 dimensionalidad>> al mismo tiempo que se mantiene la información relevante.
@@ -302,7 +302,7 @@ con las siguientes variables:
     \item \textbf{Conjunto de datos}: El conjunto de datos utilizado para el
     entrenamiento ha sido cambiado de dos formas distintas:
     \begin{itemize}
-        \item Distintas combinaciones del los conjuntos de datos anteriores.
+        \item Distintas combinaciones de los conjuntos de datos anteriores.
         \item Selección de un distinto número de los atributos según su
         relevancia estimada mediante TSFresh.
     \end{itemize}
@@ -316,14 +316,14 @@ con las siguientes variables:
     Además, existen combinaciones de parámetros sin sentido, por ejemplo, variar
     el grado de la función para una máquina de vectores de soporte con
     <<kernel>> lineal. Esto se debe tener en cuenta para no aumentar el tiempo
-    requerido de foma inútil.
+    requerido de forma inútil.
 \end{itemize}
 
 Cabe destacar que la selección de características se realiza teniendo en cuenta
 la totalidad del conjunto de datos, no solo el de entrenamiento. Esto produce
 fugas de información durante la validación cruzada ya que las características
 seleccionadas son la consideradas mejores tanto para el conjunto de
-entrenemiento como el de test.
+entrenamiento como el de test.
 
 Una opción para solventar lo anterior es realizar la selección de
 características en cada <<fold>> de la validación cruzada, usando únicamente el
@@ -344,8 +344,8 @@ interesantes.
 
 \paragraph{Número de características} Para la selección de características estas
 son ordenadas mediante una tabla de relevancia creada por TSFresh en la que se
-realiza un test de significancia (contraste de hipótesis) de cada atributo, los
-p-valores resultantes son posteriormente evaluados para detectar falsos
+realiza una prueba de significancia (contraste de hipótesis) de cada atributo,
+los p-valores resultantes son posteriormente evaluados para detectar falsos
 positivos, dando resultada a la tabla de relevancia final.
 
 En un principio se realizó la búsqueda
@@ -412,7 +412,7 @@ configuración:
 
 Este modelo tiene una precisión medida del 78,8462\%. Se debe tener en cuenta
 que este valor se ha medido realizando validación cruzada con 5 repeticiones con
-2 <<folds>>, por lo que esta precisión es la obtenida entenando modelos
+2 <<folds>>, por lo que esta precisión es la obtenida entrenando modelos
 únicamente con el 50\% de los datos disponibles, entonces es de esperar que el
 rendimiento del modelo final, entrenado con todos los datos, sea mayor.
 
@@ -426,8 +426,8 @@ extensión futura del sistema con cambios mínimos de funcionalidad preexistente
 
 Para cumplir con lo anterior se decidió crear una API (Aplication Programming
 Interface) REST en la que se implemente toda la funcionalidad de la aplicación
-junto con un una página web que sirva como <<frontend>> que se comunique con la
-API mediante peticiones HTTP. Este enfoque deja la puerta abierta a futuras
+junto con una página web que sirva como <<frontend>> que se comunique con la API
+mediante peticiones HTTP. Este enfoque deja la puerta abierta a futuras
 extensiones (como una aplicación móvil) sobre el sistema sin la necesidad de
 realizar cambios sobre el código ya existente. Estas extensiones podrían ser
 realizadas por cualquier persona, incluso si no ha estado involucrada en este
@@ -507,8 +507,8 @@ por esta enfermedad reducen la precisión con la que se puede usar una
 herramienta como un ratón y se debe utilizar métodos alternativos para los que
 se deberá implementar soporte explícitamente en el código de una página web.
 
-Para asegurar el uso correcto de las diferentes heramientas de accesibilidad que
-los navegadores implementan se ha realizado el
+Para asegurar el uso correcto de las diferentes herramientas de accesibilidad
+que los navegadores implementan se ha realizado el
 \href{https://www.udacity.com/course/web-accessibility--ud891}{curso sobre
 accesibilidad web de Udacidy}, que se puede ver en
 \href{https://www.youtube.com/playlist?list=PLcJAkgdenpsci0IJziU4bCk3dTQLpJU7R}{esta
@@ -538,7 +538,7 @@ Otros conceptos sobre accesibilidad de gran importancia son:
     funcionalidad común adicional, por ejemplo, un elemento \texttt{dialog} se
     cierra automáticamente al pulsar la tecla \texttt{Esc} sin necesidad de
     añadir código JavaScript propio.
-    \item Existem patrones y métodos estándar para implementar componenes y
+    \item Existen patrones y métodos estándar para implementar componentes y
     funcionalidades comunes en la web, como menús desplegables, listas, etc.
     Estos se pueden encontrar en la
     \href{https://www.w3.org/WAI/ARIA/apg/patterns/}{Guía de prácticas de
@@ -584,7 +584,7 @@ aplicación.
 Este token se guarda en la memoria local (local storage) del navegador
 correspondiente al dominio de la web y se envía junto a todas las peticiones
 posteriores que se hacen a la API. Al contrario que las <<cookies>>, las
-variables almacenadas en memoria local no son eviadas automáticamente por el
+variables almacenadas en memoria local no son enviadas automáticamente por el
 navegador con cada petición, sino que deben ser utilizadas explícitamente por el
 código JavaScript, esto elimina la posibilidad del ataque conocido como CSRF
 (Cross Site Request Forgery), que depende del uso de <<cookies>> como token de
@@ -593,10 +593,10 @@ autentificación.
 Otra ventaja del uso de JWT es que se pueden utilizar de tal forma que no sea
 necesario almacenar información sobre la sesión de los usuarios en la base de
 datos. Como parte de la información firmada que contiene el JWT se puede incluir
-la fecha de expiración del mismo, esto se procesa en el servidor para determinar
+la fecha de expiración de este, esto se procesa en el servidor para determinar
 su estado de validez.
 
-Una gran desventaja de este método de autentificación es que si el navegador del
-usuario se viese comprometido, el JWT podría ser utilizado para suplantar su
+Una gran desventaja de este método de autentificación es que, si el navegador
+del usuario se viese comprometido, el JWT podría ser utilizado para suplantar su
 identidad ante la aplicación. Pese a esto se ha optado por este método debido a
 su simplicidad.

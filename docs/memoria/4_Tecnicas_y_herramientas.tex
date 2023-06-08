@@ -1,5 +1,5 @@
-\capitulo{Técnicas y herraminetas}
-\label{cha:Técnicas y herraminetas}
+\capitulo{Técnicas y herramientas}
+\label{cha:Técnicas y herramientas}
 
 En el área de la inteligencia artificial, y en general en la informática, la
 conocida expresión <<Pararse a hombros de gigantes>> tiene mucho sentido, ya que
@@ -58,7 +58,7 @@ siguientes 6 fases.
     negocio establecidos en la primera fase. Aquí se deberá determinar cómo se
     van a utilizar los resultados de la minería de datos. Los procesos clave de
     esta fase son la evaluación de los resultados, la revisión del proceso
-    utilizado y la detemrinación de los pasos siguientes.
+    utilizado y la determinación de los pasos siguientes.
 \end{enumerate}
 
 Las fases anteriores tienen una naturaleza cíclica, los conocimientos obtenidos
@@ -92,7 +92,7 @@ Linux \href{https://fedoraproject.org/}{Fedora}, en concreto versiones 37 y 38.
 Fedora se caracteriza por que sus repositorios se actualizan regularmente para
 incluir las últimas versiones estables de la mayoría de programas, al contrario
 de lo que ocurriría en una distribución como Debian estable. Pese a esto, Fedora
-es considerada como una distribución bastante estable y, duarante el desarrollo
+es considerada como una distribución bastante estable y, durante el desarrollo
 de este proyecto, no se han encontrado problemas fuera de lo común.
 
 Han sido instalados de forma nativa Python 3.9 para la fase de investigación,
@@ -148,8 +148,9 @@ utilizó directamente el comando \texttt{git} desde una terminal de Linux.
 A través del proyecto hay comandos de cierta complejidad que se repiten con
 bastante frecuencia (\textit{e.g.} formatear el código, lanzar contenedores,
 limpiar contenedores, etc.), para facilitar el uso de estos comandos se ha
-utilizado la utilidad GNU Make, que viene por defecto en la mayoría de sistemas
-operativos de tipo Linux y se puede instalar tanto en Windows como en MacOS.
+utilizado la utilidad GNU Make, que viene por defecto en la mayoría de los
+sistemas operativos de tipo Linux y se puede instalar tanto en Windows como en
+MacOS.
 
 El funcionamiento de Make consiste en la creación de un archivo denominado
 \texttt{Makefile} que contiene diferentes comandos y secuencias de comandos con
@@ -218,7 +219,7 @@ código escrito en Python de forma automática:
             parte del usuario.
 \end{itemize}
 
-\subsection{Herramientas para la fase de experimientación}
+\subsection{Herramientas para la fase de experimentación}
 
 Estas herramientas han sido de gran utilidad durante la fase de experimentación
 para realizar las distintas tareas como extracción de características y
@@ -231,7 +232,7 @@ Jupyter Notebook es una herramienta que permite crear un archivo con extensión
 pueden ejecutar individualmente, pero manteniendo y compartiendo las variables
 establecidas de forma global entre todas estas celdas.
 
-Esta herramienta fue de especial utilidad durante la fase de experimientación,
+Esta herramienta fue de especial utilidad durante la fase de experimentación,
 ya que permite observar detenidamente los cambios que se producen entre celdas
 y, así, encontrar problemas sin tener que ejecutar el código completo desde el
 principio cada vez que se realice un cambio, como ocurriría con un
@@ -283,7 +284,7 @@ características de series temporales.
 
 Una serie temporal es una secuencia ordenada de valores con una componente
 temporal asociada. Estas secuencias por sí solas no son de mucha utilidad para
-entrenar algunos modelo, por lo que en la fase de preprocesado se debe realizar
+entrenar algunos modelos, por lo que en la fase de preprocesado se debe realizar
 una extracción de características sobre las mismas y así obtener características
 numéricas que sí se pueden utilizar para entrenar un modelo.
 
@@ -323,7 +324,7 @@ base.
 
 Además de \textit{Dockerfile} existe otro tipo de archivo denominado
 \textit{docker-compose.yml} utilizado para coordinar sistemas compuestos por
-multiples contenedores que interactúan entre sí. La aplicación web de este
+múltiples contenedores que interactúan entre sí. La aplicación web de este
 proyecto utiliza \textit{docker-compose.yml} para determinar las interacciones
 entre los cuatro contenedores creados (web, API, proxy inverso y base de
 datos).
@@ -333,7 +334,7 @@ datos).
 En las fases iniciales de desarrollo se decidió que la API debería estar alojada
 en el subdominio \texttt{api.}, mientras el dominio principal debería llevar a
 la web (SvelteKit). Esto significa que van a existir dos servicios funcionando
-de forma paralela (Web y API), y que dependiendo del dominio al que se realize
+de forma paralela (Web y API), y que dependiendo del dominio al que se realice
 una petición, ésta debería ser redirigida a un servicio u otro.
 
 Esta situación es uno de los casos de uso idóneos para un proxy inverso, que es
@@ -369,9 +370,10 @@ Es por todo lo anterior que, en última instancia, se decidió usar Caddy.
 
 FastAPI es un \textit{framework} de Python utilizado para crear APIs de tipo
 REST que se caracteriza por permitir al programador centrar sus esfuerzos en el
-código relacionado con la lógica de negocio al realizar la mayoría de acciones
-comunes entre diferentes APIs por defecto (como la creación de documentación,
-validación de tipos, serialización y deserialización de peticiones, etc.).
+código relacionado con la lógica de negocio al realizar la mayoría de las
+acciones comunes entre diferentes APIs por defecto (como la creación de
+documentación, validación de tipos, serialización y deserialización de
+peticiones, etc.).
 
 En este proyecto se ha creado una API REST para permitir la interacción con el
 código de Python utilizado para crear, entrenar y utilizar los modelos desde
@@ -379,7 +381,7 @@ cualquier dispositivo y lenguaje de programación (siempre y cuando permita
 realizar peticiones HTTP). Con esto se consigue que en el futuro se puedan crear
 nuevas formas para interactuar con los modelos sin necesidad de alterar el
 código ya existente. Se podría, por ejemplo, crear una aplicación móvil para
-facilitar la toma y subida de vídeos. Además estas nuevas aplicaciones podrían
+facilitar la toma y subida de vídeos. Además, estas nuevas aplicaciones podrían
 estar creadas por personas ajenas al proyecto que necesiten una implementación
 diferente para su caso de uso específico.
 
@@ -456,7 +458,7 @@ JavaScript, TypeScript, etc.
 
 Un aspecto que se tuvo muy en cuenta durante el desarrollo del sitio web es la
 accesibilidad, en especial para usuarios con visibilidad reducida que dependen
-de lectores de pantalla para decubrir el contenido de la web.
+de lectores de pantalla para descubrir el contenido de la web.
 
 Para comprobar cómo interactuaría un lector de pantalla con la aplicación se ha
 utilizado la extensión de Google Chrome

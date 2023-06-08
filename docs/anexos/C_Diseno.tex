@@ -31,8 +31,8 @@ programa y a que es ampliamente soportado por SQLAlchemy, la librería ORM
 
 El diseño de datos creado es muy simple debido a que la aplicación en sí es muy
 simple. Su objetivo principal es permitir la fácil utilización de modelos
-previamente entrenados para obtener predicciones y selección de los mismos por
-parte de los administradores.
+previamente entrenados para obtener predicciones y selección de estos por parte
+de los administradores.
 
 En la base de datos se almacenan las siguientes entidades:
 
@@ -59,7 +59,7 @@ para todos los demás.
 \section{Diseño arquitectónico}
 
 El diseño arquitectónico de la aplicación fue seleccionado sin consultar ningún
-patrón preexistente. Símplemente se tomaron las decisiones que parecían más
+patrón preexistente. Simplemente se tomaron las decisiones que parecían más
 lógicas en su momento. Pese a esto, la aplicación ha tomado una estructura muy
 similar a un patrón arquitectónico de cuatro capas.
 
@@ -68,11 +68,11 @@ existentes entre las diferentes partes de la aplicación, aunque tienen la
 desventaja que impactar el rendimiento durante la comunicación entre capas y
 pueden provocar cambios en cascada. Una característica importante es que las
 capas tienen un orden lógico y una capa solamente puede comunicarse con sus
-capas adyacentes. Además una capa solamente puede comenzar una petición hacia su
-capa inferior, la comunicación hacia la capa superior se realiza siempre en
+capas adyacentes. Además, una capa solamente puede comenzar una petición hacia
+su capa inferior, la comunicación hacia la capa superior se realiza siempre en
 forma de respuesta.
 
-Las siguientes capas conforman el patrón de cuatro capas, en order de superior a
+Las siguientes capas conforman el patrón de cuatro capas, en orden de superior a
 inferior.
 
 \begin{enumerate}

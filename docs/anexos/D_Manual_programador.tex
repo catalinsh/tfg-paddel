@@ -4,14 +4,14 @@
 \section{Introducción}
 
 Esta sección contiene toda la información que una persona externa debería tener
-para poder trabajar con las diferentes partes de este projecto.
+para poder trabajar con las diferentes partes de este proyecto.
 
 Existen varios archivos \texttt{Makefile} en diferentes lugares del proyecto que
 contienen diferentes comandos útiles que se repiten con frecuencia.
 
 \section{Estructura de directorios}
 
-En la raíz del proyecto se pueden encontrar los siguentes directorios:
+En la raíz del proyecto se pueden encontrar los siguientes directorios:
 
 \newpage
 
@@ -249,7 +249,7 @@ Los archivos que utiliza este contenedor se encuentran en la carpeta
 \texttt{/app/proxy}:
 
 \begin{itemize}
-    \item \texttt{Dockerfile}: Contiene la imágen y el proceso a seguir que
+    \item \texttt{Dockerfile}: Contiene la imagen y el proceso a seguir que
           Docker debe realizar para construir el contenedor.
     \item \texttt{Caddyfile}: Contiene la configuración de redirecciones de
           Caddy que determina el contenedor de destino para las peticiones que
@@ -273,7 +273,7 @@ generales que sigue son:
           desde el anfitrión.
     \item Instalar los requisitos (\texttt{requirements.txt}), que incluyen
           PADDEL y las dependencias específicas de la API.
-    \item Se lanza el servicio de FastAPI con los parámetro adecuados
+    \item Se lanza el servicio de FastAPI con los parámetros adecuados
           dependiendo de si se lanza en modo desarrollo o producción.
 \end{enumerate}
 
@@ -329,9 +329,9 @@ debería aparecer en el menú de selección de idioma y ser accesible en la ruta
 Los archivos estáticos que se utilizan, como imágenes, vídeos, iconos, se
 almacenan en el directorio \texttt{/static/}.
 
-En el archivo \texttt{/src/app.css} se definen definen los estilos (CSS)
-globales de la web. El contenido de este archivo es bastante escaso debido al
-extenso uso de las clases que provee la librería Tailwind CSS.
+En el archivo \texttt{/src/app.css} se definen los estilos (CSS) globales de la
+web. El contenido de este archivo es bastante escaso debido al extenso uso de
+las clases que provee la librería Tailwind CSS.
 
 \subsection{Documentación}
 
@@ -396,11 +396,11 @@ vez:
     \item \texttt{PADDEL\_MIN\_DETECTION\_SECONDS}: Tiempo mínimo de detección en
     segundos para que un vídeo no se descarte debido a no tener suficientes
     fotogramas seguidos con poses detectadas. Por defecto es 15 segundos.
-    \item \texttt{PADDEL\_ROLLING\_STD\_SECONDS}: Ventana utilizada para el cálculo
-    de la desviación estándar móvil en la extracción de algunas características,
-    esto se utiliza para obtener un umbral y, así, saber cuando considerar o no
-    máximos locales dentro de una secuencia de valores. Por defecto es 3
-    segundos.
+    \item \texttt{PADDEL\_ROLLING\_STD\_SECONDS}: Ventana utilizada para el
+    cálculo de la desviación estándar móvil en la extracción de algunas
+    características, esto se utiliza para obtener un umbral y, así, saber cuándo
+    considerar o no máximos locales dentro de una secuencia de valores. Por
+    defecto es 3 segundos.
     \item \texttt{PADDEL\_SLOT\_SIZE\_SECONDS}: Para las características que se
     calculan como una diferencia entre la parte inicial y final de una secuencia
     de poses (vídeo), es el tamaño de cada una de estas partes. No puede ser
@@ -429,7 +429,7 @@ problema concreto. Algunos de estos tipos incluyen:
     \item \texttt{Video}: Definido como un objeto iterable de objetos de tipo
     \texttt{Image}, lo que es lógico, ya que un vídeo es una secuencia de
     imágenes.
-    \item \texttt{Point}: Definido como una tupla con componenetes \textit{x},
+    \item \texttt{Point}: Definido como una tupla con componentes \textit{x},
     \textit{y} y \textit{z} representa un punto en un espacio de tres
     dimensiones, es utilizado para definir las \textit{landmarks} que componen
     una pose de la mano.
@@ -438,7 +438,7 @@ problema concreto. Algunos de estos tipos incluyen:
 \subsubsection{Convenciones del código}
 
 En la librería se han seguido las convenciones de formato definidas por
-\href{https://github.com/psf/black}{Black}, que es una libería de formateado de
+\href{https://github.com/psf/black}{Black}, que es una librería de formateado de
 código para Python, escrita en Python.
 
 Se ha seleccionado Black debido a que incluye muchas opiniones predefinidas y
@@ -482,7 +482,7 @@ Jupyter) mediante el comando:
 \texttt{jupyter notebook}
 
 Este comando inicia un servidor web al que se puede acceder de forma local
-mediante cualquiera de los enlaces que se muentran por consola (acceder de forma
+mediante cualquiera de los enlaces que se muestran por consola (acceder de forma
 remota resulta algo más complicado dependiendo de casos). En esta página web se
 muestra un explorador de archivos mediante el que se puede navegar a la
 localización donde se encuentran los notebooks de Jupyter (\texttt{/notebooks/})
@@ -521,7 +521,7 @@ disponible. Dependiendo del sistema operativo puede ser necesario instalar la
 librería \href{https://ffmpeg.org}{FFmpeg} para poder realizar el procesado de
 vídeo al realizar las predicciones.
 
-A continuación se deberán instalar las dependencias recogidas en el fichero
+A continuación, se deberán instalar las dependencias recogidas en el fichero
 \texttt{requirements.txt} mediante:
 
 \texttt{pip install -r requirements.txt}
@@ -731,7 +731,7 @@ realizar de forma manual.
     {
         Acceder al panel de administración &  & Estar en el panel de administración & Estar en el panel de administración & \ding{51} \\
         Hacer clic sobre el botón <<Cerrar sesión>> &  & Estar en la página principal & Estar en la página principal & \ding{51} \\
-        Combrobar que al acceder al \texttt{/es-ES/admin/models} se redirige a \texttt{/es-ES/login} &  & Estar en \texttt{es-ES/login} & Estar en \texttt{es-ES/login} & \ding{51} \\
+        Comprobar que al acceder al \texttt{/es-ES/admin/models} se redirige a \texttt{/es-ES/login} &  & Estar en \texttt{es-ES/login} & Estar en \texttt{es-ES/login} & \ding{51} \\
     }
 
 \cp {Alta}

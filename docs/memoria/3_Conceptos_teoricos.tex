@@ -35,7 +35,7 @@ El preprocesado suele componerse de algunos de los siguientes pasos.
 
 La extracción de características es el proceso de identificar, seleccionar y
 transformar atributos relevantes de los datos de entrada para su uso en un
-modelo. Por ejemplo, en este proyecto, se han extraido características como la
+modelo. Por ejemplo, en este proyecto, se han extraído características como la
 velocidad o amplitud de movimiento de los dedos a partir de un vídeo de la
 prueba de <<finger-tapping>>.
 
@@ -68,7 +68,7 @@ significancia, entre otras.
 
 Existen modelos muy sensibles a que existan diferencias en la escala de los
 distintos atributos, como, por ejemplo, \textit{k-nearest neighbors}, por lo que
-es muy habitual que en la fase de preprocesado se realize una normalización de
+es muy habitual que en la fase de preprocesado se realice una normalización de
 los datos, es decir, transformarlos de tal forma que utilicen la misma escala,
 en general se suelen tomar valores en los intervalos $[0, 1]$ o $[-1, 1]$.
 
@@ -98,7 +98,7 @@ son:
 \end{itemize}
 
 El enfoque del aprendizaje supervisado consiste en la utilización de una muestra
-completamete etiquetada de un conjunto de datos para crear un modelo que
+completamente etiquetada de un conjunto de datos para crear un modelo que
 <<aprenda>> de las instancias de la muestra la regla general que define el
 conjunto de datos completo \cite{learned2014introduction}.
 
@@ -134,7 +134,7 @@ distintos tipos de clasificación:
     más de dos clases.
     \item \textbf{Clasificación ordenada}: En este tipo de clasificación las
     clases tienen un orden, un ejemplo sería si en este proyecto se buscase
-    determinar el grado de severidad de la bradicinesia detectada (por ejemplo
+    determinar el grado de severidad de la bradicinesia detectada (por ejemplo,
     inexistente, bajo, medio y algo). Además, este tipo de clasificación es muy
     similar a un problema de regresión, ya que se puede asignar valores
     numéricos a cada categoría determinando el orden
@@ -152,8 +152,8 @@ a esta.
 El problema de esto es que, si se utilizan todos los datos disponibles durante
 el entrenamiento, no existe ninguna forma para verificar el comportamiento del
 modelo cuando se encuentre con instancias que no ha visto antes. Esto hace
-posible que el modelo ``memorice'' los datos con los que se ha entrenado pero no
-generalice bien al encontrarse con datos nuevos. Esto se conoce como
+posible que el modelo ``memorice'' los datos con los que se ha entrenado, pero
+no generalice bien al encontrarse con datos nuevos. Esto se conoce como
 sobreajuste.
 
 % TODO: Añadir alguna gráfica.
@@ -261,7 +261,7 @@ Las fugas de información no son algo que debería ser siempre evitado, existen
 situaciones en las que son necesarias dependiendo del caso concreto. Pero sí es
 importante que sean detectadas y tenidas en cuenta a la hora de analizar los
 resultados obtenidos, ya que, en caso contrario, se podría llegar a conclusiones
-equívocas (demasiado optimistas por ejemplo).
+equívocas (demasiado optimistas, por ejemplo).
 
 \subsection{Validación cruzada}
 
@@ -292,7 +292,7 @@ tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
     un tiempo de computación necesario muy grande.
     \item \textbf{\textit{K-fold}}: Consite en dividir la muestra en conjuntos
     de entrenamiento y test de proporciones $(K-1)/K$ y $1/K$ respectivamente,
-    realizando un total de $K$ iteraciones. Además se puede realizar varias
+    realizando un total de $K$ iteraciones. Además, se puede realizar varias
     repeticiones de este tipo de validación cruzada (don distintas particiones
     aleatorias) para reducir la variabilidad del error obtenido.
 \end{itemize}
@@ -315,9 +315,9 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
 \begin{itemize}
     \item \textbf{\textit{Grid search}}: Proceso mediante el cual se definen los
     valores posibles que puede tomar cada parámetro y se prueba cada combinación
-    de los mismos hasta encontrar la mejor. Es una búsqueda exhaustiva que puede
-    dar lugar a una gran cantidad de combinaciones, lo que puede implicar un
-    tiempo de computación muy grande dependiendo del número de parámetros y sus
+    de estos hasta encontrar la mejor. Es una búsqueda exhaustiva que puede dar
+    lugar a una gran cantidad de combinaciones, lo que puede implicar un tiempo
+    de computación muy grande dependiendo del número de parámetros y sus
     posibles valores.
     \item \textbf{\textit{Randomized search}}: Proceso similar al anterior en el
     que se especifican los valores posibles para cada parámetro, pero en este
