@@ -648,24 +648,27 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
     \addtocounter{ncp}{1}
 
     \raggedright
+    \def\arraystretch{1}
+    \setlength\tabcolsep{2px}
     \begin{table}[H]
-    \begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
+    \begin{tabularx}{\textwidth}{L{0.3}L{0.7}}
     
     \toprule
     Identificador & CP\decimal{ncp} \\
+    \rowcolor{gray!20}
     Prioridad & #1 \\
     Fecha de ejecución & #2 \\
+    \rowcolor{gray!20}
     Objetivo & #3 \\
-    Precondiciones & {#5} \\
-    Postcondiciones & {#6} \\
+    Precondiciones & #5 \\
+    \rowcolor{gray!20}
+    Postcondiciones & #6 \\
     \specialrule{.8pt}{2pt}{0pt}
 
     \multicolumn{2}{@{}p{\textwidth}@{}}{
         \begin{hyphenrules}{nohyphenation}
         \bgroup
         \rowcolors{2}{gray!20}{white}
-        \def\arraystretch{1}
-        \setlength\tabcolsep{2px}
         \scriptsize
         \begin{tabularx}{\textwidth}{L{0.2}L{0.25}L{0.25}L{0.25}>{\centering\arraybackslash}L{0.05}}
             \rowcolor[gray]{.9}
@@ -678,7 +681,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
     } \\
 
     \specialrule{.8pt}{0pt}{0pt}
-    \end{tabular}
+    \end{tabularx}
     \caption{CP\decimal{ncp}: #4}
     \end{table}
 }
@@ -693,85 +696,118 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
         Acceder a la página del formulario de predicción &  & Estar en la página del formulario & Estar en la página del formulario & \ding{51} \\
         Introducir información & Mano dominante: Derecha; Mano del vídeo: Derecha; Edad: 71; Sexo: Femenino; Archivo de vídeo: archivo respectivo; & Formulario relleno & Formulario relleno & \ding{51} \\
         Enviar información &  & Aparece pantalla de carga & Aparece pantalla de carga & \ding{51} \\
-        Esperar a que finalice el procesado &  & Probabilidad <50\% de padecer Parkinson & Probabilidad de 7.13\% de padecer Parkinson & \ding{51} \\
+        Esperar 60 segundos a que finalice el procesado &  & Probabilidad <50\% de padecer Parkinson & Probabilidad de 7.13\% de padecer Parkinson & \ding{51} \\
     }
 
 \cp {Alta}
     {08/06/2023}
+    {Probar el inicio de sesión}
+    {Inicio de Sesión}
     {No tener una sesión iniciada}
-    {}
-    {El usuario se encuentra en la página de inicio de sesión}
-    {El usuario ha accede al panel de administrador}
+    {Se ha guardado un token de sesión en la memoria local del navegador}
     {
-         &  &  &  & \ding{51} \\
+        Acceder a la página de inicio de sesión &  & Estar en la página de inicio de sesión & Estar en la página de inicio de sesión & \ding{51} \\
+        Introducir información de acceso & Usuario: \texttt{test}; Contraseña: \texttt{secret}; & Datos introducidos & Datos introducidos & \ding{51} \\
+        Enviar información mediante el botón <<Entrar>> &  & Estar en el panel de administración & Estar en el panel de administración & \ding{51} \\
     }
 
-\cp {Alta}
+\cp {Media}
     {08/06/2023}
     {Probar el cierre de sesión}
     {Cierre de Sesión}
-    {El usuario se encuentra en el panel de administrador}
-    {El usuario ha finalizado su sesión}
+    {Existe una sesión válida iniciada}
+    {El token de sesión ha sido eliminado de la memoria local del navegador}
     {
-         &  &  &  & \ding{51} \\
+        Acceder al panel de administración &  & Estar en el panel de administración & Estar en el panel de administración & \ding{51} \\
+        Hacer clic sobre el botón <<Cerrar sesión>> &  & Estar en la página principal & Estar en la página principal & \ding{51} \\
+        Combrobar que al acceder al \texttt{/es-ES/admin/models} se redirige a \texttt{/es-ES/login} &  & Estar en \texttt{es-ES/login} & Estar en \texttt{es-ES/login} & \ding{51} \\
     }
 
 \cp {Alta}
     {08/06/2023}
     {Probar añadir modelo}
     {Añadir modelo}
-    {El usuario se encuentra en el panel de administración de modelos}
+    {Existe una sesión válida iniciada}
     {Un modelo ha sido añadido}
     {
-         &  &  &  & \ding{51} \\
+        Acceder al panel de administración de modelos &  & Estar en el panel de administración de modelos & Estar en el panel de administración de modelos & \ding{51} \\
+        Hacer clic sobre el botón <<Añadir modelo>> &  & Se abre ventana modal para añadir modelo & Se abre ventana modal para añadir modelo & \ding{51} \\
+        Introducir información sobre el modelo & Nombre: \texttt{TestModel}; Archivo: Archivo binario respectivo & Formulario rellenado & Formulario rellenado & \ding{51} \\
+        Hacer clic sobre el botón <<Añadir modelo>> de la modal &  & La ventana modal se cierra y se actualiza la lista de modelos reflejando el cambio & La ventana modal se cierra y se actualiza la lista de modelos reflejando el cambio & \ding{51} \\
+        Comprobar que el modelo \texttt{TestModel} aparece en la lista de modelos &  & El modelo \texttt{TestModel} aparece en la lista de modelos & El modelo \texttt{TestModel} aparece en la lista de modelos & \ding{51} \\
     }
 
 \cp {Alta}
     {08/06/2023}
     {Probar selección de modelo}
     {Seleccionar modelo}
-    {El usuario se encuentra en el panel de administración de modelos}
-    {Un modelo diferente ha sido seleccionado}
     {
-         &  &  &  & \ding{51} \\
+        Existe una sesión válida iniciada \newline
+        Existe un modelo no seleccionado \texttt{TestModel}
+    }
+    {Se ha seleccionado el modelo}
+    {
+        Acceder al panel de administración de modelos &  & Estar en el panel de administración de modelos & Estar en el panel de administración de modelos & \ding{51} \\
+        Hacer clic sobre el botón <<Seleccionar>> del modelo \texttt{TestModel} &  & Se selecciona el modelo y actualiza la lista reflejando el cambio & Se selecciona el modelo y actualiza la lista reflejando el cambio & \ding{51} \\
+        Comprobar que el modelo \texttt{TestModel} está seleccionado &  & El modelo \texttt{TestModel} está seleccionado & El modelo \texttt{TestModel} está seleccionado & \ding{51} \\        
     }
 
-\cp {Alta}
+\cp {Media}
     {08/06/2023}
     {Probar eliminar modelo}
     {Eliminar modelo}
-    {El usuario se encuentra en el panel de administración de modelos}
-    {Un modelo diferente ha sido seleccionado}
     {
-         &  &  &  & \ding{51} \\
+        Existe una sesión válida iniciada \newline
+        Existen un modelo no seleccionado \texttt{TestModel}
+    }
+    {Un modelo ha sido eliminado}
+    {
+        Acceder al panel de administración de modelos &  & Estar en el panel de administración de modelos & Estar en el panel de administración de modelos & \ding{51} \\
+        Hacer clic sobre el botón <<Seleccionar>> del modelo respectivo &  & Se abre una ventana modal de confirmación & Se abre una ventana modal de confirmación & \ding{51} \\
+        Confirmar eliminación &  & La ventana modal se cierra y se refleja el cambio en la lista de modelos & La ventana modal se cierra y se refleja el cambio en la lista de modelos & \ding{51} \\
+        Comprobar el \texttt{TestModel} ya no está presente en la lista &  & \texttt{TestModel} ya no está presente & \texttt{TestModel} ya no está presente & \ding{51} \\
     }
 
-\cp {Alta}
+\cp {Media}
     {08/06/2023}
     {Probar añadir usuario}
     {Añadir usuario}
-    {El usuario se encuentra en el panel de administración de usuarios}
+    {Existe una sesión válida iniciada}
     {Un usuario ha sido añadido}
     {
-         &  &  &  & \ding{51} \\
+        Acceder al panel de administración de usuarios &  & Estar en el panel de administración de usuarios & Estar en el panel de administración de usuarios & \ding{51} \\
+        Hacer clic sobre el botón <<Añadir usuario>> &  & Se abre una ventana modal con el formulario de creación de usuario & Se abre una ventana modal con el formulario de creación de usuario & \ding{51} \\
+        Introducir información sobre el nuevo usuario & Nombre de usuario: \texttt{testuser}; Contraseña: \texttt{P@ssword} & Formulario rellenado & Formulario rellenado & \ding{51} \\
+        Hacer clic sobre el botón <<Añadir usuario>> &  & La ventana modal se cierra y el nuevo usuario aparece en la lista de usuarios & La ventana modal se cierra y el nuevo usuario aparece en la lista de usuarios & \ding{51} \\
+        Comprobar qie el usuario \texttt{testuser} aparece en la lista &  & El usuario \texttt{testuser} aparece en la lista & El usuario \texttt{testuser} aparece en la lista & \ding{51} \\
     }
 
-\cp {Alta}
+\cp {Baja}
     {08/06/2023}
     {Probar eliminar usuario}
     {Eliminar usuario}
-    {El usuario se encuentra en el panel de administración de usuarios}
-    {Un modelo diferente ha sido seleccionado}
     {
-         &  &  &  & \ding{51} \\
+        Existe una sesión válida iniciada \newline
+        Existe al menos un usuario eliminable \texttt{testuser}
+    }
+    {Un usuario ha sido eliminado}
+    {
+        Acceder al panel de administración de usuarios &  & Estar en el panel de administración de usuarios & Estar en el panel de administración de usuarios & \ding{51} \\
+        Hacer clic sobre el botón <<Eliminar>> del usuario \texttt{testuser} &  & Se muestra una ventana modal de confirmación & Se muestra una ventana modal de confirmación & \ding{51} \\
+        Se confirma la eliminación &  & La ventana modal se cierra y el cambio se refleja en la lista de usuarios & La ventana modal se cierra y el cambio se refleja en la lista de usuarios & \ding{51} \\
+        Comprobar que el usuario \texttt{testuser} ya no aparece en la lista &  & El usuario \texttt{testuser} ya no aparece en la lista & El usuario \texttt{testuser} ya no aparece en la lista & \ding{51} \\
     }
 
-\cp {Alta}
+\cp {Media}
     {08/06/2023}
     {Probar cambio de idioma}
     {Cambiar idioma}
-    {El usuario se encuentra en cualquier página de la aplicación}
-    {El idioma de las cadenas de texto que se muetran ha cambiado}
+    {-}
+    {La variable en almacenamiento local de idioma se cambia para reflejar el cambio}
     {
-         &  &  &  & \ding{51} \\
+        Acceder a \texttt{/en-GB} &  & Estar en la página principal en inglés & Estar en la página principal en inglés & \ding{51} \\
+        Hacer clic sobre el botón de cambio de idioma &  & Se abre un desplegable con los idiomas disponibles & Se abre un desplegable con los idiomas disponibles & \ding{51} \\
+        Seleccionar el idioma español &  & La parte de idioma de la url cambia y se refleja el cambio sobre las cadenas de texto de la página & La parte de idioma de la url cambia y se refleja el cambio sobre las cadenas de texto de la página & \ding{51} \\
+        Comprobar que la la url ha cambiado &  & La url ha cambiado & La url ha cambiado & \ding{51} \\
+        Comprobar que la cadena de título <<Predict>> cambia a <<Predecir>> &  & La cadena de título <<Predict>> cambia a <<Predecir>> & La cadena de título <<Predict>> cambia a <<Predecir>> & \ding{51} \\
     }
