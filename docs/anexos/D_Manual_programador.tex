@@ -644,7 +644,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \newcolumntype{L}[1]{>{\hsize=#1\hsize\RaggedRight} X}
 
-\newcommand{\cp}[7]{
+\newcommand{\cp}[8]{
     \addtocounter{ncp}{1}
 
     \raggedright
@@ -659,11 +659,12 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
     Prioridad & #1 \\
     Fecha de ejecución & #2 \\
     \rowcolor{gray!20}
-    Objetivo & #3 \\
-    Precondiciones & #5 \\
+    Realización & #3 \\
+    Objetivo & #4 \\
     \rowcolor{gray!20}
-    Postcondiciones & #6 \\
-    \specialrule{.8pt}{2pt}{0pt}
+    Precondiciones & #6 \\
+    Postcondiciones & #7 \\
+    \specialrule{.8pt}{1pt}{0pt}
 
     \multicolumn{2}{@{}p{\textwidth}@{}}{
         \begin{hyphenrules}{nohyphenation}
@@ -674,7 +675,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
             \rowcolor[gray]{.9}
             \textbf{Acción} & \textbf{Entrada} & \textbf{Salida Esperada} & \textbf{Salida Real} & \\
             \specialrule{.4pt}{0pt}{2pt}
-            #7
+            #8
         \end{tabularx}
         \egroup
         \end{hyphenrules}
@@ -682,12 +683,13 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
     \specialrule{.8pt}{0pt}{0pt}
     \end{tabularx}
-    \caption{CP\decimal{ncp}: #4}
+    \caption{CP\decimal{ncp}: #5}
     \end{table}
 }
 
 \cp {Alta}
     {08/06/2023}
+    {Manual}
     {Probar la obtención de una predicción}
     {Predicción}
     {-}
@@ -701,6 +703,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Alta}
     {08/06/2023}
+    {Automática (Selenium IDE)}
     {Probar el inicio de sesión}
     {Inicio de Sesión}
     {No tener una sesión iniciada}
@@ -713,6 +716,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Media}
     {08/06/2023}
+    {Automática (Selenium IDE)}
     {Probar el cierre de sesión}
     {Cierre de Sesión}
     {Existe una sesión válida iniciada}
@@ -725,6 +729,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Alta}
     {08/06/2023}
+    {Manual}
     {Probar añadir modelo}
     {Añadir modelo}
     {Existe una sesión válida iniciada}
@@ -739,6 +744,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Alta}
     {08/06/2023}
+    {Manual}
     {Probar selección de modelo}
     {Seleccionar modelo}
     {
@@ -754,6 +760,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Media}
     {08/06/2023}
+    {Manual}
     {Probar eliminar modelo}
     {Eliminar modelo}
     {
@@ -770,6 +777,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Media}
     {08/06/2023}
+    {Automática (Selenium IDE)}
     {Probar añadir usuario}
     {Añadir usuario}
     {Existe una sesión válida iniciada}
@@ -784,6 +792,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Baja}
     {08/06/2023}
+    {Automática (Selenium IDE)}
     {Probar eliminar usuario}
     {Eliminar usuario}
     {
@@ -800,6 +809,7 @@ fichero \texttt{.env} para acceder a los servicios, por defecto:
 
 \cp {Media}
     {08/06/2023}
+    {Automática (Selenium IDE)}
     {Probar cambio de idioma}
     {Cambiar idioma}
     {-}
