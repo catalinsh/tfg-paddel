@@ -77,7 +77,11 @@ type RootTranslation = {
 	/**
 	 * U​p​l​o​a​d​ ​v​i​d​e​o​ ​f​i​l​e
 	 */
-	UPLOAD_A_FILE: string
+	UPLOAD_A_VIDEO_FILE: string
+	/**
+	 * U​p​l​o​a​d​ ​m​o​d​e​l​ ​f​i​l​e
+	 */
+	UPLOAD_A_MODEL_FILE: string
 	/**
 	 * o​r​ ​d​r​a​g​ ​a​n​d​ ​d​r​o​p
 	 */
@@ -363,7 +367,11 @@ export type TranslationFunctions = {
 	/**
 	 * Upload video file
 	 */
-	UPLOAD_A_FILE: () => LocalizedString
+	UPLOAD_A_VIDEO_FILE: () => LocalizedString
+	/**
+	 * Upload model file
+	 */
+	UPLOAD_A_MODEL_FILE: () => LocalizedString
 	/**
 	 * or drag and drop
 	 */

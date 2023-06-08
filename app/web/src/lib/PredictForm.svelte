@@ -123,7 +123,7 @@
 					<label
 						class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
 					>
-						<span>{$LL.UPLOAD_A_FILE()}</span>
+						<span>{$LL.UPLOAD_A_VIDEO_FILE()}</span>
 						<input
 							bind:this={fileInput}
 							on:change={inputSelectHandler}

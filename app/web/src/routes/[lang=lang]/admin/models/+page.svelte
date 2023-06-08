@@ -345,14 +345,14 @@
 											<label
 												class="relative cursor-pointer rounded-md bg-white font-semibold text-blue-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 hover:text-blue-500"
 											>
-												<span>{$LL.UPLOAD_A_FILE()}</span>
+												<span>{$LL.UPLOAD_A_MODEL_FILE()}</span>
 												<input
 													bind:this={fileInput}
 													on:change={inputSelectHandler}
 													type="file"
-													name="video-upload"
+													name="model-upload"
 													required
-													id="video-upload"
+													id="model-upload"
 													class="sr-only"
 												/>
 											</label>
