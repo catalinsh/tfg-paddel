@@ -5,26 +5,27 @@ En el área de la inteligencia artificial, y en general en la informática, la
 conocida expresión <<Pararse a hombros de gigantes>> tiene mucho sentido, ya que
 es muy difícil, y contraproducente, crear algo por completo desde cero, siempre
 se utilizan herramientas, librerías o frameworks (abstracciones en general)
-creados por otras personas para acelerar el trabajo y permitir que al
-programador centrarse en la lógica de negocio que quiere implementar.
+creados por otras personas para acelerar el trabajo y permitir al programador
+centrarse en la lógica de negocio que quiere implementar.
 
 Este capítulo enumera las técnicas y herramientas de otras personas que se han
-utilizado durante la realización de este proyecto.
+utilizado durante la realización del proyecto.
 
 \section{Técnicas}
 
 Esta sección detalla las distintas técnicas que fueron utilizadas durante el
-desarrollo de este proyecto.
+desarrollo del proyecto.
 
 \subsection{CRISP-DM}
 
 <<Cross-industry standard process for data mining>>, conocido como (CRISP-DM),
-es un modelo estándar abierto del proceso que describe los enfoques comunes que
+es un modelo estándar abierto que describe los enfoques y procesos comunes que
 utilizan los expertos en minería de datos \cite{shearer2000crisp}. Este estándar
 surgió a finales de los 90 a partir de la inexistencia y necesidad de un enfoque
 ampliamente aceptado para la minería de datos. Para conseguir esto, CRISP-DM es
-agnóstico a la industria y herramientas que se utilicen, lo que permite que sea
-utilizado en un amplio abanico de situaciones, lo que facilitó su adopción.
+agnóstico a la industria y a las herramientas que se utilicen, lo que permite
+que sea utilizado en un amplio abanico de situaciones, lo que facilitó su
+adopción.
 
 CRISP-DM divide el ciclo de vida de un proyecto de minería de datos en las
 siguientes 6 fases.
@@ -48,11 +49,10 @@ siguientes 6 fases.
     \item \textbf{Modelado}: En esta fase se seleccionan varios algoritmos de
     aprendizaje, cuyos parámetros deben ser calibrados para ajustarse al
     conjunto de datos de forma óptima. Diferentes algoritmos imponen diferentes
-    requisitos sobre el conjunto de datos sobre el que puede trabajar, por lo
-    que es posible que se deba volver a la fase anterior para reajustar el
-    conjunto de datos final. Esta fase incluye la selección de los algoritmos a
-    utilizar, la creación de los modelos y la evaluación del rendimiento de los
-    mismos.
+    requisitos sobre el conjunto de datos , por lo que es posible que se deba
+    volver a la fase anterior para reajustar el conjunto de datos final. Esta
+    fase incluye la selección de los algoritmos a utilizar, la creación de los
+    modelos y la evaluación del rendimiento de los mismos.
     \item \textbf{Evaluación}: Antes del despliegue del modelo final es de gran
     importancia reevaluar si el modelo cumple realmente con los objetivos de
     negocio establecidos en la primera fase. Aquí se deberá determinar cómo se
@@ -63,8 +63,8 @@ siguientes 6 fases.
 
 Las fases anteriores tienen una naturaleza cíclica, los conocimientos obtenidos
 en cada ciclo de CRISP-DM se utilizan para replantear los objetivos de negocio y
-repetir el proceso con los nuevos conocimientos. Como muestra la siguiente
-figura.
+repetir el proceso con los nuevos conocimientos. Como muestra la figura
+\ref{fig:herramientas_desarrollo/crisp-dm.png}.
 
 \begin{figure}[!h]
       \centering
@@ -76,7 +76,7 @@ figura.
 \section{Herramientas de desarrollo}
 
 Esta sección detalla las distintas herramientas, librerías y frameworks que
-fueron utilizadas durante el desarrollo de este proyecto.
+fueron utilizadas durante el desarrollo del proyecto.
 
 \subsection{Herramientas generales}
 
@@ -167,9 +167,9 @@ format:
 
 Un fichero \texttt{Makefile} con el contenido anterior permite ejecutar el
 comando \texttt{make format} (siempre desde el mismo directorio en el que se
-encuentra \texttt{Makefile}) para ejecutar la secuencia de comandos denominada
-\texttt{format}, que, en este caso ejecutará varios comandos para realizar un
-formato del código.
+encuentra el \texttt{Makefile}) para ejecutar la secuencia de comandos
+denominada \texttt{format}, que, en este caso ejecutará varios comandos para
+realizar un formato del código.
 
 \subsubsection{PyCharm}
 
@@ -228,7 +228,7 @@ entrenamiento de modelos.
 \subsubsection{Jupyter Notebook}
 
 Jupyter Notebook es una herramienta que permite crear un archivo con extensión
-\texttt{.ipynb}, en el que el código Python se divide en ``celdas'' que se
+\texttt{.ipynb}, en el que el código Python se divide en <<celdas>> que se
 pueden ejecutar individualmente, pero manteniendo y compartiendo las variables
 establecidas de forma global entre todas estas celdas.
 
@@ -240,7 +240,7 @@ principio cada vez que se realice un cambio, como ocurriría con un
 
 Además de lo anterior Jupyter Notebook permite documentar de forma clara el
 código mediante otro tipo de celda, en el que se puede escribir código en
-Markdown, que es, en cierto modo, una alternativa menos verbosa a HTML.
+\textit{Markdown}, que es, en cierto modo, una alternativa menos verbosa a HTML.
 
 \subsubsection{OpenCV}
 
@@ -338,9 +338,8 @@ de forma paralela (Web y API), y que dependiendo del dominio al que se realice
 una petición, ésta debería ser redirigida a un servicio u otro.
 
 Esta situación es uno de los casos de uso idóneos para un proxy inverso, que es
-un servicio que recibe peticiones HTTP, las altera si es necesario, y las
-redirige al servicio de destino (el cual se determina mediante ciertas reglas de
-redirección).
+un servicio que recibe peticiones HTTP y las redirige al servicio de destino (el
+cual se determina mediante ciertas reglas de redirección).
 
 En un principio se optó por utilizar Nginx para implementar este proxy inverso
 con muy buenos resultados gracias a su fácil configuración, rendimiento y
@@ -370,13 +369,13 @@ Es por todo lo anterior que, en última instancia, se decidió usar Caddy.
 
 FastAPI es un \textit{framework} de Python utilizado para crear APIs de tipo
 REST que se caracteriza por permitir al programador centrar sus esfuerzos en el
-código relacionado con la lógica de negocio al realizar la mayoría de las
+código relacionado con la lógica de negocio, al realizar la mayoría de las
 acciones comunes entre diferentes APIs por defecto (como la creación de
 documentación, validación de tipos, serialización y deserialización de
 peticiones, etc.).
 
 En este proyecto se ha creado una API REST para permitir la interacción con el
-código de Python utilizado para crear, entrenar y utilizar los modelos desde
+código de Python utilizado para crear, entrenar y trabajar con los modelos desde
 cualquier dispositivo y lenguaje de programación (siempre y cuando permita
 realizar peticiones HTTP). Con esto se consigue que en el futuro se puedan crear
 nuevas formas para interactuar con los modelos sin necesidad de alterar el
@@ -402,9 +401,9 @@ JavaScript es un lenguaje de programación que no dispone de tipado estático, l
 cual hace muy difícil detectar problemas fuera del tiempo de ejecución.
 
 \href{https://www.typescriptlang.org/}{TypeScript} es un lenguaje de
-programación desarrollado por Microsoft que utiliza una sintaxis de base muy
-similar a la de JavaScript, pero añadiendo tipado estático. Los navegadores no
-``entienden'' TypeScript, por lo que éste debe ser compilado a JavaScript antes
+programación desarrollado por Microsoft que utiliza una sintaxis muy similar a
+la de JavaScript, pero añadiendo tipado estático. Los navegadores no
+<<entienden>> TypeScript, por lo que éste debe ser compilado a JavaScript antes
 de ser enviado al usuario. Durante esta compilación se pueden detectar multitud
 de errores gracias al tipado.
 

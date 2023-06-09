@@ -64,7 +64,7 @@ Una <<landmark>> en el campo de la visión artificial es un punto de referencia
 que se corresponde con un objeto físico. El objetivo de esta fase es convertir
 el vídeo de la prueba de <<finger-tapping>> a una secuencia o serie temporal de
 conjuntos de <<landmarks>> los cuales representan la posición de la mano durante
-un instante concreto.
+cada instante concreto.
 
 El primer paso para lograr esto es leer las imágenes del archivo de vídeo, esto
 ha sido logrado mediante la librería de <<bindings>> de OpenCV para Python.
@@ -82,7 +82,7 @@ La magnitud de lo anterior se ve claramente con el siguiente ejemplo. Un vídeo
 con una resolución de 1920x1080 a 30 fotogramas por segundo codificado mediante
 el códec H264 que ocupa 50,7MB, decodificado, ocuparía en torno a los 3,7GB.
 
-A continuación se deben extraer las <<landmarks>> de las imágenes leidas. Esto
+A continuación, se deben extraer las <<landmarks>> de las imágenes leidas. Esto
 ha sido logrado mediante la librería Mediapipe Hands \cite{zhang2020mediapipe},
 que permite extraer los siguentes puntos a partir de una imagen:
 
@@ -96,10 +96,10 @@ las <<landmarks>> en el intervalo [9-17] para solo tomar en cuenta la parte
 
 Mediapipe Hands ofrece la posibilidad de extraer <<landmarks>> de las imágenes
 como si estas no tuviesen relación entre sí o realizar la extracción teniendo en
-cuenta que se trata de un vídeo, así teniendo en cuenta resultados anteriores
-para determinar de forma más precisa las <<landmarks>> del fotograma actual.
-Esto tiene la gran desventaja de que hace imposible la paralelización de este
-proceso (debido a que cada extracción depende de los resultados anteriores).
+cuenta que se trata de un vídeo, así considerando los resultados anteriores para
+determinar de forma más precisa las <<landmarks>> del fotograma actual. Esto
+tiene la gran desventaja de que hace imposible la paralelización de este proceso
+(debido a que cada extracción depende de los resultados anteriores).
 
 Lo anterior no tiene un gran efecto durante la fase de investigación, ya que sí
 se puede paralelizar la extracción de <<landmarks>> de cada vídeo. Donde sí
@@ -109,8 +109,8 @@ usuarios.
 En última instancia se tomó la decisión de no usar paralelización, y así obtener
 resultados más precisos. Una alternativa planteada fue realizar la extracción en
 paralelo solamente en la aplicación, pero esto se descartó ya que esto podría
-introducir inconsistencias y variables adicionales que deberían ser tomadas en
-cuenta.
+introducir inconsistencias y variables adicionales que podrían influir sobre el
+rendimiento del modelo al ser usado desde la aplicación web.
 
 \subsubsection{Extracción de series temporales}
 
@@ -135,10 +135,10 @@ un entorno controlado esto no sería mucho problema, pero en este caso, como se
 desea hacer el uso del sistema accesible a cualquier persona sin necesitar
 equipamiento especial, se deben buscar alternativas.
 
-En este caso se ha decidido tomar el ángulo entre el ángulo entre la punta del
-dedo pulgar, la muñeca y la punta del dedo índice. Esta medida es útil ya que no
-depende de cómo se ha tomado el vídeo ni del tamaño de la mano de la persona.
-Quedando como resultado una serie temporal como en la figura
+En este caso se ha decidido tomar el ángulo entre la punta del dedo pulgar, la
+muñeca y la punta del dedo índice. Esta medida es útil ya que no depende de cómo
+se ha tomado el vídeo ni del tamaño de la mano de la persona. Quedando como
+resultado una serie temporal como en la figura
 \ref{fig:relevant_aspects/angle_series.png}. La unidad usada en estos ángulos es
 el radián.
 
@@ -150,7 +150,7 @@ El último paso para convertir un archivo de vídeo a atributos útiles para
 entrenar un modelo de aprendizaje es extraer características que describan la
 serie temporal obtenida. Algunos de estos atributos han sido extraídos de forma
 específica teniendo en cuenta este problema concreto, mientras que otros (la
-mayoría) son atributos genéricos de series temporales.
+mayoría) son atributos genéricos para cualquier serie temporal.
 
 \paragraph{Detección de toques y amplitudes}
 
@@ -221,7 +221,7 @@ pueden ser utilizados para la generación de un modelo.
     bradicinesia es la ralentización del movimiento. Esto va a ser reflejado en
     la velocidad media (en radianes por segundo) que tiene el movimiento
     \item \textbf{Frecuencia de amplitudes y toques}: Dos magnitudes que miden
-    cuantos toques o amplitudes se realizan por segundo de media durante el
+    cuántos toques o amplitudes se realizan por segundo de media durante el
     movimiento.
     \item \textbf{Amplitud media}: Otra característica de la enfermedad de
     Parkinson es la debilidad, lo que se puede ver reflejado sobre la amplitud
@@ -346,12 +346,12 @@ interesantes.
 son ordenadas mediante una tabla de relevancia creada por TSFresh en la que se
 realiza una prueba de significancia (contraste de hipótesis) de cada atributo,
 los p-valores resultantes son posteriormente evaluados para detectar falsos
-positivos, dando resultada a la tabla de relevancia final.
+positivos, dando resultado a la tabla de relevancia final.
 
-En un principio se realizó la búsqueda
-variando el número de características seleccionadas entre 1 y 120, obteniendo
-los siguientes resultados dependiendo esta cifra (cada punto corresponde con la
-configuración de mayor precisión con ese número de características).
+En un principio se realizó la búsqueda variando el número de características
+seleccionadas entre 1 y 120, obteniendo los resultados dependiendo esta cifra de
+la figura \ref{fig:results/1.png} (cada punto corresponde con la configuración
+de mayor precisión con ese número de características).
 
 \imagen{results/1.png}{Resultados iniciales variando número de características}{0.7}
 
@@ -360,7 +360,8 @@ que utilizar más información para entrenar un modelo empeora la precisión, ya
 que muchas de las nuevas características van a ser menos relevantes.
 
 En este caso ocurrió al contrario, porque al ampliar el espacio de búsqueda para
-utilizar más características se obtuvieron los resultados siguientes.
+utilizar más características se obtuvieron los resultados de la figura
+\ref{fig:results/2.png}.
 
 \imagen{results/2.png}{Resultados ampliando número de características probadas}{0.7}
 
@@ -397,7 +398,9 @@ grado 8, seguido de los grados 5 y 7.
 Aunque utilizar grado 8 ha dado la precisión máxima, la diferencia con respecto
 a utilizar grado 5 es negligente, por lo que se ha tomado la decisión de
 utilizar un modelo de grado 5 en lugar de grado 8 como modelo final para la
-aplicación web.
+aplicación web, para seleccionar un modelo más <<simple>> y evitar en la medida
+de lo posible que se produzca sobreajuste al realizar el entrenamiento con el
+conjunto de datos completo.
 
 \paragraph{Modelo final} Para generar el modelo final se ha utilizado el
 algoritmo SVM, seleccionando 320 características, con la siguiente
@@ -414,7 +417,7 @@ Este modelo tiene una precisión medida del 78,8462\%. Se debe tener en cuenta
 que este valor se ha medido realizando validación cruzada con 5 repeticiones con
 2 <<folds>>, por lo que esta precisión es la obtenida entrenando modelos
 únicamente con el 50\% de los datos disponibles, entonces es de esperar que el
-rendimiento del modelo final, entrenado con todos los datos, sea mayor.
+rendimiento del modelo final, entrenado con todos los datos, sea algo mayor.
 
 \section{Fase de desarrollo de la aplicación}
 
@@ -430,8 +433,8 @@ junto con una página web que sirva como <<frontend>> que se comunique con la AP
 mediante peticiones HTTP. Este enfoque deja la puerta abierta a futuras
 extensiones (como una aplicación móvil) sobre el sistema sin la necesidad de
 realizar cambios sobre el código ya existente. Estas extensiones podrían ser
-realizadas por cualquier persona, incluso si no ha estado involucrada en este
-proyecto con antelación.
+realizadas por cualquier persona, incluso si no está involucrada directamente en
+este proyecto.
 
 \subsection{Docker}
 
@@ -445,7 +448,7 @@ Para esta aplicación se emplean cuatro contenedores:
 
 \begin{itemize}
     \item API (Basado en \href{https://fastapi.tiangolo.com/}{FastAPI})
-    \item Aplicación web (Basado en \href{https://kit.svelte.dev/}{SvelteKit})
+    \item Aplicación web (Basado en \href{https://nodejs.org/en}{NodeJS})
     \item Proxy inverso (Basado en \href{https://caddyserver.com/}{Caddy})
     \item Base de datos (Basado en \href{https://www.postgresql.org/}{PostgreSQL})
 \end{itemize}
@@ -457,9 +460,10 @@ adecuado. Esto es generalmente usado en lo que se conoce como balance de carga
 (\textit{load balancing}).
 
 Como tanto la API como la aplicación web están alojadas en la misma máquina se
-necesita alguna forma para diferenciar qué peticiones van a qué servicio. Se ha
-decidido qué \textit{dominio} vaya a la aplicación web y qué
-\textit{api.dominio} vaya a la api, en este caso \textit{dominio} es
+necesita alguna forma para diferenciar qué peticiones van a qué servicio. Siendo
+\textit{dominio} el dominio principal de la aplicación, se ha decidido que
+\textit{dominio} vaya a la aplicación web y qué \textit{api.dominio} vaya a la
+api, en este caso \textit{dominio} es
 \href{https://paddel.catalin.sh}{paddel.catalin.sh}. Configuraciones como esta
 se deben realizar en el archivo \texttt{.env} en la raíz del proyecto de docker
 (directorio \texttt{/app} del repositorio).
@@ -468,13 +472,12 @@ Para lograr lo anterior se deben añadir registros DNS desde el panel de
 administración del servidor de nombres de dominio elegido (CloudFlare en este
 caso) para hacer que \textit{dominio} y \textit{api.dominio} apunten a la
 dirección ip del equipo en el que se aloja la aplicación. Con esto se consigue
-que las peticiones realizadas a los dominios vayan lleguen a la máquina en
-cuestión.
+que las peticiones realizadas a los dominios lleguen a la máquina en cuestión.
 
 A continuación, se debe redirigir la petición dentro de la máquina al contenedor
 respectivo. Para esto se utiliza el servidor web Caddy, que permite la creación
 de un proxy inverso con el que se pueden redirigir peticiones en función del
-dominio al que vayan dirigidas.
+dominio al que estén dirigidas.
 
 Además, Caddy permite la obtención y renovación automática de certificados SSL
 de una entidad certificadora (en concreto \href{https://letsencrypt.org/}{Let's
@@ -504,13 +507,13 @@ comunes. Algunas acciones que se realizan son:
 El público objetivo de esta aplicación son aquellas personas que padezcan o
 puedan padecer la enfermedad de Parkinson. Los problemas de movilidad causados
 por esta enfermedad reducen la precisión con la que se puede usar una
-herramienta como un ratón y se debe utilizar métodos alternativos para los que
-se deberá implementar soporte explícitamente en el código de una página web.
+herramienta como un ratón y se deben utilizar métodos alternativos para los que
+se debe implementar soporte explícitamente en el código de una página web.
 
 Para asegurar el uso correcto de las diferentes herramientas de accesibilidad
 que los navegadores implementan se ha realizado el
 \href{https://www.udacity.com/course/web-accessibility--ud891}{curso sobre
-accesibilidad web de Udacidy}, que se puede ver en
+accesibilidad web de Udacity}, que se puede ver en
 \href{https://www.youtube.com/playlist?list=PLcJAkgdenpsci0IJziU4bCk3dTQLpJU7R}{esta
 lista de reproducción de YouTube}.
 
@@ -532,7 +535,7 @@ Otros conceptos sobre accesibilidad de gran importancia son:
     accesibilidad como, por ejemplo, el orden de tabulado de los elementos.
     \item Es importante utilizar elementos HTML preexistentes cuando sea
     posible. Por ejemplo, utilizar el elemento \texttt{dialog} para crear
-    ventanas <<pop-up>> o emergentes en lugar de \texttt{div} que es un
+    ventanas <<pop-up>> o emergentes en lugar de \texttt{div}, que es un
     contenedor genérico. Estos elementos más específicos añaden información
     semántica sobre el propósito y el uso de un componente, además de
     funcionalidad común adicional, por ejemplo, un elemento \texttt{dialog} se
@@ -581,7 +584,7 @@ cadena secreta que se almacena en el servidor. Cualquier persona en posesión de
 esta cadena puede generar sus propios JWT, que se considerarán veraces por la
 aplicación.
 
-Este token se guarda en la memoria local (local storage) del navegador
+Este token JWT se guarda en la memoria local (local storage) del navegador
 correspondiente al dominio de la web y se envía junto a todas las peticiones
 posteriores que se hacen a la API. Al contrario que las <<cookies>>, las
 variables almacenadas en memoria local no son enviadas automáticamente por el
@@ -591,10 +594,10 @@ código JavaScript, esto elimina la posibilidad del ataque conocido como CSRF
 autentificación.
 
 Otra ventaja del uso de JWT es que se pueden utilizar de tal forma que no sea
-necesario almacenar información sobre la sesión de los usuarios en la base de
-datos. Como parte de la información firmada que contiene el JWT se puede incluir
-la fecha de expiración de este, esto se procesa en el servidor para determinar
-su estado de validez.
+necesario almacenar información sobre la sesión de los usuarios en el servidor.
+Como parte de la información firmada que contiene el JWT se puede incluir la
+fecha de expiración de este, esto se procesa en el servidor para determinar su
+estado de validez.
 
 Una gran desventaja de este método de autentificación es que, si el navegador
 del usuario se viese comprometido, el JWT podría ser utilizado para suplantar su

@@ -8,7 +8,7 @@ documento.
 
 La minería de datos es un área de la inteligencia artificial que consiste en el
 diseño de algoritmos y modelos que permitan a los ordenadores aprender la regla
-general que define un conjunto de datos sin ser explícitamente programados para
+general que define un conjunto de datos, sin ser explícitamente programados para
 ello.
 
 La minería de datos incluye, además de algoritmos de aprendizaje, todas las
@@ -42,14 +42,17 @@ prueba de <<finger-tapping>>.
 Existen diversas técnicas para la extracción de características, incluyendo la
 selección manual de características, o técnicas automatizadas como la reducción
 de dimensionalidad, la extracción de características basada en redes neuronales
-~\cite{intrator1991feature}, entre otras. La elección de la técnica de
-extracción de características depende del conjunto de datos, del problema
-específico de aprendizaje automático que se está abordando y del tipo de modelo
-de aprendizaje automático que se está utilizando. En este proyecto se ha
-realizado una extracción manual para obtener algunas características como la
-frecuencia de toques y la velocidad del movimiento de <<finger-tapping>>, además
-de una extracción de múltiples características genéricas de series temporales
-mediante la librería TSFresh \cite{christ2018time}.
+~\cite{intrator1991feature}, entre otras.
+
+La elección de la técnica de extracción de características depende del conjunto
+de datos, del problema específico de aprendizaje automático que se está
+abordando y del tipo de modelo de aprendizaje automático que se está utilizando.
+
+En este proyecto se ha realizado una extracción manual para obtener algunas
+características como la frecuencia de toques y la velocidad del movimiento de
+<<finger-tapping>>, además de una extracción de múltiples características
+genéricas de series temporales mediante la librería TSFresh
+\cite{christ2018time}.
 
 \subsubsection{Selección de características}
 
@@ -77,10 +80,12 @@ diferencias existentes entre los valores previos, existen situaciones en las que
 puede ser ventajoso utilizar un método de normalización que sí altere estas
 diferencias, por ejemplo, la normalización por cuantiles
 ~\cite{enwiki:1138433182}, en la que se modifican los valores para que sigan una
-distribución normal, lo que consigue que, si existen valores muy lejanos a los
-valores más comunes (\textit{outliers}), estos se acerquen al resto. 
+distribución específica (en general, la normal), lo que consigue que, si existen
+valores muy lejanos a los valores más comunes (\textit{outliers}), estos se
+acerquen al resto, ya que solamente se tiene en cuenta el orden de las
+instancias según el atributo respectivo y no la magnitud de este.
 
-\subsection{Aprendizaje supervisado}
+\subsection{Tipos de aprendizaje}
 
 Dentro del aprendizaje automático existen tres ramas o variantes dependiendo del
 conjunto de datos del que se disponga, ya que estos datos son los que determinan
@@ -92,15 +97,12 @@ son:
     ejemplo más característico es el \textit{clustering})
     \item Aprendizaje semisupervisado, en el que solo una parte de los datos
     están etiquetados.
-    \item Aprendizaje supervisado, en el que el conjunto de datos está
-    completamente etiquetado. Este es el tipo de aprendizaje utilizado realizado
-    en el proyecto y del que trata este apartado.
+    \item Aprendizaje supervisado, consiste en la utilización de una muestra
+    completamente etiquetada de un conjunto de datos para crear un modelo que
+    <<aprenda>> de las instancias de la muestra la regla general que define el
+    conjunto de datos completo \cite{learned2014introduction}. Este es el tipo
+    de aprendizaje utilizado en el proyecto.
 \end{itemize}
-
-El enfoque del aprendizaje supervisado consiste en la utilización de una muestra
-completamente etiquetada de un conjunto de datos para crear un modelo que
-<<aprenda>> de las instancias de la muestra la regla general que define el
-conjunto de datos completo \cite{learned2014introduction}.
 
 \subsection{Clasificación}
 
@@ -109,7 +111,7 @@ predeterminadas es uno de los principales problemas a resolver.
 
 En general, la resolución de un problema de clasificación se caracteriza por
 delimitar qué zonas del espacio que contiene todas las instancias posibles
-pertenecen a cada categoría (espacio de datos), es decir, definir fronteras de
+(espacio de datos) pertenecen a cada categoría , es decir, definir fronteras de
 decisión a partir de las cuales las instancias pasan de una categoría a otra.
 
 Existe una gran cantidad de métodos y algoritmos de clasificación que se pueden
@@ -126,7 +128,7 @@ distintos tipos de clasificación:
     \item \textbf{Clasificación binaria}: Es el tipo de clasificación más
     simple, la variable objetivo tiene dos valores posibles, es decir, se va a
     intentar categorizar instancias en dos clases. Este es el tipo usado en este
-    caso, ya que se está intentando determinar si un individuo tiene
+    caso, ya que se está intentando determinar si un individuo padece de
     bradicinesia o no.
     \item \textbf{Clasificación multiclase}: Este tipo de clasificación es
     similar al anterior, la diferencia está en que la variable objetivo puede
@@ -135,13 +137,10 @@ distintos tipos de clasificación:
     \item \textbf{Clasificación ordenada}: En este tipo de clasificación las
     clases tienen un orden, un ejemplo sería si en este proyecto se buscase
     determinar el grado de severidad de la bradicinesia detectada (por ejemplo,
-    inexistente, bajo, medio y algo). Además, este tipo de clasificación es muy
+    inexistente, bajo, medio y alto). Además, este tipo de clasificación es muy
     similar a un problema de regresión, ya que se puede asignar valores
-    numéricos a cada categoría determinando el orden
+    numéricos a cada categoría, determinando así el orden.
 \end{itemize}
-
-% TODO: Algunos ejemplos de algoritmos con alguna gráfica de clasificación con 2
-% características.
 
 \subsection{Sobreajuste}
 
@@ -152,11 +151,9 @@ a esta.
 El problema de esto es que, si se utilizan todos los datos disponibles durante
 el entrenamiento, no existe ninguna forma para verificar el comportamiento del
 modelo cuando se encuentre con instancias que no ha visto antes. Esto hace
-posible que el modelo ``memorice'' los datos con los que se ha entrenado, pero
+posible que el modelo <<memorice>> los datos con los que se ha entrenado, pero
 no generalice bien al encontrarse con datos nuevos. Esto se conoce como
 sobreajuste.
-
-% TODO: Añadir alguna gráfica.
 
 Una solución muy común al sobreajuste es separar los datos disponibles en dos
 grupos, un conjunto de entrenamiento y un conjunto de test o prueba. Durante el
@@ -168,9 +165,9 @@ evaluación que se verán a continuación.
 \subsection{Evaluación del modelo}
 
 Para determinar si un modelo es mejor que otro es necesario definir alguna
-métrica que asigne un valor numérico al rendimiento de cada modelo. Estas
-métricas utilizan las variables que contiene la matriz de confusión. Por
-ejemplo, la matriz de confusión para clasificación binaria es la siguiente.
+métrica que asigne un valor numérico al rendimiento de cada uno. Estas métricas
+utilizan las variables que contiene la matriz de confusión. Por ejemplo, la
+matriz de confusión para clasificación binaria es la siguiente.
 
 \newcommand\confBox[2]{
   \fbox{\lower0.75cm
@@ -205,7 +202,7 @@ $$
 \text{precisión} = \frac{TP + TN}{TP + TN + FP + TN}
 $$
 
-Al igual que ocurren con el algoritmo de clasificación empleado, la métrica que
+Al igual que ocurre con el algoritmo de clasificación empleado, la métrica que
 se use debe ser seleccionada en función del problema en cuestión. Una situación
 muy común en la que utilizar la precisión no es lo más ideal es cuando se
 trabaja con conjuntos de datos desbalanceados, es decir, cuando existen más
@@ -270,7 +267,7 @@ dividir la muestra de datos disponible en un conjunto de datos de entrenamiento
 y uno de test. Al realizar esta división es posible que, en especial al trabajar
 con muestras pequeñas, se realice una división que no sea útil para validar el
 modelo. Por ejemplo, si por casualidad se seleccionase un conjunto de test
-``fácil de predecir'' con el conjunto de entrenamiento dado, se medirá un
+<<fácil de predecir>> con el conjunto de entrenamiento dado, se medirá un
 rendimiento mayor al real.
 
 La solución a esto es la validación cruzada, que consiste en utilizar múltiples
@@ -292,8 +289,8 @@ tamaño de los grupos de entrenamiento y test en cada iteración, por ejemplo:
     un tiempo de computación necesario muy grande.
     \item \textbf{\textit{K-fold}}: Consite en dividir la muestra en conjuntos
     de entrenamiento y test de proporciones $(K-1)/K$ y $1/K$ respectivamente,
-    realizando un total de $K$ iteraciones. Además, se puede realizar varias
-    repeticiones de este tipo de validación cruzada (don distintas particiones
+    realizando un total de $K$ iteraciones. Además, se pueden realizar varias
+    repeticiones de este tipo de validación cruzada (con distintas particiones
     aleatorias) para reducir la variabilidad del error obtenido.
 \end{itemize}
 
@@ -309,7 +306,7 @@ de hiperparámetros.
 
 En general, la optimización de hiperparámetros consiste en probar diferentes
 combinaciones de valores y realizar el proceso de entrenamiento y test mediante
-validación cruzada con una métrica apropiado hasta dar con la combinación más
+validación cruzada con una métrica apropiada hasta dar con la combinación más
 adecuada. Existen varias formas para realizar esto, como, por ejemplo:
 
 \begin{itemize}
@@ -321,10 +318,11 @@ adecuada. Existen varias formas para realizar esto, como, por ejemplo:
     posibles valores.
     \item \textbf{\textit{Randomized search}}: Proceso similar al anterior en el
     que se especifican los valores posibles para cada parámetro, pero en este
-    caso se realiza la búsqueda de forma aleatoria de forma que se limita el
-    tiempo de computación necesario. Se puede utilizar para obtener una vista
-    general del espacio de combinaciones de parámetros para realizar
-    posteriormente una búsqueda más exhaustiva en un subespacio más pequeño.
+    caso se realiza la búsqueda de forma aleatoria, con lo que se puede
+    establecer un límite para el tiempo de computación necesario. Este método
+    puede ser utilizado para obtener una vista general del espacio de
+    combinaciones de parámetros para realizar posteriormente una búsqueda más
+    exhaustiva en un subespacio más pequeño.
     \item \textbf{\textit{Técnicas de optimización}}: Existen diversos métodos
     que intentan determinar la forma que tiene el rendimiento del modelo con
     respecto al espacio de combinaciones de parámetros posibles utilizando
