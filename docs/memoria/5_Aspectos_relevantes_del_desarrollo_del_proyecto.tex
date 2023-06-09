@@ -47,12 +47,12 @@ los casos mediante simples métodos de minería de datos, como, por ejemplo, la
 codificación de variables categóricas. Pero hay un problema, el archivo de
 vídeo.
 
-En este caso, una imagen es una matriz bidimensional donde cada celda contiene
-una 3-tupla representando los valores rojo, verde y azul del píxel con el que se
-corresponde. Un vídeo es una secuencia de imágenes junto con información
-adicional, es este caso solamente es relevante la tasa de refresco, que es la
-frecuencia a la que ha sido capturada cada imagen. Esto es de gran importancia
-para dar una componente temporal al vídeo.
+En este caso, una imagen es una matriz tridimensional de dimensiones
+$(ancho \times alto \times 3)$, donde la tercera dimensión representa los valores
+rojo, verde y azul del píxel correspondiente. Un vídeo es una secuencia de
+imágenes junto con información adicional, es este caso solamente es relevante la
+tasa de refresco, que es la frecuencia a la que ha sido capturada cada imagen.
+Esto es de gran importancia para dar una componente temporal al vídeo.
 
 Con lo anterior se puede ver que un vídeo no se puede utilizar de forma directa,
 sino que deberá pasar por una fase multietapa de preprocesado para ser
@@ -63,8 +63,8 @@ transformado a un conjunto de valores numéricos que lo describen.
 Una <<landmark>> en el campo de la visión artificial es un punto de referencia
 que se corresponde con un objeto físico. El objetivo de esta fase es convertir
 el vídeo de la prueba de <<finger-tapping>> a una secuencia o serie temporal de
-conjuntos de <<landmarks>> los cuales representan la posición de la mano durante
-cada instante concreto.
+conjuntos de <<landmarks>> los cuales representan la posición de las diferentes
+partes de la mano durante cada instante concreto.
 
 El primer paso para lograr esto es leer las imágenes del archivo de vídeo, esto
 ha sido logrado mediante la librería de <<bindings>> de OpenCV para Python.
@@ -88,11 +88,11 @@ que permite extraer los siguentes puntos a partir de una imagen:
 
 \imagen{relevant_aspects/hand-landmarks.png}{Mediapipe Hands <<Landmarks>>}{1}
 
-Debido a la perspectiva desde la que se han tomados los vídeos de la prueba de
-<<finger-tapping>> hay algunas <<landmarks>> que quedan ocultas en varias
-ocasiones, lo que hace su posición detectada poco fiable. Por lo que se desechan
-las <<landmarks>> en el intervalo [9-17] para solo tomar en cuenta la parte
-<<frontal>> de la mano.
+Debido a la perspectiva desde la que se han tomado los vídeos de la prueba de
+<<finger-tapping>> hay algunas <<landmarks>> que quedan ocluídas en varias
+ocasiones, lo que hace su posición detectada poco fiable. Consecuentemente, se
+desechan las <<landmarks>> en el intervalo [9-17] para solo tomar en cuenta la
+parte <<frontal>> de la mano.
 
 Mediapipe Hands ofrece la posibilidad de extraer <<landmarks>> de las imágenes
 como si estas no tuviesen relación entre sí o realizar la extracción teniendo en
@@ -136,11 +136,11 @@ desea hacer el uso del sistema accesible a cualquier persona sin necesitar
 equipamiento especial, se deben buscar alternativas.
 
 En este caso se ha decidido tomar el ángulo entre la punta del dedo pulgar, la
-muñeca y la punta del dedo índice. Esta medida es útil ya que no depende de cómo
-se ha tomado el vídeo ni del tamaño de la mano de la persona. Quedando como
-resultado una serie temporal como en la figura
-\ref{fig:relevant_aspects/angle_series.png}. La unidad usada en estos ángulos es
-el radián.
+muñeca y la punta del dedo índice, ya que el ángulo es una medida insensible a
+la escala, por lo que no depende de cómo se ha tomado el vídeo ni del tamaño de
+la mano de la persona. Quedando como resultado una serie temporal como en la
+figura \ref{fig:relevant_aspects/angle_series.png}. La unidad usada en estos
+ángulos es el radián.
 
 \imagen{relevant_aspects/angle_series.png}{Serie temporal de ángulos}{0.5}
 
@@ -169,15 +169,15 @@ El eje horizontal representa el tiempo que ha transcurrido desde el inicio del
 vídeo. El eje vertical representa el ángulo en radianes entre el dedo índice, la
 muñeca y el pulgar.
 
-Se puede apreciar que obtener todos los máximos locales no es la mejor opción,
-debe incorporarse algún criterio para determinar si un máximo debería tenerse en
+Se puede apreciar que obtener todos los máximos locales no es la mejor opción.
+Debe incorporarse algún criterio para determinar si un máximo debería tenerse en
 cuenta o no. La función \texttt{find\_peaks} tiene algunos parámetros para este
 propósito.
 
 Tras probar varias opciones y comprobar manualmente los resultados obtenidos
 sobre diferentes vídeos, se determinó que la mejor opción es establecer la
-prominencia mínima (parámetro \texttt{prominence} de \texttt{find\_peaks}) que debe tener
-un máximo local para ser considerado.
+prominencia mínima (parámetro \texttt{prominence} de \texttt{find\_peaks}) que
+debe tener un máximo local para ser considerado.
 
 La prominencia se define como la medida que determina cuánto destaca un máximo
 con respecto a sus máximos más cercanos. Se probaron varios valores estáticos,
@@ -235,7 +235,7 @@ mediante la librería TSFresh.
 \subsection{Limpieza de datos}
 
 En este punto se dispone de un conjunto de 158 instancias y unos 800 atributos,
-algunos de ellos categóricos, estos deberán ser codificados para que sean
+algunos de ellos categóricos, por lo que deberán ser codificados para que sean
 atributos numéricos, con los que se trabaja mejor.
 
 Además, se determinó que todas las instancias deberán tener un tiempo de
@@ -396,11 +396,11 @@ Se puede ver que se alcanza la precisión máxima con un <<kernel>> polinomial d
 grado 8, seguido de los grados 5 y 7. 
 
 Aunque utilizar grado 8 ha dado la precisión máxima, la diferencia con respecto
-a utilizar grado 5 es negligente, por lo que se ha tomado la decisión de
-utilizar un modelo de grado 5 en lugar de grado 8 como modelo final para la
-aplicación web, para seleccionar un modelo más <<simple>> y evitar en la medida
-de lo posible que se produzca sobreajuste al realizar el entrenamiento con el
-conjunto de datos completo.
+a utilizar grado 5 es despreciable, por lo que se ha tomado la decisión de
+utilizar un modelo de grado 5 como modelo final para la aplicación web, con el
+objetivo de seleccionar un modelo más <<simple>> y evitar en la medida de lo
+posible que se produzca sobreajuste al realizar el entrenamiento con el conjunto
+de datos completo.
 
 \paragraph{Modelo final} Para generar el modelo final se ha utilizado el
 algoritmo SVM, seleccionando 320 características, con la siguiente
@@ -413,11 +413,18 @@ configuración:
     \item Tolerancia para el criterio de parada: 0.001
 \end{itemize}
 
-Este modelo tiene una precisión medida del 78,8462\%. Se debe tener en cuenta
-que este valor se ha medido realizando validación cruzada con 5 repeticiones con
-2 <<folds>>, por lo que esta precisión es la obtenida entrenando modelos
+Este modelo tiene una precisión media del 78,85\%. Se debe tener en cuenta que
+este valor se ha medido realizando validación cruzada con 5 repeticiones con 2
+<<folds>>, por lo que esta precisión es la obtenida entrenando modelos
 únicamente con el 50\% de los datos disponibles, entonces es de esperar que el
 rendimiento del modelo final, entrenado con todos los datos, sea algo mayor.
+
+Para mostrar estos resultados se ha usado la métrica de precisión, aunque se
+está trabajando con un conjunto de datos ligeramente desbalanceado. Se ha
+comprobado que la diferencia entre el número de instancias de cada clase no es
+lo suficientemente grande como para que exista un cambio significativo entre la
+precisión y, por ejemplo, el valor F1. Se ha decidido utilizar la precisión ya
+que es un valor mucho más intuitivo y fácil de visualizar.
 
 \section{Fase de desarrollo de la aplicación}
 
@@ -513,7 +520,7 @@ se debe implementar soporte explícitamente en el código de una página web.
 Para asegurar el uso correcto de las diferentes herramientas de accesibilidad
 que los navegadores implementan se ha realizado el
 \href{https://www.udacity.com/course/web-accessibility--ud891}{curso sobre
-accesibilidad web de Udacity}, que se puede ver en
+accesibilidad web de Udacity}, que se puede ver de forma gratuíta en
 \href{https://www.youtube.com/playlist?list=PLcJAkgdenpsci0IJziU4bCk3dTQLpJU7R}{esta
 lista de reproducción de YouTube}.
 
@@ -601,5 +608,5 @@ estado de validez.
 
 Una gran desventaja de este método de autentificación es que, si el navegador
 del usuario se viese comprometido, el JWT podría ser utilizado para suplantar su
-identidad ante la aplicación. Pese a esto se ha optado por este método debido a
-su simplicidad.
+identidad ante la aplicación sin la posibilidad de deshabilitar dicho token de
+forma sencilla. Pese a esto se ha optado por este método debido a su simplicidad.

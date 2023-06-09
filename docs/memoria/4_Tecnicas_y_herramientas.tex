@@ -16,6 +16,22 @@ utilizado durante la realización del proyecto.
 Esta sección detalla las distintas técnicas que fueron utilizadas durante el
 desarrollo del proyecto.
 
+\subsection{Scrum}
+
+Durante el desarrollo del proyecto se ha utilizado una metodología ágil, en
+concreto Scrum, para la gestión y planificación del proyecto.
+
+La metodología Scrum consiste principalmente en dividir el tiempo disponible en
+lo que se conoce como <<sprints>>, que suelen tener una duración entre una y dos
+semanas.
+
+Al principio de un <<sprint>> se realiza una reunión para determinar las tareas
+a realizar durante el mismo, además de especificar el responsable de cada tarea
+y una estimación numérica de la complejidad de esta.
+
+Las tareas que, por cualquier motivo, no se finalicen durante su <<sprint>>
+asignado pasan al siguiente.
+
 \subsection{CRISP-DM}
 
 <<Cross-industry standard process for data mining>>, conocido como (CRISP-DM),
@@ -462,3 +478,21 @@ de lectores de pantalla para descubrir el contenido de la web.
 Para comprobar cómo interactuaría un lector de pantalla con la aplicación se ha
 utilizado la extensión de Google Chrome
 \href{https://chrome.google.com/webstore/detail/screen-reader/kgejglhpjiefppelpmljglcjbhoiplfn}{ChromeVox}.
+
+\subsubsection{Selenium IDE}
+
+\href{https://www.selenium.dev/selenium-ide/}{Selenium IDE} es una extensión
+para Google Chrome y Mozilla Firefox que permite la creación de pruebas
+automatizadas para aplicaciones web.
+
+Su cualidad más interesante es que ofrece la opción de grabar acciones
+realizadas por una persona y reproducirlas. Esto permite la creación de pruebas
+automáticas mediante un proceso similar al siguiente:
+
+\begin{enumerate}
+    \item Se inicia la grabación de Selenium IDE.
+    \item Se realiza una prueba específica de forma manual.
+    \item Se para la grabación de Selenium IDE.
+    \item Se realizan los cambios oportunos sobre la secuencia de pasos
+    resultante de la grabación.
+\end{enumerate}
