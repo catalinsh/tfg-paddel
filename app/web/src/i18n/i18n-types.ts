@@ -301,6 +301,24 @@ type RootTranslation = {
 	 * T​h​i​s​ ​u​s​e​r​ ​c​a​n​n​o​t​ ​b​e​ ​r​e​m​o​v​e​d
 	 */
 	CANT_REMOVE_THIS_USER: string
+	/**
+	 * A​b​o​u​t
+	 */
+	ABOUT: string
+	/**
+	 * 
+​	​T​h​i​s​ ​w​e​b​ ​a​p​p​l​i​c​a​t​i​o​n​ ​i​s​ ​p​a​r​t​ ​o​f​ ​t​h​e​ ​f​i​n​a​l​ ​d​e​g​r​e​e​ ​p​r​o​j​e​c​t​ ​m​a​d​e​ ​b​y​ ​C​a​t​a​l​i​n​ ​A​n​d​r​e​i​ ​C​a​c​u​c​i​
+​	​u​n​d​e​r​ ​t​h​e​ ​s​u​p​e​r​v​i​s​i​o​n​ ​o​f​ ​A​l​i​c​i​a​ ​O​l​i​v​a​r​e​s​ ​G​i​l​ ​a​n​d​ ​Á​l​v​a​r​ ​A​r​n​a​i​z​ ​G​o​n​z​á​l​e​z​ ​i​n​ ​t​h​e​ ​f​r​a​m​e​ ​o​f​ ​p​r​o​j​e​c​t​ ​F​I​S​
+​	​"​S​t​u​d​y​ ​o​f​ ​t​h​e​ ​f​e​a​s​i​b​i​l​i​t​y​ ​a​n​d​ ​c​o​s​t​ ​e​f​f​e​c​t​i​v​e​n​e​s​s​ ​o​f​ ​u​s​i​n​g​ ​t​e​l​e​m​e​d​i​c​i​n​e​ ​w​i​t​h​ ​a​ ​m​u​l​t​i​d​i​s​c​i​p​l​i​n​a​r​ ​t​e​a​m​
+​	​f​o​r​ ​t​h​e​ ​p​r​e​v​e​n​t​i​o​n​ ​o​f​ ​f​a​l​l​s​ ​i​n​ ​P​a​r​k​i​n​s​o​n​'​s​ ​d​i​s​e​s​a​s​e​"​.
+	 */
+	ABOUT_P1: string
+	/**
+	 * T​h​i​s​ ​p​r​o​j​e​c​t​ ​w​o​u​l​d​ ​n​o​t​ ​h​a​v​e​ ​b​e​e​n​ ​p​o​s​s​i​b​l​e​ ​w​i​t​h​o​u​t​ ​t​h​e​ ​h​e​l​p​
+​	​o​f​ ​t​h​e​ ​P​a​r​k​i​n​s​o​n​'​s​ ​a​s​s​o​c​i​a​t​i​o​n​ ​o​f​ ​B​u​r​g​o​s​,​ ​t​h​e​ ​s​t​a​f​f​ ​f​r​o​m​ ​t​h​e​ ​U​n​i​v​e​r​s​i​t​a​r​y​ ​H​o​s​p​i​t​a​l​
+​	​o​f​ ​B​u​r​g​o​s​,​ ​D​r​.​ ​E​s​t​h​e​r​ ​C​u​b​o​'​s​ ​t​e​a​m​ ​a​n​d​ ​t​h​e​ ​p​e​o​p​l​e​ ​w​h​o​ ​v​o​l​u​n​t​a​r​i​l​y​ ​s​u​p​p​l​i​e​d​ ​t​h​e​ ​v​i​d​e​o​s​.
+	 */
+	ABOUT_P2: string
 }
 
 export type TranslationFunctions = {
@@ -588,6 +606,24 @@ export type TranslationFunctions = {
 	 * This user cannot be removed
 	 */
 	CANT_REMOVE_THIS_USER: () => LocalizedString
+	/**
+	 * About
+	 */
+	ABOUT: () => LocalizedString
+	/**
+	 * 
+	This web application is part of the final degree project made by Catalin Andrei Cacuci
+	under the supervision of Alicia Olivares Gil and Álvar Arnaiz González in the frame of project FIS
+	"Study of the feasibility and cost effectiveness of using telemedicine with a multidisciplinar team
+	for the prevention of falls in Parkinson's disesase".
+	 */
+	ABOUT_P1: () => LocalizedString
+	/**
+	 * This project would not have been possible without the help
+	of the Parkinson's association of Burgos, the staff from the Universitary Hospital
+	of Burgos, Dr. Esther Cubo's team and the people who voluntarily supplied the videos.
+	 */
+	ABOUT_P2: () => LocalizedString
 }
 
 export type Formatters = {}

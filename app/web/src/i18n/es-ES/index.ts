@@ -73,4 +73,15 @@ export default {
 	MODEL_FILE: 'Archivo del modelo',
 	CANT_REMOVE_YOURSELF: 'No se puede eliminar a si mismo',
 	CANT_REMOVE_THIS_USER: 'Este usuario no puede ser eliminado',
+	ABOUT: 'Acerca de',
+	ABOUT_P1: `Esta aplicación web forma parte del trabajo de fin de grado realizado
+	por Catalin Andrei Cacuci bajo la supervisión de Alicia Olivares Gil y
+	Álvar Arnaiz González en el marco del proyecto FIS "Estudio de
+	factibilidad y coste-efectividad del uso de telemedicina con un equipo
+	multidisciplinar para prevención de caídas en la enfermedad de
+	Parkinson"`,
+	ABOUT_P2: `Este proyecto no habría sido posible sin la ayuda de la Asociación de
+	Parkinson de Burgos, el personal del Hospital Universitario de Burgos,
+	el equipo de la Dra. Esther Cubo y las personas que han suministrado los
+	vídeos de forma voluntaria.`,
 } satisfies Translation;

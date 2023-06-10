@@ -73,4 +73,13 @@ export default {
 	MODEL_FILE: 'Model file',
 	CANT_REMOVE_YOURSELF: 'You cannot remove yourself',
 	CANT_REMOVE_THIS_USER: 'This user cannot be removed',
+	ABOUT: 'About',
+	ABOUT_P1: `
+	This web application is part of the final degree project made by Catalin Andrei Cacuci
+	under the supervision of Alicia Olivares Gil and Álvar Arnaiz González in the frame of project FIS
+	"Study of the feasibility and cost effectiveness of using telemedicine with a multidisciplinar team
+	for the prevention of falls in Parkinson's disesase".`,
+	ABOUT_P2: `This project would not have been possible without the help
+	of the Parkinson's association of Burgos, the staff from the Universitary Hospital
+	of Burgos, Dr. Esther Cubo's team and the people who voluntarily supplied the videos.`,
 } satisfies BaseTranslation;
