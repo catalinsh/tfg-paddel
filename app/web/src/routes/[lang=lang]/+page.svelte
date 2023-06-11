@@ -61,7 +61,7 @@
 						aria-live="assertive"
 					>
 						<LoadingIcon
-							class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200 dark:fill-blue-400 dark:text-neutral-700"
+							class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200"
 						/>
 						{#if !uploadFinished}
 							{$LL.SENDING_DATA()}
@@ -69,8 +69,8 @@
 							{$LL.PROCESSING_DATA()}
 						{/if}
 					</span>
-					<div class="mt-4 h-1.5 w-full rounded-sm bg-neutral-200 dark:bg-neutral-700">
-						<div class="h-1.5 rounded-sm bg-blue-600 dark:bg-blue-400" style="width: {progress}%" />
+					<div class="mt-4 h-1.5 w-full rounded-sm bg-neutral-200">
+						<div class="h-1.5 rounded-sm bg-blue-600" style="width: {progress}%" />
 					</div>
 					<div class="mt-2 flex justify-between text-sm" id="email-error">
 						<span>{uploadSpeed.toFixed(2)} MB/s</span>
@@ -88,7 +88,7 @@
 				<h1 class="mt-4 text-lg font-semibold">{$LL.PREDICTION_RESULT()}</h1>
 
 				<span class="block text-center mt-6 text-lg font-bold">{(result[1] * 100).toFixed(2)}%</span>
-				<div class="mt-2 mb-6 h-1.5 w-full rounded-sm bg-neutral-200 dark:bg-neutral-700">
+				<div class="mt-2 mb-6 h-1.5 w-full rounded-sm bg-neutral-200">
 					<div
 						class="h-1.5 rounded-sm"
 						style="width: {(result[1] * 100).toFixed(2)}%; background-color: {color(result[1])}"

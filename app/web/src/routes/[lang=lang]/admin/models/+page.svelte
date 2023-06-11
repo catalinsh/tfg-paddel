@@ -117,7 +117,7 @@
 								aria-live="assertive"
 							>
 								<LoadingIcon
-									class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200 dark:fill-blue-400 dark:text-neutral-700"
+									class="block h-5 w-5 flex-shrink-0 animate-spin fill-blue-600 text-neutral-200"
 								/>
 								{$LL.FETCHING_MODELS()}
 							</span>
