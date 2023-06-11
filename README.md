@@ -13,6 +13,10 @@ Username: `test`
 
 Password: `secret`
 
+Video guides for [the application deployment](https://youtu.be/4BV7TlbiqV4) and
+[model generation](https://youtu.be/ttNIr2RnzP0) can be found on the [Paddel
+YouTube channel](https://www.youtube.com/@Paddel-us9me).
+
 ## Project structure
 This project has the following components:
 
