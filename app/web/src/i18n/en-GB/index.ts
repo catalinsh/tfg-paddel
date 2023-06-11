@@ -6,7 +6,7 @@ export default {
 	LANGUAGE_SELECTION: 'Open language selection',
 	ADMINISTRATION: 'Administration',
 	PREDICT: 'Predict',
-	PREDICT_HELP: 'Fill in and send this form to recieve a prediction.',
+	PREDICT_HELP: 'Fill in and send this form to recieve a prediction. Make sure the video is, at least, 15 seconds long. An example video can be found <a target="_blank" class="text-blue-500 dark:text-blue-500 hover:underline" href="https://youtu.be/SYb62aCo6EQ">here</a>.',
 	LEFT: 'Left',
 	RIGHT: 'Right',
 	YOUR_DOMINANT_HAND: 'Your dominant hand',

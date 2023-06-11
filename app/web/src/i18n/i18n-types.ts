@@ -31,7 +31,7 @@ type RootTranslation = {
 	 */
 	PREDICT: string
 	/**
-	 * F​i​l​l​ ​i​n​ ​a​n​d​ ​s​e​n​d​ ​t​h​i​s​ ​f​o​r​m​ ​t​o​ ​r​e​c​i​e​v​e​ ​a​ ​p​r​e​d​i​c​t​i​o​n​.
+	 * F​i​l​l​ ​i​n​ ​a​n​d​ ​s​e​n​d​ ​t​h​i​s​ ​f​o​r​m​ ​t​o​ ​r​e​c​i​e​v​e​ ​a​ ​p​r​e​d​i​c​t​i​o​n​.​ ​M​a​k​e​ ​s​u​r​e​ ​t​h​e​ ​v​i​d​e​o​ ​i​s​,​ ​a​t​ ​l​e​a​s​t​,​ ​1​5​ ​s​e​c​o​n​d​s​ ​l​o​n​g​.​ ​A​n​ ​e​x​a​m​p​l​e​ ​v​i​d​e​o​ ​c​a​n​ ​b​e​ ​f​o​u​n​d​ ​<​a​ ​t​a​r​g​e​t​=​"​_​b​l​a​n​k​"​ ​c​l​a​s​s​=​"​t​e​x​t​-​b​l​u​e​-​5​0​0​ ​d​a​r​k​:​t​e​x​t​-​b​l​u​e​-​5​0​0​ ​h​o​v​e​r​:​u​n​d​e​r​l​i​n​e​"​ ​h​r​e​f​=​"​h​t​t​p​s​:​/​/​y​o​u​t​u​.​b​e​/​S​Y​b​6​2​a​C​o​6​E​Q​"​>​h​e​r​e​<​/​a​>​.
 	 */
 	PREDICT_HELP: string
 	/**
@@ -339,7 +339,7 @@ export type TranslationFunctions = {
 	 */
 	PREDICT: () => LocalizedString
 	/**
-	 * Fill in and send this form to recieve a prediction.
+	 * Fill in and send this form to recieve a prediction. Make sure the video is, at least, 15 seconds long. An example video can be found <a target="_blank" class="text-blue-500 dark:text-blue-500 hover:underline" href="https://youtu.be/SYb62aCo6EQ">here</a>.
 	 */
 	PREDICT_HELP: () => LocalizedString
 	/**

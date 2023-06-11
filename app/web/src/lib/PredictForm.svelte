@@ -42,7 +42,7 @@
 
 <h1 class="text-xl font-semibold leading-7">{$LL.PREDICT()}</h1>
 <p class="mt-1 text-base leading-6 text-neutral-600">
-	{$LL.PREDICT_HELP()}
+	{@html $LL.PREDICT_HELP()}
 </p>
 
 <form on:submit|preventDefault={submitHandler} class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-6">

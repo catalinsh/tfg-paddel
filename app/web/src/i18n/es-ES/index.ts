@@ -6,7 +6,7 @@ export default {
 	LANGUAGE_SELECTION: 'Abrir selección de idioma',
 	ADMINISTRATION: 'Administración',
 	PREDICT: 'Predecir',
-	PREDICT_HELP: 'Rellene y envíe el siguiente formulario para obtener una predicción.',
+	PREDICT_HELP: 'Rellene y envíe el siguiente formulario para obtener una predicción. Asegúrese de que el vídeo tiene una duración mínima de 15 segundos. <a target="_blank" class="text-blue-500 dark:text-blue-500 hover:underline" href="https://youtu.be/SYb62aCo6EQ">Aquí</a> puede encontrar un vídeo de ejemplo.',
 	LEFT: 'Izquierda',
 	RIGHT: 'Derecha',
 	YOUR_DOMINANT_HAND: 'Su mano dominante',
