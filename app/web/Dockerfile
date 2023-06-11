@@ -16,7 +16,7 @@ FROM base AS production
 RUN npm run build
 CMD [ \
     "sh", "-c", \
-    "npm run preview" \
+    "PORT=80 node build" \
     ]
 
 
