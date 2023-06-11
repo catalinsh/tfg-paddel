@@ -98,6 +98,13 @@ de la página principal, si el usuario tiene una sesión válida abierta, será
 redirigido a la página de administración de modelos, en caso contrario será
 llevado a la página de inicio de sesión.
 
+Existe un usuario por defecto, el cual no puede ser eliminado, con las
+siguientes credenciales:
+
+Nombre de usuario: \texttt{test}
+
+Contraseña: \texttt{secret}
+
 \imagenConBorde{manual_usuario/07.png}{Formulario de inicio de sesión}{0.6}
 
 Desde esta página un usuario administrador puede identificarse introduciendo su
@@ -189,7 +196,7 @@ Para ello se utiliza el siguiente comando desde la raíz del proyecto.
 
 \texttt{pip install -r requirements.txt}
 
-Además, en algunos sistemas operativos Linux como Ubuntu (posiblemente también
+Además, en algunos sistemas operativos Linux como Debian (posiblemente también
 MacOS), puede ser necesario instalar \href{https://ffmpeg.org/}{FFmpeg}.
 
 \subsection{Instalación}
@@ -203,6 +210,15 @@ Con el entorno virtual de Python 3.9 activado el script se puede ejecutar
 mediante el comando:
 
 \texttt{python train.py}
+
+Se ha probado la ejecución de este comando en sistemas operativos Linux y en
+Windows 11. Ejecutando el <<script>> de forma nativa nunca ha dado problemas.
+Pero, al utilizar el Subsistema de Linux para Windows (WSL), la extracción de
+características de los vídeos no llega a finalizar siempre, en ocasiones llega a
+un estado en el que el <<script>> sigue en ejecución pero sin utilizar la CPU.
+No se ha encontrado solución a este problema, pero se sospecha que es debido a
+que la extracción de características se realiza en paralelo y a la forma en la
+que WSL gestiona los procesos.
 
 En primer lugar, se pide la siguiente información sobre el sistema de archivos:
 
